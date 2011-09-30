@@ -1,0 +1,6 @@
+Netbeans plugin
+
+http://netbeans.org/projects/versioncontrol/pages/Git_plan
+http://netbeans.org/projects/versioncontrol/pages/Git_uc#Push
+http://friendfeed.com/git-world/2ce11bea/pedrofalcao-git-plugin-for-netbeans-7-is-nice-it
+http://netbeans.org/kb/docs/ide/git.html
