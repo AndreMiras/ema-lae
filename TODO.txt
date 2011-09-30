@@ -3,6 +3,3 @@ This is to make debugging easier but it should later on move in two destinct pro
 
 test commit
 
-Test
-
-Sniff
