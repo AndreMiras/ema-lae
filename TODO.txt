@@ -1,5 +1,8 @@
+TODO
+
+== General archi ==
 At the moment both server and client stand in the same project.
 This is to make debugging easier but it should later on move in two destinct projects.
 
-test commit
-oops
+== Database ==
+jdbc:hsqldb:file:database.db;shutdown=true
