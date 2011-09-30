@@ -7,5 +7,6 @@
     <property name="hibernate.connection.url">jdbc:hsqldb:file:database.db;shutdown=true</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+    <mapping resource="database/entity/User.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
