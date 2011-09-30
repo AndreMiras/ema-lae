@@ -6,5 +6,6 @@
     <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
     <property name="hibernate.connection.url">jdbc:hsqldb:file:database.db;shutdown=true</property>
     <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
   </session-factory>
 </hibernate-configuration>
