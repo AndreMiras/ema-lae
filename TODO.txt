@@ -9,3 +9,6 @@ jdbc:hsqldb:file:database.db;shutdown=true
 
 
 Use Generic DAO
+
+Maven
+http://java.developpez.com/faq/maven/
