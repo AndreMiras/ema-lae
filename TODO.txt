@@ -6,3 +6,6 @@ This is to make debugging easier but it should later on move in two destinct pro
 
 == Database ==
 jdbc:hsqldb:file:database.db;shutdown=true
+
+
+Use Generic DAO
