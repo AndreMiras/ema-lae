@@ -5,6 +5,9 @@
 
 package dao;
 
+import java.util.Hashtable;
+import java.util.List;
+
 /**
  *
  * @author andre
@@ -24,4 +27,7 @@ public interface IDao<T> {
 
     /** Remove an object from persistent storage in the database */
     void delete(T obj);
+
+    /** find data set based on filters **/
+    List<T> find(Hashtable<String, String> querySet);
 }
