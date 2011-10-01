@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * TODO:
+ *      - add email to the model
  */
 
 package database.entity;
@@ -15,6 +15,11 @@ public class User implements Serializable {
     private Integer userId;
     private String username;
     private String password;
+
+    public User(String username)
+    {
+        this.username = username;
+    }
 
     public String getPassword()
     {
