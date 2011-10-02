@@ -15,7 +15,7 @@ import java.util.List;
 public interface IDao<T> {
 
     /** Persist the newInstance object into database */
-    T create(T obj);
+    Integer create(T obj);
 
     /** Retrieve an object that was previously persisted to the database using
      *   the indicated id as primary key

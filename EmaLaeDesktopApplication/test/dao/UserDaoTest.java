@@ -49,13 +49,15 @@ public class UserDaoTest {
     public void testCreate()
     {
         System.out.println("create");
-        User obj = null;
+        User obj = new User("username1");
+
+        // the object shouldn't have an id, until it gets one from the DAO
+        assertNull(obj.getUserId());
+
         UserDao instance = new UserDao();
-        User expResult = null;
-        User result = instance.create(obj);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Integer result = instance.create(obj);
+        // the object should now have an id given from the DAO
+        assertNotNull(result);
     }
 
     /**

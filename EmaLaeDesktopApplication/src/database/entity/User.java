@@ -19,6 +19,9 @@ public class User implements Serializable {
     public User(String username)
     {
         this.username = username;
+
+        // TODO: set random password when not specified
+        this.password = "";
     }
 
     public String getPassword()

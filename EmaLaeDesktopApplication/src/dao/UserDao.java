@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class UserDao extends DaoHibernate<User> {
 
-    public User create(User obj)
+    public Integer create(User obj)
     {
-        return (User) getSession().save(obj);
+        return (Integer) getSession().save(obj);
     }
 
     public User read(long id)
