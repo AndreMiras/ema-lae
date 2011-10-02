@@ -47,7 +47,7 @@ public class UserDao extends DaoHibernate<User> {
             Map.Entry entry = (Map.Entry) it.next();
             System.out.println(entry.getKey() + " : " + entry.getValue());
 
-            filterString += entry.getKey() + " = " + entry.getValue();
+            filterString += entry.getKey() + " = '" + entry.getValue() + "'";
             if (it.hasNext())
             {
                 filterString += " and ";
