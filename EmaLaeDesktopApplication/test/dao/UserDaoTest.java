@@ -67,11 +67,12 @@ public class UserDaoTest {
     public void testRead()
     {
         System.out.println("read");
-        Integer id = 1;
+        User newUser = new User("username2");
+
         UserDao instance = new UserDao();
-        User expResult = null;
-        User result = instance.read(id);
-        assertEquals("username1", result.getUsername());
+        Integer newUserID = instance.create(newUser);
+        User result = instance.read(newUserID);
+        assertEquals("username2", result.getUsername());
     }
 
     /**
