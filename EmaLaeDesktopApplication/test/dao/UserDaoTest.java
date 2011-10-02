@@ -82,11 +82,19 @@ public class UserDaoTest {
     public void testUpdate()
     {
         System.out.println("update");
-        User obj = null;
+        User newUser = new User("username3");
         UserDao instance = new UserDao();
-        instance.update(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Integer newUserID = instance.create(newUser);
+
+        // re-read the saved newUser from the database
+        newUser = instance.read(newUserID);
+        // update it locally
+        newUser.setUsername("updatedUsername3");
+        // re-hit the database
+        instance.update(newUser);
+        // re-read the updated newUser from the database
+        newUser = instance.read(newUserID);
+        assertEquals("updatedUsername3", newUser.getUsername());
     }
 
     /**
