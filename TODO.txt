@@ -13,3 +13,5 @@ http://desgeeksetdeslettres.com/blog/programmation-java/spring-hibernate-mise-en
 
 Maven
 http://java.developpez.com/faq/maven/
+
+Simon test commit
