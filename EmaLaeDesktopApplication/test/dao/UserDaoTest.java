@@ -104,11 +104,22 @@ public class UserDaoTest {
     public void testDelete()
     {
         System.out.println("delete");
-        User obj = null;
-        UserDao instance = new UserDao();
-        instance.delete(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        UserDao userDao = new UserDao();
+        List<User> allUsersBefore = userDao.all();
+        User userToDelete = allUsersBefore.get(0);
+
+        /*
+         * it should be possible to read that user from the database before
+         * it's been deleted
+         */
+        assertNotNull(userDao.read(userToDelete.getUserId()));
+        // deleting the first record
+        userDao.delete(userToDelete);
+        List<User> allUsersAfter = userDao.all();
+        // not record should now be found
+        assertNull(userDao.read(userToDelete.getUserId()));
+        // only one record was deleted
+        assertTrue(allUsersBefore.size() -1 == allUsersAfter.size());
     }
 
     /**
