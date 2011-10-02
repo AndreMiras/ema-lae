@@ -20,7 +20,7 @@ public interface IDao<T> {
     /** Retrieve an object that was previously persisted to the database using
      *   the indicated id as primary key
      */
-    T read(long id);
+    T read(Integer id);
 
     /** Save changes made to a persistent object.  */
     void update(T obj);
@@ -28,6 +28,9 @@ public interface IDao<T> {
     /** Remove an object from persistent storage in the database */
     void delete(T obj);
 
-    /** find data set based on filters **/
+    /** find data sets based on filters **/
     List<T> find(Hashtable<String, String> querySet);
+
+    /** get all sets **/
+    List<T> all();
 }

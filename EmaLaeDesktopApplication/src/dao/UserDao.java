@@ -21,7 +21,7 @@ public class UserDao extends DaoHibernate<User> {
         return (Integer) getSession().save(obj);
     }
 
-    public User read(long id)
+    public User read(Integer id)
     {
         return (User) getSession().get(User.class, id);
     }
@@ -68,6 +68,12 @@ public class UserDao extends DaoHibernate<User> {
 
     List objs = getSession().createQuery(hqlString + filterString).list();
     return objs;
+    }
+
+    public List<User> all()
+    {
+        return (List<User>) getSession().createQuery("from "
+                + User.class.getName());
     }
 
 }
