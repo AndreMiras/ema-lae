@@ -118,4 +118,19 @@ public class UserDaoTest {
         fail("The test case is a prototype.");
     }
 
+        /**
+     * Test of find method, of class UserDao.
+     */
+    @Test
+    public void testAll()
+    {
+        System.out.println("all");
+        UserDao instance = new UserDao();
+        List expResult = null;
+        List result = instance.all();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
 }
