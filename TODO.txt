@@ -9,6 +9,7 @@ jdbc:hsqldb:file:database.db;shutdown=true
 
 
 Use Generic DAO
+http://desgeeksetdeslettres.com/blog/programmation-java/spring-hibernate-mise-en-place-dun-dao-generique
 
 Maven
 http://java.developpez.com/faq/maven/
