@@ -72,8 +72,8 @@ public class UserDao extends DaoHibernate<User> {
 
     public List<User> all()
     {
-        return (List<User>) getSession().createQuery("from "
-                + User.class.getName());
+        return getSession().createQuery("from "
+                + User.class.getName()).list();
     }
 
 }
