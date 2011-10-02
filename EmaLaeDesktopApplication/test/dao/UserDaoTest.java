@@ -67,13 +67,11 @@ public class UserDaoTest {
     public void testRead()
     {
         System.out.println("read");
-        long id = 0L;
+        Integer id = 1;
         UserDao instance = new UserDao();
         User expResult = null;
         User result = instance.read(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("username1", result.getUsername());
     }
 
     /**
