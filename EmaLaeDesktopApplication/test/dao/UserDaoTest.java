@@ -129,13 +129,16 @@ public class UserDaoTest {
     public void testFind()
     {
         System.out.println("find");
-        Hashtable<String, String> querySet = null;
-        UserDao instance = new UserDao();
-        List expResult = null;
-        List result = instance.find(querySet);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User userToFind = new User("userToFind");
+        UserDao userDao = new UserDao();
+        Integer newUserID = userDao.create(userToFind);
+
+        Hashtable<String, String> querySet = new Hashtable<String, String>();
+        querySet.put("username", "userToFind");
+        List<User> result = userDao.find(querySet);
+        User firstUserFound = result.get(0);
+        assertEquals("userToFind", firstUserFound.getUsername());
+        assertEquals(newUserID, firstUserFound.getUserId());
     }
 
     /**
