@@ -8,7 +8,10 @@ package dao;
 import database.entity.User;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -42,16 +45,20 @@ public class UserDao extends DaoHibernate<User> {
         String filterString = "";
         Enumeration<String> e = querySet.keys();
 
-        //iterate through Hashtable keys Enumeration
-        while (e.hasMoreElements())
+        Set set = querySet.entrySet();
+        Iterator it = set.iterator();
+        while (it.hasNext())
         {
-            filterString += e.toString() + " = " + querySet.get(e.toString());
-            if (e.hasMoreElements())
+            Map.Entry entry = (Map.Entry) it.next();
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+
+            filterString += entry.getKey() + " = " + entry.getValue();
+            if (it.hasNext())
             {
                 filterString += " and ";
             }
-            e.nextElement();
         }
+
         // session.createQuery("from Student s where s.name like 'k%'");
 
         // Criteria criteria = session.createCriteria(User.class);
