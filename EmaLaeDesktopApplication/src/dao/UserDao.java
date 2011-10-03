@@ -89,6 +89,19 @@ public class UserDao extends DaoHibernate<User> {
     return objs;
     }
 
+    /*
+     * TODO: throw exception on multiple value found
+     */
+    public User get(Hashtable<String, String> querySet)
+    {
+        List objs = find(querySet);
+        if (objs.size() != 1)
+            throw new Error("Returned "
+                    + objs.size()
+                    + "object(s) when it should return one and only one.");
+        return (User) objs.get(0);
+    }
+
     public List<User> all()
     {
         Session session = getSession();

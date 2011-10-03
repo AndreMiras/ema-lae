@@ -142,6 +142,16 @@ public class UserDaoTest {
     }
 
     /**
+     * Test of get method, of class UserDao.
+     */
+    @Test
+    public void testGet()
+    {
+        System.out.println("get");
+        fail("TODO: implement the test testGet");
+    }
+
+    /**
      * Test of all method, of class UserDao.
      */
     @Test

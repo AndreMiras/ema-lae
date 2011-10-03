@@ -28,8 +28,11 @@ public interface IDao<T> {
     /** Remove an object from persistent storage in the database */
     void delete(T obj);
 
-    /** find data sets based on filters **/
+    /** Find data sets based on filters **/
     List<T> find(Hashtable<String, String> querySet);
+
+    /** Return the only one record found  for a givent filter **/
+    T get(Hashtable<String, String> querySet);
 
     /** get all sets **/
     List<T> all();
