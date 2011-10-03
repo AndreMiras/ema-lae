@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.hibernate.Session;
 
 /**
  *
@@ -16,22 +17,38 @@ public class UserDao extends DaoHibernate<User> {
 
     public Integer create(User obj)
     {
-        return (Integer) getSession().save(obj);
+        Session session = getSession();
+        session.beginTransaction();
+        Integer id = (Integer) getSession().save(obj);
+        session.getTransaction().commit();
+
+        return id;
     }
 
     public User read(Integer id)
     {
-        return (User) getSession().get(User.class, id);
+        Session session = getSession();
+        session.beginTransaction();
+        User user = (User) getSession().get(User.class, id);
+        session.getTransaction().commit();
+
+        return user;
     }
 
     public void update(User obj)
     {
+        Session session = getSession();
+        session.beginTransaction();
         getSession().update(obj);
+        session.getTransaction().commit();
     }
 
     public void delete(User obj)
     {
+        Session session = getSession();
+        session.beginTransaction();
         getSession().delete(obj);
+        session.getTransaction().commit();
     }
 
     public List<User> find(Hashtable<String, String> querySet)
@@ -39,6 +56,7 @@ public class UserDao extends DaoHibernate<User> {
         String hqlString = "from User as user where ";
         String filterString = "";
         Enumeration<String> e = querySet.keys();
+        Session session = getSession();
 
         Set set = querySet.entrySet();
         Iterator it = set.iterator();
@@ -67,15 +85,22 @@ public class UserDao extends DaoHibernate<User> {
         // objects = query.list();
         // TODO[security]: is there a security risk, using plain HQL ?
         // Hibernate.entity(User.class)
-
+    session.beginTransaction();
     List objs = getSession().createQuery(hqlString + filterString).list();
+    session.getTransaction().commit();
     return objs;
     }
 
     public List<User> all()
     {
-        return getSession().createQuery("from "
+        Session session = getSession();
+
+        session.beginTransaction();
+        List users = getSession().createQuery("from "
                 + User.class.getName()).list();
+        session.getTransaction().commit();
+
+        return users;
     }
 
 }
