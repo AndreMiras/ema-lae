@@ -55,7 +55,6 @@ public class UserDao extends DaoHibernate<User> {
     {
         String hqlString = "from User as user where ";
         String filterString = "";
-        Enumeration<String> e = querySet.keys();
         Session session = getSession();
 
         Set set = querySet.entrySet();
@@ -73,19 +72,18 @@ public class UserDao extends DaoHibernate<User> {
         }
 
         // session.createQuery("from Student s where s.name like 'k%'");
-
         // Criteria criteria = session.createCriteria(User.class);
 
+        // TODO: should we use criteria rather than plain hql
         /*
          * Query query = session.createQuery("from Stock where stockCode = :code ");
          * query.setParameter("code", "7277");
          * List list = query.list();
          */
-        // Query query = session.createQuery("from Yser as user where");
-        // objects = query.list();
-        // TODO[security]: is there a security risk, using plain HQL ?
         // Hibernate.entity(User.class)
+
     session.beginTransaction();
+    // TODO[security]: is there a security risk, using plain HQL ?
     List objs = getSession().createQuery(hqlString + filterString).list();
     session.getTransaction().commit();
     return objs;
