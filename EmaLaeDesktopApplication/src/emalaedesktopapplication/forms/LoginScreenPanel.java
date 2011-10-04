@@ -9,7 +9,7 @@
  * Created on Sep 28, 2011, 8:38:10 PM
  */
 
-package emalaedesktopapplication;
+package emalaedesktopapplication.forms;
 
 /**
  *
