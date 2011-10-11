@@ -23,5 +23,10 @@ public class Main {
         System.err.println("result = " + mySession.getResult());
     }
     
-    
+    public void testObjectsPersitence()
+    {
+        // create some objects
+        // http://java.boot.by/scbcd5-guide/ch06.html
+    }
+
 }
