@@ -27,7 +27,6 @@ public class MainWindowController
         // mainWindowFrame.initMainWindow();
         UserController userController = new UserController();
         newUserPanel = new NewUserPanel(userController);
-
         mainWindowFrame.setContentPanel(newUserPanel);
     }
 

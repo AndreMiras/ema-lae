@@ -31,7 +31,7 @@ public class MainWindowFrame extends javax.swing.JFrame
      */
     public void setContentPanel(JPanel panel)
     {
-        middleContentPanel.add(panel);
+        middleContentPanel.add(panel, "TODO");
         panel.setVisible(true);
 
         // redraw the middle content
@@ -54,17 +54,7 @@ public class MainWindowFrame extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         middleContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("MiddleContentPanel"));
-
-        javax.swing.GroupLayout middleContentPanelLayout = new javax.swing.GroupLayout(middleContentPanel);
-        middleContentPanel.setLayout(middleContentPanelLayout);
-        middleContentPanelLayout.setHorizontalGroup(
-            middleContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 368, Short.MAX_VALUE)
-        );
-        middleContentPanelLayout.setVerticalGroup(
-            middleContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 251, Short.MAX_VALUE)
-        );
+        middleContentPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,14 +62,14 @@ public class MainWindowFrame extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(middleContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(middleContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(middleContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(middleContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
