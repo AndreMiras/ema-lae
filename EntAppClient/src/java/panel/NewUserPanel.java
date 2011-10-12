@@ -10,17 +10,48 @@
  */
 package panel;
 
+import controller.UserController;
+
 /**
  *
  * @author amiras
  */
 public class NewUserPanel extends javax.swing.JPanel
 {
+    
+    private UserController userController;
 
     /** Creates new form NewUserPanel */
     public NewUserPanel()
     {
         initComponents();
+    }
+
+    public NewUserPanel(UserController userController)
+    {
+        this();
+        this.userController = userController;
+    }
+
+    
+    /**
+     * Get the value of UserController
+     *
+     * @return the value of UserController
+     */
+    public UserController getUserController()
+    {
+        return userController;
+    }
+
+    /**
+     * Set the value of UserController
+     *
+     * @param UserController new value of UserController
+     */
+    public void setUserController(UserController UserController)
+    {
+        this.userController = UserController;
     }
 
     /** This method is called from within the constructor to
