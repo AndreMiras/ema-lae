@@ -15,13 +15,24 @@ import javax.persistence.Id;
  * @author amiras
  */
 @Entity
-public class User implements Serializable {
+public class UserLae implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     protected String username;
     protected String password;
+
+    public UserLae() {
+        super();
+    }
+
+    public UserLae(String username, String password) {
+        super();
+        this.username = username;
+        this.password = password;
+    }
+
 
     /**
      * Get the value of password
@@ -79,10 +90,10 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof UserLae)) {
             return false;
         }
-        User other = (User) object;
+        UserLae other = (UserLae) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
