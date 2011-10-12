@@ -126,7 +126,7 @@ public class NewUserPanel extends javax.swing.JPanel
 private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
     userController.createUser(usernameTextField.getText(), passwordTextField.getText());
     System.out.println("Added user: " + usernameTextField.getText());
-    System.out.println("User list: " + userController.getAllUsers());
+    // System.out.println("User list: " + userController.getAllUsers());
 }//GEN-LAST:event_createUserButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

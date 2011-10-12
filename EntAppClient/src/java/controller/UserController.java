@@ -5,7 +5,6 @@
 package controller;
 
 import ejb.UserManagerSessionBeanRemote;
-import entity.UserLae;
 import java.util.Collection;
 import javax.ejb.EJB;
 
@@ -23,8 +22,11 @@ public class UserController
         userManager.addUser(username, password);
     }
     
+    /*
     public Collection<UserLae> getAllUsers()
     {
         return userManager.getAllUsers();
     }
+     * 
+     */
 }

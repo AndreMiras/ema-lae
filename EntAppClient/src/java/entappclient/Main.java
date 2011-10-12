@@ -4,8 +4,13 @@
  */
 package entappclient;
 
+import com.sun.jmx.snmp.UserAcl;
 import controller.MainWindowController;
 import ejb.MySessionRemote;
+import ejb.UserManagerSessionBeanRemote;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.ejb.EJB;
 
 /**
@@ -15,13 +20,18 @@ import javax.ejb.EJB;
 public class Main {
     @EJB
     private static MySessionRemote mySession;
+    @EJB
+    private static UserManagerSessionBeanRemote userManager;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         System.out.println("foo");
-        // System.err.println("result = " + mySession.getResult());
+        System.out.println("result = " + mySession.getResult());
+        userManager.addUser("foo", "bar");
+        List users = userManager.getAllUsers();
+        System.out.println("Users = " + users);
 
         // Creating the main view
         MainWindowFrame view = new MainWindowFrame();

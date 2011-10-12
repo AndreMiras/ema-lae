@@ -5,10 +5,13 @@
 package ejb;
 
 import entity.UserLae;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -17,8 +20,9 @@ import javax.persistence.EntityManager;
 @Remote(UserManagerSessionBeanRemote.class)
 @Stateless
 public class UserManagerSessionBean implements UserManagerSessionBeanRemote {
-    // @PersistenceContext(unitName="EntityBean")
+    @PersistenceContext(unitName="EntAppEJB-ejbPU")
     EntityManager em;
+    // @PersistenceContext EntityManager em;
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -32,13 +36,15 @@ public class UserManagerSessionBean implements UserManagerSessionBeanRemote {
     public void addUser(String username, String password)
     {
         UserLae user = new UserLae(username, password);
+        System.out.println("TODO");
         em.persist(user);
     }
 
     @Override
-    public Collection<UserLae> getAllUsers()
+    public List getAllUsers()
     {
-        Collection<UserLae> userList;
+        List userList = new ArrayList();
+        // userList.add(new UserLae("foo","bar"));
         userList = em.createQuery("from UserLae u").getResultList();
         return userList;
     }

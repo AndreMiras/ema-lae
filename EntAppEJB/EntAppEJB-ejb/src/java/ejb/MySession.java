@@ -4,7 +4,9 @@
  */
 package ejb;
 
+import entity.UserLae;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -12,13 +14,21 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class MySession implements MySessionRemote {
-
+    
+    EntityManager em;
+    // Add business logic below. (Right-click in editor and choose
+    // "Insert Code > Add Business Method")
+    
     @Override
     public String getResult() {
         return "Foobar";
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @Override
+    public void addUser(String username, String password)
+    {
+        UserLae user = new UserLae(username, password);
+        em.persist(user);
+    }
     
 }
