@@ -23,7 +23,7 @@ public class UserController
         userManager.addUser(username, password);
     }
     
-    public Collection<UserLae> getAllUsers(String username, String password)
+    public Collection<UserLae> getAllUsers()
     {
         return userManager.getAllUsers();
     }
