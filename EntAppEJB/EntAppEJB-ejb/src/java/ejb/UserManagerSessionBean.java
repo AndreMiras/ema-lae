@@ -36,7 +36,6 @@ public class UserManagerSessionBean implements UserManagerSessionBeanRemote {
     public void addUser(String username, String password)
     {
         UserLae user = new UserLae(username, password);
-        System.out.println("TODO");
         em.persist(user);
     }
 
@@ -44,7 +43,6 @@ public class UserManagerSessionBean implements UserManagerSessionBeanRemote {
     public List getAllUsers()
     {
         List userList = new ArrayList();
-        // userList.add(new UserLae("foo","bar"));
         userList = em.createQuery("from UserLae u").getResultList();
         return userList;
     }
