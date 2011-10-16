@@ -4,12 +4,9 @@
  */
 package entappclient;
 
-import com.sun.jmx.snmp.UserAcl;
 import controller.MainWindowController;
 import ejb.MySessionRemote;
 import ejb.UserManagerSessionBeanRemote;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 
