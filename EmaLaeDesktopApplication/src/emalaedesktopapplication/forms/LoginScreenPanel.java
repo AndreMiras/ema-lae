@@ -12,6 +12,7 @@
 package emalaedesktopapplication.forms;
 
 import client.RmiClient;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -125,11 +126,11 @@ public class LoginScreenPanel extends javax.swing.JPanel {
         loggedIn = RmiClient.getController().login(jTextField1.getText(), jTextField2.getText());
         if (loggedIn)
         {
-            System.out.println("Logged in!"); // TODO: go to next screen
+            JOptionPane.showMessageDialog(this, "Logged in!"); // TODO: go to next screen
         }
         else
         {
-            System.out.println("Not Logged in"); // TODO: error message
+            JOptionPane.showMessageDialog(this, "Not Logged in"); // TODO: error message
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
