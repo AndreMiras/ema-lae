@@ -4,6 +4,7 @@
 
 package emalaedesktopapplication;
 
+import emalaedesktopapplication.controller.MainWindowController;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -14,9 +15,14 @@ public class EmaLaeDesktopApplication extends SingleFrameApplication {
 
     /**
      * At startup create and show the main frame of the application.
+     * Create the associated MainWindowController and bind it to the view.
      */
     @Override protected void startup() {
-        show(new EmaLaeDesktopView(this));
+        EmaLaeDesktopView emaLaeDesktopView;
+        MainWindowController mainWindowController;
+        emaLaeDesktopView = new EmaLaeDesktopView(this);
+        mainWindowController = new MainWindowController(emaLaeDesktopView);
+        show(emaLaeDesktopView);
     }
 
     /**

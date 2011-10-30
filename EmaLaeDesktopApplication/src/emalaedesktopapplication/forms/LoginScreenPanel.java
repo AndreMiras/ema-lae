@@ -26,6 +26,7 @@ public class LoginScreenPanel extends javax.swing.JPanel {
     /** Creates new form LoginScreenPanel */
     public LoginScreenPanel() {
         initComponents();
+        System.out.println("LoginScreenPanel created");
     }
 
     /** This method is called from within the constructor to

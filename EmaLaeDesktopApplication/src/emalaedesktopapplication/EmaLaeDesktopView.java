@@ -15,6 +15,7 @@ import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * The application's main frame.
@@ -89,6 +90,16 @@ public class EmaLaeDesktopView extends FrameView {
             aboutBox.setLocationRelativeTo(mainFrame);
         }
         EmaLaeDesktopApplication.getApplication().show(aboutBox);
+    }
+
+    /**
+     * Replace the old middleContentPanel with the given one
+     * @param panel to set in the middle
+     */
+    public void setMiddleContentPanel(JPanel panel)
+    {
+        mainPanel.removeAll();
+        mainPanel.add(panel);
     }
 
     /** This method is called from within the constructor to
