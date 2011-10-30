@@ -9,7 +9,7 @@ package database.entity;
  *
  * @author pc
  */
-public class SupervisingTeacher extends User_Profile{
+public class SupervisingTeacher extends UserProfile{
 
 
 }

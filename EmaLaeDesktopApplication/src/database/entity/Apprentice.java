@@ -9,6 +9,6 @@ package database.entity;
  *
  * @author pc
  */
-public class Apprentice extends User_Profile{
+public class Apprentice extends UserProfile{
 
 }

@@ -9,7 +9,7 @@ package database.entity;
  *
  * @author pc
  */
-public class InternshipSupervisor extends User_Profile
+public class InternshipSupervisor extends UserProfile
 {
 
 }

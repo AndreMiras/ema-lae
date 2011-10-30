@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author pc
  */
-public class User_Profile {
+public class UserProfile {
 
     private int ID;
     private String firstName;
