@@ -15,6 +15,7 @@ public class User implements Serializable {
     private Integer userId;
     private String username;
     private String password;
+    private int groupID;
 
     public User()
     {
