@@ -24,7 +24,8 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         System.out.println("Constructor");
     }
 
-    public boolean login(String username, String password){
+    public boolean login(String username, String password)
+            throws java.rmi.RemoteException {
         System.out.println("Trying to login with:\n"
                 + "username:"
                 + username
