@@ -4,7 +4,6 @@
  */
 package ejb;
 
-import entity.UserLae;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 
@@ -22,13 +21,6 @@ public class MySession implements MySessionRemote {
     @Override
     public String getResult() {
         return "Foobar";
-    }
-
-    @Override
-    public void addUser(String username, String password)
-    {
-        UserLae user = new UserLae(username, password);
-        em.persist(user);
     }
     
 }

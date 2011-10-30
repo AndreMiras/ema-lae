@@ -4,6 +4,7 @@
  */
 package ejb;
 
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -19,5 +20,9 @@ public interface UserManagerSessionBeanRemote {
     void addUser(String username, String password);
 
     List getAllUsers();
+
+    String getResultTest();
+
+    Collection getAllUsersTest();
     
 }

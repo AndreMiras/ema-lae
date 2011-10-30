@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author amiras
  */
-@Remote(UserManagerSessionBeanRemote.class)
+// @Remote(UserManagerSessionBeanRemote.class)
 @Stateless
 public class UserManagerSessionBean implements UserManagerSessionBeanRemote {
     @PersistenceContext(unitName="EntAppEJB-ejbPU")
@@ -43,7 +43,23 @@ public class UserManagerSessionBean implements UserManagerSessionBeanRemote {
     public List getAllUsers()
     {
         List userList = new ArrayList();
-        userList = em.createQuery("from UserLae u").getResultList();
+        // userList = em.createQuery("from UserLae u").getResultList();
         return userList;
     }
+    
+    
+
+    @Override
+    public String getResultTest() {
+        return "Bar";
+    }
+
+    @Override
+    public Collection getAllUsersTest() {
+        List userList = new ArrayList();
+        // userList = em.createQuery("from UserLae u").getResultList();
+        return userList;
+    }
+    
+    
 }
