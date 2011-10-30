@@ -5,6 +5,7 @@
 
 package database.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -12,9 +13,9 @@ import java.util.Date;
  *
  * @author pc
  */
-public class UserProfile {
+public class UserProfile implements Serializable {
 
-    private int ID;
+    private Integer profileId;
     private String firstName;
     private String lastName;
     private Date birthDate;
@@ -22,8 +23,8 @@ public class UserProfile {
     private String phoneNumber;
     private String email;
 
-    public int getID() {
-        return ID;
+    public int getProfileId() {
+        return profileId;
     }
 
     public String getAddress() {
@@ -50,8 +51,8 @@ public class UserProfile {
         return phoneNumber;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setProfileId(int profileId) {
+        this.profileId = profileId;
     }
 
     public void setAddress(String address) {

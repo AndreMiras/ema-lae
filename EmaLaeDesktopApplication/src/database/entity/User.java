@@ -25,8 +25,6 @@ public class User implements Serializable {
         this.groupID = groupID;
     }
 
-
-
     public User()
     {
     }
