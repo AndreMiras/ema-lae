@@ -5,6 +5,7 @@
 
 package dao;
 
+import database.entity.UserProfile;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -12,39 +13,39 @@ import java.util.List;
  *
  * @author andre
  */
-public class UserProfileDao extends DaoHibernate<UserProfileDao> {
+public class UserProfileDao extends DaoHibernate<UserProfile> {
 
-    public Integer create(UserProfileDao obj)
+    public Integer create(UserProfile obj)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public UserProfileDao read(Integer id)
+    public UserProfile read(Integer id)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void update(UserProfileDao obj)
+    public void update(UserProfile obj)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void delete(UserProfileDao obj)
+    public void delete(UserProfile obj)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public List<UserProfileDao> find(Hashtable<String, String> querySet)
+    public List<UserProfile> find(Hashtable<String, String> querySet)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public UserProfileDao get(Hashtable<String, String> querySet)
+    public UserProfile get(Hashtable<String, String> querySet)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public List<UserProfileDao> all()
+    public List<UserProfile> all()
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
