@@ -12,6 +12,9 @@
 package emalaedesktopapplication.forms;
 
 import client.RmiClient;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -122,8 +125,12 @@ public class LoginScreenPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        boolean loggedIn;
-        loggedIn = RmiClient.getController().login(jTextField1.getText(), jTextField2.getText());
+        boolean loggedIn = false;
+        try {
+            loggedIn = RmiClient.getController().login(jTextField1.getText(), jTextField2.getText());
+        } catch (RemoteException ex) {
+            Logger.getLogger(LoginScreenPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (loggedIn)
         {
             JOptionPane.showMessageDialog(this, "Logged in!"); // TODO: go to next screen
