@@ -99,7 +99,9 @@ public class EmaLaeDesktopView extends FrameView {
     public void setMiddleContentPanel(JPanel panel)
     {
         mainPanel.removeAll();
+        panel.setVisible(true);
         mainPanel.add(panel);
+        mainPanel.revalidate();
     }
 
     /** This method is called from within the constructor to

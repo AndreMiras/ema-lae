@@ -22,7 +22,7 @@ public class MainWindowController {
     public MainWindowController(EmaLaeDesktopView view) {
         this.view = view;
         loginScreenPanel = new LoginScreenPanel();
-        loginScreenController = new LoginScreenController(loginScreenPanel);
+        loginScreenController = new LoginScreenController(view, loginScreenPanel);
         setMiddleContent(loginScreenPanel);
     }
 

@@ -5,7 +5,9 @@
 package emalaedesktopapplication.controller;
 
 import client.RmiClient;
+import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
+import emalaedesktopapplication.forms.ViewProfile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -18,10 +20,12 @@ import java.util.logging.Logger;
  */
 public class LoginScreenController
 {
+    private EmaLaeDesktopView mainWindow;
     private LoginScreenPanel view;
 
-    public LoginScreenController(LoginScreenPanel view)
+    public LoginScreenController(EmaLaeDesktopView mainWindow, LoginScreenPanel view)
     {
+        this.mainWindow = mainWindow;
         this.view = view;
 
         // Add listeners to the view.
@@ -54,7 +58,8 @@ public class LoginScreenController
             // get the user to the home screen if success
             if (loginSuccess)
             {
-                System.out.println("TODO: bring the user to the home screen");
+                ViewProfile viewProfilePanel = new ViewProfile();
+                mainWindow.setMiddleContentPanel(viewProfilePanel);
             }
             // otherwise popup an error message
             else
