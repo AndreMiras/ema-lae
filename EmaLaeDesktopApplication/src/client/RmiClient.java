@@ -25,7 +25,7 @@ public class RmiClient
             IController controller =
                     (IController) Naming.lookup("rmi://localhost:1099/controller");
             System.out.println("Le client est connecte au serveur RMI");
-            controller.login("user", "password");
+            controller.login("username1", "password");
         } catch (NotBoundException e)
         {
             System.err.println(e.getMessage());
