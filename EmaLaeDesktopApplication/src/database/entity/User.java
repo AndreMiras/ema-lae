@@ -17,6 +17,16 @@ public class User implements Serializable {
     private String password;
     private int groupID;
 
+    public int getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(int groupID) {
+        this.groupID = groupID;
+    }
+
+
+
     public User()
     {
     }

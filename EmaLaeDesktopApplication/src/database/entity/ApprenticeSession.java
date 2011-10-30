@@ -11,10 +11,19 @@ package database.entity;
  */
 public class ApprenticeSession {
 
+    private int ID;
     private int IDApprentice;
     private int IDSession;
     private float mark;
     private String documentLink;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
     public int getIDApprentice() {
         return IDApprentice;

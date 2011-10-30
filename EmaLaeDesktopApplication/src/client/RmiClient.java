@@ -18,14 +18,17 @@ import server.core.IController;
 public class RmiClient
 {
 
-    public static void main(String args[])
+     private IController controller;
+    
+
+    public void RmiClient()
     {
         try
         {
-            IController controller =
+            this.controller =
                     (IController) Naming.lookup("rmi://localhost:1099/controller");
             System.out.println("Le client est connecte au serveur RMI");
-            controller.login("username1", "password");
+            controller.login("a","b");
         } catch (NotBoundException e)
         {
             System.err.println(e.getMessage());
@@ -40,4 +43,10 @@ public class RmiClient
             System.err.println(e.getMessage());
         }
     }
+
+    public IController getController() {
+        return controller;
+    }
+
+    
 }

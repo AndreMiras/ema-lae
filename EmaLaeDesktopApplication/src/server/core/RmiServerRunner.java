@@ -19,6 +19,7 @@ public class RmiServerRunner
     {
         try
         {
+
             LocateRegistry.createRegistry(1099);
             ControllerImpl controller = new ControllerImpl();
             Naming.rebind("rmi://localhost:1099/controller", controller);
