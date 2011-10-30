@@ -18,11 +18,13 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         implements IController
     {
 
+    protected User loggedUser;
+
     public ControllerImpl() throws java.rmi.RemoteException, java.io.IOException {
         System.out.println("Constructor");
     }
 
-    public void login(String username, String password){
+    public boolean login(String username, String password){
         System.out.println("Trying to login with:\n"
                 + "username:"
                 + username
@@ -52,11 +54,15 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         if (userList.size() > 0)
         {
             System.out.println("Logged in!");
+            loggedUser = userList.get(0);
+            return true;
         }
         else
         {
             System.out.println("Not logged in!");
         }
         // User firstUserFound = result.get(0);
+
+        return false; // TODO
     }
 }
