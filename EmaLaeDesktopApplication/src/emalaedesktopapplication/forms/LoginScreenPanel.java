@@ -124,12 +124,15 @@ public class LoginScreenPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            RmiClient.getController().login(jTextField1.getText(), jTextField2.getText());
-        } catch (RemoteException ex) {
-            Logger.getLogger(LoginScreenPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(LoginScreenPanel.class.getName()).log(Level.SEVERE, null, ex);
+        boolean loggedIn;
+        loggedIn = RmiClient.getController().login(jTextField1.getText(), jTextField2.getText());
+        if (loggedIn)
+        {
+            System.out.println("Logged in!"); // TODO: go to next screen
+        }
+        else
+        {
+            System.out.println("Not Logged in"); // TODO: error message
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

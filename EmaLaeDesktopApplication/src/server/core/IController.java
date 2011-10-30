@@ -13,6 +13,6 @@ package server.core;
 public interface IController extends java.rmi.Remote {
 
 
-    public boolean login(String username, String password)
-            throws java.rmi.RemoteException, java.io.IOException;
+    public boolean login(String username, String password);
+            // throws java.rmi.RemoteException, java.io.IOException;
 }
