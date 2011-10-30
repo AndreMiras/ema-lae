@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * TODO:
+ * VM Options: -Djava.security.manager -Djava.security.policy=/home/andre/Progz/ema-lae/EntAppClient/src/client.policy
  */
 package entappclient;
 
@@ -24,11 +24,15 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.setSecurityManager(new java.rmi.RMISecurityManager());
+
         System.out.println("foo");
-        System.out.println("result = " + mySession.getResult());
+        System.out.println("result1 = " + mySession.getResult());
+        System.out.println("result1 = " + mySession.getResult());
         userManager.addUser("foo", "bar");
-        List users = userManager.getAllUsers();
-        System.out.println("Users = " + users);
+        System.out.println("result2 = " + userManager.getResultTest());
+        userManager.getAllUsersTest();
+        // System.out.println("Users = " + users);
 
         // Creating the main view
         MainWindowFrame view = new MainWindowFrame();

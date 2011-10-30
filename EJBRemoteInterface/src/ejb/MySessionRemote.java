@@ -14,7 +14,5 @@ import javax.ejb.Remote;
 public interface MySessionRemote {
 
     String getResult();
-
-    void addUser(String username, String password);
     
 }
