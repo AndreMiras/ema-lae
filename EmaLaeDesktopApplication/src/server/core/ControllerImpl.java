@@ -61,8 +61,7 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         {
             System.out.println("Not logged in!");
         }
-        // User firstUserFound = result.get(0);
 
-        return false; // TODO
+        return false;
     }
 }

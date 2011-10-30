@@ -4,49 +4,37 @@
  */
 package client;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import server.core.IController;
 
 /**
  *
  * @author andre
  */
-public class RmiClient
-{
+public class RmiClient {
 
-     private IController controller;
-    
+    private static IController controller;
 
-    public void RmiClient()
-    {
-        try
-        {
-            this.controller =
-                    (IController) Naming.lookup("rmi://localhost:1099/controller");
-            System.out.println("Le client est connecte au serveur RMI");
-            controller.login("a","b");
-        } catch (NotBoundException e)
-        {
-            System.err.println(e.getMessage());
-        } catch (MalformedURLException e)
-        {
-            System.err.println(e.getMessage());
-        } catch (RemoteException e)
-        {
-            System.err.println(e.getMessage());
-        } catch (IOException e)
-        {
-            System.err.println(e.getMessage());
-        }
+    public void RmiClient() {
     }
 
-    public IController getController() {
+    public static synchronized IController getController() {
+        if (controller == null) {
+            try {
+                controller = (IController) Naming.lookup("rmi://localhost:1099/controller");
+            } catch (NotBoundException ex) {
+                Logger.getLogger(RmiClient.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(RmiClient.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RemoteException ex) {
+                Logger.getLogger(RmiClient.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return controller;
     }
-
-    
 }
