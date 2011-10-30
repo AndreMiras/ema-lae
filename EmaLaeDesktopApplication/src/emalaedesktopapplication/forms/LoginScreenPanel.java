@@ -12,6 +12,7 @@
 package emalaedesktopapplication.forms;
 
 import client.RmiClient;
+import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +27,25 @@ public class LoginScreenPanel extends javax.swing.JPanel {
     /** Creates new form LoginScreenPanel */
     public LoginScreenPanel() {
         initComponents();
-        System.out.println("LoginScreenPanel created");
+    }
+
+    public String getUsernameInput()
+    {
+        return loginTextField.getText();
+    }
+
+    public String getPasswordInput()
+    {
+        return passwordTextField.getText();
+    }
+
+    public void loginErrorMesage()
+    {
+        JOptionPane.showMessageDialog(this, "Not Logged in");
+    }
+
+    public void addConnectionButtonListener(ActionListener al) {
+        connectionButton.addActionListener(al);
     }
 
     /** This method is called from within the constructor to
@@ -65,11 +84,6 @@ public class LoginScreenPanel extends javax.swing.JPanel {
 
         connectionButton.setText(resourceMap.getString("connectionButton.text")); // NOI18N
         connectionButton.setName("connectionButton"); // NOI18N
-        connectionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                connectionButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,23 +137,6 @@ public class LoginScreenPanel extends javax.swing.JPanel {
                 .addGap(58, 58, 58))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void connectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectionButtonActionPerformed
-        boolean loggedIn = false;
-        try {
-            loggedIn = RmiClient.getController().login(loginTextField.getText(), passwordTextField.getText());
-        } catch (RemoteException ex) {
-            Logger.getLogger(LoginScreenPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (loggedIn)
-        {
-            JOptionPane.showMessageDialog(this, "Logged in!"); // TODO: go to next screen
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(this, "Not Logged in"); // TODO: error message
-        }
-    }//GEN-LAST:event_connectionButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

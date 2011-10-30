@@ -17,10 +17,12 @@ public class MainWindowController {
 
     private EmaLaeDesktopView view;
     private LoginScreenPanel loginScreenPanel;
+    private LoginScreenController loginScreenController;
 
     public MainWindowController(EmaLaeDesktopView view) {
         this.view = view;
         loginScreenPanel = new LoginScreenPanel();
+        loginScreenController = new LoginScreenController(loginScreenPanel);
         setMiddleContent(loginScreenPanel);
     }
 
