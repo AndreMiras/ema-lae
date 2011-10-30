@@ -17,7 +17,13 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         System.out.println("Constructor");
     }
 
-    public void login(int pid){
-        System.out.println("TODO");
+    public void login(String username, String password){
+        System.out.println("Trying to login with:"
+                + "username:"
+                + username
+                + "\n"
+                + "password:"
+                + password
+                );
     }
 }
