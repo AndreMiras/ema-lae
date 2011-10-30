@@ -8,6 +8,7 @@ package dao;
 import database.entity.UserProfile;
 import java.util.Hashtable;
 import java.util.List;
+import org.hibernate.Session;
 
 /**
  *
@@ -17,22 +18,38 @@ public class UserProfileDao extends DaoHibernate<UserProfile> {
 
     public Integer create(UserProfile obj)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = getSession();
+        session.beginTransaction();
+        Integer id = (Integer) getSession().save(obj);
+        session.getTransaction().commit();
+
+        return id;
     }
 
     public UserProfile read(Integer id)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = getSession();
+        session.beginTransaction();
+        UserProfile userProfile = (UserProfile) getSession().get(UserProfile.class, id);
+        session.getTransaction().commit();
+
+        return userProfile;
     }
 
     public void update(UserProfile obj)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = getSession();
+        session.beginTransaction();
+        getSession().update(obj);
+        session.getTransaction().commit();
     }
 
     public void delete(UserProfile obj)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = getSession();
+        session.beginTransaction();
+        getSession().delete(obj);
+        session.getTransaction().commit();
     }
 
     public List<UserProfile> find(Hashtable<String, String> querySet)
@@ -47,7 +64,14 @@ public class UserProfileDao extends DaoHibernate<UserProfile> {
 
     public List<UserProfile> all()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Session session = getSession();
+
+        session.beginTransaction();
+        List userProfiles = getSession().createQuery("from "
+                + UserProfile.class.getName()).list();
+        session.getTransaction().commit();
+
+        return userProfiles;
     }
 
 }
