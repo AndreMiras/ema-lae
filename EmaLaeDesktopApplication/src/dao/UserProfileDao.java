@@ -5,6 +5,7 @@
 
 package dao;
 
+import database.entity.User;
 import database.entity.UserProfile;
 import java.util.Hashtable;
 import java.util.List;
@@ -60,6 +61,19 @@ public class UserProfileDao extends DaoHibernate<UserProfile> {
     public UserProfile get(Hashtable<String, String> querySet)
     {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public UserProfile get(User user)
+    {
+        String hqlString = "from UserProfile as user_profile where ";
+        String filterString = "";
+        Session session = getSession();
+
+        session.beginTransaction();
+        // TODO[security]: is there a security risk, using plain HQL ?
+        List objs = getSession().createQuery(hqlString + filterString).list();
+        session.getTransaction().commit();
+        return (UserProfile) objs.get(0);
     }
 
     public List<UserProfile> all()

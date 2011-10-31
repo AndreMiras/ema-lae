@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public class UserProfile implements Serializable {
 
-    private Integer profileId;
+    private Integer userProfileId;
     private User user;
     private String firstName;
     private String lastName;
@@ -24,9 +24,18 @@ public class UserProfile implements Serializable {
     private String phoneNumber;
     private String email;
 
-    public Integer getProfileId()
+    public UserProfile()
     {
-        return profileId;
+    }
+
+    public UserProfile(User user)
+    {
+        this.user = user;
+    }
+
+    public Integer getUserProfileId()
+    {
+        return userProfileId;
     }
 
     public User getUser()
@@ -58,8 +67,8 @@ public class UserProfile implements Serializable {
         return phoneNumber;
     }
 
-    public void setProfileId(Integer profileId) {
-        this.profileId = profileId;
+    public void setUserProfileId(Integer profileId) {
+        this.userProfileId = profileId;
     }
 
     public void setUser(User user)
