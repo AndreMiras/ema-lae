@@ -65,8 +65,8 @@ public class UserProfileDao extends DaoHibernate<UserProfile> {
 
     public UserProfile get(User user)
     {
-        String hqlString = "from UserProfile as user_profile where ";
-        String filterString = "";
+        String hqlString = "from UserProfile as userprofile where ";
+        String filterString = "id = '" + user.getUserId() + "'";
         Session session = getSession();
 
         session.beginTransaction();
