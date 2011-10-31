@@ -11,6 +11,13 @@
 
 package emalaedesktopapplication.forms;
 
+import client.RmiClient;
+import database.entity.User;
+import database.entity.UserProfile;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author amiras
@@ -20,6 +27,27 @@ public class ViewProfile extends javax.swing.JPanel {
     /** Creates new form ViewProfile */
     public ViewProfile() {
         initComponents();
+
+        UserProfile userProfile;
+        try
+        {
+            userProfile = RmiClient.getController().getUserProfile();
+        } catch (RemoteException ex)
+        {
+            Logger.getLogger(ViewProfile.class.getName()).log(Level.SEVERE, null, ex);
+            userProfile = null;
+        }
+
+        updateFieldsFromUserProfile(userProfile);
+    }
+
+    /**
+     * Update all the fields of the view with the given userProfile object
+     */
+    private void updateFieldsFromUserProfile(UserProfile userProfile)
+    {
+        firstNameLabel.setText(userProfile.getFirstName());
+        lastNameLabel.setText(userProfile.getLastName());
     }
 
     /** This method is called from within the constructor to
@@ -35,6 +63,8 @@ public class ViewProfile extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        lastNameLabel = new javax.swing.JLabel();
+        firstNameLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -58,6 +88,12 @@ public class ViewProfile extends javax.swing.JPanel {
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
 
+        lastNameLabel.setText(resourceMap.getString("lastNameLabel.text")); // NOI18N
+        lastNameLabel.setName("lastNameLabel"); // NOI18N
+
+        firstNameLabel.setText(resourceMap.getString("firstNameLabel.text")); // NOI18N
+        firstNameLabel.setName("firstNameLabel"); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -66,9 +102,15 @@ public class ViewProfile extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(200, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lastNameLabel)
+                            .addComponent(firstNameLabel))))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,9 +118,13 @@ public class ViewProfile extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lastNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(firstNameLabel))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -141,7 +187,7 @@ public class ViewProfile extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 104, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -173,6 +219,7 @@ public class ViewProfile extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel firstNameLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -184,6 +231,7 @@ public class ViewProfile extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lastNameLabel;
     // End of variables declaration//GEN-END:variables
 
 }

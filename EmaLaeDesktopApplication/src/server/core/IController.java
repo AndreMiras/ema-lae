@@ -5,6 +5,9 @@
 
 package server.core;
 
+import database.entity.User;
+import database.entity.UserProfile;
+
 
 /**
  *
@@ -13,9 +16,36 @@ package server.core;
 public interface IController extends java.rmi.Remote {
 
 
+    /**
+     * Tries to log the user in with the given credential.
+     * @param username
+     * @param password
+     * @return true on login success, false otherwise
+     * @throws java.rmi.RemoteException
+     */
     public boolean login(String username, String password)
             throws java.rmi.RemoteException;
 
+    /**
+     * Only for testing purpose but will be taken out in production
+     * Recreates some dataset in the database
+     */
     public void initDatabaseForTests()
+            throws java.rmi.RemoteException;
+
+    /**
+     * Returns the logged user
+     * @return current logged in user, false if none
+     * @throws java.rmi.RemoteException
+     */
+    public User getUser()
+            throws java.rmi.RemoteException;
+
+    /**
+     * Returns the logged user profile
+     * @returncurrent logged in user profile, false if none
+     * @throws java.rmi.RemoteException
+     */
+    public UserProfile getUserProfile()
             throws java.rmi.RemoteException;
 }
