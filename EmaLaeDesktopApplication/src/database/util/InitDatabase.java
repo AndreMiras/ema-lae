@@ -50,12 +50,14 @@ public class InitDatabase {
      */
     public void dropUsers()
     {
+        User user;
         UserDao userDao = new UserDao();
         List users = userDao.all();
         
         for(int i=0; i<users.size(); i++)
         {
-            userDao.delete((User) users.get(i));
+            user = (User) users.get(i);
+            userDao.delete(user);
         }
     }
 

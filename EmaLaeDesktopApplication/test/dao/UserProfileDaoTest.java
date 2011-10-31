@@ -7,6 +7,7 @@ package dao;
 
 import database.entity.User;
 import database.entity.UserProfile;
+import database.util.InitDatabase;
 import java.util.Hashtable;
 import java.util.List;
 import org.junit.After;
@@ -28,6 +29,9 @@ public class UserProfileDaoTest {
     @BeforeClass
     public static void setUpClass() throws Exception
     {
+        InitDatabase initDatabase = new InitDatabase();
+        initDatabase.dropUsers();
+        initDatabase.createProfiles();
     }
 
     @AfterClass
@@ -159,7 +163,7 @@ public class UserProfileDaoTest {
 
         // getting a previously created user
         Hashtable<String, String> querySet = new Hashtable<String, String>();
-        querySet.put("username", "username1");
+        querySet.put("username", "username3");
         User user = userDao.get(querySet);
         assertNotNull(user);
 
