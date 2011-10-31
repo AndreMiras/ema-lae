@@ -155,13 +155,17 @@ public class UserProfileDaoTest {
     public void testGet_User()
     {
         System.out.println("get");
-        User user = null;
+        UserDao userDao = new UserDao();
+
+        // getting a previously created user
+        Hashtable<String, String> querySet = new Hashtable<String, String>();
+        querySet.put("username", "username1");
+        User user = userDao.get(querySet);
+        assertNotNull(user);
+
         UserProfileDao instance = new UserProfileDao();
-        UserProfile expResult = null;
         UserProfile result = instance.get(user);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
     /**
