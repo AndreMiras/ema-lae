@@ -46,7 +46,7 @@ public class UserDao extends DaoHibernate<User> {
     {
         Session session = getSession();
         session.beginTransaction();
-        getSession().delete(obj);
+        session.delete(obj);
         session.getTransaction().commit();
     }
 
@@ -97,7 +97,7 @@ public class UserDao extends DaoHibernate<User> {
         if (objs.size() != 1)
             throw new Error("Returned "
                     + objs.size()
-                    + "object(s) when it should return one and only one.");
+                    + " object(s) when it should return one and only one.");
         return (User) objs.get(0);
     }
 
