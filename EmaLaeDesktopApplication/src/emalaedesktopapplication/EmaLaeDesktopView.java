@@ -4,6 +4,11 @@
 
 package emalaedesktopapplication;
 
+import client.RmiClient;
+import database.util.InitDatabase;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -116,6 +121,7 @@ public class EmaLaeDesktopView extends FrameView {
         mainPanel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
+        recreateDataSetMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
@@ -133,6 +139,15 @@ public class EmaLaeDesktopView extends FrameView {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(EmaLaeDesktopView.class);
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
+
+        recreateDataSetMenuItem.setText(resourceMap.getString("recreateDataSetMenuItem.text")); // NOI18N
+        recreateDataSetMenuItem.setName("recreateDataSetMenuItem"); // NOI18N
+        recreateDataSetMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recreateDataSetMenuItemClicked(evt);
+            }
+        });
+        fileMenu.add(recreateDataSetMenuItem);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getActionMap(EmaLaeDesktopView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
@@ -192,10 +207,22 @@ public class EmaLaeDesktopView extends FrameView {
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void recreateDataSetMenuItemClicked(java.awt.event.ActionEvent evt)//GEN-FIRST:event_recreateDataSetMenuItemClicked
+    {//GEN-HEADEREND:event_recreateDataSetMenuItemClicked
+        try
+        {
+            RmiClient.getController().initDatabaseForTests();
+        } catch (RemoteException ex)
+        {
+            Logger.getLogger(EmaLaeDesktopView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_recreateDataSetMenuItemClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
+    private javax.swing.JMenuItem recreateDataSetMenuItem;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;

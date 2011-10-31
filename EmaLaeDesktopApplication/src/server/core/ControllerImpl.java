@@ -7,6 +7,7 @@ package server.core;
 
 import dao.UserDao;
 import database.entity.User;
+import database.util.InitDatabase;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -22,6 +23,17 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
 
     public ControllerImpl() throws java.rmi.RemoteException, java.io.IOException {
         System.out.println("Constructor");
+    }
+
+    /**
+     * Only for testing purpose but will be taken out in production
+     * Recreates some dataset in the database
+     */
+    public void initDatabaseForTests()
+            throws java.rmi.RemoteException {
+        InitDatabase initDatabase = new InitDatabase();
+        initDatabase.dropUsers();
+        initDatabase.createProfiles();
     }
 
     public boolean login(String username, String password)
