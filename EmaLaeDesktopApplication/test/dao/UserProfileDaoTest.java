@@ -54,7 +54,7 @@ public class UserProfileDaoTest {
         UserProfile obj = new UserProfile(user);
 
         // the object shouldn't have an id, until it gets one from the DAO
-        assertNull(obj.getUserProfileId());
+        assertNull(obj.getUserId());
         
         UserProfileDao instance = new UserProfileDao();
         Integer result = instance.create(obj);
@@ -75,7 +75,7 @@ public class UserProfileDaoTest {
         userProfile.setLastName("bar");
 
         // the object shouldn't have an id, until it gets one from the DAO
-        assertNull(userProfile.getUserProfileId());
+        assertNull(userProfile.getUserId());
 
         UserProfileDao instance = new UserProfileDao();
         Integer newUserID = instance.create(userProfile);
