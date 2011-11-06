@@ -148,7 +148,15 @@ public class UserDaoTest {
     public void testGet()
     {
         System.out.println("get");
-        fail("TODO: implement the test testGet");
+        User userToFind = new User("userToGet");
+        UserDao userDao = new UserDao();
+        Integer newUserID = userDao.create(userToFind);
+
+        Hashtable<String, String> querySet = new Hashtable<String, String>();
+        querySet.put("username", "userToGet");
+        User result = userDao.get(querySet);
+        assertEquals("userToGet", result.getUsername());
+        assertEquals(newUserID, result.getUserId());
     }
 
     /**
