@@ -6,15 +6,25 @@
 package database.entity;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  *
  * @author andre
  */
+@Entity
+@Table(name = "users")
 public class User implements Serializable {
+
+    @Column(name ="id")
+    @Id
+    @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer userId;
+    @Column(name ="username")
     private String username;
+    @Column(name ="password")
     private String password;
+    //@Column(name="groupID")
     private int groupID;
 
     public int getGroupID() {
