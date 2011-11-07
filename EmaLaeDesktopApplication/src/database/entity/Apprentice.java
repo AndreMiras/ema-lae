@@ -7,6 +7,7 @@ package database.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  *
@@ -14,7 +15,28 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "apprentices")
+@Table(name = "users")
 public class Apprentice extends UserProfile implements Serializable{
+    private int promotionID;
+    private Set<Integer> sessions;
+
+    public int getPromotionID() {
+        return promotionID;
+    }
+
+    public void setPromotionID(int promotionID) {
+        this.promotionID = promotionID;
+    }
+
+    public Set<Integer> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(Set<Integer> sessions) {
+        this.sessions = sessions;
+    }
+
+    
+
 
 }
