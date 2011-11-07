@@ -5,18 +5,27 @@
 
 package database.entity;
 
-import java.util.List;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  *
  * @author pc
  */
-public class Group {
 
+@Entity
+@Table(name = "groups")
+public class Group implements Serializable{
+
+    @Column(name ="groupsID")
+    @Id
+    @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private int ID;
+    @Column(name ="name")
     private String name;
-    private List<Integer> usersId;
-    private List<Integer> permissionsID;
+    private Set<Integer> usersId;
+    private Set<Integer> permissionsID;
 
     public int getID() {
         return ID;
@@ -34,19 +43,19 @@ public class Group {
         this.name = name;
     }
 
-    public List<Integer> getPermissionsID() {
+    public Set<Integer> getPermissionsID() {
         return permissionsID;
     }
 
-    public void setPermissionsID(List<Integer> permissionsID) {
+    public void setPermissionsID(Set<Integer> permissionsID) {
         this.permissionsID = permissionsID;
     }
 
-    public List<Integer> getUsersId() {
+    public Set<Integer> getUsersId() {
         return usersId;
     }
 
-    public void setUsersId(List<Integer> usersId) {
+    public void setUsersId(Set<Integer> usersId) {
         this.usersId = usersId;
     }
 

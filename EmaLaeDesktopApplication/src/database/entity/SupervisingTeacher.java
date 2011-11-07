@@ -5,11 +5,17 @@
 
 package database.entity;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 /**
  *
  * @author pc
  */
-public class SupervisingTeacher extends UserProfile{
+
+@Entity
+@Table(name = "supervisingTeachers")
+public class SupervisingTeacher extends UserProfile implements Serializable{
 
 
 }

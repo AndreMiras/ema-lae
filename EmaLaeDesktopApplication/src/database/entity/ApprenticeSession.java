@@ -5,16 +5,29 @@
 
 package database.entity;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 /**
  *
  * @author pc
  */
-public class ApprenticeSession {
 
+@Entity
+@Table(name = "apprenticesSessions")
+public class ApprenticeSession implements Serializable{
+
+    @Column(name ="apprenticesSessionId")
+    @Id
+    @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private int ID;
+    @Column(name ="apprenticeID")
     private int IDApprentice;
+    @Column(name ="sessionID")
     private int IDSession;
+    @Column(name ="mark")
     private float mark;
+    @Column(name ="documentLink")
     private String documentLink;
 
     public int getID() {

@@ -5,19 +5,34 @@
 
 package database.entity;
 
+import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  *
  * @author pc
  */
-public class Contract {
 
+@Entity
+@Table(name = "contracts")
+public class Contract implements Serializable{
+
+    @Column(name ="contractsID")
+    @Id
+    @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private int ID;
+    @Column(name ="apprenticeID")
     private int IDApprentice;
+    @Column(name ="internshipSupervisorID")
     private int IDInternshipSupervisor;
+    @Column(name ="supervisingTeacherID")
     private int IDSupervisingTeacher;
+    @Column(name ="beginDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date beginDate;
+    @Column(name ="endDate")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date endDate;
 
     public int getID() {

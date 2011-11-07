@@ -4,18 +4,31 @@
  */
 
 package database.entity;
+
+import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  *
  * @author pc
  */
-public class Session {
 
+@Entity
+@Table(name = "sessions")
+public class Session implements Serializable{
+
+    @Column(name ="sessionsID")
+    @Id
+    @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private int ID;
+    @Column(name ="startDate")
     private Date startDate;
+    @Column(name ="endDate")
     private Date endDate;
+    @Column(name ="assignments")
     private String assignmentsLink;
+    @Column(name ="type")
     private int sessionType;
 
     public int getID() {

@@ -5,14 +5,27 @@
 
 package database.entity;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 /**
  *
  * @author pc
  */
-public class Company {
+
+@Entity
+@Table(name = "companies")
+public class Company implements Serializable{
+
+    @Column(name ="companiesID")
+    @Id
+    @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private int ID;
+    @Column(name ="name")
     private String name;
+    @Column(name ="address")
     private String address;
+    @Column(name ="phoneNumber")
     private String phoneNumber;
 
     public int getID() {

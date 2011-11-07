@@ -5,21 +5,33 @@
 
 package database.entity;
 
-import java.util.List;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Set;
 
 
 /**
  *
  * @author pc
  */
-public class Promotion {
 
+@Entity
+@Table(name = "promotions")
+public class Promotion implements Serializable{
+
+    @Column(name ="promotionsID")
+    @Id
+    @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private int ID;
+    @Column(name ="name")
     private String name;
+    @Column(name ="promotionYear")
     private int year;
+    @Column(name ="responsibleID")
     private int IDresponsible;
+    @Column(name ="adminID")
     private int IDAdmin;
-    private List<Integer> IDApprentice;
+    private Set<Integer> IDApprentice;
 
     public int getID() {
         return ID;
@@ -37,11 +49,11 @@ public class Promotion {
         this.IDAdmin = IDAdmin;
     }
 
-    public List<Integer> getIDApprentice() {
+    public Set<Integer> getIDApprentice() {
         return IDApprentice;
     }
 
-    public void setIDApprentice(List<Integer> IDApprentice) {
+    public void setIDApprentice(Set<Integer> IDApprentice) {
         this.IDApprentice = IDApprentice;
     }
 
