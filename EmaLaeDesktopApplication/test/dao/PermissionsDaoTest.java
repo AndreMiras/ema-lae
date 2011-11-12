@@ -98,12 +98,12 @@ public class PermissionsDaoTest {
      */
     //@Test
     public void testDelete() {
-        System.out.println("delete");
-        Permission obj = null;
+        System.out.println("read");
+        Permission newPermission = new Permission("permission4delete");
         PermissionsDao instance = new PermissionsDao();
-        instance.delete(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Integer permissionID = instance.create(newPermission);
+        Permission result = instance.read(permissionID);
+        assertEquals("permission4delete", result.getName());
     }
 
     /**
