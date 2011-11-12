@@ -130,17 +130,28 @@ public class UserProfileDaoTest {
     public void testDelete()
     {
         System.out.println("delete");
-        UserProfile obj = null;
-        UserProfileDao instance = new UserProfileDao();
-        instance.delete(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        UserProfileDao userProfileDao = new UserProfileDao();
+        List<UserProfile> allUserProfilesBefore = userProfileDao.all();
+        UserProfile userProfileToDelete = allUserProfilesBefore.get(0);
+
+        /*
+         * it should be possible to read that userprofile from the database before
+         * it's been deleted
+         */
+        assertNotNull(userProfileDao.read(userProfileToDelete.getUserId()));
+        // deleting the first record
+        userProfileDao.delete(userProfileToDelete);
+        List<UserProfile> allUserProfilesAfter = userProfileDao.all();
+        // not record should now be found
+        assertNull(userProfileDao.read(userProfileToDelete.getUserId()));
+        // only one record was deleted
+        assertTrue(allUserProfilesBefore.size() -1 == allUserProfilesAfter.size());
     }
 
     /**
-     * Test of find method, of class UserProfileDao.
+     * TODO
      */
-    @Test
+    // @Test
     public void testFind()
     {
         System.out.println("find");
@@ -154,9 +165,9 @@ public class UserProfileDaoTest {
     }
 
     /**
-     * Test of get method, of class UserProfileDao.
+     * TODO
      */
-    @Test
+    // @Test
     public void testGet_Hashtable()
     {
         System.out.println("get");
@@ -170,9 +181,9 @@ public class UserProfileDaoTest {
     }
 
     /**
-     * Test of get method, of class UserProfileDao.
+     * TODO
      */
-    @Test
+    // @Test
     public void testGet_User()
     {
         System.out.println("get");
@@ -190,9 +201,9 @@ public class UserProfileDaoTest {
     }
 
     /**
-     * Test of all method, of class UserProfileDao.
+     * TODO
      */
-    @Test
+    // @Test
     public void testAll()
     {
         System.out.println("all");
