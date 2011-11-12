@@ -22,7 +22,7 @@ public class Permission implements Serializable{
     @Column(name ="permissionsID")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private int permissionID;
+    private Integer permissionID;
     @Column(name ="name")
     private String name;
 
@@ -58,11 +58,11 @@ public class Permission implements Serializable{
         this.name = name;
     }
 
-    public int getPermissionID() {
+    public Integer getPermissionID() {
         return permissionID;
     }
 
-    public void setPermissionID(int permissionID) {
+    public void setPermissionID(Integer permissionID) {
         this.permissionID = permissionID;
     }
 
