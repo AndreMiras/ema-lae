@@ -21,7 +21,7 @@ public class Group implements Serializable{
     @Column(name ="groupsID")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private int ID;
+    private Integer groupId;
     @Column(name ="name")
     private String name;
 
@@ -41,12 +41,20 @@ public class Group implements Serializable{
     )
     private Set<Permission> permissionsID;
 
-    public int getID() {
-        return ID;
+    public Group() {
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+
+    public Group(String groupName){
+       this.name = groupName;
+    }
+
+    public Integer getID() {
+        return this.groupId;
+    }
+
+    public void setID(Integer ID) {
+        this.groupId = ID;
     }
 
     public String getName() {

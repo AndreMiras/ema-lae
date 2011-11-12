@@ -31,10 +31,10 @@ public class PermissionDao extends DaoHibernate<Permission> {
     public Permission read(Integer id) {
         Session session = getSession();
         session.beginTransaction();
-        Permission group = (Permission) getSession().get(Permission.class, id);
+        Permission permission = (Permission) getSession().get(Permission.class, id);
         session.getTransaction().commit();
 
-        return group;
+        return permission;
     }
 
     public void update(Permission obj) {

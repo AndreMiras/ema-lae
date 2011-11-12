@@ -56,6 +56,7 @@ public class UserDaoTest {
 
         UserDao instance = new UserDao();
         Integer result = instance.create(obj);
+        
         // the object should now have an id given from the DAO
         assertNotNull(result);
     }
