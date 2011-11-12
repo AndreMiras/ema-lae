@@ -3,10 +3,13 @@
  * and open the template in the editor.
  */
 
+//TODO: Generate tests for users and permission : test a viewprofile on an authorized user, and on an unauthorized  user.
+
 package database.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  *
@@ -22,16 +25,30 @@ public class Permission implements Serializable{
     private int permissionID;
     @Column(name ="name")
     private String name;
-    @Column(name ="contentType")
-    private int contentType;
 
-    public int getContentType() {
-        return contentType;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Group> groupsID;
+
+    public Set<Group> getGroupsID() {
+        return groupsID;
     }
 
-    public void setContentType(int contentType) {
-        this.contentType = contentType;
+    public void setGroupsID(Set<Group> groupsID) {
+        this.groupsID = groupsID;
     }
+
+    
+
+//    @Column(name ="contentType")
+//    private int contentType;
+//
+//    public int getContentType() {
+//        return contentType;
+//    }
+//
+//    public void setContentType(int contentType) {
+//        this.contentType = contentType;
+//    }
 
     public String getName() {
         return name;

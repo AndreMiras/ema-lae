@@ -31,6 +31,7 @@ public class Promotion implements Serializable{
     private int IDresponsible;
     @Column(name ="adminID")
     private int IDAdmin;
+    
     private Set<Integer> IDApprentice;
 
     public int getID() {

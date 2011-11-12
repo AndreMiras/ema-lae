@@ -19,15 +19,16 @@
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
     <mapping class="database.entity.User"/>
     <mapping class="database.entity.UserProfile"/>
-    <mapping class="database.entity.Apprentice"/>
+    <mapping class="database.entity.Group"/>
+    <mapping class="database.entity.Permission"/>
+<!--    <mapping class="database.entity.Apprentice"/>
     <mapping class="database.entity.ApprenticeSession"/>
     <mapping class="database.entity.Company"/>
     <mapping class="database.entity.Contract"/>
     <mapping class="database.entity.Formation"/>
-    <mapping class="database.entity.Group"/>
     <mapping class="database.entity.InternshipSupervisor"/>
     <mapping class="database.entity.Promotion"/>
     <mapping class="database.entity.Session"/>
-    <mapping class="database.entity.SupervisingTeacher"/>
+    <mapping class="database.entity.SupervisingTeacher"/>-->
   </session-factory>
 </hibernate-configuration>

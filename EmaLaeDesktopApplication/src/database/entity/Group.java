@@ -24,8 +24,22 @@ public class Group implements Serializable{
     private int ID;
     @Column(name ="name")
     private String name;
-    private Set<Integer> usersId;
-    private Set<Integer> permissionsID;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "user_group", joinColumns =
+        {@JoinColumn(name = "groupsID") },
+        inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
+    private Set<User> usersId;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "permission_group", joinColumns =
+        {@JoinColumn(name = "groupsID") },
+        inverseJoinColumns = { @JoinColumn(name = "permissionsID") }
+    )
+    private Set<Permission> permissionsID;
 
     public int getID() {
         return ID;
@@ -43,19 +57,19 @@ public class Group implements Serializable{
         this.name = name;
     }
 
-    public Set<Integer> getPermissionsID() {
+    public Set<Permission> getPermissionsID() {
         return permissionsID;
     }
 
-    public void setPermissionsID(Set<Integer> permissionsID) {
+    public void setPermissionsID(Set<Permission> permissionsID) {
         this.permissionsID = permissionsID;
     }
 
-    public Set<Integer> getUsersId() {
+    public Set<User> getUsersId() {
         return usersId;
     }
 
-    public void setUsersId(Set<Integer> usersId) {
+    public void setUsersId(Set<User> usersId) {
         this.usersId = usersId;
     }
 

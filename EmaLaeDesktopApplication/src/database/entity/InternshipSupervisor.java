@@ -14,7 +14,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "internshipsupervisors")
+@Table(name = "internshipSupervisors")
 public class InternshipSupervisor extends UserProfile implements Serializable
 {
 

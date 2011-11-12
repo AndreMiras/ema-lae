@@ -7,7 +7,7 @@ package dao;
 
 import database.entity.User;
 import database.entity.UserProfile;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -53,12 +53,12 @@ public class UserProfileDao extends DaoHibernate<UserProfile> {
         session.getTransaction().commit();
     }
 
-    public List<UserProfile> find(Hashtable<String, String> querySet)
+    public List<UserProfile> find(HashMap<String, String> querySet)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public UserProfile get(Hashtable<String, String> querySet)
+    public UserProfile get(HashMap<String, String> querySet)
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }

@@ -17,5 +17,4 @@ import javax.persistence.*;
 @Table(name = "supervisingTeachers")
 public class SupervisingTeacher extends UserProfile implements Serializable{
 
-
 }

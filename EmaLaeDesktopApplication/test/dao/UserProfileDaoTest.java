@@ -8,7 +8,7 @@ package dao;
 import database.entity.User;
 import database.entity.UserProfile;
 import database.util.InitDatabase;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -127,7 +127,7 @@ public class UserProfileDaoTest {
     public void testFind()
     {
         System.out.println("find");
-        Hashtable<String, String> querySet = null;
+        HashMap<String, String> querySet = null;
         UserProfileDao instance = new UserProfileDao();
         List expResult = null;
         List result = instance.find(querySet);
@@ -143,7 +143,7 @@ public class UserProfileDaoTest {
     public void testGet_Hashtable()
     {
         System.out.println("get");
-        Hashtable<String, String> querySet = null;
+        HashMap<String, String> querySet = null;
         UserProfileDao instance = new UserProfileDao();
         UserProfile expResult = null;
         UserProfile result = instance.get(querySet);
@@ -162,7 +162,7 @@ public class UserProfileDaoTest {
         UserDao userDao = new UserDao();
 
         // getting a previously created user
-        Hashtable<String, String> querySet = new Hashtable<String, String>();
+        HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", "username3");
         User user = userDao.get(querySet);
         assertNotNull(user);

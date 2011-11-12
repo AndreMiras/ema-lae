@@ -15,9 +15,12 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "users")
+@Table(name = "apprentices")
 public class Apprentice extends UserProfile implements Serializable{
+
+    
     private int promotionID;
+    
     private Set<Integer> sessions;
 
     public int getPromotionID() {
