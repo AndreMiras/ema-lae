@@ -46,7 +46,7 @@ public class GroupDaoTest {
     @Test
     public void testCreate() {
         System.out.println("create");
-        Group obj = new Group("username1");
+        Group obj = new Group("group4Create");
 
         // the object shouldn't have an id, until it gets one from the DAO
         assertNull(obj.getID());
@@ -64,12 +64,12 @@ public class GroupDaoTest {
     @Test
     public void testRead() {
         System.out.println("read");
-        Group testGroup2 = new Group("testGroup2");
+        Group testGroup = new Group("group4Read");
 
         GroupDao instance = new GroupDao();
-        Integer groupID = instance.create(testGroup2);
+        Integer groupID = instance.create(testGroup);
         Group result = instance.read(groupID);
-        assertEquals("testGroup2", result.getName());
+        assertEquals("group4Read", result.getName());
     }
 
     /**
@@ -78,19 +78,19 @@ public class GroupDaoTest {
     @Test
     public void testUpdate() {
         System.out.println("update");
-        Group newGroup = new Group("testGroup3");
+        Group newGroup = new Group("group4Update");
         GroupDao instance = new GroupDao();
         Integer newGroupID = instance.create(newGroup);
 
         // re-read the saved newUser from the database
         newGroup = instance.read(newGroupID);
         // update it locally
-        newGroup.setName("newtestGroup3Name");
+        newGroup.setName("group4UpdateNew");
         // re-hit the database
         instance.update(newGroup);
         // re-read the updated newUser from the database
         newGroup = instance.read(newGroupID);
-        assertEquals("newtestGroup3Name", newGroup.getName());
+        assertEquals("group4UpdateNew", newGroup.getName());
     }
 
     /**
@@ -98,12 +98,12 @@ public class GroupDaoTest {
      */
     @Test
     public void testDelete() {
-        System.out.println("delete");
-        Group obj = null;
+        System.out.println("read");
+        Group newGroup = new Group("group4delete");
         GroupDao instance = new GroupDao();
-        instance.delete(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Integer groupID = instance.create(newGroup);
+        Group result = instance.read(groupID);
+        assertEquals("group4delete", result.getName());
     }
 
     /**
