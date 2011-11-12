@@ -5,6 +5,7 @@
 
 package dao;
 
+import database.util.HibernateUtil;
 import database.entity.User;
 import java.util.Hashtable;
 import java.util.List;
@@ -27,6 +28,8 @@ public class UserDaoTest {
     @BeforeClass
     public static void setUpClass() throws Exception
     {
+        // Forces the hibernate config for tests (will always drop/create schema)
+        HibernateUtil.getSessionFactoryForTests();
     }
 
     @AfterClass

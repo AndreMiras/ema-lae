@@ -25,8 +25,8 @@ public class HibernateUtil {
     private static Configuration getDefaultConfiguration()
     {
         Configuration configuration = new AnnotationConfiguration();
-        // configuration = configuration.configure("hibernate.cfg.xml");
-        configuration = configuration.configure();
+        // configuration = configuration.configure();
+        configuration = configuration.configure("hibernate.cfg.xml");
 
         return configuration;
     }
@@ -40,6 +40,32 @@ public class HibernateUtil {
                 // Create the SessionFactory from hibernate.cfg.xml
                 Configuration configuration = getDefaultConfiguration();
                 // configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+                sessionFactory = configuration.buildSessionFactory();
+            }
+            catch (Throwable ex)
+            {
+                // Make sure you log the exception, as it might be swallowed
+                System.err.println("Initial SessionFactory creation failed." + ex);
+                throw new ExceptionInInitializerError(ex);
+            }
+        }
+        return sessionFactory;
+    }
+
+    /**
+     * Gets the default configuration object and overrides some configurations
+     * for the unit tests.
+     * @return a session factory customized for unit tests
+     */
+    public static SessionFactory getSessionFactoryForTests()
+    {
+        if (sessionFactory == null)
+        {
+            try
+            {
+                // Create the SessionFactory from hibernate.cfg.xml
+                Configuration configuration = getDefaultConfiguration();
+                configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
                 sessionFactory = configuration.buildSessionFactory();
             }
             catch (Throwable ex)

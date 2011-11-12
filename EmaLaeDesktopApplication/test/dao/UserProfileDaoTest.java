@@ -5,6 +5,7 @@
 
 package dao;
 
+import database.util.HibernateUtil;
 import database.entity.User;
 import database.entity.UserProfile;
 import database.util.InitDatabase;
@@ -29,6 +30,9 @@ public class UserProfileDaoTest {
     @BeforeClass
     public static void setUpClass() throws Exception
     {
+        // Forces the hibernate config for tests (will always drop/create schema)
+        HibernateUtil.getSessionFactoryForTests();
+
         InitDatabase initDatabase = new InitDatabase();
         initDatabase.dropUsers();
         initDatabase.createProfiles();
