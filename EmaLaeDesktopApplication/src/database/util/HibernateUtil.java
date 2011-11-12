@@ -18,6 +18,19 @@ import org.hibernate.cfg.AnnotationConfiguration;
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
 
+    /**
+     *
+     * @return the default configuration object
+     */
+    private static Configuration getDefaultConfiguration()
+    {
+        Configuration configuration = new AnnotationConfiguration();
+        // configuration = configuration.configure("hibernate.cfg.xml");
+        configuration = configuration.configure();
+
+        return configuration;
+    }
+
     public static SessionFactory getSessionFactory()
     {
         if (sessionFactory == null)
@@ -25,10 +38,7 @@ public class HibernateUtil {
             try
             {
                 // Create the SessionFactory from hibernate.cfg.xml
-                // sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-                Configuration configuration = new AnnotationConfiguration();
-                // configuration = configuration.configure("hibernate.cfg.xml");
-                configuration = configuration.configure();
+                Configuration configuration = getDefaultConfiguration();
                 // configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
                 sessionFactory = configuration.buildSessionFactory();
             }
