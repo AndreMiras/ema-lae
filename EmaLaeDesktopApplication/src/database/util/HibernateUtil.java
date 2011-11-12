@@ -16,23 +16,29 @@ import org.hibernate.cfg.AnnotationConfiguration;
  * @author andre
  */
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
-    static
+    public static SessionFactory getSessionFactory()
     {
-        try
+        if (sessionFactory == null)
         {
-            // Create the SessionFactory from hibernate.cfg.xml
-            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-        } catch (Throwable ex)
-        {
-            // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
+            try
+            {
+                // Create the SessionFactory from hibernate.cfg.xml
+                // sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+                Configuration configuration = new AnnotationConfiguration();
+                // configuration = configuration.configure("hibernate.cfg.xml");
+                configuration = configuration.configure();
+                // configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+                sessionFactory = configuration.buildSessionFactory();
+            }
+            catch (Throwable ex)
+            {
+                // Make sure you log the exception, as it might be swallowed
+                System.err.println("Initial SessionFactory creation failed." + ex);
+                throw new ExceptionInInitializerError(ex);
+            }
         }
-    }
-
-    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 }
