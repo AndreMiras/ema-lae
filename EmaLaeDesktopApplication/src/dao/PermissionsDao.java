@@ -10,14 +10,13 @@ import database.entity.Permission;
  *
  * @author pc
  */
-public class PermissionDao extends DaoHibernate<Permission, Integer> {
-
-    public PermissionDao()
+public class PermissionsDao extends DaoHibernate<Permission, Integer> {
+    public PermissionsDao()
     {
         super(Permission.class);
     }
 
-    public PermissionDao(Class<Permission> type)
+    public PermissionsDao(Class<Permission> type)
     {
         super(type);
     }

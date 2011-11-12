@@ -8,6 +8,7 @@ package database.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Set;
+import java.util.HashSet;
 
 /**
  *
@@ -27,17 +28,19 @@ public class User implements Serializable {
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Group> groupsID;
+    private Set<Group> groups;
 
-    public Set<Group> getGroupsID() {
-        return groupsID;
+    public Set<Group> getGroups() {
+        return groups;
     }
 
-    public void setGroupsID(Set<Group> groupsID) {
-        this.groupsID = groupsID;
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 
-    
+    public void addGroup(Group newGroup){
+        this.groups.add(newGroup);
+    }
 
     public User()
     {
@@ -49,6 +52,8 @@ public class User implements Serializable {
 
         // TODO: set random password when not specified
         this.password = "";
+
+        this.groups = new HashSet<Group>();
     }
 
     public String getPassword()

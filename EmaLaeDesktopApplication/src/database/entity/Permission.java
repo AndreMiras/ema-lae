@@ -29,6 +29,13 @@ public class Permission implements Serializable{
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Group> groupsID;
 
+    public Permission() {
+    }
+
+    public Permission(String permissionName){
+        this.name = permissionName;
+    }
+
     public Set<Group> getGroupsID() {
         return groupsID;
     }
