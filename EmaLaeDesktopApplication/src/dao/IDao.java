@@ -5,6 +5,7 @@
 
 package dao;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,15 +13,15 @@ import java.util.List;
  *
  * @author andre
  */
-public interface IDao<T> {
+public interface IDao<T, PK extends Serializable> {
 
     /** Persist the newInstance object into database */
-    Integer create(T obj);
+    PK create(T obj);
 
     /** Retrieve an object that was previously persisted to the database using
      *   the indicated id as primary key
      */
-    T read(Integer id);
+    T read(PK id);
 
     /** Save changes made to a persistent object.  */
     void update(T obj);

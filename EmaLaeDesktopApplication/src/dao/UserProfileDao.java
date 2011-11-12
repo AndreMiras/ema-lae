@@ -7,7 +7,6 @@ package dao;
 
 import database.entity.User;
 import database.entity.UserProfile;
-import java.util.HashMap;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -15,54 +14,23 @@ import org.hibernate.Session;
  *
  * @author andre
  */
-public class UserProfileDao extends DaoHibernate<UserProfile> {
+public class UserProfileDao extends DaoHibernate<UserProfile, Integer> {
 
-    public Integer create(UserProfile obj)
+    public UserProfileDao()
     {
-        Session session = getSession();
-        session.beginTransaction();
-        Integer id = (Integer) getSession().save(obj);
-        session.getTransaction().commit();
-
-        return id;
+        super(UserProfile.class);
     }
 
-    public UserProfile read(Integer id)
+    public UserProfileDao(Class<UserProfile> type)
     {
-        Session session = getSession();
-        session.beginTransaction();
-        UserProfile userProfile = (UserProfile) getSession().get(UserProfile.class, id);
-        session.getTransaction().commit();
-
-        return userProfile;
+        super(type);
     }
 
-    public void update(UserProfile obj)
-    {
-        Session session = getSession();
-        session.beginTransaction();
-        getSession().update(obj);
-        session.getTransaction().commit();
-    }
-
-    public void delete(UserProfile obj)
-    {
-        Session session = getSession();
-        session.beginTransaction();
-        getSession().delete(obj);
-        session.getTransaction().commit();
-    }
-
-    public List<UserProfile> find(HashMap<String, String> querySet)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public UserProfile get(HashMap<String, String> querySet)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+    /**
+     *
+     * @param user
+     * @return an userprofile object from its user object foreign key
+     */
     public UserProfile get(User user)
     {
         String hqlString = "from UserProfile as userprofile where ";
@@ -74,18 +42,6 @@ public class UserProfileDao extends DaoHibernate<UserProfile> {
         List objs = getSession().createQuery(hqlString + filterString).list();
         session.getTransaction().commit();
         return (UserProfile) objs.get(0);
-    }
-
-    public List<UserProfile> all()
-    {
-        Session session = getSession();
-
-        session.beginTransaction();
-        List userProfiles = getSession().createQuery("from "
-                + UserProfile.class.getName()).list();
-        session.getTransaction().commit();
-
-        return userProfiles;
     }
 
 }
