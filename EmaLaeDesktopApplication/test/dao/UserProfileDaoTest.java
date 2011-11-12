@@ -5,6 +5,7 @@
 
 package dao;
 
+import database.util.HibernateUtil;
 import database.entity.User;
 import database.entity.UserProfile;
 import database.util.InitDatabase;
@@ -29,6 +30,9 @@ public class UserProfileDaoTest {
     @BeforeClass
     public static void setUpClass() throws Exception
     {
+        // Forces the hibernate config for tests (will always drop/create schema)
+        HibernateUtil.getSessionFactoryForTests();
+
         InitDatabase initDatabase = new InitDatabase();
         initDatabase.dropUsers();
         initDatabase.createProfiles();
@@ -99,11 +103,24 @@ public class UserProfileDaoTest {
     public void testUpdate()
     {
         System.out.println("update");
-        UserProfile obj = null;
+        User user = new User("username3");
         UserProfileDao instance = new UserProfileDao();
-        instance.update(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        UserProfile userProfile = new UserProfile(user);
+        userProfile.setFirstName("firstname1");
+        userProfile.setLastName("lastname1");
+        Integer userProfileId = instance.create(userProfile);
+
+        // re-read the saved profile from the database
+        userProfile = instance.read(userProfileId);
+        // update it locally
+        userProfile.setFirstName("newFirstname1");
+        userProfile.setLastName("newLastname1");
+        // re-hit the database
+        instance.update(userProfile);
+        // re-read the updated profile from the database
+        userProfile = instance.read(userProfileId);
+        assertEquals("newFirstname1", userProfile.getFirstName());
+        assertEquals("newLastname1", userProfile.getLastName());
     }
 
     /**
@@ -113,17 +130,28 @@ public class UserProfileDaoTest {
     public void testDelete()
     {
         System.out.println("delete");
-        UserProfile obj = null;
-        UserProfileDao instance = new UserProfileDao();
-        instance.delete(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        UserProfileDao userProfileDao = new UserProfileDao();
+        List<UserProfile> allUserProfilesBefore = userProfileDao.all();
+        UserProfile userProfileToDelete = allUserProfilesBefore.get(0);
+
+        /*
+         * it should be possible to read that userprofile from the database before
+         * it's been deleted
+         */
+        assertNotNull(userProfileDao.read(userProfileToDelete.getUserId()));
+        // deleting the first record
+        userProfileDao.delete(userProfileToDelete);
+        List<UserProfile> allUserProfilesAfter = userProfileDao.all();
+        // not record should now be found
+        assertNull(userProfileDao.read(userProfileToDelete.getUserId()));
+        // only one record was deleted
+        assertTrue(allUserProfilesBefore.size() -1 == allUserProfilesAfter.size());
     }
 
     /**
-     * Test of find method, of class UserProfileDao.
+     * TODO
      */
-    @Test
+    // @Test
     public void testFind()
     {
         System.out.println("find");
@@ -137,9 +165,9 @@ public class UserProfileDaoTest {
     }
 
     /**
-     * Test of get method, of class UserProfileDao.
+     * TODO
      */
-    @Test
+    // @Test
     public void testGet_Hashtable()
     {
         System.out.println("get");
@@ -153,9 +181,9 @@ public class UserProfileDaoTest {
     }
 
     /**
-     * Test of get method, of class UserProfileDao.
+     * TODO
      */
-    @Test
+    // @Test
     public void testGet_User()
     {
         System.out.println("get");
@@ -173,9 +201,9 @@ public class UserProfileDaoTest {
     }
 
     /**
-     * Test of all method, of class UserProfileDao.
+     * TODO
      */
-    @Test
+    // @Test
     public void testAll()
     {
         System.out.println("all");

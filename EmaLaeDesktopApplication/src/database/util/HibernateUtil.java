@@ -7,7 +7,7 @@ package database.util;
 
 
 import org.hibernate.SessionFactory;
-//import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 /**
@@ -16,34 +16,65 @@ import org.hibernate.cfg.AnnotationConfiguration;
  * @author andre
  */
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
-    static {
-  try {
-  // Create the SessionFactory from hibernate.cfg.xml
-  sessionFactory = new
-  AnnotationConfiguration().configure().buildSessionFactory();
-  } catch (Throwable ex) {
-  // Make sure you log the exception, as it might be swallowed
-  System.err.println("Initial SessionFactory creation failed." + ex);
-  throw new ExceptionInInitializerError(ex);
-  }
-  }
+    /**
+     *
+     * @return the default configuration object
+     */
+    private static Configuration getDefaultConfiguration()
+    {
+        Configuration configuration = new AnnotationConfiguration();
+        // configuration = configuration.configure();
+        configuration = configuration.configure("hibernate.cfg.xml");
 
-    /*static {
-        try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            // sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
+        return configuration;
+    }
+
+    public static SessionFactory getSessionFactory()
+    {
+        if (sessionFactory == null)
+        {
+            try
+            {
+                // Create the SessionFactory from hibernate.cfg.xml
+                Configuration configuration = getDefaultConfiguration();
+                // configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+                sessionFactory = configuration.buildSessionFactory();
+            }
+            catch (Throwable ex)
+            {
+                // Make sure you log the exception, as it might be swallowed
+                System.err.println("Initial SessionFactory creation failed." + ex);
+                throw new ExceptionInInitializerError(ex);
+            }
         }
-    }*/
+        return sessionFactory;
+    }
 
-    public static SessionFactory getSessionFactory() {
+    /**
+     * Gets the default configuration object and overrides some configurations
+     * for the unit tests.
+     * @return a session factory customized for unit tests
+     */
+    public static SessionFactory getSessionFactoryForTests()
+    {
+        if (sessionFactory == null)
+        {
+            try
+            {
+                // Create the SessionFactory from hibernate.cfg.xml
+                Configuration configuration = getDefaultConfiguration();
+                configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+                sessionFactory = configuration.buildSessionFactory();
+            }
+            catch (Throwable ex)
+            {
+                // Make sure you log the exception, as it might be swallowed
+                System.err.println("Initial SessionFactory creation failed." + ex);
+                throw new ExceptionInInitializerError(ex);
+            }
+        }
         return sessionFactory;
     }
 }
