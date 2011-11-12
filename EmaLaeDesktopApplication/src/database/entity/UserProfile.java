@@ -28,6 +28,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "user_profile")
 public class UserProfile implements Serializable {
 
+    //TODO: check this code
     @GenericGenerator(name = "generator", strategy = "foreign",
     parameters = @Parameter(name = "property", value = "user"))
     @Id
@@ -42,10 +43,14 @@ public class UserProfile implements Serializable {
     private String firstName;
     @Column(name ="lastName")
     private String lastName;
+    @Column(name ="birthDate")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
+    @Column(name ="address")
     private String address;
+    @Column(name ="phone")
     private String phoneNumber;
+    @Column(name ="email")
     private String email;
 
     public UserProfile()

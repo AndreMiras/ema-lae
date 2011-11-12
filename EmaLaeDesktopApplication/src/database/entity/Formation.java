@@ -5,17 +5,26 @@
 
 package database.entity;
 
-import java.util.List;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  *
  * @author pc
  */
-public class Formation {
 
+@Entity
+@Table(name = "formations")
+public class Formation implements Serializable{
+
+    @Column(name ="formationsID")
+    @Id
+    @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private int ID;
+    @Column(name ="parentID")
     private int parentID;
-    private List<Integer> childrenID;
+    private Set<Integer> childrenID;
 
     public int getID() {
         return ID;
@@ -25,11 +34,11 @@ public class Formation {
         this.ID = ID;
     }
 
-    public List<Integer> getChildrenID() {
+    public Set<Integer> getChildrenID() {
         return childrenID;
     }
 
-    public void setChildrenID(List<Integer> childrenID) {
+    public void setChildrenID(Set<Integer> childrenID) {
         this.childrenID = childrenID;
     }
 

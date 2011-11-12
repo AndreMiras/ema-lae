@@ -1,7 +1,7 @@
 package dao;
 
 import database.entity.User;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +50,7 @@ public class UserDao extends DaoHibernate<User> {
         session.getTransaction().commit();
     }
 
-    public List<User> find(Hashtable<String, String> querySet)
+    public List<User> find(HashMap<String, String> querySet)
     {
         String hqlString = "from User as user where ";
         String filterString = "";
@@ -91,7 +91,7 @@ public class UserDao extends DaoHibernate<User> {
     /*
      * TODO: throw exception on multiple value found
      */
-    public User get(Hashtable<String, String> querySet)
+    public User get(HashMap<String, String> querySet)
     {
         List objs = find(querySet);
         if (objs.size() != 1)

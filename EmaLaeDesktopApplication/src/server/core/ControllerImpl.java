@@ -10,7 +10,7 @@ import dao.UserProfileDao;
 import database.entity.User;
 import database.entity.UserProfile;
 import database.util.InitDatabase;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,7 +45,7 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
                 );
 
         UserDao userDao = new UserDao();
-        Hashtable<String, String> querySet = new Hashtable<String, String>();
+        HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", username);
 
 

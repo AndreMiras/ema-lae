@@ -7,7 +7,7 @@ package dao;
 
 import database.util.HibernateUtil;
 import database.entity.User;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -136,7 +136,7 @@ public class UserDaoTest {
         UserDao userDao = new UserDao();
         Integer newUserID = userDao.create(userToFind);
 
-        Hashtable<String, String> querySet = new Hashtable<String, String>();
+        HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", "userToFind");
         List<User> result = userDao.find(querySet);
         User firstUserFound = result.get(0);
@@ -155,7 +155,7 @@ public class UserDaoTest {
         UserDao userDao = new UserDao();
         Integer newUserID = userDao.create(userToFind);
 
-        Hashtable<String, String> querySet = new Hashtable<String, String>();
+        HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", "userToGet");
         User result = userDao.get(querySet);
         assertEquals("userToGet", result.getUsername());

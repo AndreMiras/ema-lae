@@ -7,6 +7,7 @@ package database.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  *
@@ -24,16 +25,19 @@ public class User implements Serializable {
     private String username;
     @Column(name ="password")
     private String password;
-    //@Column(name="groupID")
-    private int groupID;
 
-    public int getGroupID() {
-        return groupID;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Group> groupsID;
+
+    public Set<Group> getGroupsID() {
+        return groupsID;
     }
 
-    public void setGroupID(int groupID) {
-        this.groupID = groupID;
+    public void setGroupsID(Set<Group> groupsID) {
+        this.groupsID = groupsID;
     }
+
+    
 
     public User()
     {

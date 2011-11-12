@@ -12,7 +12,7 @@ package modules.auth;
 
 import dao.UserDao;
 import database.entity.User;
-import java.util.Hashtable;
+import java.util.HashMap;
 import server.core.Payload;
 
 /**
@@ -44,7 +44,7 @@ public class Controller {
     private User get_profile(String username)
     {
         UserDao userDao = new UserDao();
-        Hashtable querySet = new Hashtable<String, String>();
+        HashMap querySet = new HashMap<String, String>();
         querySet.put("username", username);
         User user = userDao.get(querySet);
 

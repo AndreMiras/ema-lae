@@ -5,7 +5,7 @@
 
 package dao;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,10 +29,10 @@ public interface IDao<T> {
     void delete(T obj);
 
     /** Find data sets based on filters **/
-    List<T> find(Hashtable<String, String> querySet);
+    List<T> find(HashMap<String, String> querySet);
 
     /** Return the only one record found  for a givent filter **/
-    T get(Hashtable<String, String> querySet);
+    T get(HashMap<String, String> querySet);
 
     /** get all sets **/
     List<T> all();

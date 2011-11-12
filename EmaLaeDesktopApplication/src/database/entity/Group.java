@@ -5,18 +5,41 @@
 
 package database.entity;
 
-import java.util.List;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  *
  * @author pc
  */
-public class Group {
 
+@Entity
+@Table(name = "groups")
+public class Group implements Serializable{
+
+    @Column(name ="groupsID")
+    @Id
+    @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private int ID;
+    @Column(name ="name")
     private String name;
-    private List<Integer> usersId;
-    private List<Integer> permissionsID;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "user_group", joinColumns =
+        {@JoinColumn(name = "groupsID") },
+        inverseJoinColumns = { @JoinColumn(name = "user_id") }
+    )
+    private Set<User> usersId;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "permission_group", joinColumns =
+        {@JoinColumn(name = "groupsID") },
+        inverseJoinColumns = { @JoinColumn(name = "permissionsID") }
+    )
+    private Set<Permission> permissionsID;
 
     public int getID() {
         return ID;
@@ -34,19 +57,19 @@ public class Group {
         this.name = name;
     }
 
-    public List<Integer> getPermissionsID() {
+    public Set<Permission> getPermissionsID() {
         return permissionsID;
     }
 
-    public void setPermissionsID(List<Integer> permissionsID) {
+    public void setPermissionsID(Set<Permission> permissionsID) {
         this.permissionsID = permissionsID;
     }
 
-    public List<Integer> getUsersId() {
+    public Set<User> getUsersId() {
         return usersId;
     }
 
-    public void setUsersId(List<Integer> usersId) {
+    public void setUsersId(Set<User> usersId) {
         this.usersId = usersId;
     }
 
