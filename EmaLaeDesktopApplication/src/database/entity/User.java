@@ -8,6 +8,7 @@ package database.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Set;
+import java.util.HashSet;
 
 /**
  *
@@ -38,9 +39,7 @@ public class User implements Serializable {
     }
 
     public void addGroup(Group newGroup){
-        Set<Group> newGroupSet = this.groups;
-        newGroupSet.add(newGroup);
-        setGroups(newGroupSet);
+        this.groups.add(newGroup);
     }
 
     public User()
@@ -53,6 +52,8 @@ public class User implements Serializable {
 
         // TODO: set random password when not specified
         this.password = "";
+
+        this.groups = new HashSet<Group>();
     }
 
     public String getPassword()

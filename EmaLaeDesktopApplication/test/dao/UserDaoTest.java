@@ -5,6 +5,7 @@
 
 package dao;
 
+import database.entity.Group;
 import database.util.HibernateUtil;
 import database.entity.User;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.Set;
 
 /**
  *
@@ -173,6 +175,33 @@ public class UserDaoTest {
         UserDao instance = new UserDao();
         List result = instance.all();
         assertTrue(result.size() > 0);
+    }
+
+    @Test
+    public void testAddGroup()
+    {
+        System.out.println("addGroup");
+        UserDao instance = new UserDao();
+        User newUser = new User("user4addGroup");
+        Group newGroup1 = new Group("Group4addGroup");
+        Integer newUserId = instance.create(newUser);
+
+        assertFalse(newUser.getGroups().contains(newGroup1));
+
+        newUser.addGroup(newGroup1);
+        instance.update(newUser);
+        newUser = instance.read(newUserId);
+        Group newGroup2 = new Group("group4addGroup2");
+
+        assertTrue(newUser.getGroups().contains(newGroup1));
+        assertFalse(newUser.getGroups().contains(newGroup2));
+
+        newUser.addGroup(newGroup2);
+        instance.update(newUser);
+        newUser = instance.read(newUserId);
+
+        assertTrue(newUser.getGroups().contains(newGroup1)&&newUser.getGroups().contains(newGroup2));
+
     }
 
 }
