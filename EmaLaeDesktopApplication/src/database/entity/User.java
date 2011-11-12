@@ -27,17 +27,21 @@ public class User implements Serializable {
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Group> groupsID;
+    private Set<Group> groups;
 
-    public Set<Group> getGroupsID() {
-        return groupsID;
+    public Set<Group> getGroups() {
+        return groups;
     }
 
-    public void setGroupsID(Set<Group> groupsID) {
-        this.groupsID = groupsID;
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 
-    
+    public void addGroup(Group newGroup){
+        Set<Group> newGroupSet = this.groups;
+        newGroupSet.add(newGroup);
+        setGroups(newGroupSet);
+    }
 
     public User()
     {
