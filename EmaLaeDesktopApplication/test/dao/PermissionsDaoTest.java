@@ -75,14 +75,22 @@ public class PermissionsDaoTest {
     /**
      * Test of update method, of class PermissionsDao.
      */
-    //@Test
+    @Test
     public void testUpdate() {
         System.out.println("update");
-        Permission obj = null;
+        Permission newPermission = new Permission("permission4update");
         PermissionsDao instance = new PermissionsDao();
-        instance.update(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Integer newPermissionID = instance.create(newPermission);
+
+        // re-read the saved newUser from the database
+        newPermission = instance.read(newPermissionID);
+        // update it locally
+        newPermission.setName("permission4updateNew");
+        // re-hit the database
+        instance.update(newPermission);
+        // re-read the updated newUser from the database
+        newPermission = instance.read(newPermissionID);
+        assertEquals("permission4updateNew", newPermission.getName());
     }
 
     /**
