@@ -6,6 +6,7 @@
 package emalaedesktopapplication.controller;
 
 import emalaedesktopapplication.EmaLaeDesktopView;
+import emalaedesktopapplication.forms.AdminMainPanel;
 import emalaedesktopapplication.forms.LoginScreenPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +59,8 @@ public class MainWindowController {
             String actionCommand = target.getActionCommand();
             if (actionCommand.equals("AdminHome"))
             {
-                // TODO: show the Admin Home Panel
+                AdminMainPanel adminMainPanel = new AdminMainPanel();
+                view.setMiddleContentPanel(adminMainPanel);
             }
         }
     }
