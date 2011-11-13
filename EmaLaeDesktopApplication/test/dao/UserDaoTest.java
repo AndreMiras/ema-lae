@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.Set;
+import database.entity.Permission;
 
 /**
  *
@@ -202,6 +202,33 @@ public class UserDaoTest {
 
         assertTrue(newUser.getGroups().contains(newGroup1)&&newUser.getGroups().contains(newGroup2));
 
+    }
+
+    public void checkPermission (){
+        System.out.println("check permission");
+        User user1 = new User("user4checkPermission");
+        UserDao userInstance1 = new UserDao();
+        Integer user1ID = userInstance1.create(user1);
+
+        User user2 = new User("user24checkPermission");
+        UserDao userInstance2 = new UserDao();
+        Integer user2ID = userInstance2.create(user2);
+
+        Permission permission = new Permission("permission4checkPermission");
+        PermissionsDao permissionInstance = new PermissionsDao();
+        Integer permissionID = permissionInstance.create(permission);
+        
+        Group group = new Group("Group4addGroup");
+//        GroupDao groupInstance = new GroupDao();
+//        Integer groupID = groupInstance.create(group);
+
+        assertFalse(user1.checkPermission(permission));
+
+        user1.addGroup(group);
+        permission.addGroup(group);
+
+        assertTrue(user1.checkPermission(permission));
+        assertFalse(user2.checkPermission(permission));
     }
 
 }

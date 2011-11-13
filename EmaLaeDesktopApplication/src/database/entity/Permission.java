@@ -27,7 +27,7 @@ public class Permission implements Serializable{
     private String name;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Group> groupsID;
+    private Set<Group> groups;
 
     public Permission() {
     }
@@ -37,11 +37,11 @@ public class Permission implements Serializable{
     }
 
     public Set<Group> getGroupsID() {
-        return groupsID;
+        return this.groups;
     }
 
-    public void setGroupsID(Set<Group> groupsID) {
-        this.groupsID = groupsID;
+    public void setGroupsID(Set<Group> groups) {
+        this.groups = groups;
     }
 
     
@@ -71,6 +71,10 @@ public class Permission implements Serializable{
 
     public void setPermissionID(Integer permissionID) {
         this.permissionID = permissionID;
+    }
+
+    public void addGroup(Group group){
+        this.groups.add(group);
     }
 
     
