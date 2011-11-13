@@ -27,6 +27,10 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         System.out.println("Constructor");
     }
 
+    /**
+     * Creates few user profiles test sets
+     * @throws java.rmi.RemoteException
+     */
     public void initDatabaseForTests()
             throws java.rmi.RemoteException {
         InitDatabase initDatabase = new InitDatabase();
