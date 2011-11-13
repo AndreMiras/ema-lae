@@ -110,6 +110,14 @@ public class EmaLaeDesktopView extends FrameView {
         mainPanel.revalidate();
     }
 
+    public void addMenuListener(ActionListener al)
+    {
+        // TODO: fileMenu.addActionListener(al);
+        // adminMenu.addActionListener(al);
+        adminMainMenuItem.addActionListener(al);
+        // TODO: helpMenu.addActionListener(al);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -178,13 +186,13 @@ public class EmaLaeDesktopView extends FrameView {
         adminMenu.add(jMenuItem2);
 
         adminMainMenuItem.setText(resourceMap.getString("adminMainMenuItem.text")); // NOI18N
+        adminMainMenuItem.setActionCommand(resourceMap.getString("adminMainMenuItem.actionCommand")); // NOI18N
         adminMainMenuItem.setName("adminMainMenuItem"); // NOI18N
         adminMenu.add(adminMainMenuItem);
 
         menuBar.add(adminMenu);
 
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
-        helpMenu.setName("helpMenu"); // NOI18N
 
         aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
         aboutMenuItem.setName("aboutMenuItem"); // NOI18N

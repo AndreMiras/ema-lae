@@ -78,6 +78,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="adminMainMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" resourceKey="adminMainMenuItem.text"/>
+                <Property name="actionCommand" type="java.lang.String" resourceKey="adminMainMenuItem.actionCommand"/>
                 <Property name="name" type="java.lang.String" value="adminMainMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
@@ -86,7 +87,6 @@
         <Menu class="javax.swing.JMenu" name="helpMenu">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="helpMenu.text"/>
-            <Property name="name" type="java.lang.String" value="helpMenu" noResource="true"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
