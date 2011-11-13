@@ -8,6 +8,9 @@ package database.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import database.entity.Apprentice;
+import database.entity.InternshipSupervisor;
+import database.entity.SupervisingTeacher;
 
 /**
  *
@@ -21,13 +24,13 @@ public class Contract implements Serializable{
     @Column(name ="contractsID")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private int ID;
+    private Integer ID;
     @Column(name ="apprenticeID")
-    private int IDApprentice;
+    private Apprentice apprentice;
     @Column(name ="internshipSupervisorID")
-    private int IDInternshipSupervisor;
+    private InternshipSupervisor internshipSupervisor;
     @Column(name ="supervisingTeacherID")
-    private int IDSupervisingTeacher;
+    private SupervisingTeacher supervisingTeacher;
     @Column(name ="beginDate")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date beginDate;
@@ -35,24 +38,54 @@ public class Contract implements Serializable{
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date endDate;
 
-    public int getID() {
-        return ID;
+    public Contract() {
+    }
+
+    public Contract(Apprentice IDApprentice, InternshipSupervisor IDInternshipSupervisor, SupervisingTeacher IDSupervisingTeacher) {
+        this.apprentice = IDApprentice;
+        this.internshipSupervisor = IDInternshipSupervisor;
+        this.supervisingTeacher = IDSupervisingTeacher;
+    }
+
+    public Contract(Apprentice IDApprentice, InternshipSupervisor IDInternshipSupervisor, SupervisingTeacher IDSupervisingTeacher, Date beginDate, Date endDate) {
+        this.apprentice = IDApprentice;
+        this.internshipSupervisor = IDInternshipSupervisor;
+        this.supervisingTeacher = IDSupervisingTeacher;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+    }
+
+   
+    public Integer getID() {
+        return this.ID;
     }
 
     public void setID(int ID) {
         this.ID = ID;
     }
 
-    public int getIDApprentice() {
-        return IDApprentice;
+    public Apprentice getApprentice() {
+        return apprentice;
     }
 
-    public int getIDInternshipSupervisor() {
-        return IDInternshipSupervisor;
+    public void setApprentice(Apprentice apprentice) {
+        this.apprentice = apprentice;
     }
 
-    public int getIDSupervisingTeacher() {
-        return IDSupervisingTeacher;
+    public InternshipSupervisor getInternshipSupervisor() {
+        return internshipSupervisor;
+    }
+
+    public void setInternshipSupervisor(InternshipSupervisor internshipSupervisor) {
+        this.internshipSupervisor = internshipSupervisor;
+    }
+
+    public SupervisingTeacher getSupervisingTeacher() {
+        return supervisingTeacher;
+    }
+
+    public void setSupervisingTeacher(SupervisingTeacher supervisingTeacher) {
+        this.supervisingTeacher = supervisingTeacher;
     }
 
     public Date getBeginDate() {
@@ -61,18 +94,6 @@ public class Contract implements Serializable{
 
     public Date getEndDate() {
         return endDate;
-    }
-
-    public void setIDApprentice(int IDApprentice) {
-        this.IDApprentice = IDApprentice;
-    }
-
-    public void setIDInternshipSupervisor(int IDInternshipSupervisor) {
-        this.IDInternshipSupervisor = IDInternshipSupervisor;
-    }
-
-    public void setIDSupervisingTeacher(int IDSupervisingTeacher) {
-        this.IDSupervisingTeacher = IDSupervisingTeacher;
     }
 
     public void setBeginDate(Date beginDate) {

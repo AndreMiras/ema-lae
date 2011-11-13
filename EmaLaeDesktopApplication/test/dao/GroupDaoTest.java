@@ -98,7 +98,7 @@ public class GroupDaoTest {
      */
     @Test
     public void testDelete() {
-        System.out.println("read");
+        System.out.println("delete");
         Group newGroup = new Group("group4delete");
         GroupDao instance = new GroupDao();
         Integer groupID = instance.create(newGroup);
