@@ -51,7 +51,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="adminMenu">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="adminMenu.text"/>
             <Property name="name" type="java.lang.String" value="adminMenu" noResource="true"/>
@@ -61,6 +61,24 @@
               <Properties>
                 <Property name="text" type="java.lang.String" resourceKey="editViewMenuItem.text"/>
                 <Property name="name" type="java.lang.String" value="editViewMenuItem" noResource="true"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="jMenuItem1.text"/>
+                <Property name="name" type="java.lang.String" value="jMenuItem1" noResource="true"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="jMenuItem2.text"/>
+                <Property name="name" type="java.lang.String" value="jMenuItem2" noResource="true"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="adminMainMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="adminMainMenuItem.text"/>
+                <Property name="name" type="java.lang.String" value="adminMainMenuItem" noResource="true"/>
               </Properties>
             </MenuItem>
           </SubComponents>
