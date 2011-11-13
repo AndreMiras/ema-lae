@@ -85,16 +85,24 @@ public class ControllerImplTest {
     /**
      * Test of getUser method, of class ControllerImpl.
      */
-     // @Test // This test was merged with testGetUserProfile
+    @Test
     public void testGetUser() throws Exception
     {
         System.out.println("getUser");
-        ControllerImpl instance = new ControllerImpl();
-        User expResult = null;
-        User result = instance.getUser();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        User user;
+        ControllerImpl controllerImpl = new ControllerImpl();
+        String username = "username1";
+        String password = "password1";
+        controllerImpl.initDatabaseForTests();
+
+        // Before we login the user object should be Null
+        user = controllerImpl.getUser();
+        assertNull(user);
+
+        // After we login the user object should NOT be Null
+        controllerImpl.login(username, password);
+        user = controllerImpl.getUser();
+        assertNotNull(user);
     }
 
     /**
