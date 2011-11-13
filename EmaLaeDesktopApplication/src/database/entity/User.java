@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  *
@@ -86,5 +87,15 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    public boolean checkPermission (Permission permission){
+        boolean hasPermission = false;
+        Iterator i=this.groups.iterator();
+        while(i.hasNext() && !hasPermission)
+        {
+            Group userGroup = (Group) i.next();
+            hasPermission = userGroup.getPermissionsID().contains(permission) ? true : hasPermission;
+        }
+        return hasPermission;
+    }
     
 }
