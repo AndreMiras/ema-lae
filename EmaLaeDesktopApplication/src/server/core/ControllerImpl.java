@@ -89,7 +89,14 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
     public UserProfile getUserProfile()
             throws java.rmi.RemoteException
     {
+        UserProfile userProfile = null;
         UserProfileDao userProfileDao = new UserProfileDao();
-        return (UserProfile) userProfileDao.get(loggedUser);
+
+        if (loggedUser != null)
+        {
+            userProfile = (UserProfile) userProfileDao.get(loggedUser);
+        }
+
+        return userProfile;
     }
 }
