@@ -51,6 +51,7 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         UserDao userDao = new UserDao();
         HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", username);
+        querySet.put("password", password);
 
 
         List<User> userList;
