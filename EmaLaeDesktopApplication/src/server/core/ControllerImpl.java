@@ -23,8 +23,8 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
 
     protected User loggedUser;
 
-    public ControllerImpl() throws java.rmi.RemoteException, java.io.IOException {
-        System.out.println("Constructor");
+    public ControllerImpl() throws java.rmi.RemoteException, java.io.IOException
+    {
     }
 
     /**
@@ -40,45 +40,23 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
 
     public boolean login(String username, String password)
             throws java.rmi.RemoteException {
-        System.out.println("Trying to login with:\n"
-                + "username:"
-                + username
-                + "\n"
-                + "password:"
-                + password
-                );
-
+        Boolean loginSuccess = false;
         UserDao userDao = new UserDao();
         HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", username);
         querySet.put("password", password);
 
-
         List<User> userList;
         userList = userDao.all();
-        System.out.println("Debug (userlist):");
-        for(int i=0; i<userList.size(); i++)
-        {
-            System.out.println("User:"
-                    + userList.get(i).getUsername()
-                    + "\n"
-                    + "password:"
-                    + userList.get(i).getPassword()
-                    );
-        }
+
         userList = userDao.find(querySet);
         if (userList.size() > 0)
         {
-            System.out.println("Logged in!");
             loggedUser = userList.get(0);
-            return true;
-        }
-        else
-        {
-            System.out.println("Not logged in!");
+            loginSuccess = true;
         }
 
-        return false;
+        return loginSuccess;
     }
 
     public User getUser()
