@@ -5,6 +5,9 @@
 
 package server.core;
 
+import database.util.InitDatabase;
+import dao.UserProfileDao;
+import database.util.HibernateUtil;
 import database.entity.User;
 import database.entity.UserProfile;
 import org.junit.After;
@@ -26,6 +29,7 @@ public class ControllerImplTest {
     @BeforeClass
     public static void setUpClass() throws Exception
     {
+        HibernateUtil.getSessionFactoryForTests();
     }
 
     @AfterClass
@@ -48,10 +52,17 @@ public class ControllerImplTest {
     public void testInitDatabaseForTests() throws Exception
     {
         System.out.println("initDatabaseForTests");
-        ControllerImpl instance = new ControllerImpl();
-        instance.initDatabaseForTests();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ControllerImpl controllerImpl = new ControllerImpl();
+        UserProfileDao userProfileDao = new UserProfileDao();
+        InitDatabase initDatabase = new InitDatabase();
+
+        // The tables should be totally void at this point
+        // initDatabase.dropUsers();
+        assertTrue(userProfileDao.all().isEmpty());
+
+        // This should create a set of users
+        controllerImpl.initDatabaseForTests();
+        assertTrue(userProfileDao.all().size() > 0);
     }
 
     /**
