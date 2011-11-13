@@ -24,6 +24,7 @@ public class InitDatabase {
     {
         User user;
         String username;
+        String password;
         String firstname;
         String lastname;
         UserProfile userProfile;
@@ -31,12 +32,14 @@ public class InitDatabase {
 
         userProfileDao = new UserProfileDao();
         username = "username";
+        password = "pwd";
         firstname = "firstname";
         lastname = "lastname";
 
         for(int i=0; i<3; i++)
         {
             user = new User(username + i);
+            user.setPassword(password + i);
             userProfile = new UserProfile(user);
             userProfile.setFirstName(firstname + i);
             userProfile.setLastName(lastname + i);
