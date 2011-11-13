@@ -51,6 +51,7 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         UserDao userDao = new UserDao();
         HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", username);
+        querySet.put("password", password);
 
 
         List<User> userList;
@@ -89,7 +90,14 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
     public UserProfile getUserProfile()
             throws java.rmi.RemoteException
     {
+        UserProfile userProfile = null;
         UserProfileDao userProfileDao = new UserProfileDao();
-        return (UserProfile) userProfileDao.get(loggedUser);
+
+        if (loggedUser != null)
+        {
+            userProfile = (UserProfile) userProfileDao.get(loggedUser);
+        }
+
+        return userProfile;
     }
 }
