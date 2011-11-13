@@ -124,6 +124,8 @@ public class EmaLaeDesktopView extends FrameView {
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         recreateDataSetMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        editViewMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
         statusPanel = new javax.swing.JPanel();
@@ -156,6 +158,15 @@ public class EmaLaeDesktopView extends FrameView {
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
+
+        jMenu1.setText(resourceMap.getString("adminMenu.text")); // NOI18N
+        jMenu1.setName("adminMenu"); // NOI18N
+
+        editViewMenuItem.setText(resourceMap.getString("editViewMenuItem.text")); // NOI18N
+        editViewMenuItem.setName("editViewMenuItem"); // NOI18N
+        jMenu1.add(editViewMenuItem);
+
+        menuBar.add(jMenu1);
 
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
@@ -220,6 +231,8 @@ public class EmaLaeDesktopView extends FrameView {
     }//GEN-LAST:event_recreateDataSetMenuItemClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem editViewMenuItem;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
