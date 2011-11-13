@@ -39,8 +39,8 @@ public class User implements Serializable {
         this.groups = groups;
     }
 
-    public void addGroup(Group newGroup){
-        this.groups.add(newGroup);
+    public boolean addGroup(Group newGroup){
+        return this.groups.add(newGroup);
     }
 
     public User()
