@@ -14,6 +14,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.annotations.common.AssertionFailure;
 
 /**
  *
@@ -114,6 +116,22 @@ public class FormationDaoTest {
         assertTrue(allFormationsBefore.size() -1 == allFormationsAfter.size());
     }
 
+
+    @Test(expected = HibernateException.class)
+    public void testAddFormationShouldFail() {
+        System.out.println("create");
+        Formation f1 = new Formation("parent formation");
+        FormationDao instance = new FormationDao();
+        Integer result = instance.create(f1);
+
+        Formation f2 = new Formation(f1,"child formation");
+        assertFalse(f1.getChildrenFormations().contains(f2));
+
+        f1.addFormation(f2);
+
+        instance.update(f1);
+    }
+    
     @Test
     public void testAddFormation() {
         System.out.println("create");
@@ -125,7 +143,10 @@ public class FormationDaoTest {
         assertFalse(f1.getChildrenFormations().contains(f2));
 
         f1.addFormation(f2);
+
+        Integer result2 = instance.create(f2);
         instance.update(f1);
+
 
         Formation updatedf1 = instance.read(result);
 

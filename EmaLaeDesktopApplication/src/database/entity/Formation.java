@@ -26,9 +26,10 @@ public class Formation implements Serializable{
     @Column(name="formationsName")
     private String name;
     @ManyToOne
+    @JoinColumn(name = "parentFormation")
     private Formation parentFormation;
-    @OneToMany(mappedBy="ID")
-    @JoinColumn(name="formationsID")
+    @OneToMany
+    @JoinColumn(name="childrenFormations")
     private Set<Formation> childrenFormations = new HashSet<Formation>();
 
     public Formation() {
