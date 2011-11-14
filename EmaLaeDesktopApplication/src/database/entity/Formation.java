@@ -8,6 +8,7 @@ package database.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Set;
+import java.util.HashSet;
 
 /**
  *
@@ -21,35 +22,68 @@ public class Formation implements Serializable{
     @Column(name ="formationsID")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private int ID;
-    @Column(name ="parentID")
-    private int parentID;
-    private Set<Integer> childrenID;
+    private Integer ID;
+    @Column(name="formationsName")
+    private String name;
+    @ManyToOne
+    private Formation parentFormation;
+    @OneToMany(mappedBy="ID")
+    @JoinColumn(name="formationsID")
+    private Set<Formation> childrenFormations = new HashSet<Formation>();
 
-    public int getID() {
-        return ID;
+    public Formation() {
+
     }
 
-    public void setID(int ID) {
+    public Formation(Formation parentFormation) {
+        this.parentFormation = parentFormation;
+    }
+
+    public Formation(String name) {
+        this.name = name;
+    }
+
+    public Formation(Formation parentFormation, String name) {
+        this.name = name;
+        this.parentFormation = parentFormation;
+    }
+
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+        
+    public Integer getID() {
+        return this.ID;
+    }
+
+    public void setID(Integer ID) {
         this.ID = ID;
     }
 
-    public Set<Integer> getChildrenID() {
-        return childrenID;
+    public Set<Formation> getChildrenFormations() {
+        return childrenFormations;
     }
 
-    public void setChildrenID(Set<Integer> childrenID) {
-        this.childrenID = childrenID;
+    public void setChildrenFormations(Set<Formation> childrenFormations) {
+        this.childrenFormations = childrenFormations;
     }
 
-    public int getParentID() {
-        return parentID;
+    public Formation getParentFormation() {
+        return parentFormation;
     }
 
-    public void setParentID(int parentID) {
-        this.parentID = parentID;
+    public void setParentFormation(Formation parentFormation) {
+        this.parentFormation = parentFormation;
     }
     
-    
+    public boolean addFormation(Formation child){
+        return this.childrenFormations.add(child);
+    }
 
 }

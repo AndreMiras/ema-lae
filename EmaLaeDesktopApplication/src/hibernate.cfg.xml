@@ -22,8 +22,8 @@
     <mapping class="database.entity.Group"/>
     <mapping class="database.entity.Permission"/>
     <mapping class="database.entity.Contract"/>
-<!--     <mapping class="database.entity.Formation"/>
-    <mapping class="database.entity.Apprentice"/>
+    <mapping class="database.entity.Formation"/>
+<!--    <mapping class="database.entity.Apprentice"/>
     <mapping class="database.entity.ApprenticeSession"/>
     <mapping class="database.entity.Company"/>
     <mapping class="database.entity.InternshipSupervisor"/>

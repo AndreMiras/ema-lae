@@ -99,11 +99,22 @@ public class GroupDaoTest {
     @Test
     public void testDelete() {
         System.out.println("delete");
-        Group newGroup = new Group("group4delete");
         GroupDao instance = new GroupDao();
-        Integer groupID = instance.create(newGroup);
-        Group result = instance.read(groupID);
-        assertEquals("group4delete", result.getName());
+        List<Group> allGroupsBefore = instance.all();
+        Group groupToDelete = allGroupsBefore.get(0);
+
+        /*
+         * it should be possible to read that userprofile from the database before
+         * it's been deleted
+         */
+        assertNotNull(instance.read(groupToDelete.getID()));
+        // deleting the first record
+        instance.delete(groupToDelete);
+        List<Group> allGroupsAfter = instance.all();
+        // not record should now be found
+        assertNull(instance.read(groupToDelete.getID()));
+        // only one record was deleted
+        assertTrue(allGroupsBefore.size() -1 == allGroupsAfter.size());
     }
 
     /**
