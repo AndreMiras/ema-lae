@@ -25,7 +25,7 @@ public class Group implements Serializable{
     @Column(name ="name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "user_group", joinColumns =
         {@JoinColumn(name = "groupsID") },

@@ -28,7 +28,7 @@ public class User implements Serializable {
     @Column(name ="password")
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Group> groups;
 
     public Set<Group> getGroups() {

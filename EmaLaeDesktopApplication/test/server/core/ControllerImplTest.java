@@ -7,6 +7,7 @@ package server.core;
 
 import database.util.InitDatabase;
 import dao.UserProfileDao;
+import dao.UserDao;
 import database.util.HibernateUtil;
 import database.entity.User;
 import database.entity.UserProfile;
@@ -16,6 +17,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.List;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -54,12 +57,16 @@ public class ControllerImplTest {
         System.out.println("initDatabaseForTests");
         ControllerImpl controllerImpl = new ControllerImpl();
         UserProfileDao userProfileDao = new UserProfileDao();
+        UserDao userDao = new UserDao();
         InitDatabase initDatabase = new InitDatabase();
 
+        
+        List<User> myUsers = userDao.all();
         // The tables should be totally void at this point
-        // initDatabase.dropUsers();
+        //initDatabase.dropUsers();
         assertTrue(userProfileDao.all().isEmpty());
-
+        assertTrue(userDao.all().isEmpty());
+        
         // This should create a set of users
         controllerImpl.initDatabaseForTests();
         assertTrue(userProfileDao.all().size() > 0);

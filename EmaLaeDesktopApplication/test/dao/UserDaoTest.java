@@ -17,6 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import database.entity.Permission;
+import org.hibernate.HibernateException;
 
 /**
  *
@@ -176,30 +177,51 @@ public class UserDaoTest {
         List result = instance.all();
         assertTrue(result.size() > 0);
     }
+    
+    @Test(expected=HibernateException.class)
+    public void testAddGroupShouldFail()
+    {
+        System.out.println("addGroup");
+        UserDao instance = new UserDao();
+        User newUser = new User("user4addGroup");
+        Group newGroup1 = new Group("Group4addGroup");
+        instance.create(newUser);
+        
+        newUser.addGroup(newGroup1);
+        instance.update(newUser);
+    }
 
     @Test
     public void testAddGroup()
     {
         System.out.println("addGroup");
         UserDao instance = new UserDao();
+        GroupDao groupInstance = new GroupDao();
         User newUser = new User("user4addGroup");
         Group newGroup1 = new Group("Group4addGroup");
         Integer newUserId = instance.create(newUser);
 
-        assertFalse(newUser.getGroups().contains(newGroup1));
-
+        List<Group> myGroups = groupInstance.all();
+        assertFalse(myGroups.contains(newGroup1));
+        
+        groupInstance.create(newGroup1);
         newUser.addGroup(newGroup1);
         instance.update(newUser);
         newUser = instance.read(newUserId);
         Group newGroup2 = new Group("group4addGroup2");
-
+        
         assertTrue(newUser.getGroups().contains(newGroup1));
         assertFalse(newUser.getGroups().contains(newGroup2));
 
         newUser.addGroup(newGroup2);
+        groupInstance.create(newGroup2);
         instance.update(newUser);
         newUser = instance.read(newUserId);
-
+        
+        myGroups = groupInstance.all();
+        
+        assertTrue("Group4addGroup".equals(myGroups.get(0).getName())&&"group4addGroup2".equals(myGroups.get(1).getName()));
+        
         assertTrue(newUser.getGroups().contains(newGroup1)&&newUser.getGroups().contains(newGroup2));
 
     }
