@@ -33,7 +33,7 @@ public class Group implements Serializable{
     )
     private Set<User> usersId;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "permission_group", joinColumns =
         {@JoinColumn(name = "groupsID") },

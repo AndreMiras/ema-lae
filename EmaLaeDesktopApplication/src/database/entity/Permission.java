@@ -10,6 +10,7 @@ package database.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Set;
+import java.util.HashSet;
 
 /**
  *
@@ -26,14 +27,16 @@ public class Permission implements Serializable{
     @Column(name ="name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Group> groups;
 
     public Permission() {
+        this.groups = new HashSet<Group>();
     }
 
     public Permission(String permissionName){
         this.name = permissionName;
+        this.groups = new HashSet<Group>();
     }
 
     public Set<Group> getGroupsID() {
