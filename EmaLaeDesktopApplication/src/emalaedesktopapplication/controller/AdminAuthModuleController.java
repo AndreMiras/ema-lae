@@ -37,7 +37,12 @@ public class AdminAuthModuleController {
     {
         public void actionPerformed(ActionEvent e)
         {
-            User user = new User("test");
+            User user = new User("testusername");
+            user.setUserId(1);
+            user.setPassword("password foo");
+            // PersonTest user = new PersonTest("my name");
+            // user.setPassword("test");
+            // user.age = 26;
             AdminEditUserPanel adminEditUserPanel =
                     new AdminEditUserPanel(user);
             mainWindow.setMiddleContentPanel(adminEditUserPanel);

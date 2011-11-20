@@ -12,7 +12,16 @@
 package emalaedesktopapplication.forms.admin;
 
 import database.entity.User;
+import database.util.PersonTest;
 import javax.swing.JComponent;
+import org.metawidget.inspector.annotation.MetawidgetAnnotationInspector;
+import org.metawidget.inspector.composite.CompositeInspector;
+import org.metawidget.inspector.composite.CompositeInspectorConfig;
+import org.metawidget.inspector.hibernate.validator.HibernateValidatorInspector;
+import org.metawidget.inspector.iface.Inspector;
+import org.metawidget.inspector.java5.Java5Inspector;
+import org.metawidget.inspector.jpa.JpaInspector;
+import org.metawidget.inspector.propertytype.PropertyTypeInspector;
 import org.metawidget.swing.SwingMetawidget;
 
 /**
@@ -22,21 +31,56 @@ import org.metawidget.swing.SwingMetawidget;
 public class AdminEditUserPanel extends javax.swing.JPanel {
 
     private User user;
+    private SwingMetawidget metawidget;
+    // private PersonTest user;
 
     /** Creates new form AdminEditUserPanel */
     public AdminEditUserPanel() {
         initComponents();
     }
 
+    // public AdminEditUserPanel(User user) {
     public AdminEditUserPanel(User user) {
         this();
         this.user = user;
         initMetaWidget();
+        populateMetaWidgetValuesFromObject();
+    }
+
+    /*
+     * FIXME: I though metawidget could do that automagically
+     */
+    private void populateMetaWidgetValuesFromObject()
+    {
+        metawidget.setValue( user.getUsername(), new String[] {"username"} );
+        // user.setFirstname( (String) metawidget.getValue( "firstname" ) );
+    }
+
+    /**
+     * FIXME: I though metawidget could do that automagically
+     * Saves all current widget values back to the object and returns it
+     * @return updated object
+     */
+    public User save()
+    {
+        user.setUsername( (String) metawidget.getValue( new String[] {"username"} ) );
+
+        return user;
     }
 
     private void initMetaWidget()
     {
-        SwingMetawidget metawidget = new SwingMetawidget();
+        metawidget = new SwingMetawidget();
+        CompositeInspectorConfig inspectorConfig =
+                new CompositeInspectorConfig();
+        Inspector[] inspectors = { new PropertyTypeInspector(),
+                    new MetawidgetAnnotationInspector(),
+                    new Java5Inspector(),
+                    new JpaInspector(),
+                    /* new HibernateValidatorInspector() */};
+        inspectorConfig.setInspectors(inspectors);
+        metawidget.setInspector( new CompositeInspector( inspectorConfig ) );
+
         metawidget.setToInspect( user );
         setMiddleContentPanel(metawidget);
     }
