@@ -7,6 +7,7 @@ package server.core;
 
 import database.entity.User;
 import database.entity.UserProfile;
+import java.io.Serializable;
 
 
 /**
@@ -48,4 +49,9 @@ public interface IController extends java.rmi.Remote {
      */
     public UserProfile getUserProfile()
             throws java.rmi.RemoteException;
+
+    public Serializable getEntityId(Object entity)
+            throws java.rmi.RemoteException;
+
+    public User[] getAllUsers() throws java.rmi.RemoteException;
 }

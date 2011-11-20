@@ -10,6 +10,8 @@ import dao.UserProfileDao;
 import database.entity.User;
 import database.entity.UserProfile;
 import database.util.InitDatabase;
+import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -77,5 +79,26 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         }
 
         return userProfile;
+    }
+
+    public Serializable getEntityId(Object entity) throws RemoteException
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
+    /**
+     * FIXME: verify the logged user has the right to do so
+     * @return
+     * @throws RemoteException
+     */
+    public User[] getAllUsers() throws RemoteException
+    {
+        UserDao userDao = new UserDao();
+        List<User> userList;
+        userList = userDao.all();
+        User users[] = new User[userList.size()];
+
+        return userList.toArray(users);
     }
 }
