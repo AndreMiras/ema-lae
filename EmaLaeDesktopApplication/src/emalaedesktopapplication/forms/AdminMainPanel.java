@@ -22,6 +22,11 @@ public class AdminMainPanel extends javax.swing.JPanel {
         initComponents();
     }
 
+    public AdminAuthModuleTabPanel getadminAuthModuleTabPanel1()
+    {
+        return adminAuthModuleTabPanel1;
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

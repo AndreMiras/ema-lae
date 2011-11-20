@@ -24,8 +24,18 @@ public class AdminMainController
         this.mainWindow = mainWindow;
         this.view = view;
 
+        registerModulesControllers();
+
         // TODO: Add listeners to the view.
         // view.addConnectionButtonListener(new TodoButtonListener());
+    }
+
+    private void registerModulesControllers()
+    {
+        AdminAuthModuleController adminAuthModuleController =
+                new AdminAuthModuleController(
+                mainWindow, view.getadminAuthModuleTabPanel1());
+
     }
 
     /**

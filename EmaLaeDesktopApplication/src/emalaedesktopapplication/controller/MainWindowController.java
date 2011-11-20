@@ -61,6 +61,7 @@ public class MainWindowController {
             {
                 AdminMainPanel adminMainPanel = new AdminMainPanel();
                 view.setMiddleContentPanel(adminMainPanel);
+                AdminMainController adminMainController = new AdminMainController(view, adminMainPanel);
             }
         }
     }

@@ -11,6 +11,8 @@
 
 package emalaedesktopapplication.forms;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author andre
@@ -20,6 +22,10 @@ public class AdminAuthModuleTabPanel extends javax.swing.JPanel {
     /** Creates new form AdminAuthModuleTabPanel */
     public AdminAuthModuleTabPanel() {
         initComponents();
+    }
+
+    public void addAddUsersButtonListener(ActionListener al) {
+        addUsersButton.addActionListener(al);
     }
 
     /** This method is called from within the constructor to
