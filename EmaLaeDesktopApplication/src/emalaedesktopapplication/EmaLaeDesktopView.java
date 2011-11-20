@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import javax.swing.Icon;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -101,7 +102,8 @@ public class EmaLaeDesktopView extends FrameView {
      * Replace the old middleContentPanel with the given one
      * @param panel to set in the middle
      */
-    public void setMiddleContentPanel(JPanel panel)
+    // public void setMiddleContentPanel(JPanel panel)
+    public void setMiddleContentPanel(JComponent panel)
     {
         mainPanel.removeAll();
         panel.setVisible(true);
