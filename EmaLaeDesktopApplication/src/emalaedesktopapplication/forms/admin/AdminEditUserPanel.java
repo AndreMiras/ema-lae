@@ -12,7 +12,6 @@
 package emalaedesktopapplication.forms.admin;
 
 import database.entity.User;
-import database.util.PersonTest;
 import javax.swing.JComponent;
 import org.metawidget.inspector.annotation.MetawidgetAnnotationInspector;
 import org.metawidget.inspector.composite.CompositeInspector;
