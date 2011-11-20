@@ -8,6 +8,7 @@ package emalaedesktopapplication.controller;
 import database.entity.User;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.AdminAuthModuleTabPanel;
+import emalaedesktopapplication.forms.admin.AdminEditUserPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -36,13 +37,10 @@ public class AdminAuthModuleController {
     {
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println("TODO");
             User user = new User("test");
-            JPanel swingMetawidgetPanelContainer = new JPanel();
-            SwingMetawidget metawidget = new SwingMetawidget();
-            metawidget.setToInspect( user );
-            swingMetawidgetPanelContainer.add(metawidget);
-            mainWindow.setMiddleContentPanel(metawidget);
+            AdminEditUserPanel adminEditUserPanel =
+                    new AdminEditUserPanel(user);
+            mainWindow.setMiddleContentPanel(adminEditUserPanel);
         }
     }
 }
