@@ -87,6 +87,12 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    @Override
+    public String toString()
+    {
+        return username;
+    }
+
     public boolean checkPermission (Permission permission){
         boolean hasPermission = false;
         Iterator i=this.groups.iterator();
