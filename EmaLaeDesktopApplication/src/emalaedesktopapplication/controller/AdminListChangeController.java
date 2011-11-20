@@ -35,9 +35,8 @@ public class AdminListChangeController {
 
         public void actionPerformed(ActionEvent e)
         {
-            User user = new User("testusername");
-            user.setUserId(1);
-            user.setPassword("password foo");
+            User user = (User) view.getSelectedItem();
+
             AdminEditUserPanel adminEditUserPanel =
                     new AdminEditUserPanel(user);
             mainWindow.setMiddleContentPanel(adminEditUserPanel);
