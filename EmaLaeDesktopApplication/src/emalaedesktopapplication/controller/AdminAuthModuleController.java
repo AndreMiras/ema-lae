@@ -48,9 +48,6 @@ public class AdminAuthModuleController
             User user = new User("testusername");
             user.setUserId(1);
             user.setPassword("password foo");
-            // PersonTest user = new PersonTest("my name");
-            // user.setPassword("test");
-            // user.age = 26;
             AdminEditUserPanel adminEditUserPanel =
                     new AdminEditUserPanel(user);
             mainWindow.setMiddleContentPanel(adminEditUserPanel);
@@ -64,6 +61,7 @@ public class AdminAuthModuleController
         {
             User[] users = null;
             AdminListChangePanel adminListChangePanel;
+            AdminListChangeController adminListChangeController;
             try
             {
                 users = RmiClient.getController().getAllUsers();
@@ -73,6 +71,8 @@ public class AdminAuthModuleController
             }
 
             adminListChangePanel = new AdminListChangePanel(users);
+            adminListChangeController =
+                    new AdminListChangeController(mainWindow, adminListChangePanel);
             mainWindow.setMiddleContentPanel(adminListChangePanel);
         }
     }

@@ -11,6 +11,8 @@
 
 package emalaedesktopapplication.forms.admin;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author andre
@@ -25,8 +27,11 @@ public class AdminListChangePanel extends javax.swing.JPanel {
     public AdminListChangePanel(Object[] objectList)
     {
         this();
-        // Object id = entityManagerFactory.getPersistenceUnitUtil().getIdentifier(entity);
         jList1.setListData(objectList);
+    }
+
+    public void addEditButtonListener(ActionListener al) {
+        editButton.addActionListener(al);
     }
 
     /** This method is called from within the constructor to

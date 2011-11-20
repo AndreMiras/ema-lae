@@ -9,6 +9,7 @@ import dao.UserDao;
 import dao.UserProfileDao;
 import database.entity.User;
 import database.entity.UserProfile;
+import database.util.HibernateUtil;
 import database.util.InitDatabase;
 import java.io.Serializable;
 import java.rmi.RemoteException;
@@ -83,7 +84,9 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
 
     public Serializable getEntityId(Object entity) throws RemoteException
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Serializable id =
+                HibernateUtil.getSessionFactory().openSession().getIdentifier(entity);
+        return id;
     }
 
 
