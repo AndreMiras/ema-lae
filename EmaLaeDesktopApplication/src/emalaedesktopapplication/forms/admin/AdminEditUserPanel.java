@@ -13,14 +13,6 @@ package emalaedesktopapplication.forms.admin;
 
 import database.entity.User;
 import javax.swing.JComponent;
-import org.metawidget.inspector.annotation.MetawidgetAnnotationInspector;
-import org.metawidget.inspector.composite.CompositeInspector;
-import org.metawidget.inspector.composite.CompositeInspectorConfig;
-import org.metawidget.inspector.hibernate.validator.HibernateValidatorInspector;
-import org.metawidget.inspector.iface.Inspector;
-import org.metawidget.inspector.java5.Java5Inspector;
-import org.metawidget.inspector.jpa.JpaInspector;
-import org.metawidget.inspector.propertytype.PropertyTypeInspector;
 import org.metawidget.swing.SwingMetawidget;
 
 /**
