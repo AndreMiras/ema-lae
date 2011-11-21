@@ -70,15 +70,7 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
     private void initMetaWidget()
     {
         metawidget = new SwingMetawidget();
-        CompositeInspectorConfig inspectorConfig =
-                new CompositeInspectorConfig();
-        Inspector[] inspectors = { new PropertyTypeInspector(),
-                    new MetawidgetAnnotationInspector(),
-                    new Java5Inspector(),
-                    new JpaInspector(),
-                    /* new HibernateValidatorInspector() */};
-        inspectorConfig.setInspectors(inspectors);
-        metawidget.setInspector( new CompositeInspector( inspectorConfig ) );
+        metawidget.setConfig("emalaedesktopapplication/metawidget.xml");
 
         metawidget.setToInspect( user );
         setMiddleContentPanel(metawidget);
