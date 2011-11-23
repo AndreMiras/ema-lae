@@ -27,7 +27,7 @@ public class AdminListChangePanel extends javax.swing.JPanel {
     public AdminListChangePanel(Object[] objectList)
     {
         this();
-        jList1.setListData(objectList);
+        this.objectList.setListData(objectList);
     }
 
     public void addEditButtonListener(ActionListener al) {
@@ -36,7 +36,7 @@ public class AdminListChangePanel extends javax.swing.JPanel {
 
     public Object getSelectedItem()
     {
-       return jList1.getSelectedValue();
+       return objectList.getSelectedValue();
     }
 
     /** This method is called from within the constructor to
@@ -49,20 +49,20 @@ public class AdminListChangePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        objectList = new javax.swing.JList();
         editButton = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        objectList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jList1.setName("jList1"); // NOI18N
-        jScrollPane1.setViewportView(jList1);
+        objectList.setName("objectList"); // NOI18N
+        jScrollPane1.setViewportView(objectList);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(AdminListChangePanel.class);
         editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
@@ -96,8 +96,8 @@ public class AdminListChangePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton editButton;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList objectList;
     // End of variables declaration//GEN-END:variables
 
 }

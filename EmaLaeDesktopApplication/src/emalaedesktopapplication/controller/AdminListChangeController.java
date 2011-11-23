@@ -40,6 +40,8 @@ public class AdminListChangeController {
             AdminEditUserPanel adminEditUserPanel =
                     new AdminEditUserPanel(user);
             mainWindow.setMiddleContentPanel(adminEditUserPanel);
+            AdminEditUserController adminEditUserController =
+                    new AdminEditUserController(mainWindow, adminEditUserPanel);
         }
     }
 
