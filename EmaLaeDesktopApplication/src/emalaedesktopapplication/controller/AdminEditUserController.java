@@ -41,7 +41,14 @@ public class AdminEditUserController {
             try
             {
                 // hit the database back with the edited user
-                RmiClient.getController().updateUser(editedUser);
+                if (editedUser.getUserId() == null) // new user
+                {
+                    RmiClient.getController().createUser(editedUser);
+                }
+                else // existing user
+                {
+                    RmiClient.getController().updateUser(editedUser);
+                }
             } catch (RemoteException ex)
             {
                 Logger.getLogger(AdminEditUserController.class.getName()).log(Level.SEVERE, null, ex);

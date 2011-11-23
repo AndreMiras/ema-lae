@@ -42,19 +42,9 @@ public class AdminAuthModuleController
 
         public void actionPerformed(ActionEvent e)
         {
-            User[] users = null;
-            try
-            {
-                users = RmiClient.getController().getAllUsers();
-            } catch (RemoteException ex)
-            {
-                Logger.getLogger(AdminAuthModuleController.class.getName()).log(Level.SEVERE, null, ex);
-                users = null;
-            }
-
-            User user = users[1]; // test purpose
-            AdminEditPanel adminEditUserPanel =
-                    new AdminEditPanel(user);
+            User user = new User(); // test purpose
+            AdminEditPanel<User> adminEditUserPanel =
+                    new AdminEditPanel<User>(user);
             mainWindow.setMiddleContentPanel(adminEditUserPanel);
             AdminEditUserController adminEditUserController =
                     new AdminEditUserController(mainWindow, adminEditUserPanel);

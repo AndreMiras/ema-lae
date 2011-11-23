@@ -110,4 +110,14 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         UserDao userDao = new UserDao();
         userDao.update(user);
     }
+
+    public Serializable createUser(User user) throws RemoteException
+    {
+        Serializable pk;
+
+        UserDao userDao = new UserDao();
+        pk = userDao.create(user);
+
+        return pk;
+    }
 }
