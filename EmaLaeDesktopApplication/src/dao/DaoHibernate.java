@@ -21,7 +21,7 @@ public class DaoHibernate<T, PK extends Serializable>
         implements IDao<T, PK> {
     
     private Class<T> type;
-    private Session session = HibernateUtil.getSessionFactory().openSession();
+    private Session _session = HibernateUtil.getSessionFactory().openSession();
 
     
     public DaoHibernate(Class<T> type) {
@@ -30,7 +30,7 @@ public class DaoHibernate<T, PK extends Serializable>
 
     public Session getSession()
     {
-        return session;
+        return _session;
     }
 
     public PK create(T obj)
@@ -38,7 +38,7 @@ public class DaoHibernate<T, PK extends Serializable>
         // return (PK) getSession().save(obj);
         Session session = getSession();
         session.beginTransaction();
-        PK id = (PK) getSession().save(obj);
+        PK id = (PK) session.save(obj);
         session.getTransaction().commit();
 
         return id;
@@ -49,7 +49,7 @@ public class DaoHibernate<T, PK extends Serializable>
         // return (T) getSession().get(type, id);
         Session session = getSession();
         session.beginTransaction();
-        T obj = (T) getSession().get(type, id);
+        T obj = (T) session.get(type, id);
         session.getTransaction().commit();
 
         return obj;
@@ -60,7 +60,7 @@ public class DaoHibernate<T, PK extends Serializable>
         // getSession().update(o);
         Session session = getSession();
         session.beginTransaction();
-        getSession().update(obj);
+        session.update(obj);
         session.getTransaction().commit();
     }
 
@@ -107,7 +107,7 @@ public class DaoHibernate<T, PK extends Serializable>
 
         session.beginTransaction();
         // TODO[security]: is there a security risk, using plain HQL ?
-        List objs = getSession().createQuery(hqlString + filterString).list();
+        List objs = session.createQuery(hqlString + filterString).list();
         session.getTransaction().commit();
         return objs;
     }
@@ -131,7 +131,7 @@ public class DaoHibernate<T, PK extends Serializable>
         Session session = getSession();
 
         session.beginTransaction();
-        List objs = getSession().createQuery("from "
+        List objs = session.createQuery("from "
                 + type.getName()).list();
         session.getTransaction().commit();
 
