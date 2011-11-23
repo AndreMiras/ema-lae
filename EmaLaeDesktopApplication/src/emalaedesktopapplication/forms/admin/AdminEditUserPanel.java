@@ -39,7 +39,7 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
     }
 
     /*
-     * FIXME: I though metawidget could do that automagically
+     * FIXME: I though metawidget could do that automagically via automatic binding
      */
     private void populateMetaWidgetValuesFromObject()
     {

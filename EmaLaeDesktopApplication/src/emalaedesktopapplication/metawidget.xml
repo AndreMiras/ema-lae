@@ -19,6 +19,18 @@ config="XmlInspectorConfig">
                         <!-- metawidgetAnnotationInspector xmlns="java:org.metawidget.inspector.annotation"/ -->
                         <java5Inspector xmlns="java:org.metawidget.inspector.java5"/>
                         <jpaInspector xmlns="java:org.metawidget.inspector.jpa"/> <!-- config="JpaInspectorConfig" -->
+                        <!-- hibernateInspector xmlns="java:org.metawidget.inspector.hibernate"
+                            config="HibernateInspectorConfig">
+                            <inputStream>
+                                <resource>hibernate.cfg.xml</resource>
+                            </inputStream>
+                        </hibernateInspector -->
+                        <!-- jpaInspector xmlns="java:org.metawidget.inspector.jpa"
+                        config="JpaInspectorConfig">
+                            <hideIds>
+                                <boolean>false</boolean>
+                            </hideIds>
+                        </jpaInspector-->
                         <!-- hibernateValidatorInspector xmlns="java:org.metawidget.inspector.hibernate.validator"/ -->
                     </array>
                 </inspectors>
