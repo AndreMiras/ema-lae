@@ -8,7 +8,7 @@ package emalaedesktopapplication.controller;
 import client.RmiClient;
 import database.entity.User;
 import emalaedesktopapplication.EmaLaeDesktopView;
-import emalaedesktopapplication.forms.admin.AdminEditUserPanel;
+import emalaedesktopapplication.forms.admin.AdminEditPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -22,9 +22,9 @@ import java.util.logging.Logger;
 public class AdminEditUserController {
 
     private EmaLaeDesktopView mainWindow;
-    private AdminEditUserPanel<User> view;
+    private AdminEditPanel<User> view;
 
-    public AdminEditUserController(EmaLaeDesktopView mainWindow, AdminEditUserPanel<User> view)
+    public AdminEditUserController(EmaLaeDesktopView mainWindow, AdminEditPanel<User> view)
     {
         this.mainWindow = mainWindow;
         this.view = view;

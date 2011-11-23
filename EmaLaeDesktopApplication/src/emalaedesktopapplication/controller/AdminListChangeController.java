@@ -7,7 +7,7 @@ package emalaedesktopapplication.controller;
 
 import database.entity.User;
 import emalaedesktopapplication.EmaLaeDesktopView;
-import emalaedesktopapplication.forms.admin.AdminEditUserPanel;
+import emalaedesktopapplication.forms.admin.AdminEditPanel;
 import emalaedesktopapplication.forms.admin.AdminListChangePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,8 +37,8 @@ public class AdminListChangeController {
         {
             User user = (User) view.getSelectedItem();
 
-            AdminEditUserPanel<User> adminEditUserPanel =
-                    new AdminEditUserPanel<User>(user);
+            AdminEditPanel<User> adminEditUserPanel =
+                    new AdminEditPanel<User>(user);
             mainWindow.setMiddleContentPanel(adminEditUserPanel);
             AdminEditUserController adminEditUserController =
                     new AdminEditUserController(mainWindow, adminEditUserPanel);

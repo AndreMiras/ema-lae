@@ -8,7 +8,7 @@ import client.RmiClient;
 import database.entity.User;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.AdminAuthModuleTabPanel;
-import emalaedesktopapplication.forms.admin.AdminEditUserPanel;
+import emalaedesktopapplication.forms.admin.AdminEditPanel;
 import emalaedesktopapplication.forms.admin.AdminListChangePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,8 +53,8 @@ public class AdminAuthModuleController
             }
 
             User user = users[1]; // test purpose
-            AdminEditUserPanel adminEditUserPanel =
-                    new AdminEditUserPanel(user);
+            AdminEditPanel adminEditUserPanel =
+                    new AdminEditPanel(user);
             mainWindow.setMiddleContentPanel(adminEditUserPanel);
             AdminEditUserController adminEditUserController =
                     new AdminEditUserController(mainWindow, adminEditUserPanel);

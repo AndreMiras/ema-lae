@@ -4,7 +4,7 @@
  */
 
 /*
- * AdminEditUserPanel.java
+ * AdminEditPanel.java
  *
  * Created on Nov 20, 2011, 2:36:54 PM
  */
@@ -27,23 +27,23 @@ import org.metawidget.swing.SwingMetawidget;
  *
  * @author andre
  */
-public class AdminEditUserPanel<T> extends javax.swing.JPanel
+public class AdminEditPanel<T> extends javax.swing.JPanel
 {
     private final T obj;
     // private Class<T> type;
     private SwingMetawidget metawidget;
     // private PersonTest user;
 
-    /** Creates new form AdminEditUserPanel */
+    /** Creates new form AdminEditPanel */
     /*
-    public AdminEditUserPanel()
+    public AdminEditPanel()
     {
         initComponents();
     }
      */
 
-    // public AdminEditUserPanel(User user) {
-    public AdminEditUserPanel(T obj) // , Class<T> type)
+    // public AdminEditPanel(User user) {
+    public AdminEditPanel(T obj) // , Class<T> type)
     {
         // this();
         this.obj = obj;
@@ -96,22 +96,22 @@ public class AdminEditUserPanel<T> extends javax.swing.JPanel
                     }
                 } catch (IllegalAccessException ex)
                 {
-                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdminEditPanel.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalArgumentException ex)
                 {
-                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdminEditPanel.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InvocationTargetException ex)
                 {
-                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                    Logger.getLogger(AdminEditPanel.class.getName()).log(
                             Level.SEVERE, null, ex);
                 }
             } catch (NoSuchMethodException ex)
             {
-                Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                Logger.getLogger(AdminEditPanel.class.getName()).log(
                         Level.SEVERE, null, ex);
             } catch (SecurityException ex)
             {
-                Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                Logger.getLogger(AdminEditPanel.class.getName()).log(
                         Level.SEVERE, null, ex);
             }
         }
@@ -236,22 +236,22 @@ public class AdminEditUserPanel<T> extends javax.swing.JPanel
                     }
                 } catch (IllegalAccessException ex)
                 {
-                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdminEditPanel.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalArgumentException ex)
                 {
-                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdminEditPanel.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InvocationTargetException ex)
                 {
-                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                    Logger.getLogger(AdminEditPanel.class.getName()).log(
                             Level.SEVERE, null, ex);
                 }
             } catch (NoSuchMethodException ex)
             {
-                Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                Logger.getLogger(AdminEditPanel.class.getName()).log(
                         Level.SEVERE, null, ex);
             } catch (SecurityException ex)
             {
-                Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                Logger.getLogger(AdminEditPanel.class.getName()).log(
                         Level.SEVERE, null, ex);
             }
         }
@@ -298,7 +298,7 @@ public class AdminEditUserPanel<T> extends javax.swing.JPanel
 
         setName("Form"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(AdminEditUserPanel.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(AdminEditPanel.class);
         middleContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("middleContentPanel.border.title"))); // NOI18N
         middleContentPanel.setName("middleContentPanel"); // NOI18N
         middleContentPanel.setLayout(new java.awt.CardLayout());
