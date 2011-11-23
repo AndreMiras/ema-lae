@@ -11,6 +11,7 @@
 package emalaedesktopapplication.forms.admin;
 
 import database.entity.User;
+import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -66,6 +67,14 @@ public class AdminEditUserPanel<T> extends javax.swing.JPanel
         //  it has to be a better way of doing it!
         // FIXME: it has to be a way for looping in all attributes/properties
         // from metawidget.xml for a given entity
+        List<String> componentNames = new ArrayList<String>();
+        int componentCount = metawidget.getComponentCount();
+        Component component;
+        for (int i=0; i<componentCount; i++)
+        {
+            component = metawidget.getComponent(i);
+            componentNames.add(component.getName());
+        }
         String methodName;
         Method tmpMethod;
         Field[] fields = obj.getClass().getDeclaredFields();
@@ -80,8 +89,8 @@ public class AdminEditUserPanel<T> extends javax.swing.JPanel
                 try
                 {
                     Object invoke = tmpMethod.invoke(obj, null);
-                    if (!field.getName().equals("userId")
-                            && !field.getName().equals("groups")) // FIXME: for tests
+                     // FIXME: stupid way of checking it
+                    if (componentNames.contains(field.getName()))
                     {
                         metawidget.setValue(invoke, new String[] {field.getName()} );
                     }
@@ -192,6 +201,60 @@ public class AdminEditUserPanel<T> extends javax.swing.JPanel
         object.setUsername( (String) metawidget.getValue( new String[] {"username"} ) );
         object.setPassword( (String) metawidget.getValue( new String[] {"password"} ) );
          */
+
+        // FIXME: all this code below is terribly ugly.
+        //  it has to be a better way of doing it!
+        // FIXME: it has to be a way for looping in all attributes/properties
+        // from metawidget.xml for a given entity
+        List<String> componentNames = new ArrayList<String>();
+        int componentCount = metawidget.getComponentCount();
+        Component component;
+        for (int i=0; i<componentCount; i++)
+        {
+            component = metawidget.getComponent(i);
+            componentNames.add(component.getName());
+        }
+        String methodName;
+        Method tmpMethod;
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for (Field field : fields)
+        {
+            methodName = "set"
+                    + Character.toUpperCase(field.getName().charAt(0))
+                    + field.getName().substring(1);
+            try
+            {
+                // FIXME: hardcoded method argument type
+                tmpMethod = obj.getClass().getDeclaredMethod(methodName, String.class);
+                try
+                {
+                     // FIXME: stupid way of checking it
+                    if (componentNames.contains(field.getName()))
+                    {
+                        tmpMethod.invoke(obj,
+                                metawidget.getValue(new String[] {field.getName()}));
+                    }
+                } catch (IllegalAccessException ex)
+                {
+                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalArgumentException ex)
+                {
+                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvocationTargetException ex)
+                {
+                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                            Level.SEVERE, null, ex);
+                }
+            } catch (NoSuchMethodException ex)
+            {
+                Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                        Level.SEVERE, null, ex);
+            } catch (SecurityException ex)
+            {
+                Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                        Level.SEVERE, null, ex);
+            }
+        }
 
         return obj;
     }
