@@ -104,4 +104,10 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
 
         return userList.toArray(users);
     }
+
+    public void updateUser(User user) throws RemoteException
+    {
+        UserDao userDao = new UserDao();
+        userDao.update(user);
+    }
 }

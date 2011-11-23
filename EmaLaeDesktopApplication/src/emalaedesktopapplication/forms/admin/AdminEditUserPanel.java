@@ -12,6 +12,7 @@
 package emalaedesktopapplication.forms.admin;
 
 import database.entity.User;
+import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import org.metawidget.swing.SwingMetawidget;
 
@@ -38,13 +39,18 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
         populateMetaWidgetValuesFromObject();
     }
 
+
+    public void addSaveButtonListener(ActionListener al) {
+        saveButton.addActionListener(al);
+    }
+
     /*
      * FIXME: I though metawidget could do that automagically via automatic binding
      */
     private void populateMetaWidgetValuesFromObject()
     {
         metawidget.setValue( user.getUsername(), new String[] {"username"} );
-        // user.setFirstname( (String) metawidget.getValue( "firstname" ) );
+        metawidget.setValue( user.getPassword(), new String[] {"password"} );
     }
 
     /**
@@ -55,6 +61,7 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
     public User save()
     {
         user.setUsername( (String) metawidget.getValue( new String[] {"username"} ) );
+        user.setPassword( (String) metawidget.getValue( new String[] {"password"} ) );
 
         return user;
     }
@@ -92,7 +99,7 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         middleContentPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -103,8 +110,8 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
         middleContentPanel.setName("middleContentPanel"); // NOI18N
         middleContentPanel.setLayout(new java.awt.CardLayout());
 
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
+        saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
+        saveButton.setName("saveButton"); // NOI18N
 
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
@@ -120,7 +127,7 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jButton1)
+                        .addComponent(saveButton)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
@@ -139,17 +146,18 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton1))
+                    .addComponent(saveButton))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel middleContentPanel;
+    private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
+
 
 }

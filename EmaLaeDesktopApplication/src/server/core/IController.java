@@ -54,4 +54,12 @@ public interface IController extends java.rmi.Remote {
             throws java.rmi.RemoteException;
 
     public User[] getAllUsers() throws java.rmi.RemoteException;
+
+    /**
+     * TODO: this function will be generic later on
+     * TODO: security checks, is the request.user allowed to do that
+     * @param user
+     * @throws java.rmi.RemoteException
+     */
+    public void updateUser(User user) throws java.rmi.RemoteException;
 }

@@ -15,9 +15,6 @@ import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import org.metawidget.swing.SwingMetawidget;
 
 /**
  *
@@ -45,12 +42,22 @@ public class AdminAuthModuleController
 
         public void actionPerformed(ActionEvent e)
         {
-            User user = new User("testusername");
-            user.setUserId(1);
-            user.setPassword("password foo");
+            User[] users = null;
+            try
+            {
+                users = RmiClient.getController().getAllUsers();
+            } catch (RemoteException ex)
+            {
+                Logger.getLogger(AdminAuthModuleController.class.getName()).log(Level.SEVERE, null, ex);
+                users = null;
+            }
+
+            User user = users[1]; // test purpose
             AdminEditUserPanel adminEditUserPanel =
                     new AdminEditUserPanel(user);
             mainWindow.setMiddleContentPanel(adminEditUserPanel);
+            AdminEditUserController adminEditUserController =
+                    new AdminEditUserController(mainWindow, adminEditUserPanel);
         }
     }
 
