@@ -8,11 +8,17 @@
  *
  * Created on Nov 20, 2011, 2:36:54 PM
  */
-
 package emalaedesktopapplication.forms.admin;
 
 import database.entity.User;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import org.metawidget.swing.SwingMetawidget;
 
@@ -20,27 +26,34 @@ import org.metawidget.swing.SwingMetawidget;
  *
  * @author andre
  */
-public class AdminEditUserPanel extends javax.swing.JPanel {
-
-    private User user;
+public class AdminEditUserPanel<T> extends javax.swing.JPanel
+{
+    private final T obj;
+    // private Class<T> type;
     private SwingMetawidget metawidget;
     // private PersonTest user;
 
     /** Creates new form AdminEditUserPanel */
-    public AdminEditUserPanel() {
+    /*
+    public AdminEditUserPanel()
+    {
         initComponents();
     }
+     */
 
     // public AdminEditUserPanel(User user) {
-    public AdminEditUserPanel(User user) {
-        this();
-        this.user = user;
+    public AdminEditUserPanel(T obj) // , Class<T> type)
+    {
+        // this();
+        this.obj = obj;
+        initComponents();
+        // this.type = type;
         initMetaWidget();
         populateMetaWidgetValuesFromObject();
     }
 
-
-    public void addSaveButtonListener(ActionListener al) {
+    public void addSaveButtonListener(ActionListener al)
+    {
         saveButton.addActionListener(al);
     }
 
@@ -49,21 +62,138 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
      */
     private void populateMetaWidgetValuesFromObject()
     {
-        metawidget.setValue( user.getUsername(), new String[] {"username"} );
-        metawidget.setValue( user.getPassword(), new String[] {"password"} );
+        // FIXME: all this code below is terribly ugly.
+        //  it has to be a better way of doing it!
+        // FIXME: it has to be a way for looping in all attributes/properties
+        // from metawidget.xml for a given entity
+        String methodName;
+        Method tmpMethod;
+        Field[] fields = obj.getClass().getDeclaredFields();
+        for (Field field : fields)
+        {
+            methodName = "get"
+                    + Character.toUpperCase(field.getName().charAt(0))
+                    + field.getName().substring(1);
+            try
+            {
+                tmpMethod = obj.getClass().getDeclaredMethod(methodName, null);
+                try
+                {
+                    Object invoke = tmpMethod.invoke(obj, null);
+                    if (!field.getName().equals("userId")
+                            && !field.getName().equals("groups")) // FIXME: for tests
+                    {
+                        metawidget.setValue(invoke, new String[] {field.getName()} );
+                    }
+                } catch (IllegalAccessException ex)
+                {
+                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalArgumentException ex)
+                {
+                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvocationTargetException ex)
+                {
+                    Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                            Level.SEVERE, null, ex);
+                }
+            } catch (NoSuchMethodException ex)
+            {
+                Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                        Level.SEVERE, null, ex);
+            } catch (SecurityException ex)
+            {
+                Logger.getLogger(AdminEditUserPanel.class.getName()).log(
+                        Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private Method[] getGetters(Class aClass)
+    {
+        List<Method> methods = new ArrayList();
+
+        for (Method method : obj.getClass().getMethods())
+        {
+            if (isGetter(method))
+            {
+                methods.add(method);
+            }
+        }
+
+        return methods.toArray(new Method[methods.size()]);
+    }
+
+    private Method[] getSetters(Class aClass)
+    {
+        List<Method> methods = new ArrayList();
+
+        for (Method method : obj.getClass().getMethods())
+        {
+            if (isSetter(method))
+            {
+                methods.add(method);
+            }
+        }
+
+        return methods.toArray(new Method[methods.size()]);
     }
 
     /**
+     * TODO[cleaning: this should actually be part of a custom MapWidgetProcessor
+     * A getter method have its name start with "get",
+     * take 0 parameters, and returns a value.
+     * @param method
+     * @return
+     */
+    private boolean isGetter(Method method)
+    {
+        if (!method.getName().startsWith("get"))
+        {
+            return false;
+        }
+        if (method.getParameterTypes().length != 0)
+        {
+            return false;
+        }
+        if (void.class.equals(method.getReturnType()))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * A setter method have its name start with "set", and takes 1 parameter.
+     * @param method
+     * @return
+     */
+    private boolean isSetter(Method method)
+    {
+        if (!method.getName().startsWith("set"))
+        {
+            return false;
+        }
+        if (method.getParameterTypes().length != 1)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * TODO[cleaning: this should actually be part of a custom MapWidgetProcessor
      * FIXME: I though metawidget could do that automagically
      * Saves all current widget values back to the object and returns it
      * @return updated object
      */
-    public User save()
+    public T save()
     {
-        user.setUsername( (String) metawidget.getValue( new String[] {"username"} ) );
-        user.setPassword( (String) metawidget.getValue( new String[] {"password"} ) );
+        /* TODO
+        object.setUsername( (String) metawidget.getValue( new String[] {"username"} ) );
+        object.setPassword( (String) metawidget.getValue( new String[] {"password"} ) );
+         */
 
-        return user;
+        return obj;
     }
 
     private void initMetaWidget()
@@ -71,7 +201,7 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
         metawidget = new SwingMetawidget();
         metawidget.setConfig("emalaedesktopapplication/metawidget.xml");
 
-        metawidget.setToInspect( user );
+        metawidget.setToInspect(obj);
         setMiddleContentPanel(metawidget);
     }
 
@@ -150,14 +280,10 @@ public class AdminEditUserPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel middleContentPanel;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
-
-
 }

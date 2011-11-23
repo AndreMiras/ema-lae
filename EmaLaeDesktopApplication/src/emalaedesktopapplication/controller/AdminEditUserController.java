@@ -22,9 +22,9 @@ import java.util.logging.Logger;
 public class AdminEditUserController {
 
     private EmaLaeDesktopView mainWindow;
-    private AdminEditUserPanel view;
+    private AdminEditUserPanel<User> view;
 
-    public AdminEditUserController(EmaLaeDesktopView mainWindow, AdminEditUserPanel view)
+    public AdminEditUserController(EmaLaeDesktopView mainWindow, AdminEditUserPanel<User> view)
     {
         this.mainWindow = mainWindow;
         this.view = view;

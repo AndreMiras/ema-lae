@@ -37,8 +37,8 @@ public class AdminListChangeController {
         {
             User user = (User) view.getSelectedItem();
 
-            AdminEditUserPanel adminEditUserPanel =
-                    new AdminEditUserPanel(user);
+            AdminEditUserPanel<User> adminEditUserPanel =
+                    new AdminEditUserPanel<User>(user);
             mainWindow.setMiddleContentPanel(adminEditUserPanel);
             AdminEditUserController adminEditUserController =
                     new AdminEditUserController(mainWindow, adminEditUserPanel);
