@@ -19,12 +19,12 @@ import java.util.logging.Logger;
  *
  * @author andre
  */
-public class AdminEditUserController<T> {
+public class AdminEditController<T> {
     private EmaLaeDesktopView mainWindow;
     private AdminEditPanel<T> view;
     Class<T> type;
 
-    public AdminEditUserController(
+    public AdminEditController(
             EmaLaeDesktopView mainWindow, AdminEditPanel<T> view, Class<T> type)
     {
         this.mainWindow = mainWindow;
@@ -47,7 +47,7 @@ public class AdminEditUserController<T> {
                         type, editedObj);
             } catch (RemoteException ex)
             {
-                Logger.getLogger(AdminEditUserController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdminEditController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
