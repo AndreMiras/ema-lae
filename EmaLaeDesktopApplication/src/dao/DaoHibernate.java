@@ -64,6 +64,15 @@ public class DaoHibernate<T, PK extends Serializable>
         session.getTransaction().commit();
     }
 
+    public void createOrUpdate(T obj)
+    {
+        // getSession().saveOrUpdate(o);
+        Session session = getSession();
+        session.beginTransaction();
+        session.saveOrUpdate(obj);
+        session.getTransaction().commit();
+    }
+
     public void delete(T obj)
     {
         // getSession().delete(o);

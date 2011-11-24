@@ -26,6 +26,9 @@ public interface IDao<T, PK extends Serializable> {
     /** Save changes made to a persistent object.  */
     void update(T obj);
 
+    /** Tries to update the object if it already exists otherwise creates it  */
+    public void createOrUpdate(T obj);
+
     /** Remove an object from persistent storage in the database */
     void delete(T obj);
 
