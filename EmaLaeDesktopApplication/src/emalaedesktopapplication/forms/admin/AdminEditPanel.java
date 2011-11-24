@@ -10,7 +10,6 @@
  */
 package emalaedesktopapplication.forms.admin;
 
-import database.entity.User;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;

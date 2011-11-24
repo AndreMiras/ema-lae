@@ -47,7 +47,8 @@ public class AdminAuthModuleController
                     new AdminEditPanel<User>(user);
             mainWindow.setMiddleContentPanel(adminEditUserPanel);
             AdminEditUserController adminEditUserController =
-                    new AdminEditUserController(mainWindow, adminEditUserPanel);
+                    new AdminEditUserController(
+                    mainWindow, adminEditUserPanel, User.class);
         }
     }
 

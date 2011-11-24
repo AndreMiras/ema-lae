@@ -19,15 +19,17 @@ import java.util.logging.Logger;
  *
  * @author andre
  */
-public class AdminEditUserController {
-
+public class AdminEditUserController<T> {
     private EmaLaeDesktopView mainWindow;
-    private AdminEditPanel<User> view;
+    private AdminEditPanel<T> view;
+    Class<T> type;
 
-    public AdminEditUserController(EmaLaeDesktopView mainWindow, AdminEditPanel<User> view)
+    public AdminEditUserController(
+            EmaLaeDesktopView mainWindow, AdminEditPanel<T> view, Class<T> type)
     {
         this.mainWindow = mainWindow;
         this.view = view;
+        this.type = type;
 
         view.addSaveButtonListener(new SaveListener());
     }
@@ -37,18 +39,12 @@ public class AdminEditUserController {
 
         public void actionPerformed(ActionEvent e)
         {
-            User editedUser = view.save();
+            T editedObj = view.save();
             try
             {
                 // hit the database back with the edited user
-                if (editedUser.getUserId() == null) // new user
-                {
-                    RmiClient.getController().createUser(editedUser);
-                }
-                else // existing user
-                {
-                    RmiClient.getController().updateUser(editedUser);
-                }
+                RmiClient.getController().createOrUpdate(
+                        type, editedObj);
             } catch (RemoteException ex)
             {
                 Logger.getLogger(AdminEditUserController.class.getName()).log(Level.SEVERE, null, ex);

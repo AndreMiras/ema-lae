@@ -5,6 +5,7 @@
 
 package server.core;
 
+import dao.GenericDao;
 import dao.UserDao;
 import dao.UserProfileDao;
 import database.entity.User;
@@ -107,7 +108,9 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
 
     public void updateUser(User user) throws RemoteException
     {
-        UserDao userDao = new UserDao();
+        // UserDao userDao = new UserDao();
+        // userDao.update(user);
+        GenericDao<User> userDao = new GenericDao<User>(User.class);
         userDao.update(user);
     }
 
@@ -119,5 +122,14 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         pk = userDao.create(user);
 
         return pk;
+    }
+
+    public <T> void createOrUpdate(Class<T> type, T obj) throws RemoteException
+    {
+        // UserDao userDao = new UserDao();
+        // userDao.createOrUpdate(user);
+
+        GenericDao<T> userDao = new GenericDao<T>(type);
+        userDao.createOrUpdate(obj);
     }
 }

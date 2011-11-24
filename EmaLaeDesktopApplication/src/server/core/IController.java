@@ -64,4 +64,6 @@ public interface IController extends java.rmi.Remote {
     public void updateUser(User user) throws java.rmi.RemoteException;
 
     public Serializable createUser(User user) throws java.rmi.RemoteException;
+
+    public <T> void createOrUpdate(Class<T> type, T obj) throws java.rmi.RemoteException;
 }
