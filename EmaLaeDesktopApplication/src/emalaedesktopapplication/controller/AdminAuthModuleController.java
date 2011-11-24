@@ -70,7 +70,8 @@ public class AdminAuthModuleController
 
             adminListChangePanel = new AdminListChangePanel(users);
             adminListChangeController =
-                    new AdminListChangeController(mainWindow, adminListChangePanel);
+                    new AdminListChangeController(
+                    mainWindow, adminListChangePanel, User.class);
             mainWindow.setMiddleContentPanel(adminListChangePanel);
         }
     }

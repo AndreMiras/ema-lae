@@ -6,7 +6,6 @@
 package emalaedesktopapplication.controller;
 
 import client.RmiClient;
-import database.entity.User;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.admin.AdminEditPanel;
 import java.awt.event.ActionEvent;

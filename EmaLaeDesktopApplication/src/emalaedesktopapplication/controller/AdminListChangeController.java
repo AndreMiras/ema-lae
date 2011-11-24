@@ -16,15 +16,20 @@ import java.awt.event.ActionListener;
  *
  * @author andre
  */
-public class AdminListChangeController {
+public class AdminListChangeController<T> {
 
     private EmaLaeDesktopView mainWindow;
     private AdminListChangePanel view;
+    private Class<T> type;
 
-    public AdminListChangeController(EmaLaeDesktopView mainWindow, AdminListChangePanel view)
+    public AdminListChangeController(
+            EmaLaeDesktopView mainWindow,
+            AdminListChangePanel view,
+            Class<T> type)
     {
         this.mainWindow = mainWindow;
         this.view = view;
+        this.type = type;
 
         view.addEditButtonListener(new EditListener());
     }
@@ -35,14 +40,14 @@ public class AdminListChangeController {
 
         public void actionPerformed(ActionEvent e)
         {
-            User user = (User) view.getSelectedItem();
+            T obj = (T) view.getSelectedItem();
 
-            AdminEditPanel<User> adminEditUserPanel =
-                    new AdminEditPanel<User>(user);
-            mainWindow.setMiddleContentPanel(adminEditUserPanel);
-            AdminEditController adminEditUserController =
+            AdminEditPanel<T> adminEditPanel =
+                    new AdminEditPanel<T>(obj);
+            mainWindow.setMiddleContentPanel(adminEditPanel);
+            AdminEditController adminEditController =
                     new AdminEditController(
-                    mainWindow, adminEditUserPanel, User.class);
+                    mainWindow, adminEditPanel, type);
         }
     }
 
