@@ -5,6 +5,7 @@
 package emalaedesktopapplication.controller;
 
 import client.RmiClient;
+import database.entity.Group;
 import database.entity.User;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.AdminAuthModuleTabPanel;
@@ -35,6 +36,48 @@ public class AdminAuthModuleController
         // changeUsersButton
         view.addAddUsersButtonListener(new AddUsersListener());
         view.addChangeUsersButtonListener(new ChangeUsersListener());
+
+        view.addAddGroupsButtonListener(new AddGroupsListener());
+        view.addChangeGroupsButtonListener(new ChangeGroupsListener());
+    }
+
+    class AddGroupsListener implements ActionListener
+    {
+
+        public void actionPerformed(ActionEvent e)
+        {
+            Group group = new Group();
+            AdminEditPanel<Group> adminEditPanel =
+                    new AdminEditPanel<Group>(group);
+            mainWindow.setMiddleContentPanel(adminEditPanel);
+            AdminEditController adminEditUserController =
+                    new AdminEditController(
+                    mainWindow, adminEditPanel, Group.class);
+        }
+    }
+
+    class ChangeGroupsListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            // Group[] groups = null;
+            Object[] groups = null;
+            AdminListChangePanel adminListChangePanel;
+            AdminListChangeController adminListChangeController;
+            try
+            {
+                groups = RmiClient.getController().getAllObjects(Group.class);
+            } catch (RemoteException ex)
+            {
+                Logger.getLogger(AdminAuthModuleController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            adminListChangePanel = new AdminListChangePanel(groups);
+            adminListChangeController =
+                    new AdminListChangeController(
+                    mainWindow, adminListChangePanel, Group.class);
+            mainWindow.setMiddleContentPanel(adminListChangePanel);
+        }
     }
 
     class AddUsersListener implements ActionListener
@@ -42,13 +85,13 @@ public class AdminAuthModuleController
 
         public void actionPerformed(ActionEvent e)
         {
-            User user = new User(); // test purpose
-            AdminEditPanel<User> adminEditUserPanel =
+            User user = new User();
+            AdminEditPanel<User> adminEditPanel =
                     new AdminEditPanel<User>(user);
-            mainWindow.setMiddleContentPanel(adminEditUserPanel);
+            mainWindow.setMiddleContentPanel(adminEditPanel);
             AdminEditController adminEditUserController =
                     new AdminEditController(
-                    mainWindow, adminEditUserPanel, User.class);
+                    mainWindow, adminEditPanel, User.class);
         }
     }
 

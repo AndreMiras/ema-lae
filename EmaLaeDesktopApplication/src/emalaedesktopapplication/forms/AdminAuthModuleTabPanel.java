@@ -32,6 +32,14 @@ public class AdminAuthModuleTabPanel extends javax.swing.JPanel {
         changeUsersButton.addActionListener(al);
     }
 
+    public void addAddGroupsButtonListener(ActionListener al) {
+        addGroupsButton.addActionListener(al);
+    }
+
+    public void addChangeGroupsButtonListener(ActionListener al) {
+        changeGroupsButton.addActionListener(al);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

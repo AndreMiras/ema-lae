@@ -81,6 +81,10 @@ public class Group implements Serializable{
         this.usersId = usersId;
     }
 
-    
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 
 }

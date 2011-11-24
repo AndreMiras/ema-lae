@@ -129,7 +129,16 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         // UserDao userDao = new UserDao();
         // userDao.createOrUpdate(user);
 
-        GenericDao<T> userDao = new GenericDao<T>(type);
-        userDao.createOrUpdate(obj);
+        GenericDao<T> genericDao = new GenericDao<T>(type);
+        genericDao.createOrUpdate(obj);
+    }
+
+    public <T> T[] getAllObjects(Class<T> type) throws RemoteException
+    {
+        GenericDao<T> genericDao = new GenericDao<T>(type);
+        List<T> objectList;
+        objectList = genericDao.all();
+
+        return (T[]) objectList.toArray();
     }
 }
