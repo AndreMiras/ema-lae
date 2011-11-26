@@ -17,7 +17,22 @@ config="XmlInspectorConfig">
                         </xmlInspector>
                         <propertyTypeInspector xmlns="java:org.metawidget.inspector.propertytype"/>
                         <!-- metawidgetAnnotationInspector xmlns="java:org.metawidget.inspector.annotation"/ -->
-                        <java5Inspector xmlns="java:org.metawidget.inspector.java5"/>
+                        <!-- java5Inspector xmlns="java:org.metawidget.inspector.java5"/ -->
+                        <java5Inspector xmlns="java:org.metawidget.inspector.java5"
+                            config="org.metawidget.inspector.impl.BaseObjectInspectorConfig">
+                            <propertyStyle>
+                                <javaBeanPropertyStyle xmlns="java:org.metawidget.inspector.impl.propertystyle.javabean"
+                                    config="JavaBeanPropertyStyleConfig">
+                                    <supportPublicFields>
+                                        <boolean>false</boolean>
+                                    </supportPublicFields>
+                                    <privateFieldConvention>
+                                        <format>'m'{1}</format>
+                                    </privateFieldConvention>
+                                </javaBeanPropertyStyle>
+                            </propertyStyle>
+                        </java5Inspector>
+
                         <jpaInspector xmlns="java:org.metawidget.inspector.jpa"/> <!-- config="JpaInspectorConfig" -->
                         <!-- hibernateInspector xmlns="java:org.metawidget.inspector.hibernate"
                             config="HibernateInspectorConfig">
@@ -48,5 +63,16 @@ config="TabbedPaneLayoutDecoratorConfig">
                 </layout>
             </tabbedPaneLayoutDecorator>
         </metawidgetLayout -->
+        <widgetProcessors>
+            <array>
+                <!-- reflectionBindingProcessor xmlns="java:org.metawidget.swing.widgetprocessor.binding.reflection"/ -->
+                <beansBindingProcessor xmlns="java:org.metawidget.swing.widgetprocessor.binding.beansbinding"
+                    config="BeansBindingProcessorConfig">
+                    <!-- updateStrategy>
+                        <enum>READ_WRITE</enum>
+                    </updateStrategy !-->
+                </beansBindingProcessor>
+            </array>
+        </widgetProcessors>
     </swingMetawidget>
 </metawidget>
