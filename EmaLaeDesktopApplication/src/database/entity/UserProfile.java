@@ -72,6 +72,7 @@ public class UserProfile implements Serializable {
         return user;
     }
 
+
     public String getAddress() {
         return address;
     }

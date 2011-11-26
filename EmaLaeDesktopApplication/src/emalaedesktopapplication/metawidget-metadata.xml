@@ -15,4 +15,7 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         <property name="department"/>
         -->
     </entity>
+    <entity type="database.entity.Permission">
+        <property name="permissionID" hidden="true"/>
+    </entity>
 </inspection-result>

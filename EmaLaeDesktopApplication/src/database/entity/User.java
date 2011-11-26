@@ -31,18 +31,6 @@ public class User implements Serializable {
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Group> groups;
 
-    public Set<Group> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
-    }
-
-    public boolean addGroup(Group newGroup){
-        return this.groups.add(newGroup);
-    }
-
     public User()
     {
     }
@@ -56,6 +44,19 @@ public class User implements Serializable {
 
         this.groups = new HashSet<Group>();
     }
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
+
+    public boolean addGroup(Group newGroup){
+        return this.groups.add(newGroup);
+    }
+
 
     public String getPassword()
     {
