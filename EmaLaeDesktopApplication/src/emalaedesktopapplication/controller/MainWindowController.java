@@ -7,7 +7,6 @@ package emalaedesktopapplication.controller;
 import client.RmiClient;
 import database.entity.Group;
 import emalaedesktopapplication.EmaLaeDesktopView;
-import emalaedesktopapplication.forms.AdminMainPanel;
 import emalaedesktopapplication.forms.LoginScreenPanel;
 import emalaedesktopapplication.forms.admin.AdminEditPanel;
 import emalaedesktopapplication.forms.admin.AdminListChangePanel;
@@ -61,31 +60,10 @@ public class MainWindowController
      */
     private void addListeners()
     {
-        view.addMenuListener(new MenuListener());
         view.addAddNewSubMenusListener(new AdminAddNewSubMenuListener());
         view.addListChangeSubMenusListener(new AdminListChangeSubMenuListener());
     }
 
-    /**
-     * FIXME: deprecated, to be removed
-     * Listens and handles all menu actions
-     */
-    class MenuListener implements ActionListener
-    {
-
-        public void actionPerformed(ActionEvent e)
-        {
-            System.out.println("action performed");
-            JMenuItem target = (JMenuItem) e.getSource();
-            String actionCommand = target.getActionCommand();
-            if (actionCommand.equals("AdminHome"))
-            {
-                AdminMainPanel adminMainPanel = new AdminMainPanel();
-                view.setMiddleContentPanel(adminMainPanel);
-                AdminMainController adminMainController = new AdminMainController(view, adminMainPanel);
-            }
-        }
-    }
 
     /**
      * Listener for all Admin->"New"->SubMenuItems

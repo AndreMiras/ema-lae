@@ -75,13 +75,6 @@
                 <Property name="name" type="java.lang.String" value="adminListChangeMenu" noResource="true"/>
               </Properties>
             </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="adminMainMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="adminMainMenuItem.text"/>
-                <Property name="actionCommand" type="java.lang.String" resourceKey="adminMainMenuItem.actionCommand"/>
-                <Property name="name" type="java.lang.String" value="adminMainMenuItem" noResource="true"/>
-              </Properties>
-            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="helpMenu">
