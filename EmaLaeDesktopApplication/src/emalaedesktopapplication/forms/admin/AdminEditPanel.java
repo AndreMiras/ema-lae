@@ -57,6 +57,7 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
         this.obj = obj;
 
         initComponents();
+        initCustomWidgets();
         initMetaWidget();
         populateMetaWidgetValuesFromObject();
     }
@@ -274,6 +275,15 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
         return obj;
     }
 
+    /**
+     * Currently only set some labels
+     */
+    private void initCustomWidgets()
+    {
+        middleContentPanel.setBorder(
+                javax.swing.BorderFactory.createTitledBorder(type.toString()));
+    }
+
     private void initMetaWidget()
     {
         metawidget = new SwingMetawidget();
@@ -313,11 +323,11 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
 
         setName("Form"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(AdminEditPanel.class);
-        middleContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("middleContentPanel.border.title"))); // NOI18N
+        middleContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Object"));
         middleContentPanel.setName("middleContentPanel"); // NOI18N
         middleContentPanel.setLayout(new java.awt.CardLayout());
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(AdminEditPanel.class);
         saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
         saveButton.setName("saveButton"); // NOI18N
 
