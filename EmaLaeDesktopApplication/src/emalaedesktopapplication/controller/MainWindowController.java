@@ -60,44 +60,7 @@ public class MainWindowController
      */
     private void addListeners()
     {
-        view.addAddNewSubMenusListener(new AdminAddNewSubMenuListener());
         view.addListChangeSubMenusListener(new AdminListChangeSubMenuListener());
-    }
-
-
-    /**
-     * Listener for all Admin->"New"->SubMenuItems
-     */
-    class AdminAddNewSubMenuListener implements ActionListener
-    {
-
-        public void actionPerformed(ActionEvent e)
-        {
-            Object obj;
-            JMenuItem target = (JMenuItem) e.getSource();
-            String actionCommand = target.getActionCommand();
-            System.out.println("action performed: " + actionCommand);
-
-            // FIXME: DRY
-            if (actionCommand.equals("database.entity.User"))
-            {
-                AdminEditPanel<database.entity.User> adminEditPanel =
-                        new AdminEditPanel<database.entity.User>(new database.entity.User());
-                view.setMiddleContentPanel(adminEditPanel);
-                AdminEditController adminEditUserController =
-                        new AdminEditController(
-                        view, adminEditPanel, database.entity.User.class);
-            }
-            else if (actionCommand.equals("database.entity.Group"))
-            {
-                AdminEditPanel<database.entity.Group> adminEditPanel =
-                        new AdminEditPanel<database.entity.Group>(new database.entity.Group());
-                view.setMiddleContentPanel(adminEditPanel);
-                AdminEditController adminEditUserController =
-                        new AdminEditController(
-                        view, adminEditPanel, database.entity.Group.class);
-            }
-        }
     }
 
     /**

@@ -27,10 +27,14 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="editButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="editObjectButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                      <Component id="newObjectButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="deleteObjectButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="302" max="32767" attributes="0"/>
+              <EmptySpace pref="148" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -40,7 +44,11 @@
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="57" max="32767" attributes="0"/>
-              <Component id="editButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="editObjectButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="newObjectButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteObjectButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -73,10 +81,22 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="editButton">
+    <Component class="javax.swing.JButton" name="editObjectButton">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="editButton.text"/>
-        <Property name="name" type="java.lang.String" value="editButton" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="editObjectButton.text"/>
+        <Property name="name" type="java.lang.String" value="editObjectButton" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="newObjectButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="newObjectButton.text"/>
+        <Property name="name" type="java.lang.String" value="newObjectButton" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteObjectButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="deleteObjectButton.text"/>
+        <Property name="name" type="java.lang.String" value="deleteObjectButton" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

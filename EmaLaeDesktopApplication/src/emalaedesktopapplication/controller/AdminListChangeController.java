@@ -5,12 +5,13 @@
 
 package emalaedesktopapplication.controller;
 
-import database.entity.User;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.admin.AdminEditPanel;
 import emalaedesktopapplication.forms.admin.AdminListChangePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,23 +32,54 @@ public class AdminListChangeController<T> {
         this.view = view;
         this.type = type;
 
-        view.addEditButtonListener(new EditListener());
+        view.addButtonsListener(new ButtonsListener());
     }
 
 
-    class EditListener implements ActionListener
+    class ButtonsListener implements ActionListener
     {
 
         public void actionPerformed(ActionEvent e)
         {
-            T obj = (T) view.getSelectedItem();
+            String actionCommand = e.getActionCommand();
 
-            AdminEditPanel<T> adminEditPanel =
-                    new AdminEditPanel<T>(obj);
-            mainWindow.setMiddleContentPanel(adminEditPanel);
-            AdminEditController adminEditController =
-                    new AdminEditController(
-                    mainWindow, adminEditPanel, type);
+            if (actionCommand.equals("Edit"))
+            {
+                T obj = (T) view.getSelectedItem();
+
+                AdminEditPanel<T> adminEditPanel =
+                        new AdminEditPanel<T>(type, obj);
+                mainWindow.setMiddleContentPanel(adminEditPanel);
+                AdminEditController adminEditController =
+                        new AdminEditController(
+                        mainWindow, adminEditPanel, type);
+            }
+            else if (actionCommand.equals("New"))
+            {
+                try
+                {
+                    AdminEditPanel<T> adminEditPanel = new AdminEditPanel<T>(type); // TODO: check this cast up
+                    mainWindow.setMiddleContentPanel(adminEditPanel);
+                    AdminEditController adminEditUserController = new AdminEditController(mainWindow, adminEditPanel, type);
+                } catch (InstantiationException ex)
+                {
+                    Logger.getLogger(AdminListChangeController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex)
+                {
+                    Logger.getLogger(AdminListChangeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else if (actionCommand.equals("Delete"))
+            {
+                T obj = (T) view.getSelectedItem();
+
+                AdminEditPanel<T> adminEditPanel =
+                        new AdminEditPanel<T>(obj);
+                mainWindow.setMiddleContentPanel(adminEditPanel);
+                AdminEditController adminEditController =
+                        new AdminEditController(
+                        mainWindow, adminEditPanel, type);
+            }
         }
     }
 

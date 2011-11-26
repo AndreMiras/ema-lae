@@ -29,7 +29,7 @@ import org.metawidget.swing.SwingMetawidget;
 public class AdminEditPanel<T> extends javax.swing.JPanel
 {
     private final T obj;
-    // private Class<T> type;
+    private Class<T> type;
     private SwingMetawidget metawidget;
     // private PersonTest user;
 
@@ -40,14 +40,23 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
         initComponents();
     }
      */
-
-    // public AdminEditPanel(User user) {
-    public AdminEditPanel(T obj) // , Class<T> type)
+    public AdminEditPanel(Class<T> type)
+            throws InstantiationException, IllegalAccessException
     {
-        // this();
+        this(type, type.newInstance());
+    }
+
+    public AdminEditPanel(T obj)
+    {
+        this(null, obj);
+    }
+
+    public AdminEditPanel(Class<T> type, T obj)
+    {
+        this.type = type;
         this.obj = obj;
+
         initComponents();
-        // this.type = type;
         initMetaWidget();
         populateMetaWidgetValuesFromObject();
     }

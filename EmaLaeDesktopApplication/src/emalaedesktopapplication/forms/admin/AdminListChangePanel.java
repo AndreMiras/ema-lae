@@ -30,8 +30,10 @@ public class AdminListChangePanel extends javax.swing.JPanel {
         this.objectList.setListData(objectList);
     }
 
-    public void addEditButtonListener(ActionListener al) {
-        editButton.addActionListener(al);
+    public void addButtonsListener(ActionListener al) {
+        editObjectButton.addActionListener(al);
+        newObjectButton.addActionListener(al);
+        deleteObjectButton.addActionListener(al);
     }
 
     public Object getSelectedItem()
@@ -50,7 +52,9 @@ public class AdminListChangePanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         objectList = new javax.swing.JList();
-        editButton = new javax.swing.JButton();
+        editObjectButton = new javax.swing.JButton();
+        newObjectButton = new javax.swing.JButton();
+        deleteObjectButton = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
@@ -65,8 +69,14 @@ public class AdminListChangePanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(objectList);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(AdminListChangePanel.class);
-        editButton.setText(resourceMap.getString("editButton.text")); // NOI18N
-        editButton.setName("editButton"); // NOI18N
+        editObjectButton.setText(resourceMap.getString("editObjectButton.text")); // NOI18N
+        editObjectButton.setName("editObjectButton"); // NOI18N
+
+        newObjectButton.setText(resourceMap.getString("newObjectButton.text")); // NOI18N
+        newObjectButton.setName("newObjectButton"); // NOI18N
+
+        deleteObjectButton.setText(resourceMap.getString("deleteObjectButton.text")); // NOI18N
+        deleteObjectButton.setName("deleteObjectButton"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -79,8 +89,12 @@ public class AdminListChangePanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(editButton)))
-                .addContainerGap(302, Short.MAX_VALUE))
+                        .addComponent(editObjectButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(newObjectButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteObjectButton)))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,15 +102,20 @@ public class AdminListChangePanel extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(editButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editObjectButton)
+                    .addComponent(newObjectButton)
+                    .addComponent(deleteObjectButton))
                 .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton editButton;
+    private javax.swing.JButton deleteObjectButton;
+    private javax.swing.JButton editObjectButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton newObjectButton;
     private javax.swing.JList objectList;
     // End of variables declaration//GEN-END:variables
 

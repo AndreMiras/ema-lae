@@ -112,26 +112,12 @@ public class EmaLaeDesktopView extends FrameView {
 
     public void populateAdminMenu(String[] entitiesAdmin)
     {
-        javax.swing.JMenuItem menuItemNew;
         javax.swing.JMenuItem menuItemChange;
         for (String entity : entitiesAdmin)
         {
-            menuItemNew = new javax.swing.JMenuItem(entity);
-            menuItemNew.setActionCommand(entity);
             menuItemChange = new javax.swing.JMenuItem(entity);
             menuItemChange.setActionCommand(entity);
-            adminNewMenu.add(menuItemNew);
             adminListChangeMenu.add(menuItemChange);
-        }
-    }
-
-    public void addAddNewSubMenusListener(ActionListener al)
-    {
-        javax.swing.JMenuItem menuItem;
-        for (int i=0; i < adminNewMenu.getItemCount(); i++)
-        {
-            menuItem = adminNewMenu.getItem(i);
-            menuItem.addActionListener(al);
         }
     }
 
@@ -161,7 +147,6 @@ public class EmaLaeDesktopView extends FrameView {
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         adminMenu = new javax.swing.JMenu();
         editViewMenuItem = new javax.swing.JMenuItem();
-        adminNewMenu = new javax.swing.JMenu();
         adminListChangeMenu = new javax.swing.JMenu();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
@@ -202,10 +187,6 @@ public class EmaLaeDesktopView extends FrameView {
         editViewMenuItem.setText(resourceMap.getString("editViewMenuItem.text")); // NOI18N
         editViewMenuItem.setName("editViewMenuItem"); // NOI18N
         adminMenu.add(editViewMenuItem);
-
-        adminNewMenu.setText(resourceMap.getString("adminNewMenu.text")); // NOI18N
-        adminNewMenu.setName("adminNewMenu"); // NOI18N
-        adminMenu.add(adminNewMenu);
 
         adminListChangeMenu.setText(resourceMap.getString("adminListChangeMenu.text")); // NOI18N
         adminListChangeMenu.setName("adminListChangeMenu"); // NOI18N
@@ -277,7 +258,6 @@ public class EmaLaeDesktopView extends FrameView {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu adminListChangeMenu;
     private javax.swing.JMenu adminMenu;
-    private javax.swing.JMenu adminNewMenu;
     private javax.swing.JMenuItem editViewMenuItem;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
