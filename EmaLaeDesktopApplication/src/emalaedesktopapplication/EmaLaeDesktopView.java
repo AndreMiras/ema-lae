@@ -112,6 +112,41 @@ public class EmaLaeDesktopView extends FrameView {
         mainPanel.revalidate();
     }
 
+    public void populateAdminMenu(String[] entitiesAdmin)
+    {
+        javax.swing.JMenuItem menuItemNew;
+        javax.swing.JMenuItem menuItemChange;
+        for (String entity : entitiesAdmin)
+        {
+            menuItemNew = new javax.swing.JMenuItem(entity);
+            menuItemNew.setActionCommand(entity);
+            menuItemChange = new javax.swing.JMenuItem(entity);
+            menuItemChange.setActionCommand(entity);
+            adminNewMenu.add(menuItemNew);
+            adminListChangeMenu.add(menuItemChange);
+        }
+    }
+
+    public void addAddNewSubMenusListener(ActionListener al)
+    {
+        javax.swing.JMenuItem menuItem;
+        for (int i=0; i < adminNewMenu.getItemCount(); i++)
+        {
+            menuItem = adminNewMenu.getItem(i);
+            menuItem.addActionListener(al);
+        }
+    }
+
+    public void addListChangeSubMenusListener(ActionListener al)
+    {
+        javax.swing.JMenuItem menuItem;
+        for (int i=0; i < adminListChangeMenu.getItemCount(); i++)
+        {
+            menuItem = adminListChangeMenu.getItem(i);
+            menuItem.addActionListener(al);
+        }
+    }
+
     public void addMenuListener(ActionListener al)
     {
         // TODO: fileMenu.addActionListener(al);
@@ -136,8 +171,8 @@ public class EmaLaeDesktopView extends FrameView {
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
         adminMenu = new javax.swing.JMenu();
         editViewMenuItem = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        adminNewMenu = new javax.swing.JMenu();
+        adminListChangeMenu = new javax.swing.JMenu();
         adminMainMenuItem = new javax.swing.JMenuItem();
         javax.swing.JMenu helpMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
@@ -179,13 +214,13 @@ public class EmaLaeDesktopView extends FrameView {
         editViewMenuItem.setName("editViewMenuItem"); // NOI18N
         adminMenu.add(editViewMenuItem);
 
-        jMenuItem1.setText(resourceMap.getString("jMenuItem1.text")); // NOI18N
-        jMenuItem1.setName("jMenuItem1"); // NOI18N
-        adminMenu.add(jMenuItem1);
+        adminNewMenu.setText(resourceMap.getString("adminNewMenu.text")); // NOI18N
+        adminNewMenu.setName("adminNewMenu"); // NOI18N
+        adminMenu.add(adminNewMenu);
 
-        jMenuItem2.setText(resourceMap.getString("jMenuItem2.text")); // NOI18N
-        jMenuItem2.setName("jMenuItem2"); // NOI18N
-        adminMenu.add(jMenuItem2);
+        adminListChangeMenu.setText(resourceMap.getString("adminListChangeMenu.text")); // NOI18N
+        adminListChangeMenu.setName("adminListChangeMenu"); // NOI18N
+        adminMenu.add(adminListChangeMenu);
 
         adminMainMenuItem.setText(resourceMap.getString("adminMainMenuItem.text")); // NOI18N
         adminMainMenuItem.setActionCommand(resourceMap.getString("adminMainMenuItem.actionCommand")); // NOI18N
@@ -256,11 +291,11 @@ public class EmaLaeDesktopView extends FrameView {
     }//GEN-LAST:event_recreateDataSetMenuItemClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu adminListChangeMenu;
     private javax.swing.JMenuItem adminMainMenuItem;
     private javax.swing.JMenu adminMenu;
+    private javax.swing.JMenu adminNewMenu;
     private javax.swing.JMenuItem editViewMenuItem;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
