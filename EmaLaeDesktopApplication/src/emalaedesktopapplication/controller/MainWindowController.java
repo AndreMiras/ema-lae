@@ -32,7 +32,8 @@ public class MainWindowController
     {
         "database.entity.User",
         "database.entity.Group",
-        "database.entity.Permission"
+        "database.entity.Permission",
+        "database.entity.UserProfile"
     };
 
     public MainWindowController(EmaLaeDesktopView view)
@@ -130,6 +131,23 @@ public class MainWindowController
                 adminListChangeController =
                         new AdminListChangeController(
                         view, adminListChangePanel, database.entity.Permission.class);
+            }
+            else if (actionCommand.equals("database.entity.UserProfile"))
+            {
+                Object[] objs = null;
+                try
+                {
+                    objs = RmiClient.getController().getAllObjects(
+                            database.entity.UserProfile.class);
+                } catch (RemoteException ex)
+                {
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                adminListChangePanel = new AdminListChangePanel(objs);
+                adminListChangeController =
+                        new AdminListChangeController(
+                        view, adminListChangePanel, database.entity.UserProfile.class);
             }
             view.setMiddleContentPanel(adminListChangePanel);
         }
