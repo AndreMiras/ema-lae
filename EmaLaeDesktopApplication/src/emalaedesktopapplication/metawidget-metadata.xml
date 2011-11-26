@@ -7,7 +7,7 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
     <entity type="database.entity.User">
         <property name="userId" read-only="true"/>
         <property name="username"/>
-        <property name="password"/>
+        <property name="password" masked="true"/>
         <!--
         <property name="gender"/>
         <property name="notes" large="true"/>
