@@ -33,6 +33,7 @@ public class User implements Serializable {
 
     public User()
     {
+        this.groups = new HashSet<Group>();
     }
 
     public User(String username)

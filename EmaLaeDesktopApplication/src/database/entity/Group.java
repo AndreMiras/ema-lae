@@ -6,6 +6,7 @@
 package database.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import javax.persistence.*;
 import java.util.Set;
 
@@ -41,12 +42,17 @@ public class Group implements Serializable{
     )
     private Set<Permission> permissionsID;
 
-    public Group() {
+    public Group()
+    {
+        this.usersId = new HashSet<User>();
+        this.permissionsID = new HashSet<Permission>();
     }
 
 
     public Group(String groupName){
        this.name = groupName;
+       this.usersId = new HashSet<User>();
+       this.permissionsID = new HashSet<Permission>();
     }
 
     public Integer getID() {
