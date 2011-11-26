@@ -125,7 +125,7 @@ public class MainWindowController
                             database.entity.User.class);
                 } catch (RemoteException ex)
                 {
-                    Logger.getLogger(AdminAuthModuleController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 adminListChangePanel = new AdminListChangePanel(objs);
@@ -142,7 +142,7 @@ public class MainWindowController
                             database.entity.Group.class);
                 } catch (RemoteException ex)
                 {
-                    Logger.getLogger(AdminAuthModuleController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 adminListChangePanel = new AdminListChangePanel(objs);

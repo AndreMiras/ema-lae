@@ -5,7 +5,6 @@
 package emalaedesktopapplication;
 
 import client.RmiClient;
-import database.util.InitDatabase;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +20,6 @@ import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * The application's main frame.
@@ -145,14 +143,6 @@ public class EmaLaeDesktopView extends FrameView {
             menuItem = adminListChangeMenu.getItem(i);
             menuItem.addActionListener(al);
         }
-    }
-
-    public void addMenuListener(ActionListener al)
-    {
-        // TODO: fileMenu.addActionListener(al);
-        // adminMenu.addActionListener(al);
-        adminMainMenuItem.addActionListener(al);
-        // TODO: helpMenu.addActionListener(al);
     }
 
     /** This method is called from within the constructor to
