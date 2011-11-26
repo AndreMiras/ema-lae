@@ -92,6 +92,11 @@ public class UserProfile implements Serializable {
         return lastName;
     }
 
+    public String getFullName()
+    {
+        return firstName + " " + lastName;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -127,6 +132,12 @@ public class UserProfile implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString()
+    {
+        return getFullName();
     }
 
     
