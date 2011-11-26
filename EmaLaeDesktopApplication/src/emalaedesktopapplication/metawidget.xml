@@ -82,7 +82,7 @@ config="TabbedPaneLayoutDecoratorConfig">
                     <array>
                         <overriddenWidgetBuilder xmlns="java:org.metawidget.swing.widgetbuilder"/>
                         <readOnlyWidgetBuilder xmlns="java:org.metawidget.swing.widgetbuilder"/>
-                        <!-- myWidgetBuilder xmlns="java:com.myapp"/ -->
+                        <collectionWidgetBuilder xmlns="java:emalaedesktopapplication"/>
                         <swingWidgetBuilder xmlns="java:org.metawidget.swing.widgetbuilder"/>
                     </array>
                 </widgetBuilders>
