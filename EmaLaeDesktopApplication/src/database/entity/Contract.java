@@ -8,9 +8,6 @@ package database.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import database.entity.Apprentice;
-import database.entity.InternshipSupervisor;
-import database.entity.SupervisingTeacher;
 
 /**
  *
