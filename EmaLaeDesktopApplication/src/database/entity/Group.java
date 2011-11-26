@@ -55,11 +55,11 @@ public class Group implements Serializable{
        this.permissionsID = new HashSet<Permission>();
     }
 
-    public Integer getID() {
+    public Integer getGroupId() {
         return this.groupId;
     }
 
-    public void setID(Integer ID) {
+    public void setGroupId(Integer ID) {
         this.groupId = ID;
     }
 
