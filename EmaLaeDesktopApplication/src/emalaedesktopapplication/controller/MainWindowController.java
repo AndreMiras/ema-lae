@@ -31,7 +31,8 @@ public class MainWindowController
     private String[] entitiesAdmin = new String[]
     {
         "database.entity.User",
-        "database.entity.Group"
+        "database.entity.Group",
+        "database.entity.Permission"
     };
 
     public MainWindowController(EmaLaeDesktopView view)
@@ -112,6 +113,23 @@ public class MainWindowController
                 adminListChangeController =
                         new AdminListChangeController(
                         view, adminListChangePanel, database.entity.Group.class);
+            }
+            else if (actionCommand.equals("database.entity.Permission"))
+            {
+                Object[] objs = null;
+                try
+                {
+                    objs = RmiClient.getController().getAllObjects(
+                            database.entity.Permission.class);
+                } catch (RemoteException ex)
+                {
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                adminListChangePanel = new AdminListChangePanel(objs);
+                adminListChangeController =
+                        new AdminListChangeController(
+                        view, adminListChangePanel, database.entity.Permission.class);
             }
             view.setMiddleContentPanel(adminListChangePanel);
         }
