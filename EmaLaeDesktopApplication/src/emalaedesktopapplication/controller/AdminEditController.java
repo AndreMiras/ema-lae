@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package emalaedesktopapplication.controller;
 
 import client.RmiClient;
@@ -18,7 +17,9 @@ import java.util.logging.Logger;
  *
  * @author andre
  */
-public class AdminEditController<T> {
+public class AdminEditController<T>
+{
+
     private EmaLaeDesktopView mainWindow;
     private AdminEditPanel<T> view;
     Class<T> type;
@@ -30,25 +31,44 @@ public class AdminEditController<T> {
         this.view = view;
         this.type = type;
 
-        view.addSaveButtonListener(new SaveListener());
+        view.addButtonsListener(new ButtonsListener());
     }
 
-    class SaveListener implements ActionListener
+    class ButtonsListener implements ActionListener
     {
 
         public void actionPerformed(ActionEvent e)
         {
-            T editedObj = view.save();
-            try
+            String actionCommand = e.getActionCommand();
+
+            if (actionCommand.equals("Save"))
             {
-                // hit the database back with the edited user
-                RmiClient.getController().createOrUpdate(
-                        type, editedObj);
-            } catch (RemoteException ex)
+                T editedObj = view.save();
+                try
+                {
+                    // hit the database back with the edited user
+                    RmiClient.getController().createOrUpdate(
+                            type, editedObj);
+                } catch (RemoteException ex)
+                {
+                    Logger.getLogger(AdminEditController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (actionCommand.equals("Delete"))
             {
-                Logger.getLogger(AdminEditController.class.getName()).log(Level.SEVERE, null, ex);
+                T obj = view.getObj();
+                try
+                {
+                    // TODO: go back to the previous screen
+                    RmiClient.getController().delete(type, obj);
+                } catch (RemoteException ex)
+                {
+                    Logger.getLogger(AdminEditController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (actionCommand.equals("Cancel"))
+            {
+                // TODO: go back to the previous screen
+                System.out.println("TODO:back to previous screen");
             }
         }
     }
-
 }

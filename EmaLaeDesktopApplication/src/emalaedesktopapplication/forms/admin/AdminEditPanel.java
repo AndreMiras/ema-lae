@@ -61,9 +61,11 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
         populateMetaWidgetValuesFromObject();
     }
 
-    public void addSaveButtonListener(ActionListener al)
+    public void addButtonsListener(ActionListener al)
     {
         saveButton.addActionListener(al);
+        cancelButton.addActionListener(al);
+        deleteButton.addActionListener(al);
     }
 
     /*
@@ -197,6 +199,11 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
         return true;
     }
 
+    public T getObj()
+    {
+        return obj;
+    }
+
     /**
      * TODO[cleaning: this should actually be part of a custom MapWidgetProcessor
      * FIXME: I though metawidget could do that automagically
@@ -301,8 +308,8 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
 
         middleContentPanel = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
@@ -314,11 +321,11 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
         saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
         saveButton.setName("saveButton"); // NOI18N
 
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setName("jButton2"); // NOI18N
+        deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
+        deleteButton.setName("deleteButton"); // NOI18N
 
-        jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
-        jButton3.setName("jButton3"); // NOI18N
+        cancelButton.setText(resourceMap.getString("cancelButton.text")); // NOI18N
+        cancelButton.setName("cancelButton"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -330,9 +337,9 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
                         .addGap(36, 36, 36)
                         .addComponent(saveButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(deleteButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3))
+                        .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(middleContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)))
@@ -345,15 +352,15 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
                 .addComponent(middleContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(deleteButton)
+                    .addComponent(cancelButton)
                     .addComponent(saveButton))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JPanel middleContentPanel;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
