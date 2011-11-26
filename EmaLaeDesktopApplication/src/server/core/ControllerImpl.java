@@ -90,40 +90,6 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         return id;
     }
 
-
-    /**
-     * FIXME: verify the logged user has the right to do so
-     * @return
-     * @throws RemoteException
-     */
-    public User[] getAllUsers() throws RemoteException
-    {
-        UserDao userDao = new UserDao();
-        List<User> userList;
-        userList = userDao.all();
-        User users[] = new User[userList.size()];
-
-        return userList.toArray(users);
-    }
-
-    public void updateUser(User user) throws RemoteException
-    {
-        // UserDao userDao = new UserDao();
-        // userDao.update(user);
-        GenericDao<User> userDao = new GenericDao<User>(User.class);
-        userDao.update(user);
-    }
-
-    public Serializable createUser(User user) throws RemoteException
-    {
-        Serializable pk;
-
-        UserDao userDao = new UserDao();
-        pk = userDao.create(user);
-
-        return pk;
-    }
-
     public <T> void createOrUpdate(Class<T> type, T obj) throws RemoteException
     {
         // UserDao userDao = new UserDao();
@@ -133,6 +99,12 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         genericDao.createOrUpdate(obj);
     }
 
+
+    /**
+     * FIXME: verify the logged user has the right to do so
+     * @return
+     * @throws RemoteException
+     */
     public <T> T[] getAllObjects(Class<T> type) throws RemoteException
     {
         GenericDao<T> genericDao = new GenericDao<T>(type);
