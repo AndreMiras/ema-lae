@@ -5,11 +5,13 @@
 
 package emalaedesktopapplication.controller;
 
+import client.RmiClient;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.admin.AdminEditPanel;
 import emalaedesktopapplication.forms.admin.AdminListChangePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -72,13 +74,13 @@ public class AdminListChangeController<T> {
             else if (actionCommand.equals("Delete"))
             {
                 T obj = (T) view.getSelectedItem();
-
-                AdminEditPanel<T> adminEditPanel =
-                        new AdminEditPanel<T>(obj);
-                mainWindow.setMiddleContentPanel(adminEditPanel);
-                AdminEditController adminEditController =
-                        new AdminEditController(
-                        mainWindow, adminEditPanel, type);
+                try
+                {
+                    RmiClient.getController().delete(type, obj);
+                } catch (RemoteException ex)
+                {
+                    Logger.getLogger(AdminListChangeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }

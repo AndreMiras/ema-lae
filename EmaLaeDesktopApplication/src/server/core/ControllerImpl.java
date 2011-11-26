@@ -113,4 +113,10 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
 
         return (T[]) objectList.toArray();
     }
+
+    public <T> void delete(Class<T> type, T obj) throws RemoteException
+    {
+        GenericDao<T> genericDao = new GenericDao<T>(type);
+        genericDao.delete(obj);
+    }
 }

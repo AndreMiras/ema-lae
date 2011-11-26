@@ -61,4 +61,6 @@ public interface IController extends java.rmi.Remote {
      * @throws java.rmi.RemoteException
      */
     public <T> void createOrUpdate(Class<T> type, T obj) throws java.rmi.RemoteException;
+
+    public <T> void delete(Class<T> type, T obj) throws java.rmi.RemoteException;
 }
