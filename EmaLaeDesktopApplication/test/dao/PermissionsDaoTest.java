@@ -195,8 +195,10 @@ public class PermissionsDaoTest {
         
         myGroups = groupInstance.all();
         
-        assertTrue("Group4addGroup".equals(myGroups.get(0).getName())&&"group4addGroup2".equals(myGroups.get(1).getName()));
-        
+        // assertTrue("Group4addGroup".equals(myGroups.get(0).getName())&&"group4addGroup2".equals(myGroups.get(1).getName()));
+        assertTrue(myGroups.get(0).getName().equals("Group4addGroup"));
+        assertTrue(myGroups.get(1).getName().equals("group4addGroup2"));
+
         assertTrue(p1.getGroupsID().contains(newGroup1)&&p1.getGroupsID().contains(newGroup2));
 
     }
