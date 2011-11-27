@@ -170,19 +170,19 @@ public class PermissionsDaoTest {
     public void testAddGroup()
     {
         System.out.println("addGroup");
-        PermissionsDao instance = new PermissionsDao();
+        PermissionsDao permissionDao = new PermissionsDao();
         GroupDao groupInstance = new GroupDao();
         Permission p1 = new Permission("permission4addGroup");
         Group newGroup1 = new Group("Group4addGroup");
-        Integer permissionID = instance.create(p1);
+        Integer permissionID = permissionDao.create(p1);
 
         List<Group> myGroups = groupInstance.all();
         assertFalse(myGroups.contains(newGroup1));
         
         groupInstance.create(newGroup1);
         p1.addToGroup(newGroup1);
-        instance.update(p1);
-        p1 = instance.read(permissionID);
+        permissionDao.update(p1);
+        p1 = permissionDao.read(permissionID);
         Group newGroup2 = new Group("group4addGroup2");
         
         assertTrue(p1.getGroupsID().contains(newGroup1));
@@ -190,8 +190,8 @@ public class PermissionsDaoTest {
 
         p1.addToGroup(newGroup2);
         groupInstance.create(newGroup2);
-        instance.update(p1);
-        p1 = instance.read(permissionID);
+        permissionDao.update(p1);
+        p1 = permissionDao.read(permissionID);
         
         myGroups = groupInstance.all();
         
