@@ -185,8 +185,8 @@ public class PermissionsDaoTest {
         p1 = permissionDao.read(permissionID);
         Group newGroup2 = new Group("group4addGroup2");
 
-        assertTrue(p1.getGroupsID().contains(newGroup1));
-        assertFalse(p1.getGroupsID().contains(newGroup2));
+        assertTrue(p1.getGroups().contains(newGroup1));
+        assertFalse(p1.getGroups().contains(newGroup2));
 
         p1.addToGroup(newGroup2);
         groupInstance.create(newGroup2);
@@ -199,7 +199,7 @@ public class PermissionsDaoTest {
         assertTrue(myGroups.get(0).getName().equals("Group4addGroup"));
         assertTrue(myGroups.get(1).getName().equals("group4addGroup2"));
 
-        assertTrue(p1.getGroupsID().contains(newGroup1)&&p1.getGroupsID().contains(newGroup2));
+        assertTrue(p1.getGroups().contains(newGroup1)&&p1.getGroups().contains(newGroup2));
 
     }
 }

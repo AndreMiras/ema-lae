@@ -108,7 +108,7 @@ public class User implements Serializable {
         while(i.hasNext() && !hasPermission)
         {
             Group userGroup = (Group) i.next();
-            hasPermission = userGroup.getPermissionsID().contains(permission) ? true : hasPermission;
+            hasPermission = userGroup.getPermissions().contains(permission) ? true : hasPermission;
         }
         return hasPermission;
     }

@@ -39,7 +39,7 @@ public class UserDao extends DaoHibernate<User, Integer>
 
         for (Group group : user.getGroups())
         {
-            group.getUsersId().remove(user);
+            group.getUsers().remove(user);
             session.update(group);
         }
 

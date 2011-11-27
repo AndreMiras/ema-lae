@@ -37,7 +37,7 @@ public class Group implements Serializable{
         {@JoinColumn(name = "groupsID") },
         inverseJoinColumns = { @JoinColumn(name = "user_id") }
     )
-    private Set<User> usersId;
+    private Set<User> users;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -46,19 +46,19 @@ public class Group implements Serializable{
         {@JoinColumn(name = "groupsID") },
         inverseJoinColumns = { @JoinColumn(name = "permissionsID") }
     )
-    private Set<Permission> permissionsID;
+    private Set<Permission> permissions;
 
     public Group()
     {
-        this.usersId = new HashSet<User>();
-        this.permissionsID = new HashSet<Permission>();
+        this.users = new HashSet<User>();
+        this.permissions = new HashSet<Permission>();
     }
 
 
     public Group(String groupName){
        this.name = groupName;
-       this.usersId = new HashSet<User>();
-       this.permissionsID = new HashSet<Permission>();
+       this.users = new HashSet<User>();
+       this.permissions = new HashSet<Permission>();
     }
 
     public Integer getGroupId() {
@@ -78,42 +78,42 @@ public class Group implements Serializable{
     }
 
     /*
-    public Set<Permission> getPermissionsID() {
+    public Set<Permission> getPermissions() {
         return permissionsID;
     }
 
-    public void setPermissionsID(Set<Permission> permissionsID) {
+    public void setPermissions(Set<Permission> permissionsID) {
         this.permissionsID = permissionsID;
     }
      */
 
     // meta-widget better deals with Lists at the moment
-    public List<Permission> getPermissionsID()
+    public List<Permission> getPermissions()
     {
         List<Permission> permissionList =
-                new ArrayList<Permission>(permissionsID);
+                new ArrayList<Permission>(permissions);
         return permissionList;
     }
 
-    public void setPermissionsID(List<Permission> permissionsID) {
-        this.permissionsID = new HashSet<Permission>(permissionsID);
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = new HashSet<Permission>(permissions);
     }
 
     public boolean addPermission(Permission perm){
-        return this.permissionsID.add(perm);
+        return this.permissions.add(perm);
     }
 
     public boolean addUser(User u)
     {
-        return usersId.add(u);
+        return users.add(u);
     }
 
-    public Set<User> getUsersId() {
-        return usersId;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUsersId(Set<User> usersId) {
-        this.usersId = usersId;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     @Override

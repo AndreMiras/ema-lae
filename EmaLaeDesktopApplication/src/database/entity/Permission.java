@@ -45,17 +45,17 @@ public class Permission implements Serializable{
     }
 
     /*
-    public Set<Group> getGroupsID() {
+    public Set<Group> getGroups() {
         return this.groups;
     }
      */
 
-    public void setGroupsID(Set<Group> groups) {
+    public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
 
      // meta-widget better deals with Lists at the moment
-    public List<Group> getGroupsID() {
+    public List<Group> getGroups() {
         List<Group> groupList = new ArrayList<Group>(groups);
         return groupList;
     }
@@ -98,7 +98,4 @@ public class Permission implements Serializable{
     {
         return name;
     }
-
-    
-
 }

@@ -89,9 +89,9 @@ public class InitDatabase {
         // group.addUser(user); // FIXME: fails
         for(int i=0; i<3; i++)
         {
-        permission = new Permission(permissionName + i);
-        permissionsDao.create(permission);
-        // group.addPermission(permission); // FIXME: fails
+            permission = new Permission(permissionName + i);
+            permissionsDao.create(permission);
+            // group.addPermission(permission); // FIXME: fails
         }
         groupDao.create(group);
     }

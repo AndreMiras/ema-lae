@@ -40,16 +40,16 @@ public class GroupDao extends DaoHibernate<Group, Integer> {
         Transaction transaction = session.beginTransaction();
 
         // deletes associated users
-        for (User user : group.getUsersId())
+        for (User user : group.getUsers())
         {
             user.getGroups().remove(group);
             session.update(user);
         }
 
         // deletes associated permissions
-        for (Permission permission : group.getPermissionsID())
+        for (Permission permission : group.getPermissions())
         {
-            permission.getGroupsID().remove(group);
+            permission.getGroups().remove(group);
             session.update(permission);
         }
 
