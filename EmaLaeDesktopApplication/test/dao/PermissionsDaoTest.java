@@ -184,7 +184,7 @@ public class PermissionsDaoTest {
         permissionDao.update(p1);
         p1 = permissionDao.read(permissionID);
         Group newGroup2 = new Group("group4addGroup2");
-        
+
         assertTrue(p1.getGroupsID().contains(newGroup1));
         assertFalse(p1.getGroupsID().contains(newGroup2));
 
