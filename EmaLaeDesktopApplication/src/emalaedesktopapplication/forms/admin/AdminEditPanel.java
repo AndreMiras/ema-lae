@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
 import org.metawidget.swing.SwingMetawidget;
+import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessor;
 
 /**
  *
@@ -75,72 +76,13 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
     }
 
     /**
-     * TODO[cleaning: this should actually be part of a custom MapWidgetProcessor
-     * FIXME: I though metawidget could do that automagically
      * Saves all current widget values back to the object and returns it
      * @return updated object
      */
     public T save()
     {
-        /* TODO
-        object.setUsername( (String) metawidget.getValue( new String[] {"username"} ) );
-        object.setPassword( (String) metawidget.getValue( new String[] {"password"} ) );
-         */
-
-        // FIXME: all this code below is terribly ugly.
-        //  it has to be a better way of doing it!
-        // FIXME: it has to be a way for looping in all attributes/properties
-        // from metawidget.xml for a given entity
-        List<String> componentNames = new ArrayList<String>();
-        int componentCount = metawidget.getComponentCount();
-        Component component;
-        for (int i=0; i<componentCount; i++)
-        {
-            component = metawidget.getComponent(i);
-            componentNames.add(component.getName());
-        }
-        String methodName;
-        Method tmpMethod;
-        Field[] fields = obj.getClass().getDeclaredFields();
-        for (Field field : fields)
-        {
-            methodName = "set"
-                    + Character.toUpperCase(field.getName().charAt(0))
-                    + field.getName().substring(1);
-            try
-            {
-                // FIXME: hardcoded method argument type
-                tmpMethod = obj.getClass().getDeclaredMethod(methodName, String.class);
-                try
-                {
-                     // FIXME: stupid way of checking it
-                    if (componentNames.contains(field.getName()))
-                    {
-                        tmpMethod.invoke(obj,
-                                metawidget.getValue(new String[] {field.getName()}));
-                    }
-                } catch (IllegalAccessException ex)
-                {
-                    Logger.getLogger(AdminEditPanel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalArgumentException ex)
-                {
-                    Logger.getLogger(AdminEditPanel.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InvocationTargetException ex)
-                {
-                    Logger.getLogger(AdminEditPanel.class.getName()).log(
-                            Level.SEVERE, null, ex);
-                }
-            } catch (NoSuchMethodException ex)
-            {
-                Logger.getLogger(AdminEditPanel.class.getName()).log(
-                        Level.SEVERE, null, ex);
-            } catch (SecurityException ex)
-            {
-                Logger.getLogger(AdminEditPanel.class.getName()).log(
-                        Level.SEVERE, null, ex);
-            }
-        }
-
+        metawidget.getWidgetProcessor(
+                BeansBindingProcessor.class ).save(metawidget);
         return obj;
     }
 
