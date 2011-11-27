@@ -5,8 +5,11 @@
 
 package database.util;
 
+import dao.GroupDao;
 import dao.UserDao;
 import dao.UserProfileDao;
+import database.entity.Group;
+import database.entity.Permission;
 import database.entity.User;
 import database.entity.UserProfile;
 import java.util.List;
@@ -61,6 +64,40 @@ public class InitDatabase {
         {
             user = (User) users.get(i);
             userDao.delete(user);
+        }
+    }
+
+    public void createGroups()
+    {
+        Permission permission;
+        String permissionName;
+        String groupName;
+        Group group;
+        GroupDao groupDao;
+
+        groupDao = new GroupDao();
+        permissionName = "username";
+        groupName = "aGroup";
+
+        group = new Group(groupName);
+        for(int i=0; i<3; i++)
+        {
+            permission = new Permission(permissionName + i);
+            group.addPermission(permission);
+        }
+        groupDao.create(group);
+    }
+
+    public void dropGroups()
+    {
+        Group group;
+        GroupDao groupDao = new GroupDao();
+        List groups = groupDao.all();
+
+        for(int i=0; i<groups.size(); i++)
+        {
+            group = (Group) groups.get(i);
+            groupDao.delete(group);
         }
     }
 
