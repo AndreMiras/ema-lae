@@ -36,14 +36,14 @@ public class UserProfileDao extends DaoHibernate<UserProfile, Integer> {
     {
         String hqlString = "from UserProfile as userprofile where ";
         String filterString = "user_id = '" + user.getUserId() + "'";
-        Session session = sessionFactory.openSession(); // = getSession();
+        Session session = getSession(); // sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         session.beginTransaction();
         // TODO[security]: is there a security risk, using plain HQL ?
         List objs = session.createQuery(hqlString + filterString).list();
         transaction.commit();
-        session.close();
+        // session.close();
         return (UserProfile) objs.get(0);
     }
 

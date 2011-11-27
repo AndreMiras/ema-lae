@@ -31,7 +31,7 @@ public class UserDao extends DaoHibernate<User, Integer>
     @Override
     public void delete(User user)
     {
-        Session session = sessionFactory.openSession(); // = getSession();
+        Session session = getSession(); // sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         UserProfileDao userProfileDao = new UserProfileDao();
         UserProfile userProfile;
@@ -46,6 +46,6 @@ public class UserDao extends DaoHibernate<User, Integer>
         // em.remove(user);
         session.delete(user);
         transaction.commit();
-        session.close();
+        // session.close();
     }
 }

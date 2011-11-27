@@ -36,7 +36,7 @@ public class GroupDao extends DaoHibernate<Group, Integer> {
     @Override
     public void delete(Group group)
     {
-        Session session = sessionFactory.openSession(); // = getSession();
+        Session session = getSession(); // sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         // deletes associated users
@@ -55,6 +55,6 @@ public class GroupDao extends DaoHibernate<Group, Integer> {
 
         session.delete(group);
         transaction.commit();
-        session.close();
+        // session.close();
     }
 }

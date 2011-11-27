@@ -11,8 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  *
@@ -22,27 +22,25 @@ public class DaoHibernate<T, PK extends Serializable>
         implements IDao<T, PK> {
     
     private Class<T> type;
-    // private Session _session = HibernateUtil.getSessionFactory().openSession();
-    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    private Session _session = HibernateUtil.getSessionFactory().openSession();
 
     
     public DaoHibernate(Class<T> type) {
         this.type = type;
     }
 
-    public Session getSessionDeprecated()
+    public Session getSession()
     {
-        return null; // _session;
+        return _session;
     }
 
     public PK create(T obj)
     {
         // return (PK) getSession().save(obj);
-        Session session = sessionFactory.openSession(); // = getSession();
+        Session session = getSession();
         session.beginTransaction();
-        PK id = (PK) session.save(obj);
+        PK id = (PK) getSession().save(obj);
         session.getTransaction().commit();
-        session.close();
 
         return id;
     }
@@ -50,11 +48,10 @@ public class DaoHibernate<T, PK extends Serializable>
     public T read(PK id)
     {
         // return (T) getSession().get(type, id);
-        Session session = sessionFactory.openSession(); // = getSession();
+        Session session = getSession();
         session.beginTransaction();
-        T obj = (T) session.get(type, id);
+        T obj = (T) getSession().get(type, id);
         session.getTransaction().commit();
-        session.close();
 
         return obj;
     }
@@ -62,31 +59,19 @@ public class DaoHibernate<T, PK extends Serializable>
     public void update(T obj)
     {
         // getSession().update(o);
-        Session session = sessionFactory.openSession(); // = getSession();
+        Session session = getSession();
         session.beginTransaction();
-        session.update(obj);
+        getSession().update(obj);
         session.getTransaction().commit();
-        session.close();
-    }
-
-    public void createOrUpdate(T obj)
-    {
-        // getSession().saveOrUpdate(o);
-        Session session = sessionFactory.openSession(); // = getSession();
-        session.beginTransaction();
-        session.saveOrUpdate(obj);
-        session.getTransaction().commit();
-        session.close();
     }
 
     public void delete(T obj)
     {
         // getSession().delete(o);
-        Session session = sessionFactory.openSession(); // = getSession();
+        Session session = getSession();
         session.beginTransaction();
         session.delete(obj);
         session.getTransaction().commit();
-        session.close();
     }
 
     public List<T> find(HashMap<String, String> querySet)
@@ -94,7 +79,7 @@ public class DaoHibernate<T, PK extends Serializable>
         String hqlString = "from " + type.getName() +
                 " as " + type.getName().toLowerCase() + " where ";
         String filterString = "";
-        Session session = sessionFactory.openSession(); // = getSession();
+        Session session = getSession();
 
         Set set = querySet.entrySet();
         Iterator it = set.iterator();
@@ -123,9 +108,8 @@ public class DaoHibernate<T, PK extends Serializable>
 
         session.beginTransaction();
         // TODO[security]: is there a security risk, using plain HQL ?
-        List objs = session.createQuery(hqlString + filterString).list();
+        List objs = getSession().createQuery(hqlString + filterString).list();
         session.getTransaction().commit();
-        session.close();
         return objs;
     }
 
@@ -145,15 +129,25 @@ public class DaoHibernate<T, PK extends Serializable>
         Criteria crit = getSession().createCriteria(type);
         return crit.list();
          */
-        Session session = sessionFactory.openSession(); // = getSession();
+        Session session = getSession();
 
         session.beginTransaction();
-        List objs = session.createQuery("from "
+        List objs = getSession().createQuery("from "
                 + type.getName()).list();
+        session.getTransaction().commit();
+
+        return objs;
+    }
+
+    public void createOrUpdate(T obj)
+    {
+        // getSession().saveOrUpdate(o);
+        Session session = getSession();  // sessionFactory.openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(obj);
         session.getTransaction().commit();
         session.close();
 
-        return objs;
     }
 
 }
