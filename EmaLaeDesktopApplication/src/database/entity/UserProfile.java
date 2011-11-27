@@ -143,8 +143,4 @@ public class UserProfile implements Serializable {
     {
         return getFullName();
     }
-
-    
-
-    
 }

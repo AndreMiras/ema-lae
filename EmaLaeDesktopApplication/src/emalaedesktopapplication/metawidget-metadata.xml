@@ -20,6 +20,16 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
     </entity>
     <entity type="database.entity.Group">
         <property name="groupId" read-only="true"/>
-        <!-- property name="permissionsID" read-only="true"/ -->
+    </entity>
+    <entity type="database.entity.UserProfile">
+        <property name="user" hidden="true"/>
+        <property name="fullName" hidden="true"/>
+        <property name="userId" read-only="true"/>
+        <property name="firstName"/>
+        <property name="lastName"/>
+        <property name="birthDate"/>
+        <property name="email" section="Contact"/>
+        <property name="phoneNumber" section="Contact"/>
+        <property name="address" section="Contact"/>
     </entity>
 </inspection-result>
