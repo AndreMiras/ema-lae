@@ -8,9 +8,11 @@
 package database.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  *
@@ -27,7 +29,7 @@ public class Permission implements Serializable{
     @Column(name ="name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     private Set<Group> groups;
 
     public Permission() {
@@ -39,12 +41,24 @@ public class Permission implements Serializable{
         this.groups = new HashSet<Group>();
     }
 
+    /*
     public Set<Group> getGroupsID() {
         return this.groups;
     }
 
     public void setGroupsID(Set<Group> groups) {
         this.groups = groups;
+    }
+     */
+
+     // meta-widget better deals with Lists at the moment
+    public List<Group> getGroupsID() {
+        List<Group> groupList = new ArrayList<Group>(groups);
+        return groupList;
+    }
+
+    public void setGroupsID(Set<Group> groups) {
+        this.groups = new HashSet<Group>(groups);
     }
 
     
@@ -78,6 +92,12 @@ public class Permission implements Serializable{
 
     public boolean addGroup(Group group){
         return this.groups.add(group);
+    }
+
+    @Override
+    public String toString()
+    {
+        return name;
     }
 
     

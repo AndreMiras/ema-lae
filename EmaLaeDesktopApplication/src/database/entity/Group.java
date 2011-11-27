@@ -6,7 +6,9 @@
 package database.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import javax.persistence.*;
 import java.util.Set;
 
@@ -26,7 +28,7 @@ public class Group implements Serializable{
     @Column(name ="name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     @JoinTable(
         name = "user_group", joinColumns =
         {@JoinColumn(name = "groupsID") },
@@ -34,7 +36,7 @@ public class Group implements Serializable{
     )
     private Set<User> usersId;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
     @JoinTable(
         name = "permission_group", joinColumns =
         {@JoinColumn(name = "groupsID") },
@@ -71,12 +73,26 @@ public class Group implements Serializable{
         this.name = name;
     }
 
+    /*
     public Set<Permission> getPermissionsID() {
         return permissionsID;
     }
 
     public void setPermissionsID(Set<Permission> permissionsID) {
         this.permissionsID = permissionsID;
+    }
+     */
+
+    // meta-widget better deals with Lists at the moment
+    public List<Permission> getPermissionsID()
+    {
+        List<Permission> permissionList =
+                new ArrayList<Permission>(permissionsID);
+        return permissionList;
+    }
+
+    public void setPermissionsID(List<Permission> permissionsID) {
+        this.permissionsID = new HashSet<Permission>(permissionsID);
     }
 
     public Set<User> getUsersId() {

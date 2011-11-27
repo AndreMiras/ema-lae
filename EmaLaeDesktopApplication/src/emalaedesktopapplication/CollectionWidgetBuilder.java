@@ -47,7 +47,7 @@ public class CollectionWidgetBuilder
             return null;
         }
 
-        if (!List.class.isAssignableFrom(clazz))
+        if (!List.class.isAssignableFrom(clazz)) // if (!Collection.class.isAssignableFrom(clazz))
         {
             return null;
         }

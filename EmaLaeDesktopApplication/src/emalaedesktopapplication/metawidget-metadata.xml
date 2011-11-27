@@ -20,5 +20,6 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
     </entity>
     <entity type="database.entity.Group">
         <property name="groupId" read-only="true"/>
+        <!-- property name="permissionsID" read-only="true"/ -->
     </entity>
 </inspection-result>
