@@ -77,7 +77,9 @@ public class ContractDaoTest {
         ContractDao instance = new ContractDao();
         Integer contractID = instance.create(obj);
         Contract result = instance.read(contractID);
-        assertTrue(result.getApprentice() == apprenti && result.getInternshipSupervisor() == ma && result.getSupervisingTeacher() == tuteur);
+        assertTrue(result.getApprentice() == apprenti);
+        assertTrue(result.getInternshipSupervisor() == ma);
+        assertTrue(result.getSupervisingTeacher() == tuteur);
     }
 
     /**
