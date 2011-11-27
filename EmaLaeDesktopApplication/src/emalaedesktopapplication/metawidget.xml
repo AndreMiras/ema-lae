@@ -63,10 +63,25 @@ config="TabbedPaneLayoutDecoratorConfig">
                 </layout>
             </tabbedPaneLayoutDecorator>
         </metawidgetLayout -->
+        <metawidgetLayout>
+            <tabbedPaneLayoutDecorator
+                xmlns="java:org.metawidget.swing.layout"
+                config="TabbedPaneLayoutDecoratorConfig">
+                <layout>
+                    <gridBagLayout config="GridBagLayoutConfig">
+                        <numberOfColumns>
+                            <int>2</int>
+                        </numberOfColumns>
+                    </gridBagLayout>
+                </layout>
+            </tabbedPaneLayoutDecorator>
+        </metawidgetLayout>
+
         <widgetProcessors>
             <array>
                 <!-- reflectionBindingProcessor xmlns="java:org.metawidget.swing.widgetprocessor.binding.reflection"/ -->
-                <beansBindingProcessor xmlns="java:org.metawidget.swing.widgetprocessor.binding.beansbinding"
+                <beansBindingProcessor
+                    xmlns="java:org.metawidget.swing.widgetprocessor.binding.beansbinding"
                     config="BeansBindingProcessorConfig">
                     <!-- updateStrategy>
                         <enum>READ_WRITE</enum>

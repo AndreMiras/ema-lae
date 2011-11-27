@@ -24,7 +24,7 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
     <entity type="database.entity.UserProfile">
         <property name="user" hidden="true"/>
         <property name="fullName" hidden="true"/>
-        <property name="userId" read-only="true"/>
+        <property name="userId" read-only="true" large="true"/>
         <property name="firstName"/>
         <property name="lastName"/>
         <property name="birthDate"/>
