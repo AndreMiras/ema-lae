@@ -21,6 +21,11 @@ public class UserDao extends DaoHibernate<User, Integer>
         super(type);
     }
 
+    /**
+     * Explicitely deletes user related object
+     *  - group
+     * @param user
+     */
     @Override
     public void delete(User user)
     {
