@@ -9,6 +9,7 @@ import database.entity.User;
 import database.entity.UserProfile;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -35,12 +36,14 @@ public class UserProfileDao extends DaoHibernate<UserProfile, Integer> {
     {
         String hqlString = "from UserProfile as userprofile where ";
         String filterString = "user_id = '" + user.getUserId() + "'";
-        Session session = getSession();
+        Session session = sessionFactory.openSession(); // = getSession();
+        Transaction transaction = session.beginTransaction();
 
         session.beginTransaction();
         // TODO[security]: is there a security risk, using plain HQL ?
-        List objs = getSession().createQuery(hqlString + filterString).list();
-        session.getTransaction().commit();
+        List objs = session.createQuery(hqlString + filterString).list();
+        transaction.commit();
+        session.close();
         return (UserProfile) objs.get(0);
     }
 
