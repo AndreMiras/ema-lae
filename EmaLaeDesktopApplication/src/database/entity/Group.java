@@ -95,6 +95,10 @@ public class Group implements Serializable{
         this.permissionsID = new HashSet<Permission>(permissionsID);
     }
 
+    public boolean addPermission(Permission perm){
+        return this.permissionsID.add(perm);
+    }
+
     public Set<User> getUsersId() {
         return usersId;
     }

@@ -90,7 +90,7 @@ public class Permission implements Serializable{
         this.permissionID = permissionID;
     }
 
-    public boolean addGroup(Group group){
+    public boolean addToGroup(Group group){
         return this.groups.add(group);
     }
 

@@ -161,7 +161,7 @@ public class PermissionsDaoTest {
         Group newGroup1 = new Group("Group4addGroup");
         instance.create(p1);
         
-        p1.addGroup(newGroup1);
+        p1.addToGroup(newGroup1);
         instance.update(p1);
 
     }
@@ -180,7 +180,7 @@ public class PermissionsDaoTest {
         assertFalse(myGroups.contains(newGroup1));
         
         groupInstance.create(newGroup1);
-        p1.addGroup(newGroup1);
+        p1.addToGroup(newGroup1);
         instance.update(p1);
         p1 = instance.read(permissionID);
         Group newGroup2 = new Group("group4addGroup2");
@@ -188,7 +188,7 @@ public class PermissionsDaoTest {
         assertTrue(p1.getGroupsID().contains(newGroup1));
         assertFalse(p1.getGroupsID().contains(newGroup2));
 
-        p1.addGroup(newGroup2);
+        p1.addToGroup(newGroup2);
         groupInstance.create(newGroup2);
         instance.update(p1);
         p1 = instance.read(permissionID);

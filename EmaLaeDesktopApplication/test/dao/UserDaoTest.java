@@ -247,7 +247,7 @@ public class UserDaoTest {
         assertFalse(user1.checkPermission(permission));
 
         user1.addGroup(group);
-        permission.addGroup(group);
+        permission.addToGroup(group);
 
         assertTrue(user1.checkPermission(permission));
         assertFalse(user2.checkPermission(permission));
