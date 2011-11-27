@@ -77,6 +77,10 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
 
     /**
      * Saves all current widget values back to the object and returns it
+     * TODO: If set to READ or READ_WRITE (the default is READ_ONCE),
+     * the object being inspected must provide PropertyChangeSupport.
+     * If set to READ_WRITE, updates to the UI are automatically sync'ed back
+     * to the setToInspect, otherwise the client must manually call save.
      * @return updated object
      */
     public T save()
