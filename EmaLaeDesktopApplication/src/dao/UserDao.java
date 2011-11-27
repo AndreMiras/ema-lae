@@ -2,6 +2,7 @@ package dao;
 
 import database.entity.Group;
 import database.entity.User;
+import database.entity.UserProfile;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -24,6 +25,7 @@ public class UserDao extends DaoHibernate<User, Integer>
     /**
      * Explicitely deletes user related object
      *  - group
+     *  - userProfile
      * @param user
      */
     @Override
@@ -31,11 +33,16 @@ public class UserDao extends DaoHibernate<User, Integer>
     {
         Session session = sessionFactory.openSession(); // = getSession();
         Transaction transaction = session.beginTransaction();
+        UserProfileDao userProfileDao = new UserProfileDao();
+        UserProfile userProfile;
+
         for (Group group : user.getGroups())
         {
             group.getUsersId().remove(user);
             session.update(group);
         }
+        userProfile = userProfileDao.get(user);
+        session.delete(userProfile);
         // em.remove(user);
         session.delete(user);
         transaction.commit();
