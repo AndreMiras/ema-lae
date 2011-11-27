@@ -105,6 +105,9 @@ public class EmaLaeDesktopView extends FrameView {
     {
         mainPanel.removeAll();
         panel.setVisible(true);
+        // java.awt.CardLayout cl = (java.awt.CardLayout)(panel.getLayout());
+        // cl.show(panel, null);
+        // panel.getName();
         mainPanel.add(panel,
                 "FIXME: constraint must be a string, see #14");
         mainPanel.revalidate();

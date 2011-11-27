@@ -5,7 +5,7 @@ version="1.0"
 xsi:schemaLocation="http://metawidget.org/inspection-result
 http://metawidget.org/xsd/inspection-result-1.0.xsd">
     <entity type="database.entity.User">
-        <property name="userId" read-only="true"/>
+        <property name="userId" read-only="true" wide="true"/>
         <property name="username"/>
         <property name="password" masked="true"/>
         <!--
@@ -16,15 +16,19 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         -->
     </entity>
     <entity type="database.entity.Permission">
-        <property name="permissionID" read-only="true"/>
+        <property name="permissionID" read-only="true" wide="true"/>
+        <property name="name"/>
+        <property name="groups"/>
     </entity>
     <entity type="database.entity.Group">
-        <property name="groupId" read-only="true"/>
+        <property name="groupId" read-only="true" wide="true"/>
+        <property name="name"/>
+        <property name="permissions"/>
     </entity>
     <entity type="database.entity.UserProfile">
         <property name="user" hidden="true"/>
         <property name="fullName" hidden="true"/>
-        <property name="userId" read-only="true" large="true"/>
+        <property name="userId" read-only="true" wide="true"/>
         <property name="firstName"/>
         <property name="lastName"/>
         <property name="birthDate"/>
