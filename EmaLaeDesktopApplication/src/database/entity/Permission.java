@@ -9,10 +9,12 @@ package database.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.persistence.*;
-import java.util.Set;
 import java.util.HashSet;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -29,7 +31,8 @@ public class Permission implements Serializable{
     @Column(name ="name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Group> groups;
 
     public Permission() {
@@ -45,20 +48,16 @@ public class Permission implements Serializable{
     public Set<Group> getGroupsID() {
         return this.groups;
     }
+     */
 
     public void setGroupsID(Set<Group> groups) {
         this.groups = groups;
     }
-     */
 
      // meta-widget better deals with Lists at the moment
     public List<Group> getGroupsID() {
         List<Group> groupList = new ArrayList<Group>(groups);
         return groupList;
-    }
-
-    public void setGroupsID(Set<Group> groups) {
-        this.groups = new HashSet<Group>(groups);
     }
 
     

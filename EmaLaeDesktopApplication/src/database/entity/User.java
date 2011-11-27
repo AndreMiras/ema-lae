@@ -6,10 +6,14 @@
 package database.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.HashSet;
+import javax.persistence.*;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -28,6 +32,7 @@ public class User implements Serializable {
     @Column(name ="password")
     private String password;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Group> groups;
 
@@ -46,15 +51,17 @@ public class User implements Serializable {
         this.groups = new HashSet<Group>();
     }
 
-    public Set<Group> getGroups() {
-        return groups;
+    // meta-widget better deals with List Collections at the moment
+    public List<Group> getGroups() {
+        List<Group> groupList = new ArrayList<Group>(groups);
+        return groupList;
     }
 
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
 
-    public boolean addGroup(Group newGroup){
+    public boolean addToGroup(Group newGroup){
         return this.groups.add(newGroup);
     }
 

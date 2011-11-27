@@ -9,8 +9,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import javax.persistence.*;
 import java.util.Set;
+import javax.persistence.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -28,7 +30,8 @@ public class Group implements Serializable{
     @Column(name ="name")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "user_group", joinColumns =
         {@JoinColumn(name = "groupsID") },
@@ -36,7 +39,8 @@ public class Group implements Serializable{
     )
     private Set<User> usersId;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "permission_group", joinColumns =
         {@JoinColumn(name = "groupsID") },
@@ -97,6 +101,11 @@ public class Group implements Serializable{
 
     public boolean addPermission(Permission perm){
         return this.permissionsID.add(perm);
+    }
+
+    public boolean addUser(User u)
+    {
+        return usersId.add(u);
     }
 
     public Set<User> getUsersId() {
