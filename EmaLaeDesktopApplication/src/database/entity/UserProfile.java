@@ -7,6 +7,7 @@ package database.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +37,9 @@ public class UserProfile implements Serializable {
     @Column(name = "user_id", unique = true, nullable = false)
     private Integer userId;
 
+    // @CascadeType(cascade=CasadeType.ALL)
     @OneToOne(fetch = FetchType.LAZY)
+    // @OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private User user;
     @Column(name ="firstName")

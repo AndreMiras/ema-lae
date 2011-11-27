@@ -39,9 +39,9 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
             throws java.rmi.RemoteException {
         InitDatabase initDatabase = new InitDatabase();
         initDatabase.dropUsers();
-        initDatabase.dropGroups();
+        // initDatabase.dropGroups();
         initDatabase.createProfiles();
-        initDatabase.createGroups();
+        // initDatabase.createGroups();
     }
 
     public boolean login(String username, String password)
