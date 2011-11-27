@@ -24,10 +24,15 @@ public class AdminListChangePanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public AdminListChangePanel(Object[] objectList)
+    public AdminListChangePanel(Object[] objects)
     {
         this();
-        this.objectList.setListData(objectList);
+        updateObjectList(objects);
+    }
+
+    final public void updateObjectList(Object[] objects)
+    {
+        this.objectList.setListData(objects);
     }
 
     public void addButtonsListener(ActionListener al) {

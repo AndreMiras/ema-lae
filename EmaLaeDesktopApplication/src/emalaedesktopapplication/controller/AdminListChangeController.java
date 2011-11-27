@@ -73,6 +73,7 @@ public class AdminListChangeController<T> {
             }
             else if (actionCommand.equals("Delete"))
             {
+                T[] objs = null;
                 T obj = (T) view.getSelectedItem();
                 try
                 {
@@ -81,6 +82,14 @@ public class AdminListChangeController<T> {
                 {
                     Logger.getLogger(AdminListChangeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                try
+                {
+                    objs = (T[]) RmiClient.getController().getAllObjects(type);
+                } catch (RemoteException ex)
+                {
+                    Logger.getLogger(AdminListChangeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                view.updateObjectList(objs);
             }
         }
     }
