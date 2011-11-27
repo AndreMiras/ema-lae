@@ -81,7 +81,7 @@ public class InitDatabase {
 
         groupDao = new GroupDao();
         permissionsDao = new PermissionsDao();
-        user = userDao.read(1);
+        user = userDao.all().get(0);
         permissionName = "permission";
         groupName = "aGroup";
 
