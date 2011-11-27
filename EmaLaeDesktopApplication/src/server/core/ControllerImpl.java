@@ -41,7 +41,7 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         initDatabase.dropUsers();
         initDatabase.dropGroups();
         initDatabase.createProfiles();
-        // initDatabase.createGroups();
+        initDatabase.createGroups();
     }
 
     public boolean login(String username, String password)

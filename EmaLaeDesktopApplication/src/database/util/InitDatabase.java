@@ -86,12 +86,12 @@ public class InitDatabase {
         groupName = "aGroup";
 
         group = new Group(groupName);
-        group.addUser(user);
+        // group.addUser(user); // FIXME: fails
         for(int i=0; i<3; i++)
         {
-            permission = new Permission(permissionName + i);
-            permissionsDao.create(permission);
-            group.addPermission(permission);
+        permission = new Permission(permissionName + i);
+        permissionsDao.create(permission);
+        // group.addPermission(permission); // FIXME: fails
         }
         groupDao.create(group);
     }
