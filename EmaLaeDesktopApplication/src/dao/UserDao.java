@@ -3,6 +3,7 @@ package dao;
 import database.entity.Group;
 import database.entity.User;
 import database.entity.UserProfile;
+import java.util.HashMap;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -41,11 +42,22 @@ public class UserDao extends DaoHibernate<User, Integer>
             group.getUsersId().remove(user);
             session.update(group);
         }
-        userProfile = userProfileDao.get(user);
-        session.delete(userProfile);
-        // em.remove(user);
-        session.delete(user);
-        transaction.commit();
-        // session.close();
+
+        try
+        {
+            userProfile = userProfileDao.get(user);
+            session.delete(userProfile);
+        }
+        catch (Exception ex) // user not found
+        {
+            System.out.println("TODO: log this exception");
+        }
+        finally
+        {
+            // em.remove(user);
+            session.delete(user);
+            transaction.commit();
+            // session.close();
+        }
     }
 }
