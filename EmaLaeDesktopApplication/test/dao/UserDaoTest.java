@@ -187,7 +187,7 @@ public class UserDaoTest {
         Group newGroup1 = new Group("Group4addGroup");
         instance.create(newUser);
         
-        newUser.addGroup(newGroup1);
+        newUser.addToGroup(newGroup1);
         instance.update(newUser);
     }
 
@@ -205,7 +205,7 @@ public class UserDaoTest {
         assertFalse(myGroups.contains(newGroup1));
         
         groupInstance.create(newGroup1);
-        newUser.addGroup(newGroup1);
+        newUser.addToGroup(newGroup1);
         instance.update(newUser);
         newUser = instance.read(newUserId);
         Group newGroup2 = new Group("group4addGroup2");
@@ -213,7 +213,7 @@ public class UserDaoTest {
         assertTrue(newUser.getGroups().contains(newGroup1));
         assertFalse(newUser.getGroups().contains(newGroup2));
 
-        newUser.addGroup(newGroup2);
+        newUser.addToGroup(newGroup2);
         groupInstance.create(newGroup2);
         instance.update(newUser);
         newUser = instance.read(newUserId);
@@ -246,7 +246,7 @@ public class UserDaoTest {
 
         assertFalse(user1.checkPermission(permission));
 
-        user1.addGroup(group);
+        user1.addToGroup(group);
         permission.addToGroup(group);
 
         assertTrue(user1.checkPermission(permission));
