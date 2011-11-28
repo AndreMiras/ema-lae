@@ -6,6 +6,7 @@
 package dao;
 
 import database.entity.Group;
+import database.entity.User;
 import java.util.HashMap;
 import java.util.List;
 import org.junit.After;
@@ -159,6 +160,28 @@ public class GroupDaoTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testAddUser() {
+        System.out.println("addUser");
+        GroupDao groupInstance = new GroupDao();
+        UserDao userInstance = new UserDao();
+
+        Group g1 = new Group("group4addUser");
+        User u1 = new User("user4addUserToGroup");
+
+        userInstance.create(u1);
+
+        Integer groupID = groupInstance.create(g1);
+
+        g1.addUser(u1);
+        groupInstance.update(g1);
+
+        g1 = groupInstance.read(groupID);
+
+        assertTrue(g1.getUsers().contains(u1));
+
     }
 
 }
