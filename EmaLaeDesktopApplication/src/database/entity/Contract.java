@@ -22,12 +22,15 @@ public class Contract implements Serializable{
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer ID;
-    @Column(name ="apprenticeID")
-    private Apprentice apprentice;
-    @Column(name ="internshipSupervisorID")
-    private InternshipSupervisor internshipSupervisor;
-    @Column(name ="supervisingTeacherID")
-    private SupervisingTeacher supervisingTeacher;
+    @OneToOne()
+    @JoinColumn(name ="apprentice")
+    private UserProfile apprentice;
+    @OneToOne()
+    @JoinColumn(name ="internshipSupervisor")
+    private UserProfile internshipSupervisor;
+    @OneToOne()
+    @JoinColumn(name ="supervisingTeacher")
+    private UserProfile supervisingTeacher;
     @Column(name ="beginDate")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date beginDate;
@@ -38,19 +41,23 @@ public class Contract implements Serializable{
     public Contract() {
     }
 
-    public Contract(Apprentice IDApprentice, InternshipSupervisor IDInternshipSupervisor, SupervisingTeacher IDSupervisingTeacher) {
+    public Contract(UserProfile IDApprentice, UserProfile IDInternshipSupervisor, UserProfile IDSupervisingTeacher) {
         this.apprentice = IDApprentice;
         this.internshipSupervisor = IDInternshipSupervisor;
         this.supervisingTeacher = IDSupervisingTeacher;
     }
 
-    public Contract(Apprentice IDApprentice, InternshipSupervisor IDInternshipSupervisor, SupervisingTeacher IDSupervisingTeacher, Date beginDate, Date endDate) {
+    private Contract(UserProfile IDApprentice, UserProfile IDInternshipSupervisor, UserProfile IDSupervisingTeacher, Date beginDate, Date endDate) {
         this.apprentice = IDApprentice;
         this.internshipSupervisor = IDInternshipSupervisor;
         this.supervisingTeacher = IDSupervisingTeacher;
         this.beginDate = beginDate;
         this.endDate = endDate;
     }
+
+//    Contract newContract(UserProfile apprentice, UserProfile internshipSupervisor, UserProfile supervisingTeacher){
+
+  //  }
 
    
     public Integer getID() {
@@ -61,27 +68,27 @@ public class Contract implements Serializable{
         this.ID = ID;
     }
 
-    public Apprentice getApprentice() {
+    public UserProfile getApprentice() {
         return apprentice;
     }
 
-    public void setApprentice(Apprentice apprentice) {
+    public void setApprentice(UserProfile apprentice) {
         this.apprentice = apprentice;
     }
 
-    public InternshipSupervisor getInternshipSupervisor() {
+    public UserProfile getInternshipSupervisor() {
         return internshipSupervisor;
     }
 
-    public void setInternshipSupervisor(InternshipSupervisor internshipSupervisor) {
+    public void setInternshipSupervisor(UserProfile internshipSupervisor) {
         this.internshipSupervisor = internshipSupervisor;
     }
 
-    public SupervisingTeacher getSupervisingTeacher() {
+    public UserProfile getSupervisingTeacher() {
         return supervisingTeacher;
     }
 
-    public void setSupervisingTeacher(SupervisingTeacher supervisingTeacher) {
+    public void setSupervisingTeacher(UserProfile supervisingTeacher) {
         this.supervisingTeacher = supervisingTeacher;
     }
 
