@@ -18,6 +18,8 @@ import org.hibernate.cfg.AnnotationConfiguration;
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
 
+    
+
     /**
      *
      * @return the default configuration object

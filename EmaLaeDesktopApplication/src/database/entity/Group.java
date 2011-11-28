@@ -33,9 +33,9 @@ public class Group implements Serializable{
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-        name = "user_group", joinColumns =
-        {@JoinColumn(name = "groupsID") },
-        inverseJoinColumns = { @JoinColumn(name = "user_id") }
+        name = "users_groups", joinColumns =
+        {@JoinColumn(name = "group_ID") },
+        inverseJoinColumns = { @JoinColumn(name = "user_ID") }
     )
     private Set<User> users;
 
