@@ -5,9 +5,7 @@
 
 package dao;
 
-import database.entity.Apprentice;
-import database.entity.InternshipSupervisor;
-import database.entity.SupervisingTeacher;
+import database.entity.UserProfile;
 import database.entity.Contract;
 import java.util.List;
 import org.junit.After;
@@ -48,16 +46,20 @@ public class ContractDaoTest {
      * InternshipSupervisor types supposed to be taken out?
      */
     @Test
+    // can't create contract with userprofiles. First need to create the users.
     public void testCreate() {
         System.out.println("create");
-        Apprentice apprenti = new Apprentice();
-        InternshipSupervisor ma = new InternshipSupervisor();
-        SupervisingTeacher tuteur = new SupervisingTeacher();
+        UserProfile apprenti = new UserProfile();
+        UserProfile ma = new UserProfile();
+        UserProfile tuteur = new UserProfile();
+        UserProfileDao u1 = new UserProfileDao();
         Contract obj = new Contract(apprenti, ma, tuteur);
 
         // the object shouldn't have an id, until it gets one from the DAO
         assertNull(obj.getID());
-
+        u1.create(ma);
+        u1.create(tuteur);
+        u1.create(apprenti);
         ContractDao instance = new ContractDao();
         Integer result = instance.create(obj);
 
@@ -73,9 +75,9 @@ public class ContractDaoTest {
     // @Test
     public void testRead() {
         System.out.println("read");
-        Apprentice apprenti = new Apprentice();
-        InternshipSupervisor ma = new InternshipSupervisor();
-        SupervisingTeacher tuteur = new SupervisingTeacher();
+        UserProfile apprenti = new UserProfile();
+        UserProfile ma = new UserProfile();
+        UserProfile tuteur = new UserProfile();
         Contract obj = new Contract(apprenti, ma, tuteur);
 
         ContractDao instance = new ContractDao();
@@ -94,9 +96,9 @@ public class ContractDaoTest {
     // @Test
     public void testUpdate() {
         System.out.println("update");
-        Apprentice apprenti = new Apprentice();
-        InternshipSupervisor ma = new InternshipSupervisor();
-        SupervisingTeacher tuteur = new SupervisingTeacher();
+        UserProfile apprenti = new UserProfile();
+        UserProfile ma = new UserProfile();
+        UserProfile tuteur = new UserProfile();
         Contract newContract = new Contract(apprenti, ma, tuteur);
         ContractDao instance = new ContractDao();
         Integer contractID = instance.create(newContract);
