@@ -80,6 +80,12 @@ public class Contract implements Serializable{
         return apprentice;
     }
 
+    /**
+     * Verifies and sets the apprentice if the type is correct, otherwise throws
+     * an exception
+     * @param apprentice
+     * @throws ContractException
+     */
     public void setApprentice(UserProfile apprentice) throws ContractException{
         if(apprentice.getUserProfileType() == UserProfile.Type.Apprentice)this.apprentice = apprentice;
         else throw new ContractException();
@@ -89,6 +95,12 @@ public class Contract implements Serializable{
         return internshipSupervisor;
     }
 
+    /**
+     * Verifies and sets the internship supervisor if the type is correct,
+     * otherwise throws an exception
+     * @param internshipSupervisor
+     * @throws ContractException
+     */
     public void setInternshipSupervisor(UserProfile internshipSupervisor) throws ContractException{
         if (internshipSupervisor.getUserProfileType() == UserProfile.Type.InternshipSupervisor)this.internshipSupervisor = internshipSupervisor;
         else throw new ContractException();
@@ -98,6 +110,12 @@ public class Contract implements Serializable{
         return supervisingTeacher;
     }
 
+    /**
+     * Verifies and sets the supervising teach if the type is correct,
+     * otherwise throws an exception
+     * @param supervisingTeacher
+     * @throws ContractException
+     */
     public void setSupervisingTeacher(UserProfile supervisingTeacher) throws ContractException{
         if (supervisingTeacher.getUserProfileType() == UserProfile.Type.SupervisingTeacher)this.supervisingTeacher = supervisingTeacher;
         else throw new ContractException();
