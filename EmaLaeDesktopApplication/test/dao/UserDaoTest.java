@@ -144,6 +144,11 @@ public class UserDaoTest {
         querySet.put("username", "userToFind");
         List<User> result = userDao.find(querySet);
         User firstUserFound = result.get(0);
+
+        // username should be unique
+        assertEquals(result.size(), 1);
+
+        // verifies the correct username was found
         assertEquals("userToFind", firstUserFound.getUsername());
         assertEquals(newUserID, firstUserFound.getUserId());
     }
