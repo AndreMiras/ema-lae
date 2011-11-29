@@ -5,10 +5,10 @@
 
 package dao;
 
+import database.util.HibernateUtil;
 import database.entity.UserProfile;
 import database.entity.User;
 import database.entity.Contract;
-import exceptions.ContractException;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -28,6 +28,7 @@ public class ContractDaoTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        HibernateUtil.getSessionFactoryForTests();
     }
 
     @AfterClass

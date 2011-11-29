@@ -6,7 +6,7 @@
 package dao;
 
 import database.entity.Formation;
-import java.util.HashSet;
+import database.util.HibernateUtil;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,7 +15,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.List;
 import org.hibernate.HibernateException;
-import org.hibernate.annotations.common.AssertionFailure;
 
 /**
  *
@@ -28,6 +27,7 @@ public class FormationDaoTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        HibernateUtil.getSessionFactoryForTests();
     }
 
     @AfterClass

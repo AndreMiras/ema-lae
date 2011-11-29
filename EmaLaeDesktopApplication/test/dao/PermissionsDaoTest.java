@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import database.entity.Group;
+import database.util.HibernateUtil;
 import org.hibernate.HibernateException;
 
 /**
@@ -28,6 +29,7 @@ public class PermissionsDaoTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        HibernateUtil.getSessionFactoryForTests();
     }
 
     @AfterClass

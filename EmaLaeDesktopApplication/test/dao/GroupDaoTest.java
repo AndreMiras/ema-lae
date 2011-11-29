@@ -5,6 +5,7 @@
 
 package dao;
 
+import database.util.HibernateUtil;
 import database.entity.Group;
 import database.entity.User;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class GroupDaoTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        HibernateUtil.getSessionFactoryForTests();
     }
 
     @AfterClass
