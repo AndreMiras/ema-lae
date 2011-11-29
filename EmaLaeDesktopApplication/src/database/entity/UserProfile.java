@@ -55,6 +55,9 @@ public class UserProfile implements Serializable {
     private String phoneNumber;
     @Column(name ="email")
     private String email;
+    public enum Type { Apprentice, InternshipSupervisor, SupervisingTeacher }
+    @Column(name="type")
+    private Type userProfileType;
 
     public UserProfile()
     {
@@ -65,6 +68,12 @@ public class UserProfile implements Serializable {
         this.user = user;
     }
 
+    public UserProfile(User user, Type userProfileType) {
+        this.user = user;
+        this.userProfileType = userProfileType;
+    }
+
+    
     public Integer getUserId()
     {
         return userId;
@@ -143,4 +152,14 @@ public class UserProfile implements Serializable {
     {
         return getFullName();
     }
+
+    public Type getUserProfileType() {
+        return userProfileType;
+    }
+
+    public void setUserProfileType(Type userProfileType) {
+        this.userProfileType = userProfileType;
+    }
+
+    
 }

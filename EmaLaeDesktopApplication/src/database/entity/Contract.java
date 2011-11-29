@@ -8,11 +8,14 @@ package database.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import exceptions.ContractException;
 
 /**
  *
  * @author pc
  */
+
+
 
 @Entity
 @Table(name = "contracts")
@@ -41,16 +44,21 @@ public class Contract implements Serializable{
     public Contract() {
     }
 
-    public Contract(UserProfile IDApprentice, UserProfile IDInternshipSupervisor, UserProfile IDSupervisingTeacher) {
-        this.apprentice = IDApprentice;
-        this.internshipSupervisor = IDInternshipSupervisor;
-        this.supervisingTeacher = IDSupervisingTeacher;
+    public Contract(UserProfile IDApprentice, UserProfile IDInternshipSupervisor, UserProfile IDSupervisingTeacher) throws ContractException {
+        if(IDApprentice.getUserProfileType() == UserProfile.Type.Apprentice
+                && IDInternshipSupervisor.getUserProfileType() == UserProfile.Type.InternshipSupervisor
+                && IDSupervisingTeacher.getUserProfileType() == UserProfile.Type.SupervisingTeacher){
+            this.apprentice = IDApprentice;
+            this.internshipSupervisor = IDInternshipSupervisor;
+            this.supervisingTeacher = IDSupervisingTeacher;
+        }
+        else{
+            throw new ContractException();
+        }
     }
 
-    private Contract(UserProfile IDApprentice, UserProfile IDInternshipSupervisor, UserProfile IDSupervisingTeacher, Date beginDate, Date endDate) {
-        this.apprentice = IDApprentice;
-        this.internshipSupervisor = IDInternshipSupervisor;
-        this.supervisingTeacher = IDSupervisingTeacher;
+    public Contract(UserProfile IDApprentice, UserProfile IDInternshipSupervisor, UserProfile IDSupervisingTeacher, Date beginDate, Date endDate) throws ContractException {
+        this(IDApprentice, IDInternshipSupervisor, IDSupervisingTeacher);
         this.beginDate = beginDate;
         this.endDate = endDate;
     }
@@ -72,24 +80,27 @@ public class Contract implements Serializable{
         return apprentice;
     }
 
-    public void setApprentice(UserProfile apprentice) {
-        this.apprentice = apprentice;
+    public void setApprentice(UserProfile apprentice) throws ContractException{
+        if(apprentice.getUserProfileType() == UserProfile.Type.Apprentice)this.apprentice = apprentice;
+        else throw new ContractException();
     }
 
     public UserProfile getInternshipSupervisor() {
         return internshipSupervisor;
     }
 
-    public void setInternshipSupervisor(UserProfile internshipSupervisor) {
-        this.internshipSupervisor = internshipSupervisor;
+    public void setInternshipSupervisor(UserProfile internshipSupervisor) throws ContractException{
+        if (internshipSupervisor.getUserProfileType() == UserProfile.Type.InternshipSupervisor)this.internshipSupervisor = internshipSupervisor;
+        else throw new ContractException();
     }
 
     public UserProfile getSupervisingTeacher() {
         return supervisingTeacher;
     }
 
-    public void setSupervisingTeacher(UserProfile supervisingTeacher) {
-        this.supervisingTeacher = supervisingTeacher;
+    public void setSupervisingTeacher(UserProfile supervisingTeacher) throws ContractException{
+        if (supervisingTeacher.getUserProfileType() == UserProfile.Type.SupervisingTeacher)this.supervisingTeacher = supervisingTeacher;
+        else throw new ContractException();
     }
 
     public Date getBeginDate() {

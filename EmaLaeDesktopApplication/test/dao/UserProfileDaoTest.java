@@ -59,17 +59,21 @@ public class UserProfileDaoTest {
     {
         System.out.println("create");
         User user = new User("username1");
+        user.setPassword("pw1");
         UserProfile userProfile = new UserProfile(user);
         userProfile.setFirstName("foo");
         userProfile.setLastName("bar");
 
         // the object shouldn't have an id, until it gets one from the DAO
         assertNull(userProfile.getUserId());
-        
+       
         UserProfileDao userProfileDao = new UserProfileDao();
         Integer result = userProfileDao.create(userProfile);
         // the object should now have an id given from the DAO
         assertNotNull(result);
+        System.out.println(user.getUserId());
+
+        //assertTrue(myUsers.contains(user));
     }
 
     /**

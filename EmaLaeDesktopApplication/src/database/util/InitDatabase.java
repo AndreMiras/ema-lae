@@ -72,18 +72,16 @@ public class InitDatabase {
     {
         Permission permission;
         PermissionsDao permissionsDao;
-        User user;
+        User user = new User();
         UserDao userDao = new UserDao();
-        String permissionName;
-        String groupName;
+        String permissionName = "permission";
+        String groupName = "aGroup";
         Group group;
         GroupDao groupDao;
-
         groupDao = new GroupDao();
         permissionsDao = new PermissionsDao();
+
         user = userDao.all().get(0);
-        permissionName = "permission";
-        groupName = "aGroup";
 
         group = new Group(groupName);
         // group.addUser(user); // FIXME: fails
