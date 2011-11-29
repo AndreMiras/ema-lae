@@ -12,6 +12,7 @@
     <!--
         - Create a schema if one doesn't exist
         - Attempt to modify an existing one to match the defined mapping
+        WARN: never EVER use hibernate.hbm2ddl.auto in any live/production database
     -->
     <property name="hibernate.hbm2ddl.auto">update</property>
     <!-- property name="hbm2ddl.auto">create</property -->
