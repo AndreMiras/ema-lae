@@ -42,6 +42,10 @@ public class ControllerImplTest {
 
     @Before
     public void setUp() {
+        HibernateUtil.getSessionFactoryForTests();
+
+        InitDatabase initDatabase = new InitDatabase();
+        initDatabase.dropUsers();
     }
 
     @After
