@@ -55,6 +55,7 @@ public class HibernateUtil {
     }
 
     /**
+     * Forces the hibernate config for tests (always create-destroy the schema).
      * Gets the default configuration object and overrides some configurations
      * for the unit tests.
      * @return a session factory customized for unit tests
