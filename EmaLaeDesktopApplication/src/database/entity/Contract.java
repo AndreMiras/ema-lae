@@ -80,24 +80,27 @@ public class Contract implements Serializable{
         return apprentice;
     }
 
-    public void setApprentice(UserProfile apprentice) {
-        this.apprentice = apprentice;
+    public void setApprentice(UserProfile apprentice) throws ContractException{
+        if(apprentice.getUserProfileType() == UserProfile.Type.Apprentice)this.apprentice = apprentice;
+        else throw new ContractException();
     }
 
     public UserProfile getInternshipSupervisor() {
         return internshipSupervisor;
     }
 
-    public void setInternshipSupervisor(UserProfile internshipSupervisor) {
-        this.internshipSupervisor = internshipSupervisor;
+    public void setInternshipSupervisor(UserProfile internshipSupervisor) throws ContractException{
+        if (internshipSupervisor.getUserProfileType() == UserProfile.Type.InternshipSupervisor)this.internshipSupervisor = internshipSupervisor;
+        else throw new ContractException();
     }
 
     public UserProfile getSupervisingTeacher() {
         return supervisingTeacher;
     }
 
-    public void setSupervisingTeacher(UserProfile supervisingTeacher) {
-        this.supervisingTeacher = supervisingTeacher;
+    public void setSupervisingTeacher(UserProfile supervisingTeacher) throws ContractException{
+        if (supervisingTeacher.getUserProfileType() == UserProfile.Type.SupervisingTeacher)this.supervisingTeacher = supervisingTeacher;
+        else throw new ContractException();
     }
 
     public Date getBeginDate() {
