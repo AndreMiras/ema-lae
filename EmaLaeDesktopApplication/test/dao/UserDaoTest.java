@@ -146,7 +146,7 @@ public class UserDaoTest {
         User firstUserFound = result.get(0);
 
         // username should be unique
-        assertEquals(result.size(), 1);
+        assertEquals(1, result.size());
 
         // verifies the correct username was found
         assertEquals("userToFind", firstUserFound.getUsername());
