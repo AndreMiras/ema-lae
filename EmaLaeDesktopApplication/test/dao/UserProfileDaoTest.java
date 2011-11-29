@@ -41,6 +41,7 @@ public class UserProfileDaoTest {
     @AfterClass
     public static void tearDownClass() throws Exception
     {
+        HibernateUtil.getSessionFactoryForTests().close();
     }
 
     @Before

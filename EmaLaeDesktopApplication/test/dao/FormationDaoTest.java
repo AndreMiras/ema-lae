@@ -32,6 +32,7 @@ public class FormationDaoTest {
 
     @AfterClass
     public static void tearDownClass() throws Exception {
+        HibernateUtil.getSessionFactoryForTests().close();
     }
 
     @Before

@@ -33,6 +33,7 @@ public class GroupDaoTest {
 
     @AfterClass
     public static void tearDownClass() throws Exception {
+        HibernateUtil.getSessionFactoryForTests().close();
     }
 
     @Before

@@ -34,6 +34,7 @@ public class PermissionsDaoTest {
 
     @AfterClass
     public static void tearDownClass() throws Exception {
+        HibernateUtil.getSessionFactoryForTests().close();
     }
 
     @Before
