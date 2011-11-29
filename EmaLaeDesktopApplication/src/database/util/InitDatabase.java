@@ -68,6 +68,19 @@ public class InitDatabase {
         }
     }
 
+    public void dropProfiles()
+    {
+        UserProfile profile;
+        UserProfileDao userProfileDao = new UserProfileDao();
+        List profiles = userProfileDao.all();
+
+        for(int i=0; i<profiles.size(); i++)
+        {
+            profile = (UserProfile) profiles.get(i);
+            userProfileDao.delete(profile);
+        }
+    }
+
     public void createGroups()
     {
         Permission permission;
