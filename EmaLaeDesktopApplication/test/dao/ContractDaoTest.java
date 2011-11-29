@@ -8,6 +8,7 @@ package dao;
 import database.entity.UserProfile;
 import database.entity.User;
 import database.entity.Contract;
+import exceptions.ContractException;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -53,22 +54,29 @@ public class ContractDaoTest {
         User appu = new User();
         User mau = new User();
         User tutu = new User();
-        UserProfile apprenti = new UserProfile(appu);
-        UserProfile ma = new UserProfile(mau);
-        UserProfile tuteur = new UserProfile(tutu);
+        UserProfile apprenti = new UserProfile(appu, UserProfile.Type.Apprentice);
+        UserProfile ma = new UserProfile(mau, UserProfile.Type.InternshipSupervisor);
+        UserProfile tuteur = new UserProfile(tutu, UserProfile.Type.SupervisingTeacher);
         UserProfileDao u1 = new UserProfileDao();
-        Contract obj = new Contract(apprenti, ma, tuteur);
+        try{
+            Contract obj = new Contract(apprenti, ma, tuteur);
+            // the object shouldn't have an id, until it gets one from the DAO
+            assertNull(obj.getID());
+            u1.create(ma);
+            u1.create(tuteur);
+            u1.create(apprenti);
+            ContractDao instance = new ContractDao();
+            Integer result = instance.create(obj);
 
-        // the object shouldn't have an id, until it gets one from the DAO
-        assertNull(obj.getID());
-        u1.create(ma);
-        u1.create(tuteur);
-        u1.create(apprenti);
-        ContractDao instance = new ContractDao();
-        Integer result = instance.create(obj);
+            // the object should now have an id given from the DAO
+            assertNotNull(result);
+        }
+        catch (exceptions.ContractException e){
+            fail("Failed to create contract");
+        }
+        
 
-        // the object should now have an id given from the DAO
-        assertNotNull(result);
+
     }
 
     /**
@@ -82,14 +90,19 @@ public class ContractDaoTest {
         UserProfile apprenti = new UserProfile();
         UserProfile ma = new UserProfile();
         UserProfile tuteur = new UserProfile();
-        Contract obj = new Contract(apprenti, ma, tuteur);
+        try{
+            Contract obj = new Contract(apprenti, ma, tuteur);
 
-        ContractDao instance = new ContractDao();
-        Integer contractID = instance.create(obj);
-        Contract result = instance.read(contractID);
-        assertTrue(result.getApprentice() == apprenti);
-        assertTrue(result.getInternshipSupervisor() == ma);
-        assertTrue(result.getSupervisingTeacher() == tuteur);
+            ContractDao instance = new ContractDao();
+            Integer contractID = instance.create(obj);
+            Contract result = instance.read(contractID);
+            assertTrue(result.getApprentice() == apprenti);
+            assertTrue(result.getInternshipSupervisor() == ma);
+            assertTrue(result.getSupervisingTeacher() == tuteur);
+        }
+        catch (exceptions.ContractException e){
+            fail("Failed to create contract");
+        }
     }
 
     /**
@@ -103,23 +116,28 @@ public class ContractDaoTest {
         UserProfile apprenti = new UserProfile();
         UserProfile ma = new UserProfile();
         UserProfile tuteur = new UserProfile();
-        Contract newContract = new Contract(apprenti, ma, tuteur);
-        ContractDao instance = new ContractDao();
-        Integer contractID = instance.create(newContract);
+        try {
+            Contract newContract = new Contract(apprenti, ma, tuteur);
+            ContractDao instance = new ContractDao();
+            Integer contractID = instance.create(newContract);
 
-        // re-read the saved newUser from the database
-        newContract = instance.read(contractID);
-        // update it locally
-        newContract.setApprentice(apprenti);
-        newContract.setInternshipSupervisor(ma);
-        newContract.setSupervisingTeacher(tuteur);
-        // re-hit the database
-        instance.update(newContract);
-        // re-read the updated newUser from the database
-        newContract = instance.read(contractID);
-        assertEquals(apprenti, newContract.getApprentice());
-        assertEquals(tuteur, newContract.getSupervisingTeacher());
-        assertEquals(ma, newContract.getInternshipSupervisor());
+            // re-read the saved newUser from the database
+            newContract = instance.read(contractID);
+            // update it locally
+            newContract.setApprentice(apprenti);
+            newContract.setInternshipSupervisor(ma);
+            newContract.setSupervisingTeacher(tuteur);
+            // re-hit the database
+            instance.update(newContract);
+            // re-read the updated newUser from the database
+            newContract = instance.read(contractID);
+            assertEquals(apprenti, newContract.getApprentice());
+            assertEquals(tuteur, newContract.getSupervisingTeacher());
+            assertEquals(ma, newContract.getInternshipSupervisor());
+        }
+        catch (exceptions.ContractException e){
+            fail("Failed to create contract");
+        }
     }
 
     /**

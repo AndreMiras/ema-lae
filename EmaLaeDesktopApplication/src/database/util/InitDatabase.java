@@ -84,7 +84,7 @@ public class InitDatabase {
         user = userDao.all().get(0);
 
         group = new Group(groupName);
-        group.addUser(user); // FIXME: fails
+        // group.addUser(user); // FIXME: fails
         for(int i=0; i<3; i++)
         {
             permission = new Permission(permissionName + i);

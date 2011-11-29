@@ -8,11 +8,14 @@ package database.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import exceptions.ContractException;
 
 /**
  *
  * @author pc
  */
+
+
 
 @Entity
 @Table(name = "contracts")
@@ -41,16 +44,21 @@ public class Contract implements Serializable{
     public Contract() {
     }
 
-    public Contract(UserProfile IDApprentice, UserProfile IDInternshipSupervisor, UserProfile IDSupervisingTeacher) {
-        this.apprentice = IDApprentice;
-        this.internshipSupervisor = IDInternshipSupervisor;
-        this.supervisingTeacher = IDSupervisingTeacher;
+    public Contract(UserProfile IDApprentice, UserProfile IDInternshipSupervisor, UserProfile IDSupervisingTeacher) throws ContractException {
+        if(IDApprentice.getUserProfileType() == UserProfile.Type.Apprentice
+                && IDInternshipSupervisor.getUserProfileType() == UserProfile.Type.InternshipSupervisor
+                && IDSupervisingTeacher.getUserProfileType() == UserProfile.Type.SupervisingTeacher){
+            this.apprentice = IDApprentice;
+            this.internshipSupervisor = IDInternshipSupervisor;
+            this.supervisingTeacher = IDSupervisingTeacher;
+        }
+        else{
+            throw new ContractException();
+        }
     }
 
-    private Contract(UserProfile IDApprentice, UserProfile IDInternshipSupervisor, UserProfile IDSupervisingTeacher, Date beginDate, Date endDate) {
-        this.apprentice = IDApprentice;
-        this.internshipSupervisor = IDInternshipSupervisor;
-        this.supervisingTeacher = IDSupervisingTeacher;
+    public Contract(UserProfile IDApprentice, UserProfile IDInternshipSupervisor, UserProfile IDSupervisingTeacher, Date beginDate, Date endDate) throws ContractException {
+        this(IDApprentice, IDInternshipSupervisor, IDSupervisingTeacher);
         this.beginDate = beginDate;
         this.endDate = endDate;
     }
