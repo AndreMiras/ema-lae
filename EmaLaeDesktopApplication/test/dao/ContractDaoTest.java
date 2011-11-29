@@ -6,6 +6,7 @@
 package dao;
 
 import database.entity.UserProfile;
+import database.entity.User;
 import database.entity.Contract;
 import java.util.List;
 import org.junit.After;
@@ -49,9 +50,12 @@ public class ContractDaoTest {
     // can't create contract with userprofiles. First need to create the users.
     public void testCreate() {
         System.out.println("create");
-        UserProfile apprenti = new UserProfile();
-        UserProfile ma = new UserProfile();
-        UserProfile tuteur = new UserProfile();
+        User appu = new User();
+        User mau = new User();
+        User tutu = new User();
+        UserProfile apprenti = new UserProfile(appu);
+        UserProfile ma = new UserProfile(mau);
+        UserProfile tuteur = new UserProfile(tutu);
         UserProfileDao u1 = new UserProfileDao();
         Contract obj = new Contract(apprenti, ma, tuteur);
 
