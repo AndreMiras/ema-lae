@@ -56,9 +56,8 @@ public class Group implements Serializable{
 
 
     public Group(String groupName){
+        this();
        this.name = groupName;
-       this.users = new HashSet<User>();
-       this.permissions = new HashSet<Permission>();
     }
 
     public Integer getGroupId() {

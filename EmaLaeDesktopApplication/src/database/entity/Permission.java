@@ -40,8 +40,8 @@ public class Permission implements Serializable{
     }
 
     public Permission(String permissionName){
+        this();
         this.name = permissionName;
-        this.groups = new HashSet<Group>();
     }
 
     /*

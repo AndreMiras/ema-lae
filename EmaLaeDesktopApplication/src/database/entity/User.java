@@ -43,12 +43,11 @@ public class User implements Serializable {
 
     public User(String username)
     {
+        this();
         this.username = username;
 
         // TODO: set random password when not specified
         this.password = "";
-
-        this.groups = new HashSet<Group>();
     }
 
     // meta-widget better deals with List Collections at the moment
