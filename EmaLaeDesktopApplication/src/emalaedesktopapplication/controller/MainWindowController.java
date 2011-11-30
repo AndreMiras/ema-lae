@@ -29,7 +29,8 @@ public class MainWindowController
         "database.entity.User",
         "database.entity.Group",
         "database.entity.Permission",
-        "database.entity.UserProfile"
+        "database.entity.UserProfile",
+        "database.entity.Formation"
     };
 
     public MainWindowController(EmaLaeDesktopView view)
@@ -103,6 +104,13 @@ public class MainWindowController
                AdminController<database.entity.UserProfile> adminController =
                         new AdminController<database.entity.UserProfile>(
                             view, database.entity.UserProfile.class);
+                adminController.adminListChange();
+            }
+            else if (actionCommand.equals("database.entity.Formation"))
+            {
+               AdminController<database.entity.Formation> adminController =
+                        new AdminController<database.entity.Formation>(
+                            view, database.entity.Formation.class);
                 adminController.adminListChange();
             }
             else
