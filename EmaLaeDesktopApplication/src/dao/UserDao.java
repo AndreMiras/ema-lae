@@ -29,8 +29,8 @@ public class UserDao extends DaoHibernate<User, Integer>
      *  - userProfile
      * @param user
      */
-    @Override
-    public void delete(User user)
+    // @Override
+    public void delete2(User user)
     {
         Session session = getSession(); // sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();

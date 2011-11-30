@@ -33,8 +33,8 @@ public class GroupDao extends DaoHibernate<Group, Integer> {
      *  - permission
      * @param group
      */
-    @Override
-    public void delete(Group group)
+    // @Override
+    public void delete2(Group group)
     {
         Session session = getSession(); // sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
