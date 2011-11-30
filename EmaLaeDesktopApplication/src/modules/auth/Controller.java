@@ -13,24 +13,11 @@ package modules.auth;
 import dao.UserDao;
 import database.entity.User;
 import java.util.HashMap;
-import server.core.Payload;
-
 /**
  *
  * @author amiras
  */
 public class Controller {
-
-
-    /**
-     * Returns Serialized response
-     */
-    public String processRequest(Payload payload)
-    {
-        return "TODO";
-    }
-
-
     /**
      * @return true if the login was possible (and set the session), false otherwise
      * TODO: way to verify client session

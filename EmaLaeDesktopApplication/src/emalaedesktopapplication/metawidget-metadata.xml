@@ -29,9 +29,15 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         <property name="user" hidden="true"/>
         <property name="fullName" hidden="true"/>
         <property name="userId" read-only="true" wide="true"/>
+        <property name="userProfileType" wide="true"/>
         <property name="firstName"/>
         <property name="lastName"/>
-        <property name="birthDate"/>
+
+        <!--
+            FIXME: hidden because the date is not currently converted
+            from text to date
+        -->
+        <property name="birthDate" hidden="true"/>
         <property name="email" section="Contact"/>
         <property name="phoneNumber" section="Contact"/>
         <property name="address" section="Contact"/>
