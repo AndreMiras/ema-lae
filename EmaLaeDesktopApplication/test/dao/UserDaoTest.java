@@ -255,4 +255,13 @@ public class UserDaoTest {
         assertFalse(user2.checkPermission(permission));
     }
 
+    @Test(expected = HibernateException.class)
+    public void testUniqueConstraintOnUsername(){
+        UserDao instance = new UserDao();
+        User u1 = new User("user4TestUnique");
+        User u2 = new User("user4TestUnique");
+        instance.create(u1);
+        instance.create(u2);
+    }
+
 }
