@@ -7,7 +7,7 @@ package dao;
 
 import database.util.HibernateUtil;
 import database.entity.UserGroup;
-import database.entity.User;
+import database.entity.Users;
 import database.entity.Permission;
 import java.util.HashMap;
 import java.util.List;
@@ -173,7 +173,7 @@ public class GroupDaoTest {
         UserDao userInstance = new UserDao();
 
         UserGroup g1 = new UserGroup("group4addUser");
-        User u1 = new User("user4addUserToGroup");
+        Users u1 = new Users("user4addUserToGroup");
 
         userInstance.create(u1);
 

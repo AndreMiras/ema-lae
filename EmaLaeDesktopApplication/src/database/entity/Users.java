@@ -20,7 +20,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  * @author andre
  */
 @Entity
-public class User implements Serializable {
+public class Users implements Serializable {
 
     @Column(name ="userId")
     @Id
@@ -35,12 +35,12 @@ public class User implements Serializable {
     @ManyToMany(cascade = CascadeType.PERSIST/*, mappedBy="users"*/)
     private Set<UserGroup> groups;
 
-    public User()
+    public Users()
     {
         this.groups = new HashSet<UserGroup>();
     }
 
-    public User(String username)
+    public Users(String username)
     {
         this();
         this.username = username;

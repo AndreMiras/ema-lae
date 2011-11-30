@@ -5,7 +5,7 @@
 
 package server.core;
 
-import database.entity.User;
+import database.entity.Users;
 import database.entity.UserProfile;
 import java.io.Serializable;
 
@@ -39,7 +39,7 @@ public interface IController extends java.rmi.Remote {
      * @return current logged in user, false if none
      * @throws java.rmi.RemoteException
      */
-    public User getUser()
+    public Users getUser()
             throws java.rmi.RemoteException;
 
     /**

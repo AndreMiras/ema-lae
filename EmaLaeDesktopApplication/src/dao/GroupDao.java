@@ -7,7 +7,7 @@ package dao;
 
 import database.entity.UserGroup;
 import database.entity.Permission;
-import database.entity.User;
+import database.entity.Users;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -40,7 +40,7 @@ public class GroupDao extends DaoHibernate<UserGroup, Integer> {
         Transaction transaction = session.beginTransaction();
 
         // deletes associated users
-        for (User user : group.getUsers())
+        for (Users user : group.getUsers())
         {
             user.getGroups().remove(group);
             session.update(user);

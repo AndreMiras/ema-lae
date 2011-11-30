@@ -8,7 +8,7 @@ package server.core;
 import dao.GenericDao;
 import dao.UserDao;
 import dao.UserProfileDao;
-import database.entity.User;
+import database.entity.Users;
 import database.entity.UserProfile;
 import database.util.HibernateUtil;
 import database.util.InitDatabase;
@@ -25,7 +25,7 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         implements IController
     {
 
-    protected User loggedUser;
+    protected Users loggedUser;
 
     public ControllerImpl() throws java.rmi.RemoteException, java.io.IOException
     {
@@ -52,7 +52,7 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         querySet.put("username", username);
         querySet.put("password", password);
 
-        List<User> userList;
+        List<Users> userList;
         userList = userDao.all();
 
         userList = userDao.find(querySet); // TODO: use a get instead
@@ -65,7 +65,7 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         return loginSuccess;
     }
 
-    public User getUser()
+    public Users getUser()
             throws java.rmi.RemoteException
     {
         return loggedUser;

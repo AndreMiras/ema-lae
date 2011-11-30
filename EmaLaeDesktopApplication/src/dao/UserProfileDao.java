@@ -5,7 +5,7 @@
 
 package dao;
 
-import database.entity.User;
+import database.entity.Users;
 import database.entity.UserProfile;
 import java.util.List;
 import org.hibernate.Session;
@@ -32,7 +32,7 @@ public class UserProfileDao extends DaoHibernate<UserProfile, Integer> {
      * @param user
      * @return an userprofile object from its user object foreign key
      */
-    public UserProfile get(User user)
+    public UserProfile get(Users user)
     {
         String hqlString = "from UserProfile as userprofile where ";
         String filterString = "user_id = '" + user.getUserId() + "'";

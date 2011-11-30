@@ -40,7 +40,7 @@ public class UserProfile implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     // @OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private User user;
+    private Users user;
     @Column(name ="firstName")
     private String firstName;
     @Column(name ="lastName")
@@ -62,12 +62,12 @@ public class UserProfile implements Serializable {
     {
     }
 
-    public UserProfile(User user)
+    public UserProfile(Users user)
     {
         this.user = user;
     }
 
-    public UserProfile(User user, Type userProfileType) {
+    public UserProfile(Users user, Type userProfileType) {
         this.user = user;
         this.userProfileType = userProfileType;
     }
@@ -78,7 +78,7 @@ public class UserProfile implements Serializable {
         return userId;
     }
 
-    public User getUser()
+    public Users getUser()
     {
         return user;
     }
@@ -117,7 +117,7 @@ public class UserProfile implements Serializable {
         this.userId = userId;
     }
 
-    public void setUser(User user)
+    public void setUser(Users user)
     {
         this.user = user;
     }
