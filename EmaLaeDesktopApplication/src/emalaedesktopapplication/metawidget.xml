@@ -23,12 +23,12 @@ config="XmlInspectorConfig">
                             <propertyStyle>
                                 <javaBeanPropertyStyle xmlns="java:org.metawidget.inspector.impl.propertystyle.javabean"
                                     config="JavaBeanPropertyStyleConfig">
-                                    <supportPublicFields>
+                                    <!-- supportPublicFields>
                                         <boolean>false</boolean>
                                     </supportPublicFields>
                                     <privateFieldConvention>
                                         <format>'m'{1}</format>
-                                    </privateFieldConvention>
+                                    </privateFieldConvention -->
                                 </javaBeanPropertyStyle>
                             </propertyStyle>
                         </java5Inspector>

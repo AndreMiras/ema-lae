@@ -55,7 +55,7 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
         List<User> userList;
         userList = userDao.all();
 
-        userList = userDao.find(querySet);
+        userList = userDao.find(querySet); // TODO: use a get instead
         if (userList.size() > 0)
         {
             loggedUser = userList.get(0);
