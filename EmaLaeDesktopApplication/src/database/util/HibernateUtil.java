@@ -68,7 +68,10 @@ public class HibernateUtil {
             {
                 // Create the SessionFactory from hibernate.cfg.xml
                 Configuration configuration = getDefaultConfiguration();
-                configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+                configuration.setProperty("hibernate.hbm2ddl.auto",
+                        "create-drop");
+                configuration.setProperty("hibernate.connection.url",
+                        "jdbc:hsqldb:file:database-test.db;shutdown=true");
                 sessionFactory = configuration.buildSessionFactory();
             }
             catch (Throwable ex)
