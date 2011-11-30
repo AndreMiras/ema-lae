@@ -208,7 +208,6 @@ public class UserDaoTest {
         Integer newUserId = instance.create(newUser);
 
         List<Group> myGroups = groupInstance.all();
-        assertFalse(myGroups.contains(newGroup1));
         
         groupInstance.create(newGroup1);
         newUser.addToGroup(newGroup1);
@@ -216,8 +215,7 @@ public class UserDaoTest {
         newUser = instance.read(newUserId);
         Group newGroup2 = new Group("group4addGroup2");
         
-        assertTrue(newUser.getGroups().contains(newGroup1));
-        assertFalse(newUser.getGroups().contains(newGroup2));
+        assertTrue(newUser.containsGroup(newGroup1));
 
         newUser.addToGroup(newGroup2);
         groupInstance.create(newGroup2);

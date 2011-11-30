@@ -60,6 +60,7 @@ public class ContractDaoTest {
         UserProfile ma = new UserProfile(mau, UserProfile.Type.InternshipSupervisor);
         UserProfile tuteur = new UserProfile(tutu, UserProfile.Type.SupervisingTeacher);
         UserProfileDao u1 = new UserProfileDao();
+        // Can we do this another way ?
         try{
             Contract obj = new Contract(apprenti, ma, tuteur);
             // the object shouldn't have an id, until it gets one from the DAO

@@ -27,7 +27,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer userId;
-    @Column(name ="username")
+    @Column(name ="username", unique = true)
     private String username;
     @Column(name ="password")
     private String password;
@@ -110,6 +110,15 @@ public class User implements Serializable {
             hasPermission = userGroup.getPermissions().contains(permission) ? true : hasPermission;
         }
         return hasPermission;
+    }
+
+    public boolean containsGroup(Group group){
+        Iterator it = this.groups.iterator();
+        boolean foundGroup = false;
+        while(!foundGroup && it.hasNext()){
+            foundGroup = group.getGroupId().equals(it.next());
+        }
+        return foundGroup;
     }
     
 }

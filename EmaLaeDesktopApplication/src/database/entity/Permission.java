@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import java.util.Iterator;
 
 /**
  *
@@ -97,5 +98,14 @@ public class Permission implements Serializable{
     public String toString()
     {
         return name;
+    }
+
+    public boolean containsGroup(Group group){
+        Iterator<Group> it = this.getGroups().iterator();
+        boolean foundGroup = false;
+        while(!foundGroup && it.hasNext()){
+            foundGroup = group.getGroupId().equals(it.next().getGroupId());
+        }
+        return foundGroup;
     }
 }
