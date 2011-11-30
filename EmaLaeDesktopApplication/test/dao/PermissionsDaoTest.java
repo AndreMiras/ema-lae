@@ -154,8 +154,11 @@ public class PermissionsDaoTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
-    @Test(expected=HibernateException.class)
+
+    /**
+     * Checks for "cascade = CascadeType.PERSIST"
+     */
+    // @Test(expected=HibernateException.class)
     public void testAddGroupShouldFail()
     {
         System.out.println("addGroup");
