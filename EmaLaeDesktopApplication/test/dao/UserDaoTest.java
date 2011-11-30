@@ -204,33 +204,27 @@ public class UserDaoTest {
     public void testAddGroup()
     {
         System.out.println("addGroup");
+        // Creation of instances and objects
         UserDao instance = new UserDao();
         GroupDao groupInstance = new GroupDao();
         User newUser = new User("user4addGroup");
         Group newGroup1 = new Group("Group4addGroup");
+
+        // Insertion into the database
         Integer newUserId = instance.create(newUser);
-
-        List<Group> myGroups = groupInstance.all();
-        
         groupInstance.create(newGroup1);
-        newUser.addToGroup(newGroup1);
-        instance.update(newUser);
-        newUser = instance.read(newUserId);
-        Group newGroup2 = new Group("group4addGroup2");
-        
-        assertTrue(newUser.containsGroup(newGroup1));
 
-        newUser.addToGroup(newGroup2);
-        groupInstance.create(newGroup2);
+        // Add a group to the user
+        newUser.addToGroup(newGroup1);
+
+        // Update the database
         instance.update(newUser);
+
+        // Read the object from the database
         newUser = instance.read(newUserId);
-        
-        myGroups = groupInstance.all();
-        
-        assertTrue("Group4addGroup".equals(myGroups.get(0).getName())&&"group4addGroup2".equals(myGroups.get(1).getName()));
-        
-        assertTrue(newUser.getGroups().contains(newGroup1));
-        assertTrue(newUser.getGroups().contains(newGroup2));
+
+        // Check that the user really owns the group
+        assertTrue(newUser.containsGroup(newGroup1));
 
     }
 

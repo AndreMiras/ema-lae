@@ -23,17 +23,17 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "users")
 public class User implements Serializable {
 
-    @Column(name ="user_id")
+    @Column(name ="userId")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer userId;
-    @Column(name ="username", unique = true)
+    @Column(name ="username")
     private String username;
     @Column(name ="password")
     private String password;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy="users")
+    @ManyToMany(cascade = CascadeType.PERSIST/*, mappedBy="users"*/)
     private Set<Group> groups;
 
     public User()
@@ -113,10 +113,10 @@ public class User implements Serializable {
     }
 
     public boolean containsGroup(Group group){
-        Iterator it = this.groups.iterator();
+        Iterator<Group> it = this.groups.iterator();
         boolean foundGroup = false;
         while(!foundGroup && it.hasNext()){
-            foundGroup = group.getGroupId().equals(it.next());
+            foundGroup = group.getGroupId().equals(it.next().getGroupId());
         }
         return foundGroup;
     }

@@ -34,14 +34,14 @@ public class Group implements Serializable{
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-        name = "users_groups", joinColumns =
+        name = "user_group", joinColumns =
         {@JoinColumn(name = "groupsID") },
-        inverseJoinColumns = { @JoinColumn(name = "user_id") }
+        inverseJoinColumns = { @JoinColumn(name = "userId") }
     )
     private Set<User> users;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
         name = "permission_group", joinColumns =
         {@JoinColumn(name = "groupsID") },
