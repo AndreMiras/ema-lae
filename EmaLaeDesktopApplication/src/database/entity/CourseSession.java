@@ -15,7 +15,7 @@ import java.util.Date;
  */
 
 @Entity
-public class Session implements Serializable{
+public class CourseSession implements Serializable{
 
     @Column(name ="sessionsID")
     @Id
