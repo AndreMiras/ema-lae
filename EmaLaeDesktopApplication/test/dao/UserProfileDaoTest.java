@@ -59,7 +59,7 @@ public class UserProfileDaoTest {
     public void testCreate()
     {
         System.out.println("create");
-        User user = new User("username1");
+        User user = new User("username10");
         user.setPassword("pw1");
         UserProfile userProfile = new UserProfile(user);
         userProfile.setFirstName("foo");
@@ -84,7 +84,7 @@ public class UserProfileDaoTest {
     public void testRead()
     {
         System.out.println("read");
-        User user = new User("username2");
+        User user = new User("username20");
         UserProfile userProfile = new UserProfile(user);
         userProfile.setFirstName("foo");
         userProfile.setLastName("bar");
@@ -98,7 +98,7 @@ public class UserProfileDaoTest {
 
         assertEquals("foo", result.getFirstName());
         assertEquals("bar", result.getLastName());
-        assertEquals("username2", result.getUser().getUsername());
+        assertEquals("username20", result.getUser().getUsername());
     }
 
     /**
