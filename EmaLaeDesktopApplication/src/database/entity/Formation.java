@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  *
@@ -85,6 +86,15 @@ public class Formation implements Serializable{
     
     public boolean addFormation(Formation child){
         return this.childrenFormations.add(child);
+    }
+
+    public boolean containsChild(Formation child){
+        Iterator<Formation> it = this.getChildrenFormations().iterator();
+        boolean foundFormation = false;
+        while(!foundFormation && it.hasNext()){
+            foundFormation = child.getID().equals(it.next().getID());
+        }
+        return foundFormation;
     }
 
 }

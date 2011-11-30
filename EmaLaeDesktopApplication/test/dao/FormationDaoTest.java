@@ -151,7 +151,7 @@ public class FormationDaoTest {
 
         Formation updatedf1 = instance.read(result);
 
-        assertTrue(updatedf1.getChildrenFormations().contains(f2));
+        assertTrue(updatedf1.containsChild(f2));
 
 
     }
