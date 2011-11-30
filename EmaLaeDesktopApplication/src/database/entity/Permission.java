@@ -32,7 +32,7 @@ public class Permission implements Serializable{
     private String name;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy="permissions")
     private Set<Group> groups;
 
     public Permission() {

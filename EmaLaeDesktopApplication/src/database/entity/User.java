@@ -33,7 +33,7 @@ public class User implements Serializable {
     private String password;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy="users")
     private Set<Group> groups;
 
     public User()

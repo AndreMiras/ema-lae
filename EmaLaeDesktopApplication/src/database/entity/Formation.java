@@ -28,7 +28,7 @@ public class Formation implements Serializable{
     @ManyToOne
     @JoinColumn(name = "parentFormation")
     private Formation parentFormation;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name="childrenFormations")
     private Set<Formation> childrenFormations = new HashSet<Formation>();
 
