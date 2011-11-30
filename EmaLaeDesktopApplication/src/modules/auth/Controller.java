@@ -13,8 +13,6 @@ package modules.auth;
 import dao.UserDao;
 import database.entity.User;
 import java.util.HashMap;
-import server.core.Payload;
-
 /**
  *
  * @author amiras
