@@ -198,7 +198,8 @@ public class PermissionsDaoTest {
         permissionDao.update(p1);
         p1 = permissionDao.read(permissionID);
 
-        assertTrue(p1.containsGroup(newGroup1)&&p1.containsGroup(newGroup2));
+        assertTrue(p1.containsGroup(newGroup1));
+        assertTrue(p1.containsGroup(newGroup2));
 
     }
 }
