@@ -28,12 +28,13 @@ public class ContractDao extends DaoHibernate<Contract, Integer> {
     //-1 returned if error.
     @Override
     public Integer create(Contract c) throws Error{
-        if(c.getApprentice().isApprentice()
-                && c.getSupervisingTeacher().isSupervisingTeacher()
-                && c.getInternshipSupervisor().isInternshipSupervisor())
-            return super.create(c);
-        else{
-            throw new Error();
-        }
+        if(c.isCorrect()) return super.create(c);
+        else throw new Error();
+    }
+
+    @Override
+    public void update(Contract c) throws Error{
+        if(c.isCorrect()) super.update(c);
+        else throw new Error();
     }
 }

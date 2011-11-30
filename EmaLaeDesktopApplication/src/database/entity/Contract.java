@@ -137,5 +137,11 @@ public class Contract implements Serializable{
         this.endDate = endDate;
     }
 
+    public boolean isCorrect(){
+        return this.apprentice.isApprentice()
+                && this.internshipSupervisor.isInternshipSupervisor()
+                && this.supervisingTeacher.isSupervisingTeacher();
+    }
+
     
 }
