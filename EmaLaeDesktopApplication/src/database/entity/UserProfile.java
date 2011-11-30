@@ -161,5 +161,16 @@ public class UserProfile implements Serializable {
         this.userProfileType = userProfileType;
     }
 
+    public boolean isApprentice(){
+        return this.getUserProfileType().equals(Type.Apprentice);
+    }
+
+    public boolean isInternshipSupervisor(){
+        return this.getUserProfileType().equals(Type.InternshipSupervisor);
+    }
+
+    public boolean isSupervisingTeacher(){
+        return this.getUserProfileType().equals(Type.SupervisingTeacher);
+    }
     
 }

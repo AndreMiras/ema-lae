@@ -6,6 +6,7 @@
 package dao;
 
 import database.entity.Contract;
+import exceptions.ContractException;
 
 /**
  *
@@ -21,5 +22,18 @@ public class ContractDao extends DaoHibernate<Contract, Integer> {
     public ContractDao(Class<Contract> type)
     {
         super(type);
+    }
+
+
+    //-1 returned if error.
+    @Override
+    public Integer create(Contract c) throws Error{
+        if(c.getApprentice().isApprentice()
+                && c.getSupervisingTeacher().isSupervisingTeacher()
+                && c.getInternshipSupervisor().isInternshipSupervisor())
+            return super.create(c);
+        else{
+            throw new Error();
+        }
     }
 }

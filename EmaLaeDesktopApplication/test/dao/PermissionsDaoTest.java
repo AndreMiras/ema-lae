@@ -172,7 +172,8 @@ public class PermissionsDaoTest {
 
     }
     
-    @Test
+    // disabled feature
+    //@Test
     public void testAddGroup()
     {
         System.out.println("addGroup");
@@ -180,17 +181,12 @@ public class PermissionsDaoTest {
         GroupDao groupInstance = new GroupDao();
         Permission p1 = new Permission("permission4addGroup");
         Group newGroup1 = new Group("Group4addGroup");
-        groupInstance.create(newGroup1);
         p1.addToGroup(newGroup1);
         Integer permissionID = permissionDao.create(p1);
-
-        List<Group> myGroups = groupInstance.all();
-        assertFalse(myGroups.contains(newGroup1));
         
-        //permissionDao.update(p1);
+        permissionDao.update(p1);
         p1 = permissionDao.read(permissionID);
         assertTrue(p1.containsGroup(newGroup1));
-
 
         Group newGroup2 = new Group("group4addGroup2");
         p1.addToGroup(newGroup2);
