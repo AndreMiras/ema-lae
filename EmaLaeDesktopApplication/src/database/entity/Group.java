@@ -8,6 +8,7 @@ package database.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
@@ -119,6 +120,15 @@ public class Group implements Serializable{
     public String toString()
     {
         return name;
+    }
+
+    public boolean containsUser(User user){
+        boolean foundUser = false;
+        Iterator<User> it = this.users.iterator();
+        while(!foundUser && it.hasNext()){
+            foundUser = user.getUserId().equals(it.next().getUserId());
+        }
+        return foundUser;
     }
 
 }

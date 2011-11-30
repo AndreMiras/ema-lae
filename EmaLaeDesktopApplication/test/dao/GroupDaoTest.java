@@ -183,7 +183,7 @@ public class GroupDaoTest {
 
         g1 = groupInstance.read(groupID);
 
-        assertTrue(g1.getUsers().contains(u1));
+        assertTrue(g1.containsUser(u1));
 
     }
 
