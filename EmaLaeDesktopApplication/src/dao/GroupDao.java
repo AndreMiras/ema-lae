@@ -5,7 +5,7 @@
 
 package dao;
 
-import database.entity.Group;
+import database.entity.UserGroup;
 import database.entity.Permission;
 import database.entity.User;
 import org.hibernate.Session;
@@ -15,14 +15,14 @@ import org.hibernate.Transaction;
  *
  * @author pc
  */
-public class GroupDao extends DaoHibernate<Group, Integer> {
+public class GroupDao extends DaoHibernate<UserGroup, Integer> {
 
     public GroupDao()
     {
-        super(Group.class);
+        super(UserGroup.class);
     }
 
-    public GroupDao(Class<Group> type)
+    public GroupDao(Class<UserGroup> type)
     {
         super(type);
     }
@@ -34,7 +34,7 @@ public class GroupDao extends DaoHibernate<Group, Integer> {
      * @param group
      */
     // @Override
-    public void delete2(Group group)
+    public void delete2(UserGroup group)
     {
         Session session = getSession(); // sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();

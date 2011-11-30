@@ -5,7 +5,7 @@
 
 package dao;
 
-import database.entity.Group;
+import database.entity.UserGroup;
 import database.util.HibernateUtil;
 import database.entity.User;
 import java.util.HashMap;
@@ -193,7 +193,7 @@ public class UserDaoTest {
         System.out.println("addGroup");
         UserDao instance = new UserDao();
         User newUser = new User("user4addGroup");
-        Group newGroup1 = new Group("Group4addGroup");
+        UserGroup newGroup1 = new UserGroup("Group4addGroup");
         instance.create(newUser);
         
         newUser.addToGroup(newGroup1);
@@ -208,7 +208,7 @@ public class UserDaoTest {
         UserDao instance = new UserDao();
         GroupDao groupInstance = new GroupDao();
         User newUser = new User("user4addGroup");
-        Group newGroup1 = new Group("Group4addGroup");
+        UserGroup newGroup1 = new UserGroup("Group4addGroup");
 
         // Insertion into the database
         Integer newUserId = instance.create(newUser);
@@ -242,7 +242,7 @@ public class UserDaoTest {
         PermissionsDao permissionInstance = new PermissionsDao();
         Integer permissionID = permissionInstance.create(permission);
         
-        Group group = new Group("Group4addGroup");
+        UserGroup group = new UserGroup("Group4addGroup");
 //        GroupDao groupInstance = new GroupDao();
 //        Integer groupID = groupInstance.create(group);
 

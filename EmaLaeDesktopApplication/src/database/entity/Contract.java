@@ -18,7 +18,6 @@ import exceptions.ContractException;
 
 
 @Entity
-@Table(name = "contracts")
 public class Contract implements Serializable{
 
     @Column(name ="contractsID")

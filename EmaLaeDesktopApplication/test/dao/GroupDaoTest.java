@@ -6,7 +6,7 @@
 package dao;
 
 import database.util.HibernateUtil;
-import database.entity.Group;
+import database.entity.UserGroup;
 import database.entity.User;
 import database.entity.Permission;
 import java.util.HashMap;
@@ -51,7 +51,7 @@ public class GroupDaoTest {
     @Test
     public void testCreate() {
         System.out.println("create");
-        Group obj = new Group("group4Create");
+        UserGroup obj = new UserGroup("group4Create");
 
         // the object shouldn't have an id, until it gets one from the DAO
         assertNull(obj.getGroupId());
@@ -69,11 +69,11 @@ public class GroupDaoTest {
     @Test
     public void testRead() {
         System.out.println("read");
-        Group testGroup = new Group("group4Read");
+        UserGroup testGroup = new UserGroup("group4Read");
 
         GroupDao instance = new GroupDao();
         Integer groupID = instance.create(testGroup);
-        Group result = instance.read(groupID);
+        UserGroup result = instance.read(groupID);
         assertEquals("group4Read", result.getName());
     }
 
@@ -83,7 +83,7 @@ public class GroupDaoTest {
     @Test
     public void testUpdate() {
         System.out.println("update");
-        Group newGroup = new Group("group4Update");
+        UserGroup newGroup = new UserGroup("group4Update");
         GroupDao instance = new GroupDao();
         Integer newGroupID = instance.create(newGroup);
 
@@ -105,8 +105,8 @@ public class GroupDaoTest {
     public void testDelete() {
         System.out.println("delete");
         GroupDao instance = new GroupDao();
-        List<Group> allGroupsBefore = instance.all();
-        Group groupToDelete = allGroupsBefore.get(0);
+        List<UserGroup> allGroupsBefore = instance.all();
+        UserGroup groupToDelete = allGroupsBefore.get(0);
 
         /*
          * it should be possible to read that userprofile from the database before
@@ -115,7 +115,7 @@ public class GroupDaoTest {
         assertNotNull(instance.read(groupToDelete.getGroupId()));
         // deleting the first record
         instance.delete(groupToDelete);
-        List<Group> allGroupsAfter = instance.all();
+        List<UserGroup> allGroupsAfter = instance.all();
         // not record should now be found
         assertNull(instance.read(groupToDelete.getGroupId()));
         // only one record was deleted
@@ -145,8 +145,8 @@ public class GroupDaoTest {
         System.out.println("get");
         HashMap<String, String> querySet = null;
         GroupDao instance = new GroupDao();
-        Group expResult = null;
-        Group result = instance.get(querySet);
+        UserGroup expResult = null;
+        UserGroup result = instance.get(querySet);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -172,7 +172,7 @@ public class GroupDaoTest {
         GroupDao groupInstance = new GroupDao();
         UserDao userInstance = new UserDao();
 
-        Group g1 = new Group("group4addUser");
+        UserGroup g1 = new UserGroup("group4addUser");
         User u1 = new User("user4addUserToGroup");
 
         userInstance.create(u1);
@@ -194,7 +194,7 @@ public class GroupDaoTest {
         GroupDao groupInstance = new GroupDao();
         PermissionsDao permissionInstance = new PermissionsDao();
 
-        Group g1 = new Group("group4addUser");
+        UserGroup g1 = new UserGroup("group4addUser");
         Permission p1 = new Permission("permission4addPermissionToGroup");
 
         permissionInstance.create(p1);

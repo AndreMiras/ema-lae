@@ -16,7 +16,6 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "promotions")
 public class Promotion implements Serializable{
 
     @Column(name ="promotionsID")

@@ -22,7 +22,6 @@ import java.util.Iterator;
  * @author pc
  */
 @Entity
-@Table(name = "permissions")
 public class Permission implements Serializable{
 
     @Column(name ="permissionsID")
@@ -34,10 +33,10 @@ public class Permission implements Serializable{
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.PERSIST/*, mappedBy="permissions"*/)
-    private Set<Group> groups;
+    private Set<UserGroup> groups;
 
     public Permission() {
-        this.groups = new HashSet<Group>();
+        this.groups = new HashSet<UserGroup>();
     }
 
     public Permission(String permissionName){
@@ -46,18 +45,18 @@ public class Permission implements Serializable{
     }
 
     /*
-    public Set<Group> getGroups() {
+    public Set<UserGroup> getGroups() {
         return this.groups;
     }
      */
 
-    public void setGroups(Set<Group> groups) {
+    public void setGroups(Set<UserGroup> groups) {
         this.groups = groups;
     }
 
      // meta-widget better deals with Lists at the moment
-    public List<Group> getGroups() {
-        List<Group> groupList = new ArrayList<Group>(groups);
+    public List<UserGroup> getGroups() {
+        List<UserGroup> groupList = new ArrayList<UserGroup>(groups);
         return groupList;
     }
 
@@ -90,7 +89,7 @@ public class Permission implements Serializable{
         this.permissionID = permissionID;
     }
 
-    public boolean addToGroup(Group group){
+    public boolean addToGroup(UserGroup group){
         return this.groups.add(group);
     }
 
@@ -100,8 +99,8 @@ public class Permission implements Serializable{
         return name;
     }
 
-    public boolean containsGroup(Group group){
-        Iterator<Group> it = this.getGroups().iterator();
+    public boolean containsGroup(UserGroup group){
+        Iterator<UserGroup> it = this.getGroups().iterator();
         boolean foundGroup = false;
         while(!foundGroup && it.hasNext()){
             foundGroup = group.getGroupId().equals(it.next().getGroupId());

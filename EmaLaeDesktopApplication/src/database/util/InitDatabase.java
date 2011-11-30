@@ -9,7 +9,7 @@ import dao.GroupDao;
 import dao.PermissionsDao;
 import dao.UserDao;
 import dao.UserProfileDao;
-import database.entity.Group;
+import database.entity.UserGroup;
 import database.entity.Permission;
 import database.entity.User;
 import database.entity.UserProfile;
@@ -89,14 +89,14 @@ public class InitDatabase {
         UserDao userDao = new UserDao();
         String permissionName = "permission";
         String groupName = "aGroup";
-        Group group;
+        UserGroup group;
         GroupDao groupDao;
         groupDao = new GroupDao();
         permissionsDao = new PermissionsDao();
 
         user = userDao.all().get(0);
 
-        group = new Group(groupName);
+        group = new UserGroup(groupName);
         // group.addUser(user); // FIXME: fails
         for(int i=0; i<3; i++)
         {
@@ -122,14 +122,14 @@ public class InitDatabase {
 
     public void dropGroups()
     {
-        Group group;
+        UserGroup group;
         GroupDao groupDao = new GroupDao();
         List groups = groupDao.all();
 
         dropPermissions();
         for(int i=0; i<groups.size(); i++)
         {
-            group = (Group) groups.get(i);
+            group = (UserGroup) groups.get(i);
             groupDao.delete(group);
         }
     }

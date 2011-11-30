@@ -15,15 +15,16 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "sessions")
 public class Session implements Serializable{
 
     @Column(name ="sessionsID")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private int ID;
+    @Temporal(TemporalType.DATE)
     @Column(name ="startDate")
     private Date startDate;
+    @Temporal(TemporalType.DATE)
     @Column(name ="endDate")
     private Date endDate;
     @Column(name ="assignments")

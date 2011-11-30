@@ -14,7 +14,6 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "companies")
 public class Company implements Serializable{
 
     @Column(name ="companiesID")

@@ -20,7 +20,6 @@ import org.hibernate.annotations.LazyCollectionOption;
  * @author andre
  */
 @Entity
-@Table(name = "users")
 public class User implements Serializable {
 
     @Column(name ="userId")
@@ -34,11 +33,11 @@ public class User implements Serializable {
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.PERSIST/*, mappedBy="users"*/)
-    private Set<Group> groups;
+    private Set<UserGroup> groups;
 
     public User()
     {
-        this.groups = new HashSet<Group>();
+        this.groups = new HashSet<UserGroup>();
     }
 
     public User(String username)
@@ -51,16 +50,16 @@ public class User implements Serializable {
     }
 
     // meta-widget better deals with List Collections at the moment
-    public List<Group> getGroups() {
-        List<Group> groupList = new ArrayList<Group>(groups);
+    public List<UserGroup> getGroups() {
+        List<UserGroup> groupList = new ArrayList<UserGroup>(groups);
         return groupList;
     }
 
-    public void setGroups(Set<Group> groups) {
+    public void setGroups(Set<UserGroup> groups) {
         this.groups = groups;
     }
 
-    public boolean addToGroup(Group newGroup){
+    public boolean addToGroup(UserGroup newGroup){
         return this.groups.add(newGroup);
     }
 
@@ -106,14 +105,14 @@ public class User implements Serializable {
         Iterator i=this.groups.iterator();
         while(i.hasNext() && !hasPermission)
         {
-            Group userGroup = (Group) i.next();
+            UserGroup userGroup = (UserGroup) i.next();
             hasPermission = userGroup.getPermissions().contains(permission) ? true : hasPermission;
         }
         return hasPermission;
     }
 
-    public boolean containsGroup(Group group){
-        Iterator<Group> it = this.groups.iterator();
+    public boolean containsGroup(UserGroup group){
+        Iterator<UserGroup> it = this.groups.iterator();
         boolean foundGroup = false;
         while(!foundGroup && it.hasNext()){
             foundGroup = group.getGroupId().equals(it.next().getGroupId());

@@ -87,9 +87,9 @@ public class MainWindowController
             }
             else if (actionCommand.equals("database.entity.Group"))
             {
-               AdminController<database.entity.Group> adminController =
-                        new AdminController<database.entity.Group>(
-                            view, database.entity.Group.class);
+               AdminController<database.entity.UserGroup> adminController =
+                        new AdminController<database.entity.UserGroup>(
+                            view, database.entity.UserGroup.class);
                 adminController.adminListChange();
             }
             else if (actionCommand.equals("database.entity.Permission"))

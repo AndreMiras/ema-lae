@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import database.entity.Group;
+import database.entity.UserGroup;
 import database.util.HibernateUtil;
 import org.hibernate.HibernateException;
 
@@ -164,7 +164,7 @@ public class PermissionsDaoTest {
         System.out.println("addGroup");
         PermissionsDao instance = new PermissionsDao();
         Permission p1 = new Permission("permission4addGroup");
-        Group newGroup1 = new Group("Group4addGroup");
+        UserGroup newGroup1 = new UserGroup("Group4addGroup");
         instance.create(p1);
         
         p1.addToGroup(newGroup1);
@@ -180,7 +180,7 @@ public class PermissionsDaoTest {
         PermissionsDao permissionDao = new PermissionsDao();
         GroupDao groupInstance = new GroupDao();
         Permission p1 = new Permission("permission4addGroup");
-        Group newGroup1 = new Group("Group4addGroup");
+        UserGroup newGroup1 = new UserGroup("Group4addGroup");
         p1.addToGroup(newGroup1);
         Integer permissionID = permissionDao.create(p1);
         
@@ -188,7 +188,7 @@ public class PermissionsDaoTest {
         p1 = permissionDao.read(permissionID);
         assertTrue(p1.containsGroup(newGroup1));
 
-        Group newGroup2 = new Group("group4addGroup2");
+        UserGroup newGroup2 = new UserGroup("group4addGroup2");
         p1.addToGroup(newGroup2);
         groupInstance.create(newGroup2);
         permissionDao.update(p1);

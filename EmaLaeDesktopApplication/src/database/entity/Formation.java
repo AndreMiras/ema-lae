@@ -17,7 +17,6 @@ import java.util.Iterator;
  */
 
 @Entity
-@Table(name = "formations")
 public class Formation implements Serializable{
 
     @Column(name ="formationsID")

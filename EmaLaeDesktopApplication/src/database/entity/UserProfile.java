@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
  * @author pc
  */
 @Entity
-@Table(name = "user_profile")
 public class UserProfile implements Serializable {
 
     //TODO: check this code

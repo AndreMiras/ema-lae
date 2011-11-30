@@ -14,7 +14,6 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "apprenticesSessions")
 public class ApprenticeSession implements Serializable{
 
     @Column(name ="apprenticesSessionId")

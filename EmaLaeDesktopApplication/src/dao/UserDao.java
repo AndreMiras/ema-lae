@@ -1,6 +1,6 @@
 package dao;
 
-import database.entity.Group;
+import database.entity.UserGroup;
 import database.entity.User;
 import database.entity.UserProfile;
 import java.util.HashMap;
@@ -37,7 +37,7 @@ public class UserDao extends DaoHibernate<User, Integer>
         UserProfileDao userProfileDao = new UserProfileDao();
         UserProfile userProfile;
 
-        for (Group group : user.getGroups())
+        for (UserGroup group : user.getGroups())
         {
             group.getUsers().remove(user);
             session.update(group);
