@@ -229,7 +229,8 @@ public class UserDaoTest {
         
         assertTrue("Group4addGroup".equals(myGroups.get(0).getName())&&"group4addGroup2".equals(myGroups.get(1).getName()));
         
-        assertTrue(newUser.getGroups().contains(newGroup1)&&newUser.getGroups().contains(newGroup2));
+        assertTrue(newUser.getGroups().contains(newGroup1));
+        assertTrue(newUser.getGroups().contains(newGroup2));
 
     }
 
