@@ -8,6 +8,7 @@ package dao;
 import database.util.HibernateUtil;
 import database.entity.Group;
 import database.entity.User;
+import database.entity.Permission;
 import java.util.HashMap;
 import java.util.List;
 import org.junit.After;
@@ -187,4 +188,25 @@ public class GroupDaoTest {
 
     }
 
+    @Test
+    public void testAddPermission() {
+        System.out.println("addPermission");
+        GroupDao groupInstance = new GroupDao();
+        PermissionsDao permissionInstance = new PermissionsDao();
+
+        Group g1 = new Group("group4addUser");
+        Permission p1 = new Permission("permission4addPermissionToGroup");
+
+        permissionInstance.create(p1);
+
+        Integer groupID = groupInstance.create(g1);
+
+        g1.addPermission(p1);
+        groupInstance.update(g1);
+
+        g1 = groupInstance.read(groupID);
+
+        assertTrue(g1.containsPermission(p1));
+
+    }
 }

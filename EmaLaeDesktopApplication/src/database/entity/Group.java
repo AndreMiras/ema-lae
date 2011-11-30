@@ -131,4 +131,13 @@ public class Group implements Serializable{
         return foundUser;
     }
 
+    public boolean containsPermission(Permission permission){
+        boolean foundPermission = false;
+        Iterator<Permission> it = this.permissions.iterator();
+        while(!foundPermission && it.hasNext()){
+            foundPermission = permission.getPermissionID().equals(it.next().getPermissionID());
+        }
+        return foundPermission;
+    }
+
 }
