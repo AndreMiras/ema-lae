@@ -12,7 +12,10 @@ package modules.auth;
 
 import dao.UserDao;
 import database.entity.User;
+import exceptions.DaoException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author amiras
@@ -33,7 +36,15 @@ public class Controller {
         UserDao userDao = new UserDao();
         HashMap querySet = new HashMap<String, String>();
         querySet.put("username", username);
-        User user = userDao.get(querySet);
+        User user;
+        try
+        {
+            user = userDao.get(querySet);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            user = null;
+        }
 
         return user;
     }

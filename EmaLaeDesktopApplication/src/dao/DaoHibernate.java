@@ -5,13 +5,13 @@
 package dao;
 
 import database.util.HibernateUtil;
+import exceptions.DaoException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -122,13 +122,15 @@ public class DaoHibernate<T, PK extends Serializable>
         return objs;
     }
 
-    public T get(HashMap<String, String> querySet)
+    public T get(HashMap<String, String> querySet) throws DaoException
     {
         List objs = find(querySet);
         if (objs.size() != 1)
-            throw new Error("Returned "
+        {
+            throw new DaoException("Returned "
                     + objs.size()
                     + " object(s) when it should return one and only one.");
+        }
         return (T) objs.get(0);
     }
 
