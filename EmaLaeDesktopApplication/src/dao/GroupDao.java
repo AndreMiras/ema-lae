@@ -28,7 +28,9 @@ public class GroupDao extends DaoHibernate<UserGroup, Integer> {
     }
 
     /**
-     * Explicitely deletes group related object
+     * Explicitely deletes user related objects.
+     * This is only required when the cascade delete isn't enabled.
+     * Currently deletes the following objects:
      *  - user
      *  - permission
      * @param group

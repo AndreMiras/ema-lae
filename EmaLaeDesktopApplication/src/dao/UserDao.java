@@ -26,13 +26,15 @@ public class UserDao extends DaoHibernate<Users, Integer>
     }
 
     /**
-     * Explicitely deletes user related object
+     * Explicitely deletes user related objects.
+     * This is only required when the cascade delete isn't enabled.
+     * Currently deletes the following objects:
      *  - group
      *  - userProfile
      * @param user
      */
-    @Override
-    public void delete(Users user)
+    // @Override
+    public void delete2(Users user)
     {
         Session session = sessionFactory.openSession(); // getSession();
         Transaction transaction = session.beginTransaction();
