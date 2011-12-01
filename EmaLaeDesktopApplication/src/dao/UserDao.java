@@ -31,8 +31,8 @@ public class UserDao extends DaoHibernate<Users, Integer>
      *  - userProfile
      * @param user
      */
-    // @Override
-    public void delete2(Users user)
+    @Override
+    public void delete(Users user)
     {
         Session session = sessionFactory.openSession(); // getSession();
         Transaction transaction = session.beginTransaction();
@@ -44,7 +44,10 @@ public class UserDao extends DaoHibernate<Users, Integer>
             group.getUsers().remove(user);
             session.update(group);
         }
+        // transaction.commit();
+        session.flush();
 
+        // session.beginTransaction();
         try
         {
             userProfile = userProfileDao.get(user);
@@ -60,6 +63,7 @@ public class UserDao extends DaoHibernate<Users, Integer>
             // em.remove(user);
             session.delete(user);
             transaction.commit();
+            session.flush();
             session.close();
         }
     }

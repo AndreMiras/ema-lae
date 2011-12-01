@@ -55,6 +55,7 @@ public class GroupDao extends DaoHibernate<UserGroup, Integer> {
 
         session.delete(group);
         transaction.commit();
+        session.flush();
         session.close();
     }
 }
