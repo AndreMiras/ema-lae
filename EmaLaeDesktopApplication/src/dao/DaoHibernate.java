@@ -118,7 +118,7 @@ public class DaoHibernate<T, PK extends Serializable>
 
         session.beginTransaction();
         // TODO[security]: is there a security risk, using plain HQL ?
-        List objs = session.createQuery(hqlString + filterString).list();
+        List<T> objs = session.createQuery(hqlString + filterString).list();
         session.getTransaction().commit();
         session.flush();
         session.close();
@@ -147,7 +147,7 @@ public class DaoHibernate<T, PK extends Serializable>
         Session session = sessionFactory.openSession(); // getSession();
 
         session.beginTransaction();
-        List objs = session.createQuery("from "
+        List<T> objs = session.createQuery("from "
                 + type.getName()).list();
         session.getTransaction().commit();
         session.flush();
