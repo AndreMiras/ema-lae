@@ -6,7 +6,7 @@
 package dao;
 
 import database.util.HibernateUtil;
-import database.entity.User;
+import database.entity.Users;
 import database.entity.UserProfile;
 import database.util.InitDatabase;
 import exceptions.DaoException;
@@ -62,7 +62,7 @@ public class UserProfileDaoTest {
     public void testCreate()
     {
         System.out.println("create");
-        User user = new User("username10");
+        Users user = new Users("username10");
         user.setPassword("pw1");
         UserProfile userProfile = new UserProfile(user);
         userProfile.setFirstName("foo");
@@ -87,7 +87,7 @@ public class UserProfileDaoTest {
     public void testRead()
     {
         System.out.println("read");
-        User user = new User("username20");
+        Users user = new Users("username20");
         UserProfile userProfile = new UserProfile(user);
         userProfile.setFirstName("foo");
         userProfile.setLastName("bar");
@@ -111,7 +111,7 @@ public class UserProfileDaoTest {
     public void testUpdate()
     {
         System.out.println("update");
-        User user = new User("username3");
+        Users user = new Users("username3");
         UserProfileDao instance = new UserProfileDao();
         UserProfile userProfile = new UserProfile(user);
         userProfile.setFirstName("firstname1");
@@ -207,7 +207,7 @@ public class UserProfileDaoTest {
         // getting a previously created user
         HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", "username3");
-        User user = null;
+        Users user = null;
         try
         {
             user = userDao.get(querySet);

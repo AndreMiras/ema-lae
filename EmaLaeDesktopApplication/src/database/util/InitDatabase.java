@@ -11,7 +11,7 @@ import dao.UserDao;
 import dao.UserProfileDao;
 import database.entity.UserGroup;
 import database.entity.Permission;
-import database.entity.User;
+import database.entity.Users;
 import database.entity.UserProfile;
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class InitDatabase {
      */
     public void createProfiles()
     {
-        User user;
+        Users user;
         String username;
         String password;
         String firstname;
@@ -42,7 +42,7 @@ public class InitDatabase {
 
         for(int i=0; i<3; i++)
         {
-            user = new User(username + i);
+            user = new Users(username + i);
             user.setPassword(password + i);
             userProfile = new UserProfile(user);
             userProfile.setFirstName(firstname + i);
@@ -57,13 +57,13 @@ public class InitDatabase {
      */
     public void dropUsers()
     {
-        User user;
+        Users user;
         UserDao userDao = new UserDao();
         List users = userDao.all();
         
         for(int i=0; i<users.size(); i++)
         {
-            user = (User) users.get(i);
+            user = (Users) users.get(i);
             userDao.delete(user);
         }
     }
@@ -85,7 +85,7 @@ public class InitDatabase {
     {
         Permission permission;
         PermissionsDao permissionsDao;
-        User user = new User();
+        Users user = new Users();
         UserDao userDao = new UserDao();
         String permissionName = "permission";
         String groupName = "aGroup";

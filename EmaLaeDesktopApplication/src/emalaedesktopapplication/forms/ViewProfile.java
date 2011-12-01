@@ -12,7 +12,7 @@
 package emalaedesktopapplication.forms;
 
 import client.RmiClient;
-import database.entity.User;
+import database.entity.Users;
 import database.entity.UserProfile;
 import java.rmi.RemoteException;
 import java.util.logging.Level;

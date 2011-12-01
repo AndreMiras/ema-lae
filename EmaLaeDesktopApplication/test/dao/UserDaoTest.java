@@ -7,8 +7,8 @@ package dao;
 
 import database.entity.UserGroup;
 import database.util.HibernateUtil;
-import database.entity.User;
 import exceptions.DaoException;
+import database.entity.Users;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -59,7 +59,7 @@ public class UserDaoTest {
     public void testCreate()
     {
         System.out.println("create");
-        User obj = new User("username1");
+        Users obj = new Users("username1");
 
         // the object shouldn't have an id, until it gets one from the DAO
         assertNull(obj.getUserId());
@@ -78,11 +78,11 @@ public class UserDaoTest {
     public void testRead()
     {
         System.out.println("read");
-        User newUser = new User("username2");
+        Users newUser = new Users("username2");
 
         UserDao instance = new UserDao();
         Integer newUserID = instance.create(newUser);
-        User result = instance.read(newUserID);
+        Users result = instance.read(newUserID);
         assertEquals("username2", result.getUsername());
     }
 
@@ -93,7 +93,7 @@ public class UserDaoTest {
     public void testUpdate()
     {
         System.out.println("update");
-        User newUser = new User("username3");
+        Users newUser = new Users("username3");
         UserDao instance = new UserDao();
         Integer newUserID = instance.create(newUser);
 
@@ -116,8 +116,8 @@ public class UserDaoTest {
     {
         System.out.println("delete");
         UserDao userDao = new UserDao();
-        List<User> allUsersBefore = userDao.all();
-        User userToDelete = allUsersBefore.get(0);
+        List<Users> allUsersBefore = userDao.all();
+        Users userToDelete = allUsersBefore.get(0);
 
         /*
          * it should be possible to read that user from the database before
@@ -126,7 +126,7 @@ public class UserDaoTest {
         assertNotNull(userDao.read(userToDelete.getUserId()));
         // deleting the first record
         userDao.delete(userToDelete);
-        List<User> allUsersAfter = userDao.all();
+        List<Users> allUsersAfter = userDao.all();
         // not record should now be found
         assertNull(userDao.read(userToDelete.getUserId()));
         // only one record was deleted
@@ -140,14 +140,14 @@ public class UserDaoTest {
     public void testFind()
     {
         System.out.println("find");
-        User userToFind = new User("userToFind");
+        Users userToFind = new Users("userToFind");
         UserDao userDao = new UserDao();
         Integer newUserID = userDao.create(userToFind);
 
         HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", "userToFind");
-        List<User> result = userDao.find(querySet);
-        User firstUserFound = result.get(0);
+        List<Users> result = userDao.find(querySet);
+        Users firstUserFound = result.get(0);
 
         // username should be unique
         assertEquals(1, result.size());
@@ -164,13 +164,13 @@ public class UserDaoTest {
     public void testGet()
     {
         System.out.println("get");
-        User userToFind = new User("userToGet");
+        Users userToFind = new Users("userToGet");
         UserDao userDao = new UserDao();
         Integer newUserID = userDao.create(userToFind);
 
         HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", "userToGet");
-        User result = null;
+        Users result = null;
         try
         {
             result = userDao.get(querySet);
@@ -202,7 +202,7 @@ public class UserDaoTest {
     {
         System.out.println("addGroup");
         UserDao instance = new UserDao();
-        User newUser = new User("user4addGroup");
+        Users newUser = new Users("user4addGroup");
         UserGroup newGroup1 = new UserGroup("Group4addGroup");
         instance.create(newUser);
         
@@ -217,7 +217,7 @@ public class UserDaoTest {
         // Creation of instances and objects
         UserDao instance = new UserDao();
         GroupDao groupInstance = new GroupDao();
-        User newUser = new User("user4addGroup");
+        Users newUser = new Users("user4addGroup");
         UserGroup newGroup1 = new UserGroup("Group4addGroup");
 
         // Insertion into the database
@@ -240,11 +240,11 @@ public class UserDaoTest {
 
     public void checkPermission (){
         System.out.println("check permission");
-        User user1 = new User("user4checkPermission");
+        Users user1 = new Users("user4checkPermission");
         UserDao userInstance1 = new UserDao();
         Integer user1ID = userInstance1.create(user1);
 
-        User user2 = new User("user24checkPermission");
+        Users user2 = new Users("user24checkPermission");
         UserDao userInstance2 = new UserDao();
         Integer user2ID = userInstance2.create(user2);
 
@@ -268,8 +268,8 @@ public class UserDaoTest {
     @Test(expected = HibernateException.class)
     public void testUniqueConstraintOnUsername(){
         UserDao instance = new UserDao();
-        User u1 = new User("user4TestUnique");
-        User u2 = new User("user4TestUnique");
+        Users u1 = new Users("user4TestUnique");
+        Users u2 = new Users("user4TestUnique");
         instance.create(u1);
         instance.create(u2);
     }

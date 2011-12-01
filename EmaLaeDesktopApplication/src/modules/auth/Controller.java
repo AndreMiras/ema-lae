@@ -11,8 +11,8 @@
 package modules.auth;
 
 import dao.UserDao;
-import database.entity.User;
 import exceptions.DaoException;
+import database.entity.Users;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,13 +30,13 @@ public class Controller {
         return true; // FIXME: POF only
     }
 
-    // TODO: returning an User as a POF but will later be a Profile returned
-    private User get_profile(String username)
+    // TODO: returning an Users as a POF but will later be a Profile returned
+    private Users get_profile(String username)
     {
         UserDao userDao = new UserDao();
         HashMap querySet = new HashMap<String, String>();
         querySet.put("username", username);
-        User user;
+        Users user;
         try
         {
             user = userDao.get(querySet);
@@ -49,9 +49,9 @@ public class Controller {
         return user;
     }
 
-    // TODO: returning an User as a POF but will later be a Profile returned
+    // TODO: returning an Users as a POF but will later be a Profile returned
     // this is a proto
-    private User get_my_profile()
+    private Users get_my_profile()
     {
         // proto
         String current_profile = "firstname.lastname1"; // get_current_profile_from_request()

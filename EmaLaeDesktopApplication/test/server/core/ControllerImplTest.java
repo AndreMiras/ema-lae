@@ -9,7 +9,7 @@ import database.util.InitDatabase;
 import dao.UserProfileDao;
 import dao.UserDao;
 import database.util.HibernateUtil;
-import database.entity.User;
+import database.entity.Users;
 import database.entity.UserProfile;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -65,7 +65,7 @@ public class ControllerImplTest {
         InitDatabase initDatabase = new InitDatabase();
 
         
-        List<User> myUsers = userDao.all();
+        List<Users> myUsers = userDao.all();
         // The tables should be totally void at this point
         //initDatabase.dropUsers();
         assertTrue(userProfileDao.all().isEmpty());
@@ -83,7 +83,7 @@ public class ControllerImplTest {
     public void testLogin() throws Exception
     {
         System.out.println("login");
-        User user;
+        Users user;
         ControllerImpl controllerImpl = new ControllerImpl();
         Boolean loginResult;
         String correctUsername = "username1";
@@ -124,7 +124,7 @@ public class ControllerImplTest {
     public void testGetUser() throws Exception
     {
         System.out.println("getUser");
-        User user;
+        Users user;
         ControllerImpl controllerImpl = new ControllerImpl();
         String username = "username1";
         String password = "pwd1";

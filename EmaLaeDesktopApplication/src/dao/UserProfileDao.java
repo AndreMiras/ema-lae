@@ -5,7 +5,7 @@
 
 package dao;
 
-import database.entity.User;
+import database.entity.Users;
 import database.entity.UserProfile;
 import exceptions.DaoException;
 import java.lang.String;
@@ -35,7 +35,8 @@ public class UserProfileDao extends DaoHibernate<UserProfile, Integer> {
      * @param user
      * @return an userprofile object from its user object foreign key
      */
-    public UserProfile get(User user) throws DaoException
+
+    public UserProfile get(Users user) throws DaoException
     {
         HashMap querySet = new HashMap<String, String>();
         querySet.put("user_id", user.getUserId().toString());

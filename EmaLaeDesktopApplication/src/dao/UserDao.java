@@ -1,7 +1,7 @@
 package dao;
 
 import database.entity.UserGroup;
-import database.entity.User;
+import database.entity.Users;
 import database.entity.UserProfile;
 import exceptions.DaoException;
 import java.util.logging.Level;
@@ -13,14 +13,14 @@ import org.hibernate.Transaction;
  *
  * @author andre
  */
-public class UserDao extends DaoHibernate<User, Integer>
+public class UserDao extends DaoHibernate<Users, Integer>
 {
     public UserDao()
     {
-        super(User.class);
+        super(Users.class);
     }
 
-    public UserDao(Class<User> type)
+    public UserDao(Class<Users> type)
     {
         super(type);
     }
@@ -32,7 +32,7 @@ public class UserDao extends DaoHibernate<User, Integer>
      * @param user
      */
     // @Override
-    public void delete2(User user)
+    public void delete2(Users user)
     {
         Session session = sessionFactory.openSession(); // getSession();
         Transaction transaction = session.beginTransaction();

@@ -37,7 +37,7 @@ public class UserGroup implements Serializable{
         {@JoinColumn(name = "groupsID") },
         inverseJoinColumns = { @JoinColumn(name = "userId") }
     )
-    private Set<User> users;
+    private Set<Users> users;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -50,7 +50,7 @@ public class UserGroup implements Serializable{
 
     public UserGroup()
     {
-        this.users = new HashSet<User>();
+        this.users = new HashSet<Users>();
         this.permissions = new HashSet<Permission>();
     }
 
@@ -102,16 +102,16 @@ public class UserGroup implements Serializable{
         return this.permissions.add(perm);
     }
 
-    public boolean addUser(User u)
+    public boolean addUser(Users u)
     {
         return users.add(u);
     }
 
-    public Set<User> getUsers() {
+    public Set<Users> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(Set<Users> users) {
         this.users = users;
     }
 
@@ -121,9 +121,9 @@ public class UserGroup implements Serializable{
         return name;
     }
 
-    public boolean containsUser(User user){
+    public boolean containsUser(Users user){
         boolean foundUser = false;
-        Iterator<User> it = this.users.iterator();
+        Iterator<Users> it = this.users.iterator();
         while(!foundUser && it.hasNext()){
             foundUser = user.getUserId().equals(it.next().getUserId());
         }
