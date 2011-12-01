@@ -7,6 +7,9 @@ package dao;
 
 import database.entity.User;
 import database.entity.UserProfile;
+import exceptions.DaoException;
+import java.lang.String;
+import java.util.HashMap;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -32,19 +35,11 @@ public class UserProfileDao extends DaoHibernate<UserProfile, Integer> {
      * @param user
      * @return an userprofile object from its user object foreign key
      */
-    public UserProfile get(User user)
+    public UserProfile get(User user) throws DaoException
     {
-        String hqlString = "from UserProfile as userprofile where ";
-        String filterString = "user_id = '" + user.getUserId() + "'";
-        Session session = sessionFactory.openSession(); // getSession();
-        Transaction transaction = session.beginTransaction();
-
-        session.beginTransaction();
-        // TODO[security]: is there a security risk, using plain HQL ?
-        List objs = session.createQuery(hqlString + filterString).list();
-        transaction.commit();
-        session.close();
-        return (UserProfile) objs.get(0);
+        HashMap querySet = new HashMap<String, String>();
+        querySet.put("user_id", user.getUserId().toString());
+        return super.get(querySet);
     }
 
 }
