@@ -18,35 +18,35 @@ import java.util.Set;
 @Entity
 public class Promotion implements Serializable{
 
-    @Column(name ="promotionsID")
+    @Column(name ="promotions_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private int ID;
-    @Column(name ="name")
+    private int promotionId;
+    @Column
     private String name;
-    @Column(name ="promotionYear")
-    private int year;
-    @Column(name ="responsibleID")
-    private int IDresponsible;
-    @Column(name ="adminID")
-    private int IDAdmin;
+    @Column
+    private int promotionYear;
+    @Column
+    private int responsibleId;
+    @Column
+    private int adminId;
     
     private Set<Integer> IDApprentice;
 
     public int getID() {
-        return ID;
+        return promotionId;
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.promotionId = ID;
     }
 
     public int getIDAdmin() {
-        return IDAdmin;
+        return adminId;
     }
 
     public void setIDAdmin(int IDAdmin) {
-        this.IDAdmin = IDAdmin;
+        this.adminId = IDAdmin;
     }
 
     public Set<Integer> getIDApprentice() {
@@ -58,11 +58,11 @@ public class Promotion implements Serializable{
     }
 
     public int getIDresponsible() {
-        return IDresponsible;
+        return responsibleId;
     }
 
     public void setIDresponsible(int IDresponsible) {
-        this.IDresponsible = IDresponsible;
+        this.responsibleId = IDresponsible;
     }
 
     public String getName() {
@@ -74,11 +74,11 @@ public class Promotion implements Serializable{
     }
 
     public int getYear() {
-        return year;
+        return promotionYear;
     }
 
     public void setYear(int year) {
-        this.year = year;
+        this.promotionYear = year;
     }
 
     

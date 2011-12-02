@@ -19,17 +19,17 @@ import java.util.Iterator;
 @Entity
 public class Formation implements Serializable{
 
-    @Column(name ="formationsID")
+    @Column(name ="formations_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer ID;
-    @Column(name="formationsName")
+    @Column
     private String name;
     @ManyToOne
-    @JoinColumn(name = "parentFormation")
+    @JoinColumn
     private Formation parentFormation;
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name="childrenFormations")
+    @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
 
     public Formation() {

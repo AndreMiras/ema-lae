@@ -16,23 +16,23 @@ import javax.persistence.*;
 @Entity
 public class Company implements Serializable{
 
-    @Column(name ="companiesID")
+    @Column(name ="company_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private int ID;
-    @Column(name ="name")
+    private int companyId;
+    @Column
     private String name;
-    @Column(name ="address")
+    @Column
     private String address;
-    @Column(name ="phoneNumber")
+    @Column
     private String phoneNumber;
 
     public int getID() {
-        return ID;
+        return companyId;
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.companyId = ID;
     }
     
     public String getAddress() {

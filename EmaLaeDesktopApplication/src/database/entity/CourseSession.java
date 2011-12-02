@@ -17,27 +17,27 @@ import java.util.Date;
 @Entity
 public class CourseSession implements Serializable{
 
-    @Column(name ="sessionsID")
+    @Column(name ="sessions_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private int ID;
+    private int sessionId;
     @Temporal(TemporalType.DATE)
-    @Column(name ="startDate")
+    @Column
     private Date startDate;
     @Temporal(TemporalType.DATE)
-    @Column(name ="endDate")
+    @Column
     private Date endDate;
-    @Column(name ="assignments")
+    @Column
     private String assignmentsLink;
-    @Column(name ="type")
+    @Column
     private int sessionType;
 
     public int getID() {
-        return ID;
+        return sessionId;
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.sessionId = ID;
     }
 
     public String getAssignmentsLink() {

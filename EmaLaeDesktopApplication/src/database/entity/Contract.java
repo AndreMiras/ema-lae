@@ -20,23 +20,23 @@ import exceptions.ContractException;
 @Entity
 public class Contract implements Serializable{
 
-    @Column(name ="contractsID")
+    @Column(name ="contracts_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer ID;
     @OneToOne()
-    @JoinColumn(name ="apprentice")
+    @JoinColumn
     private UserProfile apprentice;
     @OneToOne()
-    @JoinColumn(name ="internshipSupervisor")
+    @JoinColumn
     private UserProfile internshipSupervisor;
     @OneToOne()
-    @JoinColumn(name ="supervisingTeacher")
+    @JoinColumn
     private UserProfile supervisingTeacher;
-    @Column(name ="beginDate")
+    @Column
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date beginDate;
-    @Column(name ="endDate")
+    @Column
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date endDate;
 
