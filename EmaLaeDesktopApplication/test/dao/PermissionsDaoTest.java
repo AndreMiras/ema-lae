@@ -57,7 +57,7 @@ public class PermissionsDaoTest {
         Permission obj = new Permission("Permission4Create");
 
         // the object shouldn't have an id, until it gets one from the DAO
-        assertNull(obj.getPermissionID());
+        assertNull(obj.getPermissionId());
 
         PermissionsDao instance = new PermissionsDao();
         Integer result = instance.create(obj);

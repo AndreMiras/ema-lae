@@ -134,7 +134,7 @@ public class UserGroup implements Serializable{
         boolean foundPermission = false;
         Iterator<Permission> it = this.permissions.iterator();
         while(!foundPermission && it.hasNext()){
-            foundPermission = permission.getPermissionID().equals(it.next().getPermissionID());
+            foundPermission = permission.getPermissionId().equals(it.next().getPermissionId());
         }
         return foundPermission;
     }
