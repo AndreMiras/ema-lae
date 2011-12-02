@@ -181,9 +181,11 @@ public class PermissionsDaoTest {
         instance.update(p1);
 
     }
-    
-    // disabled feature
-    //@Test
+
+    /**
+     * It should be possible to add a permission to a group
+     */
+    @Test
     public void testAddGroup()
     {
         System.out.println("addGroup");
