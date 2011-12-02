@@ -23,28 +23,27 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 public class UserGroup implements Serializable{
 
-    @Column(name ="groupsID")
+    @Column(name ="group_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer groupId;
-    @Column(name ="name")
     private String name;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "user_group", joinColumns =
-        {@JoinColumn(name = "groupsID") },
-        inverseJoinColumns = { @JoinColumn(name = "userId") }
+        joinColumns =
+        {@JoinColumn},
+        inverseJoinColumns = {@JoinColumn}
     )
     private Set<Users> users;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "permission_group", joinColumns =
-        {@JoinColumn(name = "groupsID") },
-        inverseJoinColumns = { @JoinColumn(name = "permissionsID") }
+        joinColumns =
+        {@JoinColumn(name = "groups_id") },
+        inverseJoinColumns = { @JoinColumn(name = "permissions_id") }
     )
     private Set<Permission> permissions;
 

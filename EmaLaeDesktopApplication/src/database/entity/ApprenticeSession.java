@@ -16,17 +16,16 @@ import javax.persistence.*;
 @Entity
 public class ApprenticeSession implements Serializable{
 
-    @Column(name ="apprenticesSessionId")
+    @Column(name ="apprentice_session_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private int ID;
-    @Column(name ="apprenticeID")
-    private int IDApprentice;
-    @Column(name ="sessionID")
-    private int IDSession;
-    @Column(name ="mark")
+    private int apprenticeId;
+    @Column(name ="session_id")
+    private int sessionId;
+    @Column
     private float mark;
-    @Column(name ="documentLink")
+    @Column
     private String documentLink;
 
     public int getID() {
@@ -38,11 +37,11 @@ public class ApprenticeSession implements Serializable{
     }
 
     public int getIDApprentice() {
-        return IDApprentice;
+        return apprenticeId;
     }
 
     public int getIDSession() {
-        return IDSession;
+        return sessionId;
     }
 
     public String getDocumentLink() {
@@ -54,11 +53,11 @@ public class ApprenticeSession implements Serializable{
     }
 
     public void setIDApprentice(int IDApprentice) {
-        this.IDApprentice = IDApprentice;
+        this.apprenticeId = IDApprentice;
     }
 
     public void setIDSession(int IDSession) {
-        this.IDSession = IDSession;
+        this.sessionId = IDSession;
     }
 
     public void setDocumentLink(String documentLink) {

@@ -22,13 +22,13 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 public class Users implements Serializable {
 
-    @Column(name ="userId")
+    @Column(name="user_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer userId;
-    @Column(name ="username", unique = true)
+    @Column(unique = true)
     private String username;
-    @Column(name ="password")
+    @Column
     private String password;
 
     @LazyCollection(LazyCollectionOption.FALSE)

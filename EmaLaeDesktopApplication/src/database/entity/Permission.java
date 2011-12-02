@@ -24,11 +24,11 @@ import java.util.Iterator;
 @Entity
 public class Permission implements Serializable{
 
-    @Column(name ="permissionsID")
+    @Column(name ="permissions_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer permissionId;
-    @Column(name ="name")
+    @Column
     private String name;
 
     @LazyCollection(LazyCollectionOption.FALSE)

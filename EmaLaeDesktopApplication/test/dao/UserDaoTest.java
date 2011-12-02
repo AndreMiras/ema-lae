@@ -238,6 +238,7 @@ public class UserDaoTest {
 
     }
 
+    @Test
     public void checkPermission (){
         System.out.println("check permission");
         Users user1 = new Users("user4checkPermission");
