@@ -67,7 +67,10 @@ public class CollectionWidgetBuilder
         {
 
             Node node = elements.item(loop);
-            columns.add(metawidget.getLabelString(XmlUtils.getAttributesAsMap(node)));
+            Map<String, String> attributesAsMap = XmlUtils.getAttributesAsMap(node);
+            String columnName = attributesAsMap.get("name");
+            // columns.add(metawidget.getLabelString(XmlUtils.getAttributesAsMap(node)));
+            columns.add(columnName);
         }
 
         // Fetch the data. This part could be improved to use BeansBinding or similar
