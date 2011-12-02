@@ -27,7 +27,7 @@ public class Permission implements Serializable{
     @Column(name ="permissionsID")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private Integer permissionID;
+    private Integer permissionId;
     @Column(name ="name")
     private String name;
 
@@ -81,12 +81,12 @@ public class Permission implements Serializable{
         this.name = name;
     }
 
-    public Integer getPermissionID() {
-        return permissionID;
+    public Integer getPermissionId() {
+        return permissionId;
     }
 
-    public void setPermissionID(Integer permissionID) {
-        this.permissionID = permissionID;
+    public void setPermissionId(Integer permissionID) {
+        this.permissionId = permissionID;
     }
 
     public boolean addToGroup(UserGroup group){
