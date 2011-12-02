@@ -9,8 +9,11 @@ import database.util.HibernateUtil;
 import database.entity.Users;
 import database.entity.UserProfile;
 import database.util.InitDatabase;
+import exceptions.DaoException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -179,7 +182,14 @@ public class UserProfileDaoTest {
         HashMap<String, String> querySet = null;
         UserProfileDao instance = new UserProfileDao();
         UserProfile expResult = null;
-        UserProfile result = instance.get(querySet);
+        UserProfile result = null;
+        try
+        {
+            result = instance.get(querySet);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(UserProfileDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -197,11 +207,25 @@ public class UserProfileDaoTest {
         // getting a previously created user
         HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", "username3");
-        Users user = userDao.get(querySet);
+        Users user = null;
+        try
+        {
+            user = userDao.get(querySet);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(UserProfileDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertNotNull(user);
 
         UserProfileDao instance = new UserProfileDao();
-        UserProfile result = instance.get(user);
+        UserProfile result = null;
+        try
+        {
+            result = instance.get(user);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(UserProfileDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertNotNull(result);
     }
 

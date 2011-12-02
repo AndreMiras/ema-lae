@@ -7,9 +7,12 @@ package dao;
 
 import database.entity.UserGroup;
 import database.util.HibernateUtil;
+import exceptions.DaoException;
 import database.entity.Users;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -167,7 +170,14 @@ public class UserDaoTest {
 
         HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", "userToGet");
-        Users result = userDao.get(querySet);
+        Users result = null;
+        try
+        {
+            result = userDao.get(querySet);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(UserDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("userToGet", result.getUsername());
         assertEquals(newUserID, result.getUserId());
     }

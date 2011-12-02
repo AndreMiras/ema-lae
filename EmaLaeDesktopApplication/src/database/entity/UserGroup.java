@@ -30,7 +30,7 @@ public class UserGroup implements Serializable{
     private String name;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         joinColumns =
         {@JoinColumn},

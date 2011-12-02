@@ -32,7 +32,7 @@ public class Permission implements Serializable{
     private String name;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = CascadeType.ALL/*, mappedBy="permissions"*/)
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy="permissions")
     private Set<UserGroup> groups;
 
     public Permission() {
@@ -90,7 +90,7 @@ public class Permission implements Serializable{
     }
 
     public boolean addToGroup(UserGroup group){
-        group.addPermission(this);
+        group.addPermission(this); // workaround, seems required by mappedBy
         return this.groups.add(group);
     }
 

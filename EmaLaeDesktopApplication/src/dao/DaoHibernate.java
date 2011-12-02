@@ -5,13 +5,13 @@
 package dao;
 
 import database.util.HibernateUtil;
+import exceptions.DaoException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -40,10 +40,10 @@ public class DaoHibernate<T, PK extends Serializable>
     {
         // return (PK) getSession().save(obj);
         Session session = sessionFactory.openSession(); // getSession();
-        sessionFactory.openSession();
         session.beginTransaction();
         PK id = (PK) session.save(obj);
         session.getTransaction().commit();
+        session.flush();
         session.close();
 
         return id;
@@ -56,6 +56,7 @@ public class DaoHibernate<T, PK extends Serializable>
         session.beginTransaction();
         T obj = (T) session.get(type, id);
         session.getTransaction().commit();
+        session.flush();
         session.close();
 
         return obj;
@@ -68,6 +69,7 @@ public class DaoHibernate<T, PK extends Serializable>
         session.beginTransaction();
         session.update(obj);
         session.getTransaction().commit();
+        session.flush();
         session.close();
     }
 
@@ -78,6 +80,7 @@ public class DaoHibernate<T, PK extends Serializable>
         session.beginTransaction();
         session.delete(obj);
         session.getTransaction().commit();
+        session.flush();
         session.close();
     }
 
@@ -115,20 +118,23 @@ public class DaoHibernate<T, PK extends Serializable>
 
         session.beginTransaction();
         // TODO[security]: is there a security risk, using plain HQL ?
-        List objs = session.createQuery(hqlString + filterString).list();
+        List<T> objs = session.createQuery(hqlString + filterString).list();
         session.getTransaction().commit();
+        session.flush();
         session.close();
 
         return objs;
     }
 
-    public T get(HashMap<String, String> querySet)
+    public T get(HashMap<String, String> querySet) throws DaoException
     {
         List objs = find(querySet);
         if (objs.size() != 1)
-            throw new Error("Returned "
+        {
+            throw new DaoException("Returned "
                     + objs.size()
                     + " object(s) when it should return one and only one.");
+        }
         return (T) objs.get(0);
     }
 
@@ -141,9 +147,10 @@ public class DaoHibernate<T, PK extends Serializable>
         Session session = sessionFactory.openSession(); // getSession();
 
         session.beginTransaction();
-        List objs = session.createQuery("from "
+        List<T> objs = session.createQuery("from "
                 + type.getName()).list();
         session.getTransaction().commit();
+        session.flush();
         session.close();
 
         return objs;
@@ -156,8 +163,8 @@ public class DaoHibernate<T, PK extends Serializable>
         session.beginTransaction();
         session.saveOrUpdate(obj);
         session.getTransaction().commit();
+        session.flush();
         session.close();
-
     }
 
 }

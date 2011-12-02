@@ -5,6 +5,7 @@
 
 package dao;
 
+import exceptions.DaoException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,8 @@ public interface IDao<T, PK extends Serializable> {
     List<T> find(HashMap<String, String> querySet);
 
     /** Return the only one record found  for a givent filter **/
-    T get(HashMap<String, String> querySet);
+    T get(HashMap<String, String> querySet)
+            throws DaoException;
 
     /** get all sets **/
     List<T> all();

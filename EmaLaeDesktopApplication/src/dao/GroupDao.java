@@ -28,7 +28,9 @@ public class GroupDao extends DaoHibernate<UserGroup, Integer> {
     }
 
     /**
-     * Explicitely deletes group related object
+     * Explicitely deletes user related objects.
+     * This is only required when the cascade delete isn't enabled.
+     * Currently deletes the following objects:
      *  - user
      *  - permission
      * @param group
@@ -36,7 +38,7 @@ public class GroupDao extends DaoHibernate<UserGroup, Integer> {
     // @Override
     public void delete2(UserGroup group)
     {
-        Session session = getSession(); // sessionFactory.openSession();
+        Session session = sessionFactory.openSession(); // getSession();
         Transaction transaction = session.beginTransaction();
 
         // deletes associated users
@@ -55,6 +57,7 @@ public class GroupDao extends DaoHibernate<UserGroup, Integer> {
 
         session.delete(group);
         transaction.commit();
-        // session.close();
+        session.flush();
+        session.close();
     }
 }

@@ -12,10 +12,13 @@ import database.entity.Users;
 import database.entity.UserProfile;
 import database.util.HibernateUtil;
 import database.util.InitDatabase;
+import exceptions.DaoException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -79,7 +82,13 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
 
         if (loggedUser != null)
         {
-            userProfile = (UserProfile) userProfileDao.get(loggedUser);
+            try
+            {
+                userProfile = (UserProfile) userProfileDao.get(loggedUser);
+            } catch (DaoException ex)
+            {
+                Logger.getLogger(ControllerImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         return userProfile;

@@ -9,8 +9,11 @@ import database.util.HibernateUtil;
 import database.entity.UserGroup;
 import database.entity.Users;
 import database.entity.Permission;
+import exceptions.DaoException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -146,7 +149,14 @@ public class GroupDaoTest {
         HashMap<String, String> querySet = null;
         GroupDao instance = new GroupDao();
         UserGroup expResult = null;
-        UserGroup result = instance.get(querySet);
+        UserGroup result = null;
+        try
+        {
+            result = instance.get(querySet);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(GroupDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
