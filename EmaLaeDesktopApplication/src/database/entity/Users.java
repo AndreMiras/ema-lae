@@ -32,7 +32,7 @@ public class Users implements Serializable {
     private String password;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = CascadeType.PERSIST/*, mappedBy="users"*/)
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy="users")
     private Set<UserGroup> groups;
 
     public Users()
@@ -60,6 +60,7 @@ public class Users implements Serializable {
     }
 
     public boolean addToGroup(UserGroup newGroup){
+        newGroup.addUser(this); // workaround, seems required by mappedBy
         return this.groups.add(newGroup);
     }
 

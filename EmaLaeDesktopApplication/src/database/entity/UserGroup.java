@@ -31,7 +31,7 @@ public class UserGroup implements Serializable{
     private String name;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "user_group", joinColumns =
         {@JoinColumn(name = "groupsID") },
@@ -40,7 +40,7 @@ public class UserGroup implements Serializable{
     private Set<Users> users;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "permission_group", joinColumns =
         {@JoinColumn(name = "groupsID") },

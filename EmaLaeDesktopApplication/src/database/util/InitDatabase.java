@@ -59,11 +59,11 @@ public class InitDatabase {
     {
         Users user;
         UserDao userDao = new UserDao();
-        List users = userDao.all();
+        List<Users> users = userDao.all();
         
         for(int i=0; i<users.size(); i++)
         {
-            user = (Users) users.get(i);
+            user = users.get(i);
             userDao.delete(user);
         }
     }
@@ -97,12 +97,12 @@ public class InitDatabase {
         user = userDao.all().get(0);
 
         group = new UserGroup(groupName);
-        // group.addUser(user); // FIXME: fails
+        group.addUser(user);
         for(int i=0; i<3; i++)
         {
             permission = new Permission(permissionName + i);
             permissionsDao.create(permission);
-            // group.addPermission(permission); // FIXME: fails
+            group.addPermission(permission);
         }
         groupDao.create(group);
     }
