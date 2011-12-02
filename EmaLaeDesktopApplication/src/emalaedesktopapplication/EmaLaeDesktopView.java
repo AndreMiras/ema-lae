@@ -8,6 +8,7 @@ import client.RmiClient;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -103,14 +104,16 @@ public class EmaLaeDesktopView extends FrameView {
     // public void setMiddleContentPanel(JPanel panel)
     public void setMiddleContentPanel(JComponent panel)
     {
-        mainPanel.removeAll();
+        JButton jButton = new javax.swing.JButton("Foobar");
+        // navigationPanel.add(jButton);
+        middleContentPanel.removeAll();
         panel.setVisible(true);
         // java.awt.CardLayout cl = (java.awt.CardLayout)(panel.getLayout());
         // cl.show(panel, null);
         // panel.getName();
-        mainPanel.add(panel,
+        middleContentPanel.add(panel,
                 "FIXME: constraint must be a string, see #14");
-        mainPanel.revalidate();
+        middleContentPanel.revalidate();
     }
 
     public void populateAdminMenu(String[] entitiesAdmin)
@@ -142,8 +145,8 @@ public class EmaLaeDesktopView extends FrameView {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        mainPanel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         recreateDataSetMenuItem = new javax.swing.JMenuItem();
@@ -158,9 +161,10 @@ public class EmaLaeDesktopView extends FrameView {
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
-
-        mainPanel.setName("mainPanel"); // NOI18N
-        mainPanel.setLayout(new java.awt.CardLayout());
+        mainPanel = new javax.swing.JPanel();
+        navigationPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        middleContentPanel = new javax.swing.JPanel();
 
         menuBar.setName("menuBar"); // NOI18N
 
@@ -220,11 +224,11 @@ public class EmaLaeDesktopView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 416, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -241,6 +245,37 @@ public class EmaLaeDesktopView extends FrameView {
                     .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3))
         );
+
+        mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("mainPanel.border.title"))); // NOI18N
+        mainPanel.setMinimumSize(new java.awt.Dimension(600, 600));
+        mainPanel.setName("mainPanel"); // NOI18N
+        mainPanel.setPreferredSize(new java.awt.Dimension(600, 600));
+        mainPanel.setLayout(new java.awt.GridBagLayout());
+
+        navigationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("navigationPanel.border.title"))); // NOI18N
+
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+        navigationPanel.add(jButton1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        mainPanel.add(navigationPanel, gridBagConstraints);
+
+        middleContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Middle Content"));
+        middleContentPanel.setName("middleContentPanel"); // NOI18N
+        middleContentPanel.setPreferredSize(new java.awt.Dimension(400, 300));
+        middleContentPanel.setLayout(new java.awt.CardLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        mainPanel.add(middleContentPanel, gridBagConstraints);
 
         setComponent(mainPanel);
         setMenuBar(menuBar);
@@ -262,8 +297,11 @@ public class EmaLaeDesktopView extends FrameView {
     private javax.swing.JMenu adminListChangeMenu;
     private javax.swing.JMenu adminMenu;
     private javax.swing.JMenuItem editViewMenuItem;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JPanel middleContentPanel;
+    private javax.swing.JPanel navigationPanel;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JMenuItem recreateDataSetMenuItem;
     private javax.swing.JLabel statusAnimationLabel;
