@@ -179,21 +179,21 @@ public class GroupDaoTest {
     @Test
     public void testAddUser() {
         System.out.println("addUser");
+        // Instantiate the objects
         GroupDao groupInstance = new GroupDao();
-        UserDao userInstance = new UserDao();
-
         UserGroup g1 = new UserGroup("group4addUser");
         Users u1 = new Users("user4addUserToGroup");
 
-        userInstance.create(u1);
-
+        // Insert the empty group into the database
         Integer groupID = groupInstance.create(g1);
 
+        // Add the user to the group and update it into the database
+        g1 = groupInstance.read(groupID);
         g1.addUser(u1);
         groupInstance.update(g1);
 
+        // Check that the group now owns the user
         g1 = groupInstance.read(groupID);
-
         assertTrue(g1.containsUser(u1));
 
     }
@@ -201,21 +201,20 @@ public class GroupDaoTest {
     @Test
     public void testAddPermission() {
         System.out.println("addPermission");
+        // Instantiate the objects
         GroupDao groupInstance = new GroupDao();
-        PermissionsDao permissionInstance = new PermissionsDao();
-
         UserGroup g1 = new UserGroup("group4addUser");
         Permission p1 = new Permission("permission4addPermissionToGroup");
 
-        permissionInstance.create(p1);
-
+        // Insert the empty group into the database
         Integer groupID = groupInstance.create(g1);
 
+        // Add the permission to the group and update the group
         g1.addPermission(p1);
         groupInstance.update(g1);
 
+        // Check that the group now owns the permission
         g1 = groupInstance.read(groupID);
-
         assertTrue(g1.containsPermission(p1));
 
     }

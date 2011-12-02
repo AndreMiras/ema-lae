@@ -27,24 +27,17 @@ public class UserGroup implements Serializable{
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer groupId;
+    @Column
     private String name;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        joinColumns =
-        {@JoinColumn},
-        inverseJoinColumns = {@JoinColumn}
-    )
+    @JoinTable
     private Set<Users> users;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        joinColumns =
-        {@JoinColumn(name = "groups_id") },
-        inverseJoinColumns = { @JoinColumn(name = "permissions_id") }
-    )
+    @JoinTable
     private Set<Permission> permissions;
 
     public UserGroup()

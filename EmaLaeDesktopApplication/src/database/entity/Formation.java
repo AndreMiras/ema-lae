@@ -25,10 +25,10 @@ public class Formation implements Serializable{
     private Integer ID;
     @Column
     private String name;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Formation parentFormation;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
 
