@@ -241,31 +241,38 @@ public class UserDaoTest {
     @Test
     public void checkPermission (){
         System.out.println("check permission");
+        // Instantiate the objects
         Users user1 = new Users("user4checkPermission");
-        UserDao userInstance1 = new UserDao();
-        Integer user1ID = userInstance1.create(user1);
-
         Users user2 = new Users("user24checkPermission");
-        UserDao userInstance2 = new UserDao();
-        Integer user2ID = userInstance2.create(user2);
-
         Permission permission = new Permission("permission4checkPermission");
-        PermissionsDao permissionInstance = new PermissionsDao();
-        Integer permissionID = permissionInstance.create(permission);
-        
         UserGroup group = new UserGroup("Group4addGroup");
-//        GroupDao groupInstance = new GroupDao();
-//        Integer groupID = groupInstance.create(group);
+        UserDao userInstance = new UserDao();
 
+        GroupDao groupInstance = new GroupDao();
+
+        // Insert the empty users into the database
+        Integer user1ID = userInstance.create(user1);
+        Integer user2ID = userInstance.create(user2);
+
+        // Check that the user does not have the permission yet
         assertFalse(user1.checkPermission(permission));
 
+        // Adds the group to the user and the permission to the group
         user1.addToGroup(group);
         permission.addToGroup(group);
 
+        // Update the users into the database
+        userInstance.update(user1);
+        userInstance.update(user2);
+
+        // Check that user 1 now has the permission, but that user 2 still does not have it
+        user1 = userInstance.read(user1ID);
+        user2 = userInstance.read(user2ID);
         assertTrue(user1.checkPermission(permission));
         assertFalse(user2.checkPermission(permission));
     }
 
+    // Checks the unique constraints on user name
     @Test(expected = HibernateException.class)
     public void testUniqueConstraintOnUsername(){
         UserDao instance = new UserDao();

@@ -103,11 +103,14 @@ public class Users implements Serializable {
 
     public boolean checkPermission (Permission permission){
         boolean hasPermission = false;
-        Iterator i=this.groups.iterator();
+        Iterator<UserGroup> i=this.groups.iterator();
         while(i.hasNext() && !hasPermission)
         {
-            UserGroup userGroup = (UserGroup) i.next();
-            hasPermission = userGroup.getPermissions().contains(permission) ? true : hasPermission;
+            UserGroup userGroup = i.next();
+            Iterator<Permission> j = userGroup.getPermissions().iterator();
+            while(j.hasNext() && !hasPermission){
+                hasPermission = j.next().containsGroup(userGroup);
+            }
         }
         return hasPermission;
     }
