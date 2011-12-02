@@ -1,10 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-<hibernate-configuration>
-  <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
     <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
-    <property name="hibernate.connection.url">jdbc:hsqldb:file:database.db;shutdown=true</property>
+    <!-- <property name="hibernate.connection.url">jdbc:hsqldb:file:database.db;shutdown=true</property> -->
     <property name="connection.username">sa</property>
     <property name="connection.password"/>
     <!-- Echo all executed SQL to stdout -->
@@ -14,7 +10,7 @@
         - Attempt to modify an existing one to match the defined mapping
         WARN: never EVER use hibernate.hbm2ddl.auto in any live/production database
     -->
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
     <!-- property name="hbm2ddl.auto">create</property -->
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
@@ -33,5 +29,3 @@
     <mapping class="database.entity.Promotion"/>
     <mapping class="database.entity.CourseSession"/>
     <mapping class="database.entity.SupervisingTeacher"/>-->
-  </session-factory>
-</hibernate-configuration>
