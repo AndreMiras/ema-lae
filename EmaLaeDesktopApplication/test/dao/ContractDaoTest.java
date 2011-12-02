@@ -53,21 +53,19 @@ public class ContractDaoTest {
     // can't create contract with userprofiles. First need to create the users.
     public void testCreate() {
         System.out.println("create");
+        // Objects instanciation
         Users appu = new Users();
         Users mau = new Users();
         Users tutu = new Users();
         UserProfile apprenti = new UserProfile(appu, UserProfile.Type.Apprentice);
         UserProfile ma = new UserProfile(mau, UserProfile.Type.InternshipSupervisor);
         UserProfile tuteur = new UserProfile(tutu, UserProfile.Type.SupervisingTeacher);
-        UserProfileDao u1 = new UserProfileDao();
-        // Can we do this another way ?
+
+        //Contract creation
         try{
             Contract obj = new Contract(apprenti, ma, tuteur);
             // the object shouldn't have an id, until it gets one from the DAO
             assertNull(obj.getID());
-            u1.create(ma);
-            u1.create(tuteur);
-            u1.create(apprenti);
             ContractDao instance = new ContractDao();
             Integer result = instance.create(obj);
 
@@ -82,11 +80,6 @@ public class ContractDaoTest {
 
     }
 
-    /**
-     * Test of read method, of class GroupDao.
-     * FIXME: update this test, wasn't the Apprentice, SupervisingTeacher and
-     * InternshipSupervisor types supposed to be taken out?
-     */
     // @Test
     public void testRead() {
         System.out.println("read");

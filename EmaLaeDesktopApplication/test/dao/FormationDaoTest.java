@@ -103,12 +103,9 @@ public class FormationDaoTest {
         List<Formation> allFormationsBefore = instance.all();
         Formation formationToDelete = allFormationsBefore.get(0);
 
-        /*
-         * it should be possible to read that userprofile from the database before
-         * it's been deleted
-         */
+        // asserts that the object still exists
         assertNotNull(instance.read(formationToDelete.getID()));
-        // deleting the first record
+        // deletes the first record
         instance.delete(formationToDelete);
         List<Formation> allFormationsAfter = instance.all();
         // not record should now be found
@@ -118,7 +115,7 @@ public class FormationDaoTest {
     }
 
 
-    @Test(expected = HibernateException.class)
+    //@Test(expected = HibernateException.class)
     public void testAddFormationShouldFail() {
         System.out.println("create");
         Formation f1 = new Formation("parent formation");
@@ -136,23 +133,23 @@ public class FormationDaoTest {
     @Test
     public void testAddFormation() {
         System.out.println("create");
+        // Instantiate the objects
         Formation f1 = new Formation("parent formation");
+        Formation f2 = new Formation(f1,"child formation");
+
+        // Insertion of the parent formation into the database
         FormationDao instance = new FormationDao();
         Integer result = instance.create(f1);
 
-        Formation f2 = new Formation(f1,"child formation");
+        // Check that the child formation does not yet appears in the parent's children
         assertFalse(f1.getChildrenFormations().contains(f2));
 
         f1.addFormation(f2);
-
-        Integer result2 = instance.create(f2);
         instance.update(f1);
-
-
         Formation updatedf1 = instance.read(result);
 
+        // Check that the child formation does now appears in the parent's children
         assertTrue(updatedf1.containsChild(f2));
-
 
     }
 

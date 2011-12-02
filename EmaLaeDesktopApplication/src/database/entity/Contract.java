@@ -24,13 +24,13 @@ public class Contract implements Serializable{
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer ID;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn
     private UserProfile apprentice;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn
     private UserProfile internshipSupervisor;
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn
     private UserProfile supervisingTeacher;
     @Column
