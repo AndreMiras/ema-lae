@@ -181,8 +181,8 @@ public class EmaLaeDesktopView extends FrameView {
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
         mainPanel = new javax.swing.JPanel();
-        navigationPanel = new javax.swing.JPanel();
         middleContentPanel = new javax.swing.JPanel();
+        navigationPanel1 = new emalaedesktopapplication.forms.NavigationPanel();
 
         menuBar.setName("menuBar"); // NOI18N
 
@@ -242,11 +242,11 @@ public class EmaLaeDesktopView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 416, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -265,30 +265,30 @@ public class EmaLaeDesktopView extends FrameView {
         );
 
         mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("mainPanel.border.title"))); // NOI18N
-        mainPanel.setMinimumSize(new java.awt.Dimension(600, 600));
+        mainPanel.setMinimumSize(new java.awt.Dimension(700, 500));
         mainPanel.setName("mainPanel"); // NOI18N
         mainPanel.setPreferredSize(new java.awt.Dimension(600, 600));
         mainPanel.setLayout(new java.awt.GridBagLayout());
 
-        navigationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("navigationPanel.border.title"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        mainPanel.add(navigationPanel, gridBagConstraints);
-
         middleContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Middle Content"));
         middleContentPanel.setName("middleContentPanel"); // NOI18N
-        middleContentPanel.setPreferredSize(new java.awt.Dimension(400, 300));
+        middleContentPanel.setPreferredSize(new java.awt.Dimension(400, 200));
         middleContentPanel.setLayout(new java.awt.CardLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         mainPanel.add(middleContentPanel, gridBagConstraints);
+
+        navigationPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("navigationPanel1.border.title"))); // NOI18N
+        navigationPanel1.setName("navigationPanel1"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        mainPanel.add(navigationPanel1, gridBagConstraints);
 
         setComponent(mainPanel);
         setMenuBar(menuBar);
@@ -313,7 +313,7 @@ public class EmaLaeDesktopView extends FrameView {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JPanel middleContentPanel;
-    private javax.swing.JPanel navigationPanel;
+    private emalaedesktopapplication.forms.NavigationPanel navigationPanel1;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JMenuItem recreateDataSetMenuItem;
     private javax.swing.JLabel statusAnimationLabel;
