@@ -28,8 +28,7 @@ public class HibernateUtil {
     {
         Configuration configuration = new AnnotationConfiguration();
         // configuration = configuration.configure();
-        configuration = configuration.configure("hibernate.cfg.xml");
-
+        
         return configuration;
     }
 
@@ -43,6 +42,7 @@ public class HibernateUtil {
                 Configuration configuration = getDefaultConfiguration();
                 // configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
                 sessionFactory = configuration.buildSessionFactory();
+                configuration = configuration.configure("hibernate-prod.cfg.xml");
             }
             catch (Throwable ex)
             {
@@ -68,10 +68,7 @@ public class HibernateUtil {
             {
                 // Create the SessionFactory from hibernate.cfg.xml
                 Configuration configuration = getDefaultConfiguration();
-                configuration.setProperty("hibernate.hbm2ddl.auto",
-                        "create-drop");
-                configuration.setProperty("hibernate.connection.url",
-                        "jdbc:hsqldb:file:database-test.db;shutdown=true");
+                configuration = configuration.configure("hibernate-test.cfg.xml");
                 sessionFactory = configuration.buildSessionFactory();
             }
             catch (Throwable ex)

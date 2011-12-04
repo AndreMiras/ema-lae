@@ -30,7 +30,6 @@ public class UserDaoTest {
 
     public UserDaoTest() {
     }
-
     @BeforeClass
     public static void setUpClass() throws Exception
     {
