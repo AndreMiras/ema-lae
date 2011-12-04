@@ -11,6 +11,8 @@
 
 package emalaedesktopapplication.forms;
 
+import javax.swing.tree.DefaultTreeCellRenderer;
+
 /**
  *
  * @author andre
@@ -20,6 +22,17 @@ public class NavigationPanel extends javax.swing.JPanel {
     /** Creates new form NavigationPanel */
     public NavigationPanel() {
         initComponents();
+        init();
+    }
+
+    /**
+     * Removes the nodes background color
+     */
+    private void init()
+    {
+        DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+        renderer.setBackgroundNonSelectionColor(null);
+        jTree1.setCellRenderer(renderer);
     }
 
     /** This method is called from within the constructor to
