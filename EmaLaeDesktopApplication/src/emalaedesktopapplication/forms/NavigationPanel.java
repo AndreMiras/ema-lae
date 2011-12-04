@@ -78,7 +78,7 @@ public class NavigationPanel extends javax.swing.JPanel {
         jTree1.setBackground(resourceMap.getColor("jTree1.background")); // NOI18N
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Home");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TODO");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Login");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Profile");

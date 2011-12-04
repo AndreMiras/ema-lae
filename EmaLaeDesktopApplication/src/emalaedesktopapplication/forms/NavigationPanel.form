@@ -54,7 +54,7 @@
           <Properties>
             <Property name="background" type="java.awt.Color" resourceKey="jTree1.background"/>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="Home&#xa; TODO&#xa;Profile&#xa; My profile&#xa; Contracts&#xa;Agenda&#xa; TODO&#xa;Messaging&#xa; TODO&#xa;TODO&#xa; TODO"/>
+              <TreeModel code="Home&#xa; Login&#xa;Profile&#xa; My profile&#xa; Contracts&#xa;Agenda&#xa; TODO&#xa;Messaging&#xa; TODO&#xa;TODO&#xa; TODO"/>
             </Property>
             <Property name="name" type="java.lang.String" value="jTree1" noResource="true"/>
             <Property name="rootVisible" type="boolean" value="false"/>

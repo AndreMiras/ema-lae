@@ -5,7 +5,9 @@
 package emalaedesktopapplication.controller;
 
 import emalaedesktopapplication.EmaLaeDesktopView;
+import emalaedesktopapplication.forms.LoginScreenPanel;
 import emalaedesktopapplication.forms.NavigationPanel;
+import emalaedesktopapplication.forms.ViewProfile;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -40,10 +42,30 @@ public class NavigationController
         {
             // TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
             DefaultMutableTreeNode node = navigationPanel.getCurrentPath();
-            System.out.println("Mouse clicked:");
+            System.out.println("Node selected:");
             if (node != null)
             {
                 System.out.println(node.toString());
+
+                if (node.toString().toLowerCase().equals("home") ||
+                    node.toString().toLowerCase().equals("login"))
+                {
+                    LoginScreenPanel loginScreenPanel = new LoginScreenPanel();
+                    LoginScreenController loginScreenController =
+                            new LoginScreenController(
+                                mainWindow, loginScreenPanel);
+                    mainWindow.setMiddleContentPanel(loginScreenPanel);
+                }
+                else if (node.toString().toLowerCase().equals("my profile"))
+                {
+                    ViewProfile viewProfilePanel = new ViewProfile();
+                    mainWindow.setMiddleContentPanel(viewProfilePanel);
+                }
+                else
+                {
+                    // TODO: log this one
+                    System.out.println("Unknown navigation item.");
+                }
             }
         }
 
