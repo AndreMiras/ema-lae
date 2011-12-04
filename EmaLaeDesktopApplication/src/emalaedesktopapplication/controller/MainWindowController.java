@@ -43,7 +43,7 @@ public class MainWindowController
         loginScreenController = new LoginScreenController(view, loginScreenPanel);
         setMiddleContent(loginScreenPanel);
 
-        navigationController = new NavigationController(view, null);
+        navigationController = new NavigationController(view, navigationPanel);
 
         initAdminMenu();
         addListeners();

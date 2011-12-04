@@ -4,7 +4,6 @@
 
 package emalaedesktopapplication;
 
-import emalaedesktopapplication.controller.MainWindowController;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 

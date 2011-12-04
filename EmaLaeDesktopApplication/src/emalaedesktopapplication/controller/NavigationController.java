@@ -49,22 +49,22 @@ public class NavigationController
 
         public void mousePressed(MouseEvent me)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            // throw new UnsupportedOperationException("Not supported yet.");
         }
 
         public void mouseReleased(MouseEvent me)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            // throw new UnsupportedOperationException("Not supported yet.");
         }
 
         public void mouseEntered(MouseEvent me)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            // throw new UnsupportedOperationException("Not supported yet.");
         }
 
         public void mouseExited(MouseEvent me)
         {
-            throw new UnsupportedOperationException("Not supported yet.");
+            // throw new UnsupportedOperationException("Not supported yet.");
         }
     }
 }
