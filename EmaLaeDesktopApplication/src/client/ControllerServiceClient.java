@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.core.IControllerService;
+import server.core.IControllerServiceFactory;
 
 /**
  *
@@ -26,7 +27,9 @@ public class ControllerServiceClient {
     public static synchronized IControllerService getController() {
         if (controller == null) {
             try {
-                controller = (IControllerService) Naming.lookup("rmi://localhost:1099/controller");
+                IControllerServiceFactory controllerServiceFactory =
+                        (IControllerServiceFactory) Naming.lookup("rmi://localhost:1099/controllerServiceFactory");
+                controller = controllerServiceFactory.createControllerService();
             } catch (NotBoundException ex) {
                 Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
             } catch (MalformedURLException ex) {

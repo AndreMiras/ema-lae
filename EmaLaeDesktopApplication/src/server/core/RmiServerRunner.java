@@ -9,8 +9,7 @@ import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 
 /**
- *
- * @author andre
+ * Runs the RMI Controller Factory
  */
 public class RmiServerRunner
 {
@@ -19,10 +18,11 @@ public class RmiServerRunner
     {
         try
         {
-
             LocateRegistry.createRegistry(1099);
-            ControllerServiceImpl controller = new ControllerServiceImpl();
-            Naming.rebind("rmi://localhost:1099/controller", controller);
+            IControllerServiceFactory controller =
+                    new ControllerServiceFactoryImpl();
+            Naming.rebind("rmi://localhost:1099/controllerServiceFactory",
+                    controller);
         } catch (IOException e)
         {
             System.err.println(e);
