@@ -21,6 +21,7 @@ import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * The application's main frame.
@@ -31,6 +32,7 @@ public class EmaLaeDesktopView extends FrameView {
         super(app);
 
         initComponents();
+        customInitComponents();
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -137,6 +139,23 @@ public class EmaLaeDesktopView extends FrameView {
         }
     }
 
+    /**
+     * Performs some additional component init
+     *  - set main widow minimum size (from its main component min size)
+     */
+    private void customInitComponents()
+    {
+        JFrame mainFrame = this.getFrame();
+        JPanel componentPanel = this.mainPanel;
+
+        mainFrame.pack();
+        mainFrame.setMinimumSize(componentPanel.getMinimumSize());
+        // mainFrame.setMinimumSize(new Dimension(800, 500));
+        mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // mainFrame.setResizable(false);
+        mainFrame.validate();
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -163,7 +182,6 @@ public class EmaLaeDesktopView extends FrameView {
         progressBar = new javax.swing.JProgressBar();
         mainPanel = new javax.swing.JPanel();
         navigationPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         middleContentPanel = new javax.swing.JPanel();
 
         menuBar.setName("menuBar"); // NOI18N
@@ -253,11 +271,6 @@ public class EmaLaeDesktopView extends FrameView {
         mainPanel.setLayout(new java.awt.GridBagLayout());
 
         navigationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("navigationPanel.border.title"))); // NOI18N
-
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
-        navigationPanel.add(jButton1);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -297,7 +310,6 @@ public class EmaLaeDesktopView extends FrameView {
     private javax.swing.JMenu adminListChangeMenu;
     private javax.swing.JMenu adminMenu;
     private javax.swing.JMenuItem editViewMenuItem;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JPanel middleContentPanel;
