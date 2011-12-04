@@ -30,7 +30,7 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
 
     protected Users loggedUser;
 
-    public ControllerServiceImpl() throws java.rmi.RemoteException, java.io.IOException
+    ControllerServiceImpl() throws java.rmi.RemoteException, java.io.IOException
     {
     }
 
