@@ -53,13 +53,13 @@ public class ControllerImplTest {
     }
 
     /**
-     * Test of initDatabaseForTests method, of class ControllerImpl.
+     * Test of initDatabaseForTests method, of class ControllerServiceImpl.
      */
     @Test
     public void testInitDatabaseForTests() throws Exception
     {
         System.out.println("initDatabaseForTests");
-        ControllerImpl controllerImpl = new ControllerImpl();
+        ControllerServiceImpl controllerImpl = new ControllerServiceImpl();
         UserProfileDao userProfileDao = new UserProfileDao();
         UserDao userDao = new UserDao();
         InitDatabase initDatabase = new InitDatabase();
@@ -77,14 +77,14 @@ public class ControllerImplTest {
     }
 
     /**
-     * Test of login method, of class ControllerImpl.
+     * Test of login method, of class ControllerServiceImpl.
      */
     @Test
     public void testLogin() throws Exception
     {
         System.out.println("login");
         Users user;
-        ControllerImpl controllerImpl = new ControllerImpl();
+        ControllerServiceImpl controllerImpl = new ControllerServiceImpl();
         Boolean loginResult;
         String correctUsername = "username1";
         String correctPassword = "pwd1";
@@ -118,14 +118,14 @@ public class ControllerImplTest {
     }
 
     /**
-     * Test of getUser method, of class ControllerImpl.
+     * Test of getUser method, of class ControllerServiceImpl.
      */
     @Test
     public void testGetUser() throws Exception
     {
         System.out.println("getUser");
         Users user;
-        ControllerImpl controllerImpl = new ControllerImpl();
+        ControllerServiceImpl controllerImpl = new ControllerServiceImpl();
         String username = "username1";
         String password = "pwd1";
         controllerImpl.initDatabaseForTests();
@@ -141,14 +141,14 @@ public class ControllerImplTest {
     }
 
     /**
-     * Test of getUserProfile method, of class ControllerImpl.
+     * Test of getUserProfile method, of class ControllerServiceImpl.
      */
     @Test
     public void testGetUserProfile() throws Exception
     {
         System.out.println("getUserProfile");
         UserProfile userProfile;
-        ControllerImpl controllerImpl = new ControllerImpl();
+        ControllerServiceImpl controllerImpl = new ControllerServiceImpl();
         String username = "username1";
         String password = "pwd1";
         controllerImpl.initDatabaseForTests();

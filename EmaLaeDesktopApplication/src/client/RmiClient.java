@@ -10,7 +10,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import server.core.IController;
+import server.core.IControllerService;
 
 /**
  *
@@ -18,15 +18,15 @@ import server.core.IController;
  */
 public class RmiClient {
 
-    private static IController controller;
+    private static IControllerService controller;
 
     public void RmiClient() {
     }
 
-    public static synchronized IController getController() {
+    public static synchronized IControllerService getController() {
         if (controller == null) {
             try {
-                controller = (IController) Naming.lookup("rmi://localhost:1099/controller");
+                controller = (IControllerService) Naming.lookup("rmi://localhost:1099/controller");
             } catch (NotBoundException ex) {
                 Logger.getLogger(RmiClient.class.getName()).log(Level.SEVERE, null, ex);
             } catch (MalformedURLException ex) {
