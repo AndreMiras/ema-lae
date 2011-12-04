@@ -12,8 +12,8 @@
 package emalaedesktopapplication.forms;
 
 import java.awt.event.MouseListener;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.TreePath;
 
 /**
  *
@@ -43,12 +43,18 @@ public class NavigationPanel extends javax.swing.JPanel {
     }
 
     /**
-     * @return TreePath of the current mouse location
+     * @return the selected leaf node
      */
-    public TreePath getCurrentPath()
+    public DefaultMutableTreeNode getCurrentPath()
     {
-        TreePath treePath = jTree1.getLeadSelectionPath();
-        return treePath;
+        DefaultMutableTreeNode node;
+
+        node = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
+        if (!node.isLeaf())
+        {
+           node = null;
+        }
+        return node;
     }
 
     /** This method is called from within the constructor to

@@ -8,7 +8,7 @@ import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.NavigationPanel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.tree.TreePath;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -39,11 +39,11 @@ public class NavigationController
         public void mouseClicked(MouseEvent me)
         {
             // TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
-            TreePath tp = navigationPanel.getCurrentPath();
+            DefaultMutableTreeNode node = navigationPanel.getCurrentPath();
             System.out.println("Mouse clicked:");
-            if (tp != null)
+            if (node != null)
             {
-                System.out.println(tp.toString());
+                System.out.println(node.toString());
             }
         }
 
