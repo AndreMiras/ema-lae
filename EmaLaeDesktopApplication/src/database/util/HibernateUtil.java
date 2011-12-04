@@ -40,9 +40,9 @@ public class HibernateUtil {
             {
                 // Create the SessionFactory from hibernate.cfg.xml
                 Configuration configuration = getDefaultConfiguration();
+                configuration = configuration.configure("hibernate-prod.cfg.xml");
                 // configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
                 sessionFactory = configuration.buildSessionFactory();
-                configuration = configuration.configure("hibernate-prod.cfg.xml");
             }
             catch (Throwable ex)
             {
