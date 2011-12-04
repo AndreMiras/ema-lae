@@ -16,7 +16,7 @@ import server.core.IControllerService;
  *
  * @author andre
  */
-public class RmiClient {
+public class ControllerServiceClient {
 
     private static IControllerService controller;
 
@@ -28,11 +28,11 @@ public class RmiClient {
             try {
                 controller = (IControllerService) Naming.lookup("rmi://localhost:1099/controller");
             } catch (NotBoundException ex) {
-                Logger.getLogger(RmiClient.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
             } catch (MalformedURLException ex) {
-                Logger.getLogger(RmiClient.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RemoteException ex) {
-                Logger.getLogger(RmiClient.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return controller;

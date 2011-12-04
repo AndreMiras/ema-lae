@@ -5,7 +5,7 @@
 
 package emalaedesktopapplication.controller;
 
-import client.RmiClient;
+import client.ControllerServiceClient;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.admin.AdminListChangePanel;
 import java.rmi.RemoteException;
@@ -37,7 +37,7 @@ public class AdminController<T> {
 
         try
         {
-            objs = (T[]) RmiClient.getController().getAllObjects(type);
+            objs = (T[]) ControllerServiceClient.getController().getAllObjects(type);
         } catch (RemoteException ex)
         {
             Logger.getLogger(AdminController.class.getName()).log(

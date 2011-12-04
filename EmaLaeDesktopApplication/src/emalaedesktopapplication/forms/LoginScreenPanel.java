@@ -11,7 +11,7 @@
 
 package emalaedesktopapplication.forms;
 
-import client.RmiClient;
+import client.ControllerServiceClient;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;

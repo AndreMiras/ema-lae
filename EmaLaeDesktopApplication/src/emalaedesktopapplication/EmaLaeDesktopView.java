@@ -4,7 +4,7 @@
 
 package emalaedesktopapplication;
 
-import client.RmiClient;
+import client.ControllerServiceClient;
 import emalaedesktopapplication.controller.MainWindowController;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
@@ -311,7 +311,7 @@ public class EmaLaeDesktopView extends FrameView {
     {//GEN-HEADEREND:event_recreateDataSetMenuItemClicked
         try
         {
-            RmiClient.getController().initDatabaseForTests();
+            ControllerServiceClient.getController().initDatabaseForTests();
         } catch (RemoteException ex)
         {
             Logger.getLogger(EmaLaeDesktopView.class.getName()).log(Level.SEVERE, null, ex);

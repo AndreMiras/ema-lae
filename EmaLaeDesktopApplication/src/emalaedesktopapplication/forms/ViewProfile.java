@@ -11,7 +11,7 @@
 
 package emalaedesktopapplication.forms;
 
-import client.RmiClient;
+import client.ControllerServiceClient;
 import database.entity.UserProfile;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
@@ -29,7 +29,7 @@ public class ViewProfile extends javax.swing.JPanel {
         UserProfile userProfile;
         try
         {
-            userProfile = RmiClient.getController().getUserProfile();
+            userProfile = ControllerServiceClient.getController().getUserProfile();
         } catch (RemoteException ex)
         {
             Logger.getLogger(ViewProfile.class.getName()).log(Level.SEVERE, null, ex);

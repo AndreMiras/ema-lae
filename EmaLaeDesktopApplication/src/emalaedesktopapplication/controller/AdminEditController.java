@@ -4,7 +4,7 @@
  */
 package emalaedesktopapplication.controller;
 
-import client.RmiClient;
+import client.ControllerServiceClient;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.admin.AdminEditPanel;
 import java.awt.event.ActionEvent;
@@ -47,7 +47,7 @@ public class AdminEditController<T>
                 try
                 {
                     // hit the database back with the edited user
-                    RmiClient.getController().createOrUpdate(
+                    ControllerServiceClient.getController().createOrUpdate(
                             type, editedObj);
                 } catch (RemoteException ex)
                 {
@@ -59,7 +59,7 @@ public class AdminEditController<T>
                 try
                 {
                     // TODO: go back to the previous screen
-                    RmiClient.getController().delete(type, obj);
+                    ControllerServiceClient.getController().delete(type, obj);
                 } catch (RemoteException ex)
                 {
                     Logger.getLogger(AdminEditController.class.getName()).log(Level.SEVERE, null, ex);

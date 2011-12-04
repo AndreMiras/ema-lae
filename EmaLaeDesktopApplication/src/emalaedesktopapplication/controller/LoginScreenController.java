@@ -4,7 +4,7 @@
  */
 package emalaedesktopapplication.controller;
 
-import client.RmiClient;
+import client.ControllerServiceClient;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
 import emalaedesktopapplication.forms.ViewProfile;
@@ -48,7 +48,7 @@ public class LoginScreenController
 
             try
             {
-                loginSuccess = RmiClient.getController().login(username, password);
+                loginSuccess = ControllerServiceClient.getController().login(username, password);
             } catch (RemoteException ex)
             {
                 Logger.getLogger(LoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
