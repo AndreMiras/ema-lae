@@ -6,6 +6,7 @@ package emalaedesktopapplication.controller;
 
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
+import emalaedesktopapplication.forms.NavigationPanel;
 import emalaedesktopapplication.forms.admin.AdminListChangePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,7 @@ public class MainWindowController
     private EmaLaeDesktopView view;
     private LoginScreenPanel loginScreenPanel;
     private LoginScreenController loginScreenController;
+    private NavigationController navigationController;
     private String[] entitiesAdmin = new String[]
     {
         "database.entity.User",
@@ -33,12 +35,15 @@ public class MainWindowController
         "database.entity.Formation"
     };
 
-    public MainWindowController(EmaLaeDesktopView view)
+    public MainWindowController(EmaLaeDesktopView view,
+            NavigationPanel navigationPanel)
     {
         this.view = view;
         loginScreenPanel = new LoginScreenPanel();
         loginScreenController = new LoginScreenController(view, loginScreenPanel);
         setMiddleContent(loginScreenPanel);
+
+        navigationController = new NavigationController(view, null);
 
         initAdminMenu();
         addListeners();

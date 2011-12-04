@@ -11,7 +11,9 @@
 
 package emalaedesktopapplication.forms;
 
+import java.awt.event.MouseListener;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.TreePath;
 
 /**
  *
@@ -33,6 +35,20 @@ public class NavigationPanel extends javax.swing.JPanel {
         DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
         renderer.setBackgroundNonSelectionColor(null);
         jTree1.setCellRenderer(renderer);
+    }
+
+    public void addTreeMouseListener(MouseListener l)
+    {
+        jTree1.addMouseListener(l);
+    }
+
+    /**
+     * @return TreePath of the current mouse location
+     */
+    public TreePath getCurrentPath()
+    {
+        TreePath treePath = jTree1.getLeadSelectionPath();
+        return treePath;
     }
 
     /** This method is called from within the constructor to

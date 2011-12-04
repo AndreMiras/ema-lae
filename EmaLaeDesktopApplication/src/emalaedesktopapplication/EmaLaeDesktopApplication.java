@@ -19,9 +19,7 @@ public class EmaLaeDesktopApplication extends SingleFrameApplication {
      */
     @Override protected void startup() {
         EmaLaeDesktopView emaLaeDesktopView;
-        MainWindowController mainWindowController;
         emaLaeDesktopView = new EmaLaeDesktopView(this);
-        mainWindowController = new MainWindowController(emaLaeDesktopView);
         show(emaLaeDesktopView);
     }
 

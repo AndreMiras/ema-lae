@@ -5,6 +5,7 @@
 package emalaedesktopapplication;
 
 import client.RmiClient;
+import emalaedesktopapplication.controller.MainWindowController;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +34,7 @@ public class EmaLaeDesktopView extends FrameView {
 
         initComponents();
         customInitComponents();
+        setMainWindowController();
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -154,6 +156,16 @@ public class EmaLaeDesktopView extends FrameView {
         mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // mainFrame.setResizable(false);
         mainFrame.validate();
+    }
+
+    /**
+     * Constructs default controllers
+     */
+    private void setMainWindowController()
+    {
+        MainWindowController mainWindowController;
+        mainWindowController =
+                new MainWindowController(this, navigationPanel1);
     }
 
     /** This method is called from within the constructor to
