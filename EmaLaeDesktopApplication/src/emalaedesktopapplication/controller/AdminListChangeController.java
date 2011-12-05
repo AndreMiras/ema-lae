@@ -5,7 +5,7 @@
 
 package emalaedesktopapplication.controller;
 
-import client.RmiClient;
+import client.ControllerServiceClient;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.admin.AdminEditPanel;
 import emalaedesktopapplication.forms.admin.AdminListChangePanel;
@@ -77,14 +77,14 @@ public class AdminListChangeController<T> {
                 T obj = (T) view.getSelectedItem();
                 try
                 {
-                    RmiClient.getController().delete(type, obj);
+                    ControllerServiceClient.getController().delete(type, obj);
                 } catch (RemoteException ex)
                 {
                     Logger.getLogger(AdminListChangeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 try
                 {
-                    objs = (T[]) RmiClient.getController().getAllObjects(type);
+                    objs = (T[]) ControllerServiceClient.getController().getAllObjects(type);
                 } catch (RemoteException ex)
                 {
                     Logger.getLogger(AdminListChangeController.class.getName()).log(Level.SEVERE, null, ex);

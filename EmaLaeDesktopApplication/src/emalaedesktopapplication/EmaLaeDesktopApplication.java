@@ -4,7 +4,6 @@
 
 package emalaedesktopapplication;
 
-import emalaedesktopapplication.controller.MainWindowController;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -19,9 +18,7 @@ public class EmaLaeDesktopApplication extends SingleFrameApplication {
      */
     @Override protected void startup() {
         EmaLaeDesktopView emaLaeDesktopView;
-        MainWindowController mainWindowController;
         emaLaeDesktopView = new EmaLaeDesktopView(this);
-        mainWindowController = new MainWindowController(emaLaeDesktopView);
         show(emaLaeDesktopView);
     }
 

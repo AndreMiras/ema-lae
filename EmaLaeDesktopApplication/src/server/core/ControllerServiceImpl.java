@@ -24,13 +24,13 @@ import java.util.logging.Logger;
  *
  * @author laurent
  */
-public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
-        implements IController
+public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
+        implements IControllerService
     {
 
     protected Users loggedUser;
 
-    public ControllerImpl() throws java.rmi.RemoteException, java.io.IOException
+    ControllerServiceImpl() throws java.rmi.RemoteException, java.io.IOException
     {
     }
 
@@ -87,7 +87,7 @@ public class ControllerImpl extends java.rmi.server.UnicastRemoteObject
                 userProfile = (UserProfile) userProfileDao.get(loggedUser);
             } catch (DaoException ex)
             {
-                Logger.getLogger(ControllerImpl.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

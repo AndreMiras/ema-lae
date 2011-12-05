@@ -23,7 +23,8 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
     <entity type="database.entity.UserGroup">
         <property name="groupId" read-only="true" wide="true"/>
         <property name="name"/>
-        <property name="permissions"/>
+        <property name="users" wide="true"/>
+        <property name="permissions" wide="true"/>
     </entity>
     <entity type="database.entity.UserProfile">
         <property name="user" hidden="true"/>

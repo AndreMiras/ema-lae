@@ -23,12 +23,14 @@ public class CollectionWidgetBuilder
         implements WidgetBuilder<JComponent, SwingMetawidget>
 {
 
-    public JComponent buildWidget(String elementName, Map<String, String> attributes, SwingMetawidget metawidget)
+    public JComponent buildWidget(String elementName,
+            Map<String, String> attributes, SwingMetawidget metawidget)
     {
 
         // Not for us?
 
-        if (TRUE.equals(attributes.get(HIDDEN)) || attributes.containsKey(LOOKUP))
+        if (TRUE.equals(attributes.get(HIDDEN))
+                || attributes.containsKey(LOOKUP))
         {
             return null;
         }
@@ -65,7 +67,6 @@ public class CollectionWidgetBuilder
 
         for (int loop = 0, length = elements.getLength(); loop < length; loop++)
         {
-
             Node node = elements.item(loop);
             Map<String, String> attributesAsMap = XmlUtils.getAttributesAsMap(node);
             String columnName = attributesAsMap.get("name");

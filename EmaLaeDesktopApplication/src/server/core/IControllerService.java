@@ -14,7 +14,7 @@ import java.io.Serializable;
  *
  * @author andre
  */
-public interface IController extends java.rmi.Remote {
+public interface IControllerService extends java.rmi.Remote {
 
 
     /**
