@@ -244,4 +244,10 @@ public class UserProfileDaoTest {
         fail("The test case is a prototype.");
     }
 
+    @Test
+    public void getContract()
+    {
+        System.out.println("getContract");
+    }
+
 }

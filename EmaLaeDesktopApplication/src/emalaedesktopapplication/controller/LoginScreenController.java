@@ -58,8 +58,10 @@ public class LoginScreenController
             // get the user to the home screen if success
             if (loginSuccess)
             {
-                ViewProfile viewProfilePanel = new ViewProfile();
-                mainWindow.setMiddleContentPanel(viewProfilePanel);
+                UserProfileController userProfileController =
+                        new UserProfileController(mainWindow);
+                mainWindow.setMiddleContentPanel(
+                        userProfileController.getView());
             }
             // otherwise popup an error message
             else

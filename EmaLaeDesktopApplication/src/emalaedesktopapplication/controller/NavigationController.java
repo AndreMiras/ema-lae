@@ -58,8 +58,10 @@ public class NavigationController
                 }
                 else if (node.toString().toLowerCase().equals("my profile"))
                 {
-                    ViewProfile viewProfilePanel = new ViewProfile();
-                    mainWindow.setMiddleContentPanel(viewProfilePanel);
+                    UserProfileController userProfileController =
+                            new UserProfileController(mainWindow);
+                    mainWindow.setMiddleContentPanel(
+                    userProfileController.getView());
                 }
                 else
                 {

@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import org.hibernate.annotations.Parameter;
@@ -54,6 +55,9 @@ public class UserProfile implements Serializable {
     public enum Type { Apprentice, InternshipSupervisor, SupervisingTeacher }
     @Column
     private Type userProfileType;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn
+    private Contract contract;
 
     public UserProfile()
     {
@@ -155,6 +159,14 @@ public class UserProfile implements Serializable {
 
     public void setUserProfileType(Type userProfileType) {
         this.userProfileType = userProfileType;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
     }
 
     public boolean isApprentice(){

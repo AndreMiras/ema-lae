@@ -80,8 +80,6 @@ public class MainWindowController
             JMenuItem target = (JMenuItem) e.getSource();
             String actionCommand = target.getActionCommand();
             System.out.println("action performed: " + actionCommand);
-            AdminListChangePanel adminListChangePanel = null;
-            AdminListChangeController adminListChangeController;
 
             if (actionCommand.equals("database.entity.User"))
             {
