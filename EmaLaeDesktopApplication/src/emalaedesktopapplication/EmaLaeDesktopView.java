@@ -109,6 +109,7 @@ public class EmaLaeDesktopView extends FrameView {
     public void setMiddleContentPanel(JComponent panel)
     {
         JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setBorder(null);
         middleContentPanel.removeAll();
         panel.setVisible(true);
         // java.awt.CardLayout cl = (java.awt.CardLayout)(panel.getLayout());
@@ -253,11 +254,11 @@ public class EmaLaeDesktopView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 566, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -276,9 +277,9 @@ public class EmaLaeDesktopView extends FrameView {
         );
 
         mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("mainPanel.border.title"))); // NOI18N
-        mainPanel.setMinimumSize(new java.awt.Dimension(700, 500));
+        mainPanel.setMinimumSize(new java.awt.Dimension(750, 550));
         mainPanel.setName("mainPanel"); // NOI18N
-        mainPanel.setPreferredSize(new java.awt.Dimension(600, 600));
+        mainPanel.setPreferredSize(null);
         mainPanel.setLayout(new java.awt.GridBagLayout());
 
         middleContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Middle Content"));
