@@ -163,7 +163,7 @@ public class ContractDaoTest {
         assertTrue(allContractsBefore.size() -1 == allContractsAfter.size());
     }
 
-    @Test(expected=NullPointerException.class)
+    @Test(expected=Error.class)
     public void getUsersShouldFail()
     {
         //It should not be possible to create a contract without the three users

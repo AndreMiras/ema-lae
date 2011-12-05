@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.core.IControllerService;
 import server.core.IControllerServiceFactory;
+import emalaedesktopapplication.utils.*;
+import java.util.Properties;
 
 /**
  *
@@ -27,8 +29,12 @@ public class ControllerServiceClient {
     public static synchronized IControllerService getController() {
         if (controller == null) {
             try {
+                Properties rmiProp = Utils.readProperties("./src/emalaedesktopapplication/utils/RMI");
                 IControllerServiceFactory controllerServiceFactory =
-                        (IControllerServiceFactory) Naming.lookup("rmi://localhost:1099/controllerServiceFactory");
+                        (IControllerServiceFactory) Naming.lookup(rmiProp.getProperty("protocol")+
+                        "://"+rmiProp.getProperty("ipaddress")+
+                        ":"+rmiProp.getProperty("port")+
+                        "/"+rmiProp.getProperty("directory"));
                 controller = controllerServiceFactory.createControllerService();
             } catch (NotBoundException ex) {
                 Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
