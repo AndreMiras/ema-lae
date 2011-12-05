@@ -149,7 +149,7 @@ public class ViewProfile extends javax.swing.JPanel {
                     .addComponent(birthDateLabel)
                     .addComponent(lastNameLabel)
                     .addComponent(firstNameLabel))
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +225,7 @@ public class ViewProfile extends javax.swing.JPanel {
                     .addComponent(jLabel16)
                     .addComponent(addressLabel)
                     .addComponent(jLabel14))
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +331,7 @@ public class ViewProfile extends javax.swing.JPanel {
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(beginDateLabel)))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
