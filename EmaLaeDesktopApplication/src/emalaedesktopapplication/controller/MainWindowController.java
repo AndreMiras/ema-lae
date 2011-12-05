@@ -7,7 +7,6 @@ package emalaedesktopapplication.controller;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
 import emalaedesktopapplication.forms.NavigationPanel;
-import emalaedesktopapplication.forms.admin.AdminListChangePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
@@ -28,11 +27,11 @@ public class MainWindowController
     private NavigationController navigationController;
     private String[] entitiesAdmin = new String[]
     {
-        "database.entity.User",
-        "database.entity.Group",
-        "database.entity.Permission",
-        "database.entity.UserProfile",
-        "database.entity.Formation"
+        database.entity.Users.class.getName(),
+        database.entity.UserGroup.class.getName(),
+        database.entity.Permission.class.getName(),
+        database.entity.UserProfile.class.getName(),
+        database.entity.Formation.class.getName()
     };
 
     public MainWindowController(EmaLaeDesktopView view,
@@ -81,35 +80,40 @@ public class MainWindowController
             String actionCommand = target.getActionCommand();
             System.out.println("action performed: " + actionCommand);
 
-            if (actionCommand.equals("database.entity.User"))
+            if (actionCommand.equals(
+                    database.entity.Users.class.getName()))
             {
                 AdminController<database.entity.Users> adminController =
                         new AdminController<database.entity.Users>(
                             view, database.entity.Users.class);
                 adminController.adminListChange();
             }
-            else if (actionCommand.equals("database.entity.Group"))
+            else if (actionCommand.equals(
+                    database.entity.UserGroup.class.getName()))
             {
                AdminController<database.entity.UserGroup> adminController =
                         new AdminController<database.entity.UserGroup>(
                             view, database.entity.UserGroup.class);
                 adminController.adminListChange();
             }
-            else if (actionCommand.equals("database.entity.Permission"))
+            else if (actionCommand.equals(
+                    database.entity.Permission.class.getName()))
             {
                AdminController<database.entity.Permission> adminController =
                         new AdminController<database.entity.Permission>(
                             view, database.entity.Permission.class);
                 adminController.adminListChange();
             }
-            else if (actionCommand.equals("database.entity.UserProfile"))
+            else if (actionCommand.equals(
+                    database.entity.UserProfile.class.getName()))
             {
                AdminController<database.entity.UserProfile> adminController =
                         new AdminController<database.entity.UserProfile>(
                             view, database.entity.UserProfile.class);
                 adminController.adminListChange();
             }
-            else if (actionCommand.equals("database.entity.Formation"))
+            else if (actionCommand.equals(
+                    database.entity.Formation.class.getName()))
             {
                AdminController<database.entity.Formation> adminController =
                         new AdminController<database.entity.Formation>(
@@ -118,7 +122,7 @@ public class MainWindowController
             }
             else
             {
-                Logger.getLogger(AdminController.class.getName()).log(
+                Logger.getLogger(MainWindowController.class.getName()).log(
                         Level.WARNING, null, "Unknown entity type");
             }
         }
