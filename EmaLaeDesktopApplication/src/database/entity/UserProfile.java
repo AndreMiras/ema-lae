@@ -52,6 +52,9 @@ public class UserProfile implements Serializable {
     private String phoneNumber;
     @Column
     private String email;
+    public enum Gender { Male, Female }
+    @Column
+    private Gender gender;
     public enum Type { Apprentice, InternshipSupervisor, SupervisingTeacher }
     @Column
     private Type userProfileType;
@@ -229,7 +232,14 @@ public class UserProfile implements Serializable {
         // back to the client
         if (photoPath == null)
         {
-            return "src/emalaedesktopapplication/resources/man-icon.png";
+            if (gender == Gender.Female)
+            {
+                return "src/emalaedesktopapplication/resources/woman-icon.png";
+            }
+            else
+            {
+                return "src/emalaedesktopapplication/resources/man-icon.png";
+            }
         }
         return photoPath;
     }
@@ -237,5 +247,27 @@ public class UserProfile implements Serializable {
     public void setPhotoPath(String photo)
     {
         this.photoPath = photo;
+    }
+
+    public Gender getGender()
+    {
+        return gender;
+    }
+
+    public void setGender(Gender gender)
+    {
+        this.gender = gender;
+    }
+
+    public String getTitle()
+    {
+        if (gender == Gender.Female)
+        {
+            return "Mme.";
+        }
+        else
+        {
+            return "M.";
+        }
     }
 }

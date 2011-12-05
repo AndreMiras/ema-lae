@@ -43,6 +43,7 @@ public class ViewProfile extends javax.swing.JPanel {
      */
     private void updateFieldsFromUserProfile(UserProfile userProfile)
     {
+        genderLabel.setText(userProfile.getTitle());
         firstNameLabel.setText(userProfile.getFirstName());
         lastNameLabel.setText(userProfile.getLastName());
         phoneNumberLabel.setText(userProfile.getPhoneNumber());
