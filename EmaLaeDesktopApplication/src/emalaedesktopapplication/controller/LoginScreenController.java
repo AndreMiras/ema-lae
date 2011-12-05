@@ -7,7 +7,6 @@ package emalaedesktopapplication.controller;
 import client.ControllerServiceClient;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
-import emalaedesktopapplication.forms.ViewProfile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;

@@ -63,11 +63,11 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="loginTextField" alignment="1" pref="108" max="32767" attributes="0"/>
-                      <Component id="passwordTextField" alignment="1" pref="108" max="32767" attributes="0"/>
+                      <Component id="loginTextField" alignment="1" pref="109" max="32767" attributes="0"/>
                       <Component id="connectionButton" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="passwordTextField" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -84,7 +84,7 @@
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="passwordTextField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="connectionButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -104,12 +104,6 @@
             <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="passwordTextField">
-          <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="passwordTextField.text"/>
-            <Property name="name" type="java.lang.String" value="passwordTextField" noResource="true"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="jLabel2.text"/>
@@ -120,6 +114,12 @@
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="connectionButton.text"/>
             <Property name="name" type="java.lang.String" value="connectionButton" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="passwordTextField">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="passwordTextField.text"/>
+            <Property name="name" type="java.lang.String" value="passwordTextField" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
