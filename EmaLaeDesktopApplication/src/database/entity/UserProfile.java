@@ -6,6 +6,7 @@
 package database.entity;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -91,6 +92,39 @@ public class UserProfile implements Serializable {
 
     public Date getBirthDate() {
         return birthDate;
+    }
+
+    /**
+     *
+     * @return age computed from birthdate
+     */
+    public Integer getAge()
+    {
+        Calendar now = Calendar.getInstance();
+        Calendar dob = Calendar.getInstance();
+        dob.setTime(birthDate);
+        if (dob.after(now))
+        {
+            throw new IllegalArgumentException("Can't be born in the future");
+        }
+        int year1 = now.get(Calendar.YEAR);
+        int year2 = dob.get(Calendar.YEAR);
+        int age = year1 - year2;
+        int month1 = now.get(Calendar.MONTH);
+        int month2 = dob.get(Calendar.MONTH);
+        if (month2 > month1)
+        {
+            age--;
+        } else if (month1 == month2)
+        {
+            int day1 = now.get(Calendar.DAY_OF_MONTH);
+            int day2 = dob.get(Calendar.DAY_OF_MONTH);
+            if (day2 > day1)
+            {
+                age--;
+            }
+        }
+        return age;
     }
 
     public String getEmail() {
