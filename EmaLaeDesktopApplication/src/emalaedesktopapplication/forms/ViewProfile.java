@@ -49,6 +49,14 @@ public class ViewProfile extends javax.swing.JPanel {
                     );
             emailLabel.setText(userProfile.getEmail());
         }
+
+        if(userProfile.getContract() != null){
+            apprenticeLabel.setText(userProfile.getContract().getApprentice().toString());
+            internshipSupervisorLabel.setText(userProfile.getContract().getInternshipSupervisor().toString());
+            supervisingTeacherLabel.setText(userProfile.getContract().getSupervisingTeacher().toString());
+            beginDateLabel.setText((userProfile.getContract().getBeginDate().toString()));
+            endDateLabel.setText((userProfile.getContract().getEndDate().toString()));
+        }
     }
 
 

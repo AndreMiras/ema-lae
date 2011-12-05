@@ -5,14 +5,9 @@
 
 package database.util;
 
-import dao.GroupDao;
-import dao.PermissionsDao;
-import dao.UserDao;
-import dao.UserProfileDao;
-import database.entity.UserGroup;
-import database.entity.Permission;
-import database.entity.Users;
-import database.entity.UserProfile;
+import dao.*;
+import database.entity.*;
+import exceptions.ContractException;
 import java.util.List;
 
 /**
@@ -47,7 +42,18 @@ public class InitDatabase {
             userProfile = new UserProfile(user);
             userProfile.setFirstName(firstname + i);
             userProfile.setLastName(lastname + i);
-
+            // Attribute a different type each user
+            switch (i%3){
+                case 1:
+                    userProfile.setUserProfileType(UserProfile.Type.Apprentice);
+                    break;
+                case 2:
+                    userProfile.setUserProfileType(UserProfile.Type.InternshipSupervisor);
+                    break;
+                case 3:
+                    userProfile.setUserProfileType(UserProfile.Type.SupervisingTeacher);
+                    break;
+            }
             userProfileDao.create(userProfile);
         }
     }
@@ -132,6 +138,68 @@ public class InitDatabase {
             group = (UserGroup) groups.get(i);
             groupDao.delete(group);
         }
+    }
+
+    public void createContracts()
+    {
+        UserProfileDao userProfileDao;
+        ContractDao contractDao;
+        Users user;
+        String username;
+        String password;
+        String firstname;
+        String lastname;
+        UserProfile userProfile1;
+        UserProfile userProfile2;
+        UserProfile userProfile3;
+        Contract contract;
+
+        userProfileDao = new UserProfileDao();
+        contractDao = new ContractDao();
+        username = "username";
+        password = "pwd";
+        firstname = "firstname";
+        lastname = "lastname";
+
+
+        user = new Users(username+'1');
+        user.setPassword(password+'1');
+        userProfile1 = new UserProfile(user);
+        userProfile1.setFirstName(firstname + '1');
+        userProfile1.setLastName(lastname + '1');
+        // Attribute a different type each user
+        userProfile1.setUserProfileType(UserProfile.Type.Apprentice);
+        Integer id = userProfileDao.create(userProfile1);
+        
+        user = new Users(username+'2');
+        user.setPassword(password+'2');
+        userProfile2 = new UserProfile(user);
+        userProfile2.setFirstName(firstname + '2');
+        userProfile2.setLastName(lastname + '2');
+        // Attribute a different type each user
+        userProfile2.setUserProfileType(UserProfile.Type.InternshipSupervisor);
+        userProfileDao.create(userProfile2);
+        
+        user = new Users(username+'3');
+        user.setPassword(password+'3');
+        userProfile3 = new UserProfile(user);
+        userProfile3.setFirstName(firstname + '3');
+        userProfile3.setLastName(lastname + '3');
+        // Attribute a different type each user
+        userProfile3.setUserProfileType(UserProfile.Type.SupervisingTeacher);
+        userProfileDao.create(userProfile3);
+
+
+        try{
+            contract = new Contract(userProfile1, userProfile2, userProfile3);
+            contractDao.create(contract);
+            userProfile1 = userProfileDao.read(id);
+            System.out.println("");
+        }
+        catch(ContractException e){
+            System.out.println("Bad contract");
+        }
+
     }
 
 }
