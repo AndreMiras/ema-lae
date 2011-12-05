@@ -29,7 +29,7 @@ public class LoginScreenPanel extends javax.swing.JPanel {
     }
 
     /**
-     * Listening to "Enter" key event for both login and password fields
+     * Makes the return (Enter) key validate form, refs #30
      */
     private void customInitComponents()
     {
