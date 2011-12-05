@@ -69,7 +69,7 @@ public class UserProfile implements Serializable {
     }
 
     public UserProfile(Users user, Type userProfileType) {
-        this.user = user;
+        this(user);
         this.userProfileType = userProfileType;
     }
 
