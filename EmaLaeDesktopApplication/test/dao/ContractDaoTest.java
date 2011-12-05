@@ -162,6 +162,62 @@ public class ContractDaoTest {
         assertTrue(allContractsBefore.size() -1 == allContractsAfter.size());
     }
 
+    @Test(expected=NullPointerException.class)
+    public void getUsersShouldFail()
+    {
+        //It should not be possible to create a contract without the three users
+        System.out.println("getContract");
+        // Instantiate the objects
+        ContractDao instance = new ContractDao();
+        UserProfileDao uinstance = new UserProfileDao();
+        Users u1 = new Users("user4getContract");
+        UserProfile p1 = new UserProfile(u1, UserProfile.Type.Apprentice);
+        Contract emptyContract = new Contract();
+        Contract pcontract = new Contract();
+        // Insert into the database
+        Integer profileId = uinstance.create(p1);
+        pcontract.addUser(p1);
+        Integer contractId = instance.create(pcontract);
+
+        emptyContract = instance.read(contractId);
+        p1 = uinstance.read(profileId);
+
+        assertTrue(emptyContract.getApprentice().equals(p1));
+        assertTrue(p1.getContract().equals(emptyContract));
+
+
+    }
+
+    @Test
+    public void getUsers()
+    {
+        //It should not be possible to create a contract without the three users
+        System.out.println("getContract");
+        // Instantiate the objects
+        ContractDao instance = new ContractDao();
+        Users u1 = new Users("user4ContractGetUser");
+        Users u2 = new Users("user24ContractGetUser");
+        Users u3 = new Users("user34ContractGetUser");
+        UserProfile p1 = new UserProfile(u1, UserProfile.Type.Apprentice);
+        UserProfile p2 = new UserProfile(u2, UserProfile.Type.InternshipSupervisor);
+        UserProfile p3 = new UserProfile(u3, UserProfile.Type.SupervisingTeacher);
+        Contract emptyContract = new Contract();
+        Contract pcontract = new Contract();
+        // Insert into the database
+        pcontract.addUser(p1);
+        pcontract.addUser(p2);
+        pcontract.addUser(p3);
+        Integer contractId = instance.create(pcontract);
+
+        emptyContract = instance.read(contractId);
+
+        assertTrue(emptyContract.getApprentice().getUserId().equals(p1.getUserId()));
+        assertTrue(p1.getContract().getID().equals(emptyContract.getID()));
+        assertTrue(p2.getContract().getID().equals(emptyContract.getID()));
+        assertTrue(p3.getContract().getID().equals(emptyContract.getID()));
+
+
+    }
     /**
      * Test of find method, of class GroupDao.
      */

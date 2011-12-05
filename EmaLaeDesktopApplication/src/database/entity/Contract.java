@@ -142,5 +142,40 @@ public class Contract implements Serializable{
                 && this.supervisingTeacher.isSupervisingTeacher();
     }
 
+    public void addUser(UserProfile p){
+       switch (p.getUserProfileType()){
+            case Apprentice:
+                try
+                {
+                    this.setApprentice(p);
+                }
+                catch (ContractException e)
+                {
+                    System.out.println("Bad contract");
+                }
+                break;
+            case InternshipSupervisor:
+                try
+                {
+                    this.setInternshipSupervisor(p);
+                }
+                catch (ContractException e)
+                {
+                    System.out.println("Bad contract");
+                }
+                break;
+            case SupervisingTeacher:
+                try
+                {
+                    this.setSupervisingTeacher(p);
+                }
+                catch (ContractException e)
+                {
+                    System.out.println("Bad contract");
+                }
+                break;
+        }
+       p.setContract(this);
+    }
     
 }

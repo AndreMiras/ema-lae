@@ -5,6 +5,7 @@
 
 package database.entity;
 
+import exceptions.ContractException;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -13,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import org.hibernate.annotations.Parameter;
@@ -56,7 +56,6 @@ public class UserProfile implements Serializable {
     @Column
     private Type userProfileType;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn
     private Contract contract;
 
     public UserProfile()
@@ -180,5 +179,5 @@ public class UserProfile implements Serializable {
     public boolean isSupervisingTeacher(){
         return this.getUserProfileType().equals(Type.SupervisingTeacher);
     }
-    
+
 }
