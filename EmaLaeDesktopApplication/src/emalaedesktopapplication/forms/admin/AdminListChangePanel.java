@@ -12,6 +12,8 @@
 package emalaedesktopapplication.forms.admin;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  *
@@ -22,6 +24,7 @@ public class AdminListChangePanel extends javax.swing.JPanel {
     /** Creates new form AdminListChangePanel */
     public AdminListChangePanel() {
         initComponents();
+        customInitComponents();
     }
 
     public AdminListChangePanel(Object[] objects)
@@ -39,6 +42,48 @@ public class AdminListChangePanel extends javax.swing.JPanel {
         editObjectButton.addActionListener(al);
         newObjectButton.addActionListener(al);
         deleteObjectButton.addActionListener(al);
+    }
+
+    /**
+     * Listens to the double click event, refs #29
+     */
+    public void customInitComponents()
+    {
+        MouseListener keyListener = new MouseListener()
+        {
+            public void mouseClicked(MouseEvent me)
+            {
+                if (me.getClickCount() == 2)
+                {
+                    int index = objectList.locationToIndex(me.getPoint());
+                    System.out.println("Double clicked on Item " + index);
+                    // simulates edit button click
+                    editObjectButton.doClick();
+                }
+            }
+
+            public void mousePressed(MouseEvent me)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void mouseReleased(MouseEvent me)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void mouseEntered(MouseEvent me)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void mouseExited(MouseEvent me)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+        };
+
+        objectList.addMouseListener(keyListener);
     }
 
     public Object getSelectedItem()
