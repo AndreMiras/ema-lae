@@ -142,59 +142,22 @@ public class InitDatabase {
 
     public void createContracts()
     {
-        UserProfileDao userProfileDao;
-        ContractDao contractDao;
-        Users user;
-        String username;
-        String password;
-        String firstname;
-        String lastname;
-        UserProfile userProfile1;
-        UserProfile userProfile2;
-        UserProfile userProfile3;
-        Contract contract;
-
-        userProfileDao = new UserProfileDao();
-        contractDao = new ContractDao();
-        username = "username";
-        password = "pwd";
-        firstname = "firstname";
-        lastname = "lastname";
-
-
-        user = new Users(username+'1');
-        user.setPassword(password+'1');
-        userProfile1 = new UserProfile(user);
-        userProfile1.setFirstName(firstname + '1');
-        userProfile1.setLastName(lastname + '1');
-        // Attribute a different type each user
-        userProfile1.setUserProfileType(UserProfile.Type.Apprentice);
-        Integer id = userProfileDao.create(userProfile1);
-        
-        user = new Users(username+'2');
-        user.setPassword(password+'2');
-        userProfile2 = new UserProfile(user);
-        userProfile2.setFirstName(firstname + '2');
-        userProfile2.setLastName(lastname + '2');
-        // Attribute a different type each user
-        userProfile2.setUserProfileType(UserProfile.Type.InternshipSupervisor);
-        userProfileDao.create(userProfile2);
-        
-        user = new Users(username+'3');
-        user.setPassword(password+'3');
-        userProfile3 = new UserProfile(user);
-        userProfile3.setFirstName(firstname + '3');
-        userProfile3.setLastName(lastname + '3');
-        // Attribute a different type each user
-        userProfile3.setUserProfileType(UserProfile.Type.SupervisingTeacher);
-        userProfileDao.create(userProfile3);
-
-
+       ContractDao instance = new ContractDao();
+        Users u1 = new Users("username1","pwd1");
+        Users u2 = new Users("username2", "pwd2");
+        Users u3 = new Users("username3", "pwd3");
+        UserProfile p1 = new UserProfile(u1, UserProfile.Type.Apprentice);
+        p1.setFirstName("BOEUF");
+        p1.setLastName("Simon");
+        UserProfile p2 = new UserProfile(u2, UserProfile.Type.InternshipSupervisor);
+        p2.setFirstName("CATHALA");
+        p2.setLastName("Philippe");
+        UserProfile p3 = new UserProfile(u3, UserProfile.Type.SupervisingTeacher);
+        p3.setFirstName("AMEGLIO");
+        p3.setLastName("Frédéric");
         try{
-            contract = new Contract(userProfile1, userProfile2, userProfile3);
-            contractDao.create(contract);
-            userProfile1 = userProfileDao.read(id);
-            System.out.println("");
+            Contract pcontract = new Contract(p1, p2, p3);
+            instance.create(pcontract);
         }
         catch(ContractException e){
             System.out.println("Bad contract");

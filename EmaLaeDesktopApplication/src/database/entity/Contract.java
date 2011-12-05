@@ -47,9 +47,9 @@ public class Contract implements Serializable{
         if(IDApprentice.getUserProfileType() == UserProfile.Type.Apprentice
                 && IDInternshipSupervisor.getUserProfileType() == UserProfile.Type.InternshipSupervisor
                 && IDSupervisingTeacher.getUserProfileType() == UserProfile.Type.SupervisingTeacher){
-            this.apprentice = IDApprentice;
-            this.internshipSupervisor = IDInternshipSupervisor;
-            this.supervisingTeacher = IDSupervisingTeacher;
+            this.addUser(IDApprentice);
+            this.addUser(IDInternshipSupervisor);
+            this.addUser(IDSupervisingTeacher);
         }
         else{
             throw new ContractException();
@@ -142,7 +142,7 @@ public class Contract implements Serializable{
                 && this.supervisingTeacher.isSupervisingTeacher();
     }
 
-    public void addUser(UserProfile p){
+    public final void addUser(UserProfile p){
        switch (p.getUserProfileType()){
             case Apprentice:
                 try

@@ -49,6 +49,12 @@ public class Users implements Serializable {
         this.password = "";
     }
 
+    public Users(String username, String password)
+    {
+        this(username);
+        this.password = password;
+    }
+
     // meta-widget better deals with List Collections at the moment
     public List<UserGroup> getGroups() {
         List<UserGroup> groupList = new ArrayList<UserGroup>(groups);
