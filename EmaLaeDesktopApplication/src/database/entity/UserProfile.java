@@ -5,7 +5,6 @@
 
 package database.entity;
 
-import exceptions.ContractException;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -58,6 +57,9 @@ public class UserProfile implements Serializable {
     private Type userProfileType;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Contract contract;
+    @Column
+    private String photoPath;
+
 
     public UserProfile()
     {
@@ -221,4 +223,13 @@ public class UserProfile implements Serializable {
         return this.getUserProfileType().equals(Type.SupervisingTeacher);
     }
 
+    public String getPhotoPath()
+    {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photo)
+    {
+        this.photoPath = photo;
+    }
 }
