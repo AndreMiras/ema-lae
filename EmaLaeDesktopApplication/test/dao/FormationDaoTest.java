@@ -49,7 +49,7 @@ public class FormationDaoTest {
         Formation obj = new Formation();
 
         // the object shouldn't have an id, until it gets one from the DAO
-        assertNull(obj.getID());
+        assertNull(obj.getFormationId());
 
         FormationDao instance = new FormationDao();
         Integer result = instance.create(obj);
@@ -104,12 +104,12 @@ public class FormationDaoTest {
         Formation formationToDelete = allFormationsBefore.get(0);
 
         // asserts that the object still exists
-        assertNotNull(instance.read(formationToDelete.getID()));
+        assertNotNull(instance.read(formationToDelete.getFormationId()));
         // deletes the first record
         instance.delete(formationToDelete);
         List<Formation> allFormationsAfter = instance.all();
         // not record should now be found
-        assertNull(instance.read(formationToDelete.getID()));
+        assertNull(instance.read(formationToDelete.getFormationId()));
         // only one record was deleted
         assertTrue(allFormationsBefore.size() -1 == allFormationsAfter.size());
     }

@@ -22,7 +22,7 @@ public class Formation implements Serializable{
     @Column(name ="formations_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private Integer ID;
+    private Integer formationId;
     @Column
     private String name;
     @ManyToOne(cascade = CascadeType.ALL)
@@ -58,13 +58,12 @@ public class Formation implements Serializable{
         this.name = name;
     }
 
-        
-    public Integer getID() {
-        return this.ID;
+    public Integer getFormationId() {
+        return this.formationId;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setFormationId(Integer ID) {
+        this.formationId = ID;
     }
 
     public Set<Formation> getChildrenFormations() {
@@ -91,7 +90,7 @@ public class Formation implements Serializable{
         Iterator<Formation> it = this.getChildrenFormations().iterator();
         boolean foundFormation = false;
         while(!foundFormation && it.hasNext()){
-            foundFormation = child.getID().equals(it.next().getID());
+            foundFormation = child.getFormationId().equals(it.next().getFormationId());
         }
         return foundFormation;
     }
