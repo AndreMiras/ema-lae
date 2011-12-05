@@ -23,7 +23,7 @@ public class Contract implements Serializable{
     @Column(name ="contracts_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private Integer ID;
+    private Integer contractId;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn
     private UserProfile apprentice;
@@ -67,12 +67,12 @@ public class Contract implements Serializable{
   //  }
 
    
-    public Integer getID() {
-        return this.ID;
+    public Integer getId() {
+        return this.contractId;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int ID) {
+        this.contractId = ID;
     }
 
     public UserProfile getApprentice() {

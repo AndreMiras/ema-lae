@@ -43,4 +43,9 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         <property name="phoneNumber" section="Contact"/>
         <property name="address" section="Contact"/>
     </entity>
+<!--    <entity type="database.entity.Contract">
+        <property name="apprentice"/>
+        <property name="internshipSupervisor"/>
+        <property name="supervisingTeacher"/>
+    </entity>-->
 </inspection-result>
