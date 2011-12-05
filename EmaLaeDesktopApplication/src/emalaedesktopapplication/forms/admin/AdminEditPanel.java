@@ -11,6 +11,8 @@
 package emalaedesktopapplication.forms.admin;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JComponent;
 import org.metawidget.swing.SwingMetawidget;
 import org.metawidget.swing.widgetprocessor.binding.beansbinding.BeansBindingProcessor;
@@ -50,8 +52,8 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
         this.obj = obj;
 
         initComponents();
-        initCustomWidgets();
         initMetaWidget();
+        initCustomWidgets();
     }
 
     public void addButtonsListener(ActionListener al)
@@ -83,12 +85,40 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
     }
 
     /**
-     * Currently only set some labels
+     * - sets some labels
+     * - makes the return (Enter) key validate form, refs #30
      */
     private void initCustomWidgets()
     {
         middleContentPanel.setBorder(
                 javax.swing.BorderFactory.createTitledBorder(type.toString()));
+        KeyListener keyListener = new KeyListener()
+        {
+
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    saveButton.doClick();
+                }
+            }
+
+            public void keyTyped(KeyEvent ke)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void keyReleased(KeyEvent ke)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+        };
+
+        // loops over all the components and registers the enter key event
+        for (int i=0; i<metawidget.getComponentCount(); i++)
+        {
+            metawidget.getComponent(i).addKeyListener(keyListener);
+        }
     }
 
     private void initMetaWidget()
