@@ -137,9 +137,17 @@ public class Contract implements Serializable{
     }
 
     public boolean isCorrect(){
-        return this.apprentice.isApprentice()
-                && this.internshipSupervisor.isInternshipSupervisor()
-                && this.supervisingTeacher.isSupervisingTeacher();
+        if (apprentice == null ||
+            internshipSupervisor == null ||
+            supervisingTeacher == null)
+        {
+            return false;
+        }
+        {
+            return this.apprentice.isApprentice()
+                    && this.internshipSupervisor.isInternshipSupervisor()
+                    && this.supervisingTeacher.isSupervisingTeacher();
+        }
     }
 
     public final void addUser(UserProfile p){
