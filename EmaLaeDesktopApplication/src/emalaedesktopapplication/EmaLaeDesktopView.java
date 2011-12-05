@@ -9,7 +9,6 @@ import emalaedesktopapplication.controller.MainWindowController;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -23,6 +22,7 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * The application's main frame.
@@ -108,14 +108,13 @@ public class EmaLaeDesktopView extends FrameView {
     // public void setMiddleContentPanel(JPanel panel)
     public void setMiddleContentPanel(JComponent panel)
     {
-        JButton jButton = new javax.swing.JButton("Foobar");
-        // navigationPanel.add(jButton);
+        JScrollPane scrollPane = new JScrollPane(panel);
         middleContentPanel.removeAll();
         panel.setVisible(true);
         // java.awt.CardLayout cl = (java.awt.CardLayout)(panel.getLayout());
         // cl.show(panel, null);
         // panel.getName();
-        middleContentPanel.add(panel,
+        middleContentPanel.add(scrollPane,
                 "FIXME: constraint must be a string, see #14");
         middleContentPanel.revalidate();
     }
