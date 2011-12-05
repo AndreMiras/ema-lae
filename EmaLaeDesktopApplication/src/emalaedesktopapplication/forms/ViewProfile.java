@@ -11,6 +11,7 @@
 
 package emalaedesktopapplication.forms;
 
+import database.entity.Contract;
 import database.entity.UserProfile;
 
 /**
@@ -51,16 +52,19 @@ public class ViewProfile extends javax.swing.JPanel {
         }
 
         if(userProfile.getContract() != null){
-            apprenticeLabel.setText(userProfile.getContract().getApprentice().toString());
-            internshipSupervisorLabel.setText(userProfile.getContract().getInternshipSupervisor().toString());
-            supervisingTeacherLabel.setText(userProfile.getContract().getSupervisingTeacher().toString());
-            beginDateLabel.setText((userProfile.getContract().getBeginDate().toString()));
-            endDateLabel.setText((userProfile.getContract().getEndDate().toString()));
+            Contract c = userProfile.getContract();
+            if (c.isCorrect()){
+                apprenticeLabel.setText(c.getApprentice().getFullName());
+                internshipSupervisorLabel.setText(c.getInternshipSupervisor().getFullName());
+                supervisingTeacherLabel.setText(c.getSupervisingTeacher().getFullName());
+            }
+            if (c.getBeginDate() != null) beginDateLabel.setText((userProfile.getContract().getBeginDate().toString()));
+            if (c.getEndDate() != null) endDateLabel.setText((userProfile.getContract().getEndDate().toString()));
         }
     }
 
 
-    public void setUserProfile(UserProfile userProfile) {
+    public final void setUserProfile(UserProfile userProfile) {
         if (userProfile != null)
         {
             updateFieldsFromUserProfile(userProfile);
