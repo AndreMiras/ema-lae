@@ -225,6 +225,12 @@ public class UserProfile implements Serializable {
 
     public String getPhotoPath()
     {
+        // TODO: this is cheating, the image should really get downloaded
+        // back to the client
+        if (photoPath == null)
+        {
+            return "src/emalaedesktopapplication/resources/man-icon.png";
+        }
         return photoPath;
     }
 
