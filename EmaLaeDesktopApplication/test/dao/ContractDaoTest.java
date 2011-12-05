@@ -66,7 +66,7 @@ public class ContractDaoTest {
         try{
             Contract obj = new Contract(apprenti, ma, tuteur);
             // the object shouldn't have an id, until it gets one from the DAO
-            assertNull(obj.getID());
+            assertNull(obj.getId());
             ContractDao instance = new ContractDao();
             Integer result = instance.create(obj);
 
@@ -153,12 +153,12 @@ public class ContractDaoTest {
          * it should be possible to read that user from the database before
          * it's been deleted
          */
-        assertNotNull(contractDao.read(contractToDelete.getID()));
+        assertNotNull(contractDao.read(contractToDelete.getId()));
         // deleting the first record
         contractDao.delete(contractToDelete);
         List<Contract> allContractsAfter = contractDao.all();
         // not record should now be found
-        assertNull(contractDao.read(contractToDelete.getID()));
+        assertNull(contractDao.read(contractToDelete.getId()));
         // only one record was deleted
         assertTrue(allContractsBefore.size() -1 == allContractsAfter.size());
     }
@@ -214,9 +214,9 @@ public class ContractDaoTest {
             emptyContract = instance.read(contractId);
 
             assertTrue(emptyContract.getApprentice().getUserId().equals(p1.getUserId()));
-            assertTrue(p1.getContract().getID().equals(emptyContract.getID()));
-            assertTrue(p2.getContract().getID().equals(emptyContract.getID()));
-            assertTrue(p3.getContract().getID().equals(emptyContract.getID()));
+            assertTrue(p1.getContract().getId().equals(emptyContract.getId()));
+            assertTrue(p2.getContract().getId().equals(emptyContract.getId()));
+            assertTrue(p3.getContract().getId().equals(emptyContract.getId()));
         }
         catch(ContractException e){
             System.out.println("Bad contract");
