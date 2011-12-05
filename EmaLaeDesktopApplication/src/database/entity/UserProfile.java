@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import org.hibernate.annotations.Parameter;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -39,21 +38,21 @@ public class UserProfile implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Users user;
-    @Column(name ="firstName")
+    @Column
     private String firstName;
-    @Column(name ="lastName")
+    @Column
     private String lastName;
-    @Column(name ="birthDate")
+    @Column
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDate;
-    @Column(name ="address")
+    @Column
     private String address;
-    @Column(name ="phone")
+    @Column
     private String phoneNumber;
-    @Column(name ="email")
+    @Column
     private String email;
     public enum Type { Apprentice, InternshipSupervisor, SupervisingTeacher }
-    @Column(name="type")
+    @Column
     private Type userProfileType;
 
     public UserProfile()
