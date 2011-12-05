@@ -11,11 +11,9 @@
 
 package emalaedesktopapplication.forms;
 
-import client.ControllerServiceClient;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,6 +25,37 @@ public class LoginScreenPanel extends javax.swing.JPanel {
     /** Creates new form LoginScreenPanel */
     public LoginScreenPanel() {
         initComponents();
+        customInitComponents();
+    }
+
+    /**
+     * Listening to "Enter" key event for both login and password fields
+     */
+    private void customInitComponents()
+    {
+        KeyListener keyListener = new KeyListener()
+        {
+
+            public void keyPressed(KeyEvent e)
+            {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    connectionButton.doClick();
+                }
+            }
+
+            public void keyTyped(KeyEvent ke)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void keyReleased(KeyEvent ke)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+        };
+        loginTextField.addKeyListener(keyListener);
+        passwordTextField.addKeyListener(keyListener);
     }
 
     public String getUsernameInput()
