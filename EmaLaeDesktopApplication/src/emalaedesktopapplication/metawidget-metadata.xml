@@ -27,7 +27,7 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         <property name="permissions" wide="true"/>
     </entity>
     <entity type="database.entity.UserProfile">
-        <property name="user" type="Users" hidden="true"/>
+        <property name="user" type="database.entity.Users" hidden="true"/>
         <property name="fullName" hidden="true"/>
         <property name="userId" read-only="true" wide="true"/>
         <property name="userProfileType"/>
