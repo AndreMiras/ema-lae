@@ -99,8 +99,18 @@ public class UserGroup implements Serializable{
         return users.add(u);
     }
 
+    /* metawidget cannot deal with Set Collection
     public Set<Users> getUsers() {
         return users;
+    }
+     */
+
+    // at the moment, metawidget can only deal with List not with Set
+    public List<Users> getUsers()
+    {
+    List<Users> userList =
+                new ArrayList<Users>(users);
+        return userList;
     }
 
     public void setUsers(Set<Users> users) {
