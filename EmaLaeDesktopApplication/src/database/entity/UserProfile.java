@@ -215,15 +215,15 @@ public class UserProfile implements Serializable {
     }
 
     public boolean isApprentice(){
-        return this.getUserProfileType().equals(Type.Apprentice);
+        return userProfileType == Type.Apprentice;
     }
 
     public boolean isInternshipSupervisor(){
-        return this.getUserProfileType().equals(Type.InternshipSupervisor);
+        return userProfileType == Type.InternshipSupervisor;
     }
 
     public boolean isSupervisingTeacher(){
-        return this.getUserProfileType().equals(Type.SupervisingTeacher);
+        return userProfileType == Type.SupervisingTeacher;
     }
 
     public String getPhotoPath()
