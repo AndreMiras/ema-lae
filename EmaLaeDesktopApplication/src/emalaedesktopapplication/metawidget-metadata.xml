@@ -27,25 +27,23 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         <property name="permissions" wide="true"/>
     </entity>
     <entity type="database.entity.UserProfile">
-        <property name="user" hidden="true"/>
-        <property name="fullName" hidden="true"/>
-        <property name="userId" read-only="true" wide="true"/>
-        <property name="userProfileType" wide="true"/>
+        <property name="user" type="Users" hidden="true"/>
         <property name="firstName"/>
         <property name="lastName"/>
-
-        <!--
-            FIXME: hidden because the date is not currently converted
-            from text to date
-        -->
         <property name="birthDate" hidden="true"/>
-        <property name="email" section="Contact"/>
-        <property name="phoneNumber" section="Contact"/>
-        <property name="address" section="Contact"/>
+        <property name="address"/>
+        <property name="phoneNumber"/>
+        <property name="email"/>
+        <property name="gender"/>
+        <property name="userProfileType"/>
+        <property name="contract" hidden="true"/>
+        <property name="photoPath" hidden="true"/>
     </entity>
-    <!-- entity type="database.entity.Contract">
-        <property name="apprentice" section="Apprentice"/>
-        <property name="internshipSupervisor" section="Internship Supervisor"/>
-        <property name="supervisingTeacher" section="Internship Teacher"/>
-    </entity -->
+   <entity type="database.entity.Contract">
+        <property name="apprentice" type="UserProfile"/>
+        <property name="internshipSupervisor" type="UserProfile"/>
+        <property name="supervisingTeacher" type="UserProfile"/>
+        <property name="beginDate" hidden="true"/>
+        <property name="endDate" hidden="true"/>
+    </entity>
 </inspection-result>

@@ -165,4 +165,17 @@ public class InitDatabase {
 
     }
 
+        public void dropContracts()
+    {
+        Contract contract;
+        ContractDao contractDao = new ContractDao();
+        List contracts = contractDao.all();
+
+        dropPermissions();
+        for(int i=0; i<contracts.size(); i++)
+        {
+            contract = (Contract) contracts.get(i);
+            contractDao.delete(contract);
+        }
+    }
 }
