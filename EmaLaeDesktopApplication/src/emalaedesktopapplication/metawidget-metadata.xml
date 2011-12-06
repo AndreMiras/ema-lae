@@ -54,9 +54,10 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         <property name="age" section="Other"/>
     </entity>
    <entity type="database.entity.Contract">
-        <property name="apprentice" type="UserProfile"/>
-        <property name="internshipSupervisor" type="UserProfile"/>
-        <property name="supervisingTeacher" type="UserProfile"/>
+        <property name="contractId" read-only="true" wide="true"/>
+        <property name="apprentice" type="database.entity.UserProfile"/>
+        <property name="internshipSupervisor" type="database.entity.UserProfile"/>
+        <property name="supervisingTeacher" type="database.entity.UserProfile"/>
         <property name="beginDate" hidden="true"/>
         <property name="endDate" hidden="true"/>
     </entity>
