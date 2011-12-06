@@ -177,7 +177,7 @@ public class ContractDaoTest {
         Contract pcontract = new Contract();
         // Insert into the database
         Integer profileId = uinstance.create(p1);
-        pcontract.addUser(p1);
+        pcontract.addUserProfile(p1);
         Integer contractId = instance.create(pcontract);
 
         emptyContract = instance.read(contractId);
@@ -206,9 +206,9 @@ public class ContractDaoTest {
             Contract emptyContract = new Contract();
             Contract pcontract = new Contract(p1,p2,p3);
 //            // Insert into the database
-//            pcontract.addUser(p1);
-//            pcontract.addUser(p2);
-//            pcontract.addUser(p3);
+//            pcontract.addUserProfile(p1);
+//            pcontract.addUserProfile(p2);
+//            pcontract.addUserProfile(p3);
             Integer contractId = instance.create(pcontract);
 
             emptyContract = instance.read(contractId);

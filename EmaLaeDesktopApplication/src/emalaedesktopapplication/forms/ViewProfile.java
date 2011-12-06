@@ -83,7 +83,7 @@ public class ViewProfile extends javax.swing.JPanel {
                     photoPanel.getPreferredSize().height,
                     java.awt.Image.SCALE_SMOOTH);
             JLabel picLabel = new JLabel(new ImageIcon(scaledPicture));
-            photoPanel.add(picLabel);
+            photoPanel.add(picLabel,"");
         } catch (IOException ex)
         {
             Logger.getLogger(ViewProfile.class.getName()).log(Level.SEVERE, null, ex);

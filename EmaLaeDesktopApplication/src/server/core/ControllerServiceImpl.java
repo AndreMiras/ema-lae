@@ -41,6 +41,7 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
     public void initDatabaseForTests()
             throws java.rmi.RemoteException {
         InitDatabase initDatabase = new InitDatabase();
+        initDatabase.dropContracts();
         initDatabase.dropUsers();
         initDatabase.dropGroups();
         initDatabase.createContracts();
