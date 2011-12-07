@@ -84,8 +84,7 @@ public class CollectionWidgetBuilder
          * http://code.google.com/p/ema-lae/issues/detail?id=35
          */
         String mPath =  metawidget.getPath(); // e.g. database.entity.UserProfile/user
-        // String className = metawidget.getToInspect().getClass().getName();
-        if (!metawidget.getPath().contains("/"))
+        if (!mPath.contains("/"))
         {
             list = (List<?>) ClassUtils.getProperty(metawidget.getToInspect(), attributes.get(NAME));
         }
