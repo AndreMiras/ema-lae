@@ -86,7 +86,6 @@ public class MainWindowController
             // AdminController adminController = null;
             JMenuItem target = (JMenuItem) e.getSource();
             String actionCommand = target.getActionCommand();
-            System.out.println("action performed: " + actionCommand);
 
             if (actionCommand.equals(Utils.getClassNameWithoutPackage(
                     database.entity.Users.class)))
