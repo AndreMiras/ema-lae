@@ -76,7 +76,7 @@ public class CollectionWidgetBuilder
 
         // Fetch the data. This part could be improved to use BeansBinding or similar
 
-        List<?> list = null;
+        List<?> list = new ArrayList();
 
         /*
          * Workarounding metawidget bug, see:

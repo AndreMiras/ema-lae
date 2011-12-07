@@ -27,7 +27,7 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         <property name="permissions" wide="true"/>
     </entity>
     <entity type="database.entity.UserProfile">
-        <property name="user" type="database.entity.Users" hidden="true"/>
+        <!-- property name="user" type="database.entity.Users" hidden="true"/ -->
         <property name="fullName" hidden="true"/>
         <property name="userId" read-only="true" wide="true"/>
         <property name="userProfileType"/>
@@ -49,6 +49,8 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         <property name="internshipSupervisor" section="Contract"/>
         <property name="supervisingTeacher" section="Contract"/>
         <property name="apprentice" section="Contract"/>
+
+        <property name="user" type="database.entity.Users" section="User"/>
 
         <property name="title" section="Other"/>
         <property name="age" section="Other"/>
