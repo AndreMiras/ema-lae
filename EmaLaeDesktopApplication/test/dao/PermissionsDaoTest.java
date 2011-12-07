@@ -9,8 +9,6 @@ import database.entity.Permission;
 import exceptions.DaoException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,7 +17,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import database.entity.UserGroup;
 import database.util.HibernateUtil;
-import org.hibernate.HibernateException;
 
 /**
  *
@@ -133,19 +130,13 @@ public class PermissionsDaoTest {
      * Test of get method, of class PermissionsDao.
      */
     //@Test
-    public void testGet() {
+    public void testGet() throws DaoException {
         System.out.println("get");
         HashMap<String, String> querySet = null;
         PermissionsDao instance = new PermissionsDao();
         Permission expResult = null;
         Permission result = null;
-        try
-        {
-            result = instance.get(querySet);
-        } catch (DaoException ex)
-        {
-            Logger.getLogger(PermissionsDaoTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        result = instance.get(querySet);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -208,6 +199,5 @@ public class PermissionsDaoTest {
 
         assertTrue(p1.containsGroup(newGroup1));
         assertTrue(p1.containsGroup(newGroup2));
-
     }
 }

@@ -11,8 +11,6 @@ import exceptions.DaoException;
 import database.entity.Users;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -160,7 +158,7 @@ public class UserDaoTest {
      * Test of get method, of class UserDao.
      */
     @Test
-    public void testGet()
+    public void testGet() throws DaoException
     {
         System.out.println("get");
         Users userToFind = new Users("userToGet");
@@ -170,13 +168,7 @@ public class UserDaoTest {
         HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", "userToGet");
         Users result = null;
-        try
-        {
-            result = userDao.get(querySet);
-        } catch (DaoException ex)
-        {
-            Logger.getLogger(UserDaoTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        result = userDao.get(querySet);
         assertEquals("userToGet", result.getUsername());
         assertEquals(newUserID, result.getUserId());
     }
@@ -215,13 +207,11 @@ public class UserDaoTest {
         System.out.println("addGroup");
         // Creation of instances and objects
         UserDao instance = new UserDao();
-        GroupDao groupInstance = new GroupDao();
         Users newUser = new Users("user4addGroup");
         UserGroup newGroup1 = new UserGroup("Group4addGroup");
 
         // Insertion into the database
         Integer newUserId = instance.create(newUser);
-        groupInstance.create(newGroup1);
 
         // Add a group to the user
         newUser.addToGroup(newGroup1);
@@ -281,21 +271,27 @@ public class UserDaoTest {
         instance.create(u2);
     }
 
-    //@Test
+    @Test
     public void testAddSpecialPermission(){
+        System.out.println("addSpecialPerm");
+        // Creation of instances and objects
         UserDao instance = new UserDao();
-        PermissionsDao pinstance = new PermissionsDao();
-        Users u1 = new Users("user4AddSpecialPermission");
-        Users u2 = new Users("emptyUser4AddSpecialPermission");
-        Permission p1 = new Permission("permission4AddSpecialPermission");
+        Users newUser = new Users("user4addPermission");
+        Permission p1 = new Permission("Permissiion4addPermission");
 
-        u1.addSpecialPermission(p1);
-        Integer uid = instance.create(u1);
-        Integer pid = pinstance.create(p1);
+        // Insertion into the database
+        Integer newUserId = instance.create(newUser);
 
-        u2 = instance.read(uid);
-        p1 = pinstance.read(pid);
+        // Add a permission to the user
+        newUser.addSpecialPermission(p1);
 
-        assertTrue(u2.checkPermission(p1));
+        // Update the database
+        instance.update(newUser);
+
+        // Read the object from the database
+        newUser = instance.read(newUserId);
+
+        // Check that the user really owns the permission
+        assertTrue(newUser.checkPermission(p1));
     }
 }

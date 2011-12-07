@@ -43,12 +43,12 @@ public class Users implements Serializable {
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL, mappedBy="users")
-    private List<Permission> specialPermissions;
+    private Set<Permission> specialPermissions;
 
     public Users()
     {
         this.groups = new HashSet<UserGroup>();
-        this.specialPermissions = new ArrayList<Permission>();
+        this.specialPermissions = new HashSet<Permission>();
     }
 
     public Users(String username)
@@ -113,10 +113,11 @@ public class Users implements Serializable {
     }
 
     public List<Permission> getSpecialPermissions() {
-        return specialPermissions;
+        List<Permission> listPermissions = (ArrayList<Permission>) specialPermissions;
+        return listPermissions;
     }
 
-    public void setSpecialPermissions(List<Permission> specialPermissions) {
+    public void setSpecialPermissions(Set<Permission> specialPermissions) {
         this.specialPermissions = specialPermissions;
     }
 
@@ -158,8 +159,9 @@ public class Users implements Serializable {
                 hasPermission = j.next().containsGroup(userGroup);
             }
         }
-        for(int j=0;j<this.specialPermissions.size();j++){
-            hasPermission = this.specialPermissions.get(j).equals(permission);
+        Iterator<Permission> k = this.specialPermissions.iterator();
+        while(k.hasNext() && !hasPermission){
+            hasPermission = k.next().getPermissionId().equals(permission.getPermissionId());
         }
         return hasPermission;
     }
