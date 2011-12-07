@@ -111,6 +111,10 @@ public class CollectionWidgetBuilderEditable implements
         {
             elementType = Object.class;
         }
+
+        // @SuppressWarnings("unchecked")
+        // ListTableModel<?> tableModel = new ListTableModel(list, columns);
+
         // Return the JTable
         @SuppressWarnings(
         {
@@ -119,11 +123,15 @@ public class CollectionWidgetBuilderEditable implements
         final ListTableModelEditable<?> tableModel =
                 new ListTableModelEditable(
                 elementType,
-                new ArrayList(list), columns.toArray(new String[] { }));
+                // new ArrayList(list),
+                list,
+                // columns.toArray(new String[] {})
+                columns
+                );
         JPanel panel = new JPanel();
         final JTable table = new JTable(tableModel);
         JScrollPane jScrollPane = new JScrollPane(table);
-        // /*
+        /*
         table.addMouseListener(new MouseListener()
         {
 
@@ -153,9 +161,10 @@ public class CollectionWidgetBuilderEditable implements
                 MetaWidgetUtils.createEditDialog(obj);
             }
         });
+         */
 
         // panel.setLayout(new GridBagLayout());
-        panel.add(jScrollPane);
+        // panel.add(jScrollPane);
         /*
         JButton buttonAdd = new JButton("Add");
         buttonAdd.addActionListener(new ActionListener()
