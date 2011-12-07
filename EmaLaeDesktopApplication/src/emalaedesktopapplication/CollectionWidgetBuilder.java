@@ -93,6 +93,6 @@ public class CollectionWidgetBuilder
         @SuppressWarnings("unchecked")
         ListTableModel<?> tableModel = new ListTableModel(list, columns);
 
-        return new JScrollPane(new JTable()); // new JScrollPane(new JTable(tableModel));
+        return new JScrollPane(new JTable(tableModel));
     }
 }
