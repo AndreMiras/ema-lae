@@ -116,17 +116,12 @@ public class CollectionWidgetBuilderEditable implements
         // ListTableModel<?> tableModel = new ListTableModel(list, columns);
 
         // Return the JTable
-        @SuppressWarnings(
-        {
-            "unchecked", "rawtypes"
-        })
+        @SuppressWarnings({"unchecked", "rawtypes"})
         final ListTableModelEditable<?> tableModel =
                 new ListTableModelEditable(
                 elementType,
-                // new ArrayList(list),
-                list,
-                // columns.toArray(new String[] {})
-                columns
+                list, // new ArrayList(list),
+                columns // columns.toArray(new String[] {})
                 );
         JPanel panel = new JPanel();
         final JTable table = new JTable(tableModel);
@@ -165,17 +160,15 @@ public class CollectionWidgetBuilderEditable implements
 
         // panel.setLayout(new GridBagLayout());
         // panel.add(jScrollPane);
-        /*
         JButton buttonAdd = new JButton("Add");
         buttonAdd.addActionListener(new ActionListener()
         {
 
             public void actionPerformed(ActionEvent e)
             {
-                // TODO Auto-generated method stub
+                System.out.println("TODO: show the collection selector");
             }
         });
-         */
 
         return jScrollPane;
         // return panel;
