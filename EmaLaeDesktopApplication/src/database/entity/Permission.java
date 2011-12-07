@@ -35,8 +35,14 @@ public class Permission implements Serializable{
     @ManyToMany(cascade = CascadeType.ALL, mappedBy="permissions")
     private Set<UserGroup> groups;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable
+    private Set<Users> users;
+
     public Permission() {
         this.groups = new HashSet<UserGroup>();
+        this.users = new HashSet<Users>();
     }
 
     public Permission(String permissionName){
@@ -87,6 +93,19 @@ public class Permission implements Serializable{
 
     public void setPermissionId(Integer permissionID) {
         this.permissionId = permissionID;
+    }
+
+    public List<Users> getUsers() {
+        List<Users> usersList = new ArrayList<Users>(users);
+        return usersList;
+    }
+
+    public void setUsers(Set<Users> users) {
+        this.users = users;
+    }
+
+    public void addUsers(Users user){
+        this.users.add(user);
     }
 
     public boolean addToGroup(UserGroup group){

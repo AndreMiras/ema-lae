@@ -144,11 +144,14 @@ public class EmaLaeDesktopView extends FrameView {
     /**
      * Performs some additional component init
      *  - set main widow minimum size (from its main component min size)
+     *  - Hide the admin panel by default
      */
     private void customInitComponents()
     {
         JFrame mainFrame = this.getFrame();
         JPanel componentPanel = this.mainPanel;
+
+        adminMenu.setVisible(false);
 
         mainFrame.pack();
         mainFrame.setMinimumSize(componentPanel.getMinimumSize());
@@ -158,6 +161,9 @@ public class EmaLaeDesktopView extends FrameView {
         mainFrame.validate();
     }
 
+    public void setAdminVisible(boolean visible){
+        adminMenu.setVisible(visible);
+    }
     /**
      * Constructs default controllers
      */

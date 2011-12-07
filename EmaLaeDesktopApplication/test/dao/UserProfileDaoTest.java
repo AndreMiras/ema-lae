@@ -59,7 +59,7 @@ public class UserProfileDaoTest {
      * Test of create method, of class UserProfileDao.
      */
     @Test
-    public void testCreate()
+    public void testCreate() throws DaoException
     {
         System.out.println("create");
         Users user = new Users("username10");
@@ -96,12 +96,17 @@ public class UserProfileDaoTest {
         assertNull(userProfile.getUserId());
 
         UserProfileDao instance = new UserProfileDao();
-        Integer newUserID = instance.create(userProfile);
-        UserProfile result = instance.read(newUserID);
+        try{
+            Integer newUserID = instance.create(userProfile);
+            UserProfile result = instance.read(newUserID);
 
-        assertEquals("foo", result.getFirstName());
-        assertEquals("bar", result.getLastName());
-        assertEquals("username20", result.getUser().getUsername());
+            assertEquals("foo", result.getFirstName());
+            assertEquals("bar", result.getLastName());
+            assertEquals("username20", result.getUser().getUsername());
+        }
+        catch(DaoException e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -116,19 +121,25 @@ public class UserProfileDaoTest {
         UserProfile userProfile = new UserProfile(user);
         userProfile.setFirstName("firstname1");
         userProfile.setLastName("lastname1");
-        Integer userProfileId = instance.create(userProfile);
+        try{
+            Integer userProfileId = instance.create(userProfile);
+            // re-read the saved profile from the database
+            userProfile = instance.read(userProfileId);
 
-        // re-read the saved profile from the database
-        userProfile = instance.read(userProfileId);
-        // update it locally
-        userProfile.setFirstName("newFirstname1");
-        userProfile.setLastName("newLastname1");
-        // re-hit the database
-        instance.update(userProfile);
-        // re-read the updated profile from the database
-        userProfile = instance.read(userProfileId);
-        assertEquals("newFirstname1", userProfile.getFirstName());
-        assertEquals("newLastname1", userProfile.getLastName());
+            // update it locally
+            userProfile.setFirstName("newFirstname1");
+            userProfile.setLastName("newLastname1");
+            // re-hit the database
+            instance.update(userProfile);
+            // re-read the updated profile from the database
+            userProfile = instance.read(userProfileId);
+            assertEquals("newFirstname1", userProfile.getFirstName());
+            assertEquals("newLastname1", userProfile.getLastName());
+        }
+        catch(DaoException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -141,6 +152,11 @@ public class UserProfileDaoTest {
         UserProfileDao userProfileDao = new UserProfileDao();
         List<UserProfile> allUserProfilesBefore = userProfileDao.all();
         UserProfile userProfileToDelete = allUserProfilesBefore.get(0);
+
+        /*
+         * it should be possible to read that userprofile from the database before
+         * it's been deleted
+         */
 
         /*
          * it should be possible to read that userprofile from the database before
@@ -242,6 +258,14 @@ public class UserProfileDaoTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+
+    @Test(expected=DaoException.class)
+    public void testCascadeUser() throws DaoException{
+        System.out.println("testCascadeUser");
+        UserProfileDao instance = new UserProfileDao();
+        UserProfile p1 = new UserProfile();
+        instance.create(p1);
     }
 
 }

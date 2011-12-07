@@ -36,7 +36,7 @@ public class DaoHibernate<T, PK extends Serializable>
         return _session;
     }
 
-    public PK create(T obj)
+    public PK create(T obj) throws DaoException
     {
         // return (PK) getSession().save(obj);
         Session session = sessionFactory.openSession(); // getSession();

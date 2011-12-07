@@ -4,6 +4,7 @@
  */
 package emalaedesktopapplication.controller;
 
+import database.entity.Users;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
 import emalaedesktopapplication.forms.NavigationPanel;
@@ -26,6 +27,8 @@ public class MainWindowController
     private LoginScreenPanel loginScreenPanel;
     private LoginScreenController loginScreenController;
     private NavigationController navigationController;
+    private Users user;
+    
     private String[] entitiesAdmin = new String[]
     {
         Utils.getClassNameWithoutPackage(
@@ -54,6 +57,10 @@ public class MainWindowController
 
         initAdminMenu();
         addListeners();
+    }
+
+    public void setAdminVisible (Users u){
+        view.setAdminVisible(true);
     }
 
     private void setMiddleContent(JPanel panel)

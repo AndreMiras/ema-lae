@@ -30,14 +30,25 @@ public class Users implements Serializable {
     private String username;
     @Column
     private String password;
+    //Has access to admin GUI but actions have to be defined in the group permissions
+    @Column
+    private boolean isStaff;
+    @Column
+    //Has access to everything regardless his permissionsh
+    private boolean isSuperUser;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL, mappedBy="users")
     private Set<UserGroup> groups;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy="users")
+    private Set<Permission> specialPermissions;
+
     public Users()
     {
         this.groups = new HashSet<UserGroup>();
+        this.specialPermissions = new HashSet<Permission>();
     }
 
     public Users(String username)
@@ -101,12 +112,42 @@ public class Users implements Serializable {
         this.username = username;
     }
 
+    public List<Permission> getSpecialPermissions() {
+        List<Permission> listPermissions = (ArrayList<Permission>) specialPermissions;
+        return listPermissions;
+    }
+
+    public void setSpecialPermissions(Set<Permission> specialPermissions) {
+        this.specialPermissions = specialPermissions;
+    }
+
+    public boolean addSpecialPermission(Permission permission){
+        permission.addUsers(this); // workaround, seems required by mappedBy
+        return this.specialPermissions.add(permission);
+    }
+
     @Override
     public String toString()
     {
         return username;
     }
 
+    public boolean isIsStaff() {
+        return isStaff;
+    }
+
+    public void setIsStaff(boolean isStaff) {
+        this.isStaff = isStaff;
+    }
+
+    public boolean isIsSuperUser() {
+        return isSuperUser;
+    }
+
+    public void setIsSuperUser(boolean isSuperUser) {
+        this.isSuperUser = isSuperUser;
+    }
+    
     public boolean checkPermission (Permission permission){
         boolean hasPermission = false;
         Iterator<UserGroup> i=this.groups.iterator();
@@ -117,6 +158,10 @@ public class Users implements Serializable {
             while(j.hasNext() && !hasPermission){
                 hasPermission = j.next().containsGroup(userGroup);
             }
+        }
+        Iterator<Permission> k = this.specialPermissions.iterator();
+        while(k.hasNext() && !hasPermission){
+            hasPermission = k.next().getPermissionId().equals(permission.getPermissionId());
         }
         return hasPermission;
     }

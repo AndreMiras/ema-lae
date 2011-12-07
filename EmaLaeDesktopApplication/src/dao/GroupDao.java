@@ -8,8 +8,11 @@ package dao;
 import database.entity.UserGroup;
 import database.entity.Permission;
 import database.entity.Users;
+import exceptions.DaoException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -59,5 +62,20 @@ public class GroupDao extends DaoHibernate<UserGroup, Integer> {
         transaction.commit();
         session.flush();
         session.close();
+    }
+
+
+    @Override
+    public Integer create(UserGroup g){
+        Integer pk = null;
+        try {
+            pk = super.create(g);
+        } catch (DaoException ex) {
+            Logger.getLogger(GroupDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            return pk;
+        }
     }
 }

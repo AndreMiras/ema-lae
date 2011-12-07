@@ -8,7 +8,10 @@ package database.util;
 import dao.*;
 import database.entity.*;
 import exceptions.ContractException;
+import exceptions.DaoException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,7 +57,11 @@ public class InitDatabase {
                     userProfile.setUserProfileType(UserProfile.Type.SupervisingTeacher);
                     break;
             }
-            userProfileDao.create(userProfile);
+            try {
+                userProfileDao.create(userProfile);
+            } catch (DaoException ex) {
+                Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

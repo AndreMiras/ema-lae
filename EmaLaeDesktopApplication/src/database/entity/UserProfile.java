@@ -36,7 +36,7 @@ public class UserProfile implements Serializable {
     @Column(name = "user_id", unique = true, nullable = false)
     private Integer userId;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REMOVE})
     @PrimaryKeyJoinColumn
     private Users user;
     @Column

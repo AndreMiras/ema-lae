@@ -43,4 +43,12 @@ public class UserProfileDao extends DaoHibernate<UserProfile, Integer> {
         return super.get(querySet);
     }
 
+    @Override
+    public Integer create(UserProfile profile) throws DaoException{
+        if(profile.getUser() == null)
+            throw new DaoException("Can not create userprofile without user");
+        else
+            return super.create(profile);
+    }
+
 }
