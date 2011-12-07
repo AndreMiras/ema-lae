@@ -4,6 +4,7 @@
  */
 package emalaedesktopapplication;
 
+import java.awt.GridBagConstraints;
 import static org.metawidget.inspector.InspectionResultConstants.*;
 
 import java.awt.GridBagLayout;
@@ -158,9 +159,24 @@ public class CollectionWidgetBuilderEditable implements
         });
          */
 
-        // panel.setLayout(new GridBagLayout());
-        panel.add(jScrollPane);
+        // Adding add/delete buttons and constrains
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gBC = new GridBagConstraints();
+        gBC.fill = GridBagConstraints.HORIZONTAL;
+        gBC.gridx = 0;
+        gBC.gridy = 1;
+        gBC.gridwidth = 2;
+        panel.add(jScrollPane, gBC);
         JButton buttonAdd = new JButton("Add");
+        JButton buttonDelete = new JButton("Delete");
+        gBC.anchor = GridBagConstraints.PAGE_START;
+        gBC.weightx = 0.5;
+        gBC.gridx = 0;
+        gBC.gridy = 0;
+        gBC.gridwidth = 1;
+        panel.add(buttonAdd, gBC);
+        gBC.gridx = 1;
+        panel.add(buttonDelete, gBC);
         buttonAdd.addActionListener(new ActionListener()
         {
 
@@ -169,10 +185,18 @@ public class CollectionWidgetBuilderEditable implements
                 System.out.println("TODO: show the collection selector");
             }
         });
+        buttonDelete.addActionListener(new ActionListener()
+        {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                System.out.println("TODO: delete the selected object");
+            }
+        });
 
         // return jScrollPane;
-        return panel;
-        // */
+        return new JScrollPane(panel);
+        // return panel;
     }
 //      public SwingMetawidget createMetaWidget(Object obj) {
 //              SwingMetawidget metawidget = new SwingMetawidget();
