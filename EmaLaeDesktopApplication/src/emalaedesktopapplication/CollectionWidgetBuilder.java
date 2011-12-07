@@ -88,7 +88,6 @@ public class CollectionWidgetBuilder
         {
             list = (List<?>) ClassUtils.getProperty(metawidget.getToInspect(), attributes.get(NAME));
         }
-        }
         // Return the JTable
         @SuppressWarnings("unchecked")
         ListTableModel<?> tableModel = new ListTableModel(list, columns);
