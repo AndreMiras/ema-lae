@@ -76,11 +76,23 @@ public class CollectionWidgetBuilder
 
         // Fetch the data. This part could be improved to use BeansBinding or similar
 
-        List<?> list = (List<?>) ClassUtils.getProperty(metawidget.getToInspect(), attributes.get(NAME));
+        List<?> list = null;
+
+        /*
+         * Workarounding metawidget bug, see:
+         * http://sourceforge.net/projects/metawidget/forums/forum/747623/topic/4707912 (upstreams)
+         * http://code.google.com/p/ema-lae/issues/detail?id=35
+         */
+        String mPath =  metawidget.getPath(); // e.g. database.entity.UserProfile/user
+        // String className = metawidget.getToInspect().getClass().getName();
+        if (!metawidget.getPath().contains("/"))
+        {
+            list = (List<?>) ClassUtils.getProperty(metawidget.getToInspect(), attributes.get(NAME));
+        }
         // Return the JTable
         @SuppressWarnings("unchecked")
         ListTableModel<?> tableModel = new ListTableModel(list, columns);
 
-        return new JScrollPane(new JTable(tableModel));
+        return new JScrollPane(new JTable()); // new JScrollPane(new JTable(tableModel));
     }
 }

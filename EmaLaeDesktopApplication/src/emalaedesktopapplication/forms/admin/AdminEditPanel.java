@@ -115,7 +115,7 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
         };
 
         // loops over all the components and registers the enter key event
-        for (int i=0; i<metawidget.getComponentCount(); i++)
+        for (int i=metawidget.getComponentCount()-1; i>=0; i--)
         {
             metawidget.getComponent(i).addKeyListener(keyListener);
         }

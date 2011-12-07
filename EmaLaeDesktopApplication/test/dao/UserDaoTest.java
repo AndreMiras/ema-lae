@@ -281,4 +281,21 @@ public class UserDaoTest {
         instance.create(u2);
     }
 
+    //@Test
+    public void testAddSpecialPermission(){
+        UserDao instance = new UserDao();
+        PermissionsDao pinstance = new PermissionsDao();
+        Users u1 = new Users("user4AddSpecialPermission");
+        Users u2 = new Users("emptyUser4AddSpecialPermission");
+        Permission p1 = new Permission("permission4AddSpecialPermission");
+
+        u1.addSpecialPermission(p1);
+        Integer uid = instance.create(u1);
+        Integer pid = pinstance.create(p1);
+
+        u2 = instance.read(uid);
+        p1 = pinstance.read(pid);
+
+        assertTrue(u2.checkPermission(p1));
+    }
 }

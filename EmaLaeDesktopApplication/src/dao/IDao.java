@@ -17,7 +17,8 @@ import java.util.List;
 public interface IDao<T, PK extends Serializable> {
 
     /** Persist the newInstance object into database */
-    PK create(T obj);
+    PK create(T obj)
+            throws DaoException;
 
     /** Retrieve an object that was previously persisted to the database using
      *   the indicated id as primary key

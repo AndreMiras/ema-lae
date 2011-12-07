@@ -69,4 +69,16 @@ public class UserDao extends DaoHibernate<Users, Integer>
             session.close();
         }
     }
+
+
+    @Override
+    public Integer create(Users u){
+        Integer pk = null;
+        try {
+            pk = super.create(u);
+        } catch (DaoException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pk;
+    }
 }

@@ -67,11 +67,11 @@ public class Contract implements Serializable{
   //  }
 
    
-    public Integer getId() {
+    public Integer getContractId() {
         return this.contractId;
     }
 
-    public void setId(int ID) {
+    public void setContractId(int ID) {
         this.contractId = ID;
     }
 

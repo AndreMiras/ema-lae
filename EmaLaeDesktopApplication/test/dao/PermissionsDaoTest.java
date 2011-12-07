@@ -52,7 +52,7 @@ public class PermissionsDaoTest {
      * Test of create method, of class PermissionsDao.
      */
     @Test
-    public void testCreate() {
+    public void testCreate() throws DaoException {
         System.out.println("create");
         Permission obj = new Permission("Permission4Create");
 
@@ -70,7 +70,7 @@ public class PermissionsDaoTest {
      * Test of read method, of class PermissionsDao.
      */
     @Test
-    public void testRead() {
+    public void testRead() throws DaoException {
         System.out.println("read");
         Permission permissionTest = new Permission("permission4read");
 

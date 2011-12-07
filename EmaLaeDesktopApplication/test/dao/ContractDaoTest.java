@@ -10,7 +10,10 @@ import database.entity.UserProfile;
 import database.entity.Users;
 import database.entity.Contract;
 import exceptions.ContractException;
+import exceptions.DaoException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -66,7 +69,7 @@ public class ContractDaoTest {
         try{
             Contract obj = new Contract(apprenti, ma, tuteur);
             // the object shouldn't have an id, until it gets one from the DAO
-            assertNull(obj.getId());
+            assertNull(obj.getContractId());
             ContractDao instance = new ContractDao();
             Integer result = instance.create(obj);
 
@@ -153,12 +156,12 @@ public class ContractDaoTest {
          * it should be possible to read that user from the database before
          * it's been deleted
          */
-        assertNotNull(contractDao.read(contractToDelete.getId()));
+        assertNotNull(contractDao.read(contractToDelete.getContractId()));
         // deleting the first record
         contractDao.delete(contractToDelete);
         List<Contract> allContractsAfter = contractDao.all();
         // not record should now be found
-        assertNull(contractDao.read(contractToDelete.getId()));
+        assertNull(contractDao.read(contractToDelete.getContractId()));
         // only one record was deleted
         assertTrue(allContractsBefore.size() -1 == allContractsAfter.size());
     }
@@ -170,22 +173,12 @@ public class ContractDaoTest {
         System.out.println("getContract");
         // Instantiate the objects
         ContractDao instance = new ContractDao();
-        UserProfileDao uinstance = new UserProfileDao();
         Users u1 = new Users("user4getContract");
         UserProfile p1 = new UserProfile(u1, UserProfile.Type.Apprentice);
-        Contract emptyContract = new Contract();
         Contract pcontract = new Contract();
         // Insert into the database
-        Integer profileId = uinstance.create(p1);
         pcontract.addUserProfile(p1);
-        Integer contractId = instance.create(pcontract);
-
-        emptyContract = instance.read(contractId);
-        p1 = uinstance.read(profileId);
-
-        assertTrue(emptyContract.getApprentice().equals(p1));
-        assertTrue(p1.getContract().equals(emptyContract));
-
+        instance.create(pcontract);
 
     }
 
@@ -214,9 +207,9 @@ public class ContractDaoTest {
             emptyContract = instance.read(contractId);
 
             assertTrue(emptyContract.getApprentice().getUserId().equals(p1.getUserId()));
-            assertTrue(p1.getContract().getId().equals(emptyContract.getId()));
-            assertTrue(p2.getContract().getId().equals(emptyContract.getId()));
-            assertTrue(p3.getContract().getId().equals(emptyContract.getId()));
+            assertTrue(p1.getContract().getContractId().equals(emptyContract.getContractId()));
+            assertTrue(p2.getContract().getContractId().equals(emptyContract.getContractId()));
+            assertTrue(p3.getContract().getContractId().equals(emptyContract.getContractId()));
         }
         catch(ContractException e){
             System.out.println("Bad contract");

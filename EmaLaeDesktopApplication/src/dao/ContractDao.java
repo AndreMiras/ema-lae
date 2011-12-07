@@ -7,6 +7,9 @@ package dao;
 
 import database.entity.Contract;
 import exceptions.ContractException;
+import exceptions.DaoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,9 +29,23 @@ public class ContractDao extends DaoHibernate<Contract, Integer> {
 
 
     //-1 returned if error.
+    //Fails silently
     @Override
     public Integer create(Contract c) throws Error{
-        if(c.isCorrect()) return super.create(c);
+        Integer pk = null;
+        if(c.isCorrect())
+        try
+        {
+            pk = super.create(c);
+        }
+        catch (DaoException ex)
+        {
+            Logger.getLogger(ContractDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            return pk;
+        }
         else throw new Error();
     }
 
