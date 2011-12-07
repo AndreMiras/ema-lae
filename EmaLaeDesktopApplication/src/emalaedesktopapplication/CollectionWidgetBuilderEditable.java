@@ -159,7 +159,7 @@ public class CollectionWidgetBuilderEditable implements
          */
 
         // panel.setLayout(new GridBagLayout());
-        // panel.add(jScrollPane);
+        panel.add(jScrollPane);
         JButton buttonAdd = new JButton("Add");
         buttonAdd.addActionListener(new ActionListener()
         {
@@ -170,8 +170,8 @@ public class CollectionWidgetBuilderEditable implements
             }
         });
 
-        return jScrollPane;
-        // return panel;
+        // return jScrollPane;
+        return panel;
         // */
     }
 //      public SwingMetawidget createMetaWidget(Object obj) {
