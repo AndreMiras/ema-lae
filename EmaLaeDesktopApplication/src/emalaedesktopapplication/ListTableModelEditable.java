@@ -25,20 +25,23 @@ public class ListTableModelEditable<T>// <T extends Comparable<T>>
     //
     private Class<T> mClass;
     private List<T> mList;
-    private String[] mColumns;
+    // private String[] mColumns;
+    private List<String> mColumns;
     private boolean mEditable;
     private boolean mExtraBlankRow;
 
     //
     // Constructor
     //
-    public ListTableModelEditable(Class<T> clazz, Collection<T> collection, String... columns)
+    // public ListTableModelEditable(Class<T> clazz, Collection<T> collection, List<String> columns)
+    public ListTableModelEditable(Class<T> clazz, List<T> list, List<String> columns)
     {
 
         mClass = clazz;
+        mList = list;
         mColumns = columns;
 
-        importCollection(collection);
+        // importCollection(collection);
     }
 
     //
@@ -90,7 +93,7 @@ public class ListTableModelEditable<T>// <T extends Comparable<T>>
 
         // (mColumns can never be null)
 
-        return mColumns.length;
+        return mColumns.size();
     }
 
     @Override
@@ -102,7 +105,7 @@ public class ListTableModelEditable<T>// <T extends Comparable<T>>
             return null;
         }
 
-        return mColumns[columnIndex];
+        return mColumns.get(columnIndex);
     }
 
     public int getRowCount()
@@ -120,8 +123,8 @@ public class ListTableModelEditable<T>// <T extends Comparable<T>>
         return rows;
     }
 
-    @Override
-    public Class<?> getColumnClass(int columnIndex)
+    // @Override
+    public Class<?> getColumnClassDisabled(int columnIndex)
     {
 
         String column = getColumnName(columnIndex);
