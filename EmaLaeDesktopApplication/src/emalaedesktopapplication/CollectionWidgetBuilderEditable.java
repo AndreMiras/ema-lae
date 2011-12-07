@@ -103,7 +103,7 @@ public class CollectionWidgetBuilderEditable implements
             t = m.getGenericReturnType();
         }
 
-        Class<?> elementType;
+        final Class<?> elementType;
         if (t instanceof ParameterizedType)
         {
             ParameterizedType pt = (ParameterizedType) t;
@@ -183,6 +183,7 @@ public class CollectionWidgetBuilderEditable implements
             public void actionPerformed(ActionEvent e)
             {
                 System.out.println("TODO: show the collection selector");
+                MetaWidgetUtils.addObjectDialog(elementType);
             }
         });
         buttonDelete.addActionListener(new ActionListener()
