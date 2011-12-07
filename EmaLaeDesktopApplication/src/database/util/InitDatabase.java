@@ -151,9 +151,9 @@ public class InitDatabase {
     {
        ContractDao instance = new ContractDao();
         Users u1 = new Users("username1","pwd1");
-        u1.setIsStaff(true);
+        u1.setStaff(true);
         Users u2 = new Users("username2", "pwd2");
-        u2.setIsSuperUser(true);
+        u2.setSuperUser(true);
         Users u3 = new Users("username3", "pwd3");
         UserProfile p1 = new UserProfile(u1, UserProfile.Type.Apprentice);
         p1.setFirstName("BOEUF");

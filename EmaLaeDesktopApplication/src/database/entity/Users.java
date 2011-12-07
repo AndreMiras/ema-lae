@@ -32,10 +32,10 @@ public class Users implements Serializable {
     private String password;
     //Has access to admin GUI but actions have to be defined in the group permissions
     @Column
-    private boolean isStaff;
+    private boolean staff;
     @Column
     //Has access to everything regardless his permissionsh
-    private boolean isSuperUser;
+    private boolean superUser;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL, mappedBy="users")
@@ -132,20 +132,20 @@ public class Users implements Serializable {
         return username;
     }
 
-    public boolean isIsStaff() {
-        return isStaff;
+    public boolean isStaff() {
+        return staff;
     }
 
-    public void setIsStaff(boolean isStaff) {
-        this.isStaff = isStaff;
+    public void setStaff(boolean isStaff) {
+        this.staff = isStaff;
     }
 
-    public boolean isIsSuperUser() {
-        return isSuperUser;
+    public boolean isSuperUser() {
+        return superUser;
     }
 
-    public void setIsSuperUser(boolean isSuperUser) {
-        this.isSuperUser = isSuperUser;
+    public void setSuperUser(boolean isSuperUser) {
+        this.superUser = isSuperUser;
     }
     
     public boolean checkPermission (Permission permission){
