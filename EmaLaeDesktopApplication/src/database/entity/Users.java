@@ -113,7 +113,7 @@ public class Users implements Serializable {
     }
 
     public List<Permission> getSpecialPermissions() {
-        List<Permission> listPermissions = (ArrayList<Permission>) specialPermissions;
+        List<Permission> listPermissions = new ArrayList<Permission>(specialPermissions);
         return listPermissions;
     }
 
