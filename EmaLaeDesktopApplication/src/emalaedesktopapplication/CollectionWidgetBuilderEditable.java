@@ -84,10 +84,24 @@ public class CollectionWidgetBuilderEditable implements
         // Fetch the data. This part could be improved to use BeansBinding or
         // similar
 
-        Collection<?> list = (Collection<?>) ClassUtils.getProperty(
-                metawidget.getToInspect(), attributes.get(NAME));
-        Method m = ClassUtils.getReadMethod(metawidget.getToInspect().getClass(), attributes.get(NAME));
-        Type t = m.getGenericReturnType();
+        List<?> list = new ArrayList();
+        Method m = null;
+        Type t = null;
+
+        /*
+         * Workarounding metawidget bug, see:
+         * http://sourceforge.net/projects/metawidget/forums/forum/747623/topic/4707912 (upstreams)
+         * http://code.google.com/p/ema-lae/issues/detail?id=35
+         */
+        String mPath =  metawidget.getPath(); // e.g. database.entity.UserProfile/user
+        if (!mPath.contains("/"))
+        {
+            list = (List<?>) ClassUtils.getProperty(
+                    metawidget.getToInspect(), attributes.get(NAME));
+            m = ClassUtils.getReadMethod(metawidget.getToInspect().getClass(), attributes.get(NAME));
+            t = m.getGenericReturnType();
+        }
+
         Class<?> elementType;
         if (t instanceof ParameterizedType)
         {
@@ -102,9 +116,10 @@ public class CollectionWidgetBuilderEditable implements
         {
             "unchecked", "rawtypes"
         })
-        final ListTableModelEditable<?> tableModel = new ListTableModelEditable(elementType, new ArrayList(list), columns.toArray(new String[]
-                {
-                }));
+        final ListTableModelEditable<?> tableModel =
+                new ListTableModelEditable(
+                elementType,
+                new ArrayList(list), columns.toArray(new String[] { }));
         JPanel panel = new JPanel();
         final JTable table = new JTable(tableModel);
         JScrollPane jScrollPane = new JScrollPane(table);
@@ -153,7 +168,8 @@ public class CollectionWidgetBuilderEditable implements
         });
          */
 
-        return panel;
+        return jScrollPane;
+        // return panel;
         // */
     }
 //      public SwingMetawidget createMetaWidget(Object obj) {
