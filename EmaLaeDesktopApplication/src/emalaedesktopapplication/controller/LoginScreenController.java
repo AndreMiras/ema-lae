@@ -5,6 +5,7 @@
 package emalaedesktopapplication.controller;
 
 import client.ControllerServiceClient;
+import database.entity.Users;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
 import java.awt.event.ActionEvent;
@@ -57,11 +58,22 @@ public class LoginScreenController
             // get the user to the home screen if success
             if (loginSuccess)
             {
+                Users user;
+                try
+                {
+                    user = ControllerServiceClient.getController().getUser();
+                    mainWindow.setAdminVisible(user.isIsStaff()||user.isIsSuperUser());
+                }
+                catch (RemoteException ex)
+                {
+                    Logger.getLogger(LoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 UserProfileController userProfileController =
                         new UserProfileController(mainWindow);
                 mainWindow.setMiddleContentPanel(
                         userProfileController.getView());
-            }
+                }
             // otherwise popup an error message
             else
             {
