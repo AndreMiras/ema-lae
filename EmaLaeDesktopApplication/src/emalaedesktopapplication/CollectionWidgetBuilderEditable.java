@@ -4,7 +4,12 @@
  */
 package emalaedesktopapplication;
 
+import client.ControllerServiceClient;
+import emalaedesktopapplication.forms.admin.ManyToManySelectorPanel;
 import java.awt.GridBagConstraints;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static org.metawidget.inspector.InspectionResultConstants.*;
 
 import java.awt.GridBagLayout;
@@ -125,7 +130,20 @@ public class CollectionWidgetBuilderEditable implements
                 columns // columns.toArray(new String[] {})
                 );
         JPanel panel = new JPanel();
-        final JTable table = new JTable(tableModel);
+        // final JTable table = new JTable(tableModel);
+        Object[] allObjects = null;
+        ManyToManySelectorPanel table =
+                new ManyToManySelectorPanel();
+        try
+        {
+            allObjects = ControllerServiceClient.getController().getAllObjects(elementType);
+        } catch (RemoteException ex)
+        {
+            Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        table.setSelectedObjectsListFromObjects(list.toArray());
+        table.setAllObjectsListFromObjects(allObjects);
+
         JScrollPane jScrollPane = new JScrollPane(table);
         /*
         table.addMouseListener(new MouseListener()
@@ -161,14 +179,16 @@ public class CollectionWidgetBuilderEditable implements
 
         // Adding add/delete buttons and constrains
         panel.setLayout(new GridBagLayout());
+        panel.add(jScrollPane);
+        JButton buttonAdd = new JButton("Add");
+        JButton buttonDelete = new JButton("Delete");
+        /*
         GridBagConstraints gBC = new GridBagConstraints();
         gBC.fill = GridBagConstraints.HORIZONTAL;
         gBC.gridx = 0;
         gBC.gridy = 1;
         gBC.gridwidth = 2;
         panel.add(jScrollPane, gBC);
-        JButton buttonAdd = new JButton("Add");
-        JButton buttonDelete = new JButton("Delete");
         gBC.anchor = GridBagConstraints.PAGE_START;
         gBC.weightx = 0.5;
         gBC.gridx = 0;
@@ -177,6 +197,7 @@ public class CollectionWidgetBuilderEditable implements
         panel.add(buttonAdd, gBC);
         gBC.gridx = 1;
         panel.add(buttonDelete, gBC);
+         */
         buttonAdd.addActionListener(new ActionListener()
         {
 
