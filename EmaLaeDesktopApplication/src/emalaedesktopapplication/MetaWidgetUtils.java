@@ -4,12 +4,8 @@
  */
 package emalaedesktopapplication;
 
-import client.ControllerServiceClient;
-import emalaedesktopapplication.forms.admin.AdminListChangePanel;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JList;
 
 import org.metawidget.swing.SwingMetawidget;
@@ -29,7 +25,47 @@ public class MetaWidgetUtils
 
     public static JList createObjectListWidget(Object[] objs)
     {
-        JList objectList = new JList(objs);
+        final JList objectList = new JList(objs);
+
+        /**
+         * Listens to the double click event
+         */
+        MouseListener keyListener = new MouseListener()
+        {
+
+            public void mouseClicked(MouseEvent me)
+            {
+                Object obj = null;
+                if (me.getClickCount() == 2)
+                {
+                    int index = objectList.locationToIndex(me.getPoint());
+                    obj = objectList.getSelectedValue();
+                }
+            }
+
+            public void mousePressed(MouseEvent me)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void mouseReleased(MouseEvent me)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void mouseEntered(MouseEvent me)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void mouseExited(MouseEvent me)
+            {
+                // throw new UnsupportedOperationException("Not supported yet.");
+            }
+        };
+
+        objectList.addMouseListener(keyListener);
+
         return objectList;
     }
 
