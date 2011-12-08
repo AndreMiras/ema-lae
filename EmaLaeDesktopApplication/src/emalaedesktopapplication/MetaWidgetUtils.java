@@ -4,7 +4,11 @@
  */
 package emalaedesktopapplication;
 
+import client.ControllerServiceClient;
 import emalaedesktopapplication.forms.admin.AdminListChangePanel;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JList;
 
@@ -49,12 +53,20 @@ public class MetaWidgetUtils
      */
     public static <T> void addObjectDialog(Class<T> type)
     {
-        T[] obj = null;
-        String[] tests = new String[]{"foo","bar", "foobar"}; // tests
+        T[] objs = null;
+        try
+        {
+            // TODO[uglyness]: This should really be done in the controller
+            // rather than in the view
+            objs = ControllerServiceClient.getController().getAllObjects(type);
+        } catch (RemoteException ex)
+        {
+            Logger.getLogger(MetaWidgetUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         JDialog f = new JDialog();
         f.setModal(true);
-        f.getContentPane().add(createObjectListWidget(tests));
+        f.getContentPane().add(createObjectListWidget(objs));
         f.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         f.setSize(400, 250);
         f.setVisible(true);
