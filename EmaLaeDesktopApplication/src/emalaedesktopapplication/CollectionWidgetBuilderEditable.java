@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import static org.metawidget.inspector.InspectionResultConstants.*;
 
 import java.awt.GridBagLayout;
-import java.awt.event.*;
 import java.lang.reflect.*;
 import java.util.*;
 
@@ -92,7 +91,8 @@ public class CollectionWidgetBuilderEditable implements
         // similar
 
         List<?> list = new ArrayList();
-        Method m = null;
+        Method readMethod = null;
+        Method writeMethod = null;
         Type t = null;
 
         /*
@@ -105,8 +105,14 @@ public class CollectionWidgetBuilderEditable implements
         {
             list = (List<?>) ClassUtils.getProperty(
                     metawidget.getToInspect(), attributes.get(NAME));
-            m = ClassUtils.getReadMethod(metawidget.getToInspect().getClass(), attributes.get(NAME));
-            t = m.getGenericReturnType();
+            readMethod = ClassUtils.getReadMethod(
+                    metawidget.getToInspect().getClass(),
+                    attributes.get(NAME));
+            writeMethod = ClassUtils.getWriteMethod(
+                    metawidget.getToInspect().getClass(),
+                    attributes.get(NAME),
+                    Set.class); // TODO: support any collection e.g. List.class
+            t = readMethod.getGenericReturnType();
         }
 
         final Class<?> elementType;
@@ -136,7 +142,9 @@ public class CollectionWidgetBuilderEditable implements
                 new ManyToManySelectorPanel(elementType, allObjects, list);
         manyToManySelectorPanel.addWidgetUpdatedListener(
                 new ManyToManyWidgetDataListener(
-                    elementType, list, manyToManySelectorPanel));
+                    elementType, manyToManySelectorPanel,
+                    metawidget.getToInspect(),
+                    writeMethod));
         JScrollPane jScrollPane = new JScrollPane(manyToManySelectorPanel);
 
         // Adding add/delete buttons and constrains
@@ -153,25 +161,50 @@ public class CollectionWidgetBuilderEditable implements
         class ManyToManyWidgetDataListener<T> implements ListDataListener
         {
             private Class<T> type;
-            private List<T> listToUpdate;
             private ManyToManySelectorPanel manyToManySelectorPanel;
+            Object inspectedObject;
+            Method setCollectionMethod;
 
             public ManyToManyWidgetDataListener(
-                    Class<T> type, List<T> listToUpdate,
-                    ManyToManySelectorPanel manyToManySelectorPanel)
+                    Class<T> type,
+                    ManyToManySelectorPanel manyToManySelectorPanel,
+                    Object inspectedObject,
+                    Method setCollectionMethod)
             {
                 this.type = type;
-                this.listToUpdate = listToUpdate;
                 this.manyToManySelectorPanel = manyToManySelectorPanel;
+                this.inspectedObject = inspectedObject;
+                this.setCollectionMethod = setCollectionMethod;
             }
             // This method is called when new items have been added to the list
             public void intervalAdded(ListDataEvent evt)
             {
                 // update with items
-                listToUpdate.clear();
                 List<?> selectedObjects =
                         manyToManySelectorPanel.getSelectedObjects();
-                listToUpdate.addAll((Collection<? extends T>) selectedObjects);
+                // TODO: add support for any collections (e.g. List)
+                Set<?> listToUpdateSet = new HashSet(
+                        new ArrayList(selectedObjects));
+
+                // Sets the list back to the object
+                if (setCollectionMethod != null)
+                {
+                    try
+                    {
+                        setCollectionMethod.invoke(
+                                inspectedObject,
+                                listToUpdateSet);
+                    } catch (IllegalAccessException ex)
+                    {
+                        Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalArgumentException ex)
+                    {
+                        Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InvocationTargetException ex)
+                    {
+                        Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
 
             // This method is called when items have been removed from the list
@@ -184,18 +217,8 @@ public class CollectionWidgetBuilderEditable implements
             // This method is called when items in the list are replaced
             public void contentsChanged(ListDataEvent evt)
             {
-                DefaultListModel model = (DefaultListModel) evt.getSource();
-
                 // Get range of changed items
-                int start = evt.getIndex0();
-                int end = evt.getIndex1();
-                int count = end - start + 1;
-
-                // Get changed items
-                for (int i = start; i <= end; i++)
-                {
-                    Object item = model.getElementAt(i);
-                }
+                intervalAdded(evt);
             }
         };
 }
