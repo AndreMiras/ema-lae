@@ -62,7 +62,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="allObjectsList">
+        <Component class="javax.swing.JList" name="allObjectsListWidget">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -73,7 +73,7 @@
                 <StringItem index="4" value="Item 5"/>
               </StringArray>
             </Property>
-            <Property name="name" type="java.lang.String" value="allObjectsList" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="allObjectsListWidget" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -88,7 +88,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="selectedObjectsList">
+        <Component class="javax.swing.JList" name="selectedObjectsListWidget">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -99,7 +99,7 @@
                 <StringItem index="4" value="Item 5"/>
               </StringArray>
             </Property>
-            <Property name="name" type="java.lang.String" value="selectedObjectsList" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="selectedObjectsListWidget" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>

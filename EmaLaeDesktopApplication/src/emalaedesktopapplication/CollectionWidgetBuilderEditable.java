@@ -6,7 +6,6 @@ package emalaedesktopapplication;
 
 import client.ControllerServiceClient;
 import emalaedesktopapplication.forms.admin.ManyToManySelectorPanel;
-import java.awt.GridBagConstraints;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +17,8 @@ import java.lang.reflect.*;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 
 import org.metawidget.swing.SwingMetawidget;
 import org.metawidget.util.*;
@@ -121,114 +122,80 @@ public class CollectionWidgetBuilderEditable implements
         // @SuppressWarnings("unchecked")
         // ListTableModel<?> tableModel = new ListTableModel(list, columns);
 
-        // Return the JTable
-        @SuppressWarnings({"unchecked", "rawtypes"})
-        final ListTableModelEditable<?> tableModel =
-                new ListTableModelEditable(
-                elementType,
-                list, // new ArrayList(list),
-                columns // columns.toArray(new String[] {})
-                );
         JPanel panel = new JPanel();
         // final JTable table = new JTable(tableModel);
-        Object[] allObjects = null;
-        ManyToManySelectorPanel table =
-                new ManyToManySelectorPanel();
+        List<?> allObjects = new ArrayList();
         try
         {
-            allObjects = ControllerServiceClient.getController().getAllObjects(elementType);
+            allObjects = new ArrayList(Arrays.asList(ControllerServiceClient.getController().getAllObjects(elementType)));
         } catch (RemoteException ex)
         {
             Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
         }
-        table.setSelectedObjectsListFromObjects(list.toArray());
-        table.setAllObjectsListFromObjects(allObjects);
-
-        JScrollPane jScrollPane = new JScrollPane(table);
-        /*
-        table.addMouseListener(new MouseListener()
-        {
-
-            public void mouseReleased(MouseEvent e)
-            {
-                // TODO Auto-generated method stub
-            }
-
-            public void mousePressed(MouseEvent e)
-            {
-                // TODO Auto-generated method stub
-            }
-
-            public void mouseExited(MouseEvent e)
-            {
-                // TODO Auto-generated method stub
-            }
-
-            public void mouseEntered(MouseEvent e)
-            {
-                // TODO Auto-generated method stub
-            }
-
-            public void mouseClicked(MouseEvent e)
-            {
-                Object obj = tableModel.getValueAt(table.getSelectedRow());
-                MetaWidgetUtils.createEditDialog(obj);
-            }
-        });
-         */
+        ManyToManySelectorPanel<?> manyToManySelectorPanel =
+                new ManyToManySelectorPanel(elementType, allObjects, list);
+        manyToManySelectorPanel.addWidgetUpdatedListener(
+                new ManyToManyWidgetDataListener(
+                    elementType, list, manyToManySelectorPanel));
+        JScrollPane jScrollPane = new JScrollPane(manyToManySelectorPanel);
 
         // Adding add/delete buttons and constrains
         panel.setLayout(new GridBagLayout());
         panel.add(jScrollPane);
-        JButton buttonAdd = new JButton("Add");
-        JButton buttonDelete = new JButton("Delete");
-        /*
-        GridBagConstraints gBC = new GridBagConstraints();
-        gBC.fill = GridBagConstraints.HORIZONTAL;
-        gBC.gridx = 0;
-        gBC.gridy = 1;
-        gBC.gridwidth = 2;
-        panel.add(jScrollPane, gBC);
-        gBC.anchor = GridBagConstraints.PAGE_START;
-        gBC.weightx = 0.5;
-        gBC.gridx = 0;
-        gBC.gridy = 0;
-        gBC.gridwidth = 1;
-        panel.add(buttonAdd, gBC);
-        gBC.gridx = 1;
-        panel.add(buttonDelete, gBC);
-         */
-        buttonAdd.addActionListener(new ActionListener()
-        {
 
-            public void actionPerformed(ActionEvent e)
-            {
-                System.out.println("TODO: show the collection selector");
-                MetaWidgetUtils.addObjectDialog(elementType);
-            }
-        });
-        buttonDelete.addActionListener(new ActionListener()
-        {
-
-            public void actionPerformed(ActionEvent e)
-            {
-                System.out.println("TODO: delete the selected object");
-            }
-        });
 
         // return jScrollPane;
         return new JScrollPane(panel);
         // return panel;
     }
-//      public SwingMetawidget createMetaWidget(Object obj) {
-//              SwingMetawidget metawidget = new SwingMetawidget();
-//              CompositeInspectorConfig inspectorConfig = new CompositeInspectorConfig()
-//                              .setInspectors(new PropertyTypeInspector(),
-//                                              new MetawidgetAnnotationInspector(),
-//                                              new Java5Inspector());
-//              metawidget.setInspector(new CompositeInspector(inspectorConfig));
-//
-//              metawidget.setToInspect(obj);
-//              return metawidget;
-//      }
+
+    // ManyToManySelector listener
+        class ManyToManyWidgetDataListener<T> implements ListDataListener
+        {
+            private Class<T> type;
+            private List<T> listToUpdate;
+            private ManyToManySelectorPanel manyToManySelectorPanel;
+
+            public ManyToManyWidgetDataListener(
+                    Class<T> type, List<T> listToUpdate,
+                    ManyToManySelectorPanel manyToManySelectorPanel)
+            {
+                this.type = type;
+                this.listToUpdate = listToUpdate;
+                this.manyToManySelectorPanel = manyToManySelectorPanel;
+            }
+            // This method is called when new items have been added to the list
+            public void intervalAdded(ListDataEvent evt)
+            {
+                // update with items
+                listToUpdate.clear();
+                List<?> selectedObjects =
+                        manyToManySelectorPanel.getSelectedObjects();
+                listToUpdate.addAll((Collection<? extends T>) selectedObjects);
+            }
+
+            // This method is called when items have been removed from the list
+            public void intervalRemoved(ListDataEvent evt)
+            {
+                // Get range of removed items
+                intervalAdded(evt);
+            }
+
+            // This method is called when items in the list are replaced
+            public void contentsChanged(ListDataEvent evt)
+            {
+                DefaultListModel model = (DefaultListModel) evt.getSource();
+
+                // Get range of changed items
+                int start = evt.getIndex0();
+                int end = evt.getIndex1();
+                int count = end - start + 1;
+
+                // Get changed items
+                for (int i = start; i <= end; i++)
+                {
+                    Object item = model.getElementAt(i);
+                }
+            }
+        };
 }

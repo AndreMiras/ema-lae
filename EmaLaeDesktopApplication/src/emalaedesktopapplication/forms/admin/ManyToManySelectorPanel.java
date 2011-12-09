@@ -11,66 +11,69 @@
 
 package emalaedesktopapplication.forms.admin;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.event.ListDataListener;
 
 /**
  *
  * @author andre
  */
-public class ManyToManySelectorPanel extends javax.swing.JPanel {
+public class ManyToManySelectorPanel<T> extends javax.swing.JPanel {
 
-    DefaultListModel allObjectsListModel;
-    DefaultListModel selectedObjectsListModel;
+    private Class<T> type;
+    private List<T> allObjects;
+    private List<T> selectedObjects;
+    private DefaultListModel allObjectsListModel;
+    private DefaultListModel selectedObjectsListModel;
 
-    /** Creates new form ManyToManySelectorPanel */
-    public ManyToManySelectorPanel() {
+    public ManyToManySelectorPanel(
+            Class<T> type, List<T> allObjects, List<T> selectedObjects)
+    {
         initComponents();
+        this.type = type;
+        this.allObjects = allObjects;
+        this.selectedObjects = selectedObjects;
         customInitComponents();
     }
 
-    public void setAllObjectsListFromObjects(Object[] objects)
+    /**
+     * @return the list of selected objects
+     */
+    public List<T> getSelectedObjects()
     {
-        for (int i = 0; i < objects.length; i++)
-        {
-            if(!selectedObjectsListModel.contains(objects[i]))
-            {
-                allObjectsListModel.add(i, objects[i]);
-            }
-        }
+        return (List<T>) Arrays.asList(selectedObjectsListModel.toArray());
     }
 
-    public void setSelectedObjectsListFromObjects(Object[] objects)
+    public void addWidgetUpdatedListener(ListDataListener ldl)
     {
-        for (int i = 0; i < objects.length; i++)
-        {
-            if(!allObjectsListModel.contains(objects[i]))
-            {
-                selectedObjectsListModel.add(i, objects[i]);
-            }
-        }
+        selectedObjectsListModel.addListDataListener(ldl);
     }
-
-
 
     /**
      * Changes the JList model
      */
     private void customInitComponents()
     {
-        String[] items = new String[] {}; // {"foo", "bar", "foobar"};
+        T obj;
         allObjectsListModel = new DefaultListModel();
         selectedObjectsListModel = new DefaultListModel();
-        for (int i = 0; i < items.length; i++)
+        for (int i = 0; i < allObjects.size(); i++)
         {
-            allObjectsListModel.add(i, items[i]);
-            selectedObjectsListModel.add(i, items[i]);
+            obj = allObjects.get(i);
+            if (selectedObjects.contains(obj))
+            {
+                selectedObjectsListModel.addElement(obj);
+            }
+            else
+            {
+                allObjectsListModel.addElement(obj);
+            }
         }
 
-        allObjectsList.setModel(allObjectsListModel);
-        selectedObjectsList.setModel(selectedObjectsListModel);
+        allObjectsListWidget.setModel(allObjectsListModel);
+        selectedObjectsListWidget.setModel(selectedObjectsListModel);
     }
 
     /**
@@ -94,43 +97,6 @@ public class ManyToManySelectorPanel extends javax.swing.JPanel {
         allObjectsListModel.addElement(obj);
     }
 
-    /**
-     * TODO: use JList.getSelectedValues instead
-     * @param list
-     * @return
-     */
-    private Object[] getSelectedObjectList(javax.swing.JList list)
-    {
-        Object sel;
-        List objects = new ArrayList();
-        // Get the index of all the selected items
-        int[] selectedIx = list.getSelectedIndices();
-
-        // Get all the selected items using the indices
-        for (int i=0; i<selectedIx.length; i++) {
-            sel = list.getModel().getElementAt(selectedIx[i]);
-            objects.add(sel);
-        }
-
-        return objects.toArray();
-    }
-
-    /**
-     * @return the selected objects of the allObjectsList
-     */
-    private Object[] getSelectedAllObjectList()
-    {
-        return getSelectedObjectList(allObjectsList);
-    }
-
-    /**
-     * @return the selected objects of the selectedObjectsList
-     */
-    private Object[] getSelectedSelectedObjectList()
-    {
-        return getSelectedObjectList(selectedObjectsList);
-    }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -141,9 +107,9 @@ public class ManyToManySelectorPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        allObjectsList = new javax.swing.JList();
+        allObjectsListWidget = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
-        selectedObjectsList = new javax.swing.JList();
+        selectedObjectsListWidget = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -151,23 +117,23 @@ public class ManyToManySelectorPanel extends javax.swing.JPanel {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        allObjectsList.setModel(new javax.swing.AbstractListModel() {
+        allObjectsListWidget.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        allObjectsList.setName("allObjectsList"); // NOI18N
-        jScrollPane1.setViewportView(allObjectsList);
+        allObjectsListWidget.setName("allObjectsListWidget"); // NOI18N
+        jScrollPane1.setViewportView(allObjectsListWidget);
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
-        selectedObjectsList.setModel(new javax.swing.AbstractListModel() {
+        selectedObjectsListWidget.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        selectedObjectsList.setName("selectedObjectsList"); // NOI18N
-        jScrollPane2.setViewportView(selectedObjectsList);
+        selectedObjectsListWidget.setName("selectedObjectsListWidget"); // NOI18N
+        jScrollPane2.setViewportView(selectedObjectsListWidget);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(ManyToManySelectorPanel.class);
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
@@ -218,22 +184,22 @@ public class ManyToManySelectorPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        moveToSelected(allObjectsList.getSelectedIndex());
+        moveToSelected(allObjectsListWidget.getSelectedIndex());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
-        removeFromSelected(selectedObjectsList.getSelectedIndex());
+        removeFromSelected(selectedObjectsListWidget.getSelectedIndex());
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList allObjectsList;
+    private javax.swing.JList allObjectsListWidget;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList selectedObjectsList;
+    private javax.swing.JList selectedObjectsListWidget;
     // End of variables declaration//GEN-END:variables
 
 }
