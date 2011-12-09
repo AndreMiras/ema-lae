@@ -72,11 +72,11 @@ public class UserGroup implements Serializable{
     public Set<Permission> getPermissions() {
         return permissionsID;
     }
-
-    public void setPermissions(Set<Permission> permissionsID) {
-        this.permissionsID = permissionsID;
-    }
      */
+
+    public void setPermissions(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
 
     // meta-widget better deals with Lists at the moment
     public List<Permission> getPermissions()
@@ -86,9 +86,11 @@ public class UserGroup implements Serializable{
         return permissionList;
     }
 
+    /*
     public void setPermissions(List<Permission> permissions) {
         this.permissions = new HashSet<Permission>(permissions);
     }
+     */
 
     public boolean addPermission(Permission perm){
         return this.permissions.add(perm);
