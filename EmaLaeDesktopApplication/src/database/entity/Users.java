@@ -73,7 +73,11 @@ public class Users implements Serializable {
     }
 
     public void setGroups(Set<UserGroup> groups) {
-        this.groups = groups;
+        // perfs: could retro set user/group manually for better performances
+        for (UserGroup group: groups)
+        {
+            addToGroup(group);
+        }
     }
 
     public boolean addToGroup(UserGroup newGroup){

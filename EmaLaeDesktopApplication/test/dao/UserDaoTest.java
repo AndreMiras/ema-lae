@@ -18,6 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import database.entity.Permission;
+import java.util.HashSet;
 import org.hibernate.HibernateException;
 
 /**
@@ -66,6 +67,50 @@ public class UserDaoTest {
         
         // the object should now have an id given from the DAO
         assertNotNull(result);
+    }
+
+    /**
+     * Verifies the setGroups method works correctly
+     */
+    @Test
+    public void testSetGroups()
+    {
+    /*
+     * public void setGroups(Set<UserGroup> groups) {
+        this.groups = groups;
+    }
+     */
+        System.out.println("setGroups");
+        UserDao userDao = new UserDao();
+        GroupDao groupDao = new GroupDao();
+        HashSet<UserGroup> groupHashSet = new HashSet<UserGroup>();
+
+        Users user = new Users("usernameSetGroups");
+        UserGroup userGroup = new UserGroup("GroupSetGroups");
+
+        Integer userPk = userDao.create(user);
+        user = userDao.read(userPk);
+        Integer groupPk = groupDao.create(userGroup);
+        userGroup = groupDao.read(groupPk);
+        groupHashSet.add(userGroup);
+
+        /*
+         * The group shouldn't be in the user groups set before it
+         * was actually set manually
+         */
+        assertFalse(user.containsGroup(userGroup));
+        user.setGroups(groupHashSet);
+
+        // now the group should be part of the user object
+        assertTrue(user.containsGroup(userGroup));
+
+        /*
+         * the group should still be part of the user object after
+         * reading from the database
+         */
+        userDao.update(user);
+        user = userDao.read(userPk);
+        assertTrue(user.containsGroup(userGroup));
     }
 
     /**
