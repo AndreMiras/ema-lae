@@ -20,7 +20,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  * @author andre
  */
 @Entity
-public class Users implements Serializable {
+public class Users implements Serializable, WithPrimaryKey {
 
     @Column(name="user_id")
     @Id
@@ -177,6 +177,11 @@ public class Users implements Serializable {
             foundGroup = group.getGroupId().equals(it.next().getGroupId());
         }
         return foundGroup;
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return userId;
     }
     
 }

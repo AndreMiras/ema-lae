@@ -18,7 +18,7 @@ import exceptions.ContractException;
 
 
 @Entity
-public class Contract implements Serializable{
+public class Contract implements Serializable, WithPrimaryKey {
 
     @Column(name ="contracts_id")
     @Id
@@ -184,5 +184,10 @@ public class Contract implements Serializable{
                 break;
         }
        p.setContract(this);
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return contractId;
     }
 }

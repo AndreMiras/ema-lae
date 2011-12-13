@@ -21,7 +21,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 
 @Entity
-public class UserGroup implements Serializable{
+public class UserGroup implements Serializable, WithPrimaryKey {
 
     @Column(name ="group_id")
     @Id
@@ -141,6 +141,11 @@ public class UserGroup implements Serializable{
             foundPermission = permission.getPermissionId().equals(it.next().getPermissionId());
         }
         return foundPermission;
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return groupId;
     }
 
 }

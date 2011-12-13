@@ -16,7 +16,7 @@ import java.util.Set;
  */
 
 @Entity
-public class Promotion implements Serializable{
+public class Promotion implements Serializable, WithPrimaryKey {
 
     @Column(name ="promotions_id")
     @Id
@@ -79,6 +79,11 @@ public class Promotion implements Serializable{
 
     public void setYear(int year) {
         this.promotionYear = year;
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return promotionId;
     }
 
     
