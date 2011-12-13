@@ -11,6 +11,7 @@
 
 package emalaedesktopapplication.forms.admin;
 
+import database.entity.WithPrimaryKey;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -20,7 +21,8 @@ import javax.swing.event.ListDataListener;
  *
  * @author andre
  */
-public class ManyToManySelectorPanel<T> extends javax.swing.JPanel {
+public class ManyToManySelectorPanel<T extends WithPrimaryKey>
+        extends javax.swing.JPanel {
 
     private Class<T> type;
     private List<T> allObjects;
@@ -29,7 +31,9 @@ public class ManyToManySelectorPanel<T> extends javax.swing.JPanel {
     private DefaultListModel selectedObjectsListModel;
 
     public ManyToManySelectorPanel(
-            Class<T> type, List<T> allObjects, List<T> selectedObjects)
+            Class<T> type,
+            List<T> allObjects,
+            List<T> selectedObjects)
     {
         initComponents();
         this.type = type;
@@ -43,7 +47,10 @@ public class ManyToManySelectorPanel<T> extends javax.swing.JPanel {
      */
     public List<T> getSelectedObjects()
     {
-        return (List<T>) Arrays.asList(selectedObjectsListModel.toArray());
+        // return (List<T>) Arrays.asList(selectedObjectsListModel.toArray());
+        // return Arrays.asList(selectedObjectsListModel.toArray());
+        T[] toArray = (T[]) selectedObjectsListModel.toArray();
+        return Arrays.asList(toArray);
     }
 
     public void addWidgetUpdatedListener(ListDataListener ldl)
@@ -62,7 +69,7 @@ public class ManyToManySelectorPanel<T> extends javax.swing.JPanel {
         for (int i = 0; i < allObjects.size(); i++)
         {
             obj = allObjects.get(i);
-            if (selectedObjects.contains(obj))
+            if (selectedObjects.contains(obj)) // TODO
             {
                 selectedObjectsListModel.addElement(obj);
             }
