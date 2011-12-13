@@ -8,12 +8,10 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         <property name="userId" read-only="true" wide="true"/>
         <property name="username"/>
         <property name="password" masked="true"/>
-        <!--
-        <property name="gender"/>
-        <property name="notes" large="true"/>
-        <property name="employer" section="Work"/>
-        <property name="department"/>
-        -->
+        <property name="superUser"/>
+        <property name="staff"/>
+        <property name="groups" large="true"/>
+        <property name="specialPermissions" large="true"/>
     </entity>
     <entity type="database.entity.Permission">
         <property name="permissionId" read-only="true" wide="true"/>

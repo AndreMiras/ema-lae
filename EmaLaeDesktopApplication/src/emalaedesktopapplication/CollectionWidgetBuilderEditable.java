@@ -4,14 +4,20 @@
  */
 package emalaedesktopapplication;
 
+import client.ControllerServiceClient;
+import emalaedesktopapplication.forms.admin.ManyToManySelectorPanel;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static org.metawidget.inspector.InspectionResultConstants.*;
 
 import java.awt.GridBagLayout;
-import java.awt.event.*;
 import java.lang.reflect.*;
 import java.util.*;
 
 import javax.swing.*;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 
 import org.metawidget.swing.SwingMetawidget;
 import org.metawidget.util.*;
@@ -85,7 +91,8 @@ public class CollectionWidgetBuilderEditable implements
         // similar
 
         List<?> list = new ArrayList();
-        Method m = null;
+        Method readMethod = null;
+        Method writeMethod = null;
         Type t = null;
 
         /*
@@ -98,11 +105,17 @@ public class CollectionWidgetBuilderEditable implements
         {
             list = (List<?>) ClassUtils.getProperty(
                     metawidget.getToInspect(), attributes.get(NAME));
-            m = ClassUtils.getReadMethod(metawidget.getToInspect().getClass(), attributes.get(NAME));
-            t = m.getGenericReturnType();
+            readMethod = ClassUtils.getReadMethod(
+                    metawidget.getToInspect().getClass(),
+                    attributes.get(NAME));
+            writeMethod = ClassUtils.getWriteMethod(
+                    metawidget.getToInspect().getClass(),
+                    attributes.get(NAME),
+                    Set.class); // TODO: support any collection e.g. List.class
+            t = readMethod.getGenericReturnType();
         }
 
-        Class<?> elementType;
+        final Class<?> elementType;
         if (t instanceof ParameterizedType)
         {
             ParameterizedType pt = (ParameterizedType) t;
@@ -115,81 +128,97 @@ public class CollectionWidgetBuilderEditable implements
         // @SuppressWarnings("unchecked")
         // ListTableModel<?> tableModel = new ListTableModel(list, columns);
 
-        // Return the JTable
-        @SuppressWarnings(
-        {
-            "unchecked", "rawtypes"
-        })
-        final ListTableModelEditable<?> tableModel =
-                new ListTableModelEditable(
-                elementType,
-                // new ArrayList(list),
-                list,
-                // columns.toArray(new String[] {})
-                columns
-                );
         JPanel panel = new JPanel();
-        final JTable table = new JTable(tableModel);
-        JScrollPane jScrollPane = new JScrollPane(table);
-        /*
-        table.addMouseListener(new MouseListener()
+        // final JTable table = new JTable(tableModel);
+        List<?> allObjects = new ArrayList();
+        try
         {
-
-            public void mouseReleased(MouseEvent e)
-            {
-                // TODO Auto-generated method stub
-            }
-
-            public void mousePressed(MouseEvent e)
-            {
-                // TODO Auto-generated method stub
-            }
-
-            public void mouseExited(MouseEvent e)
-            {
-                // TODO Auto-generated method stub
-            }
-
-            public void mouseEntered(MouseEvent e)
-            {
-                // TODO Auto-generated method stub
-            }
-
-            public void mouseClicked(MouseEvent e)
-            {
-                Object obj = tableModel.getValueAt(table.getSelectedRow());
-                MetaWidgetUtils.createEditDialog(obj);
-            }
-        });
-         */
-
-        // panel.setLayout(new GridBagLayout());
-        // panel.add(jScrollPane);
-        /*
-        JButton buttonAdd = new JButton("Add");
-        buttonAdd.addActionListener(new ActionListener()
+            allObjects = new ArrayList(Arrays.asList(ControllerServiceClient.getController().getAllObjects(elementType)));
+        } catch (RemoteException ex)
         {
+            Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ManyToManySelectorPanel<?> manyToManySelectorPanel =
+                new ManyToManySelectorPanel(elementType, allObjects, list);
+        manyToManySelectorPanel.addWidgetUpdatedListener(
+                new ManyToManyWidgetDataListener(
+                    elementType, manyToManySelectorPanel,
+                    metawidget.getToInspect(),
+                    writeMethod));
+        JScrollPane jScrollPane = new JScrollPane(manyToManySelectorPanel);
 
-            public void actionPerformed(ActionEvent e)
-            {
-                // TODO Auto-generated method stub
-            }
-        });
-         */
+        // Adding add/delete buttons and constrains
+        panel.setLayout(new GridBagLayout());
+        panel.add(jScrollPane);
 
-        return jScrollPane;
+
+        // return jScrollPane;
+        return new JScrollPane(panel);
         // return panel;
-        // */
     }
-//      public SwingMetawidget createMetaWidget(Object obj) {
-//              SwingMetawidget metawidget = new SwingMetawidget();
-//              CompositeInspectorConfig inspectorConfig = new CompositeInspectorConfig()
-//                              .setInspectors(new PropertyTypeInspector(),
-//                                              new MetawidgetAnnotationInspector(),
-//                                              new Java5Inspector());
-//              metawidget.setInspector(new CompositeInspector(inspectorConfig));
-//
-//              metawidget.setToInspect(obj);
-//              return metawidget;
-//      }
+
+    // ManyToManySelector listener
+        class ManyToManyWidgetDataListener<T> implements ListDataListener
+        {
+            private Class<T> type;
+            private ManyToManySelectorPanel manyToManySelectorPanel;
+            Object inspectedObject;
+            Method setCollectionMethod;
+
+            public ManyToManyWidgetDataListener(
+                    Class<T> type,
+                    ManyToManySelectorPanel manyToManySelectorPanel,
+                    Object inspectedObject,
+                    Method setCollectionMethod)
+            {
+                this.type = type;
+                this.manyToManySelectorPanel = manyToManySelectorPanel;
+                this.inspectedObject = inspectedObject;
+                this.setCollectionMethod = setCollectionMethod;
+            }
+            // This method is called when new items have been added to the list
+            public void intervalAdded(ListDataEvent evt)
+            {
+                // update with items
+                List<?> selectedObjects =
+                        manyToManySelectorPanel.getSelectedObjects();
+                // TODO: add support for any collections (e.g. List)
+                Set<?> listToUpdateSet = new HashSet(
+                        new ArrayList(selectedObjects));
+
+                // Sets the list back to the object
+                if (setCollectionMethod != null)
+                {
+                    try
+                    {
+                        setCollectionMethod.invoke(
+                                inspectedObject,
+                                listToUpdateSet);
+                    } catch (IllegalAccessException ex)
+                    {
+                        Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalArgumentException ex)
+                    {
+                        Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InvocationTargetException ex)
+                    {
+                        Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+
+            // This method is called when items have been removed from the list
+            public void intervalRemoved(ListDataEvent evt)
+            {
+                // Get range of removed items
+                intervalAdded(evt);
+            }
+
+            // This method is called when items in the list are replaced
+            public void contentsChanged(ListDataEvent evt)
+            {
+                // Get range of changed items
+                intervalAdded(evt);
+            }
+        };
 }

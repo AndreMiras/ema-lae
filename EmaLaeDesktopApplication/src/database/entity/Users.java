@@ -20,7 +20,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  * @author andre
  */
 @Entity
-public class Users implements Serializable {
+public class Users implements Serializable, WithPrimaryKey {
 
     @Column(name="user_id")
     @Id
@@ -32,10 +32,10 @@ public class Users implements Serializable {
     private String password;
     //Has access to admin GUI but actions have to be defined in the group permissions
     @Column
-    private boolean isStaff;
+    private boolean staff;
     @Column
     //Has access to everything regardless his permissionsh
-    private boolean isSuperUser;
+    private boolean superUser;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL, mappedBy="users")
@@ -73,7 +73,11 @@ public class Users implements Serializable {
     }
 
     public void setGroups(Set<UserGroup> groups) {
-        this.groups = groups;
+        // perfs: could retro set user/group manually for better performances
+        for (UserGroup group: groups)
+        {
+            addToGroup(group);
+        }
     }
 
     public boolean addToGroup(UserGroup newGroup){
@@ -132,20 +136,20 @@ public class Users implements Serializable {
         return username;
     }
 
-    public boolean isIsStaff() {
-        return isStaff;
+    public boolean isStaff() {
+        return staff;
     }
 
-    public void setIsStaff(boolean isStaff) {
-        this.isStaff = isStaff;
+    public void setStaff(boolean isStaff) {
+        this.staff = isStaff;
     }
 
-    public boolean isIsSuperUser() {
-        return isSuperUser;
+    public boolean isSuperUser() {
+        return superUser;
     }
 
-    public void setIsSuperUser(boolean isSuperUser) {
-        this.isSuperUser = isSuperUser;
+    public void setSuperUser(boolean isSuperUser) {
+        this.superUser = isSuperUser;
     }
     
     public boolean checkPermission (Permission permission){
@@ -173,6 +177,11 @@ public class Users implements Serializable {
             foundGroup = group.getGroupId().equals(it.next().getGroupId());
         }
         return foundGroup;
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return userId;
     }
     
 }

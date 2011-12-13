@@ -17,7 +17,7 @@ import java.util.Iterator;
  */
 
 @Entity
-public class Formation implements Serializable{
+public class Formation implements Serializable, WithPrimaryKey {
 
     @Column(name ="formations_id")
     @Id
@@ -93,6 +93,11 @@ public class Formation implements Serializable{
             foundFormation = child.getFormationId().equals(it.next().getFormationId());
         }
         return foundFormation;
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return formationId;
     }
 
 }

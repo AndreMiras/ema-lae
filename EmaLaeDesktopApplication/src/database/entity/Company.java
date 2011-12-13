@@ -14,7 +14,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class Company implements Serializable{
+public class Company implements Serializable, WithPrimaryKey {
 
     @Column(name ="company_id")
     @Id
@@ -59,6 +59,9 @@ public class Company implements Serializable{
         this.phoneNumber = phoneNumber;
     }
 
-    
+    public Serializable getPrimaryKey()
+    {
+        return companyId;
+    }
 
 }

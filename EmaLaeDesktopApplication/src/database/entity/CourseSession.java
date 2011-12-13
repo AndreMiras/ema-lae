@@ -15,7 +15,7 @@ import java.util.Date;
  */
 
 @Entity
-public class CourseSession implements Serializable{
+public class CourseSession implements Serializable, WithPrimaryKey {
 
     @Column(name ="sessions_id")
     @Id
@@ -70,6 +70,11 @@ public class CourseSession implements Serializable{
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return sessionId;
     }
     
 

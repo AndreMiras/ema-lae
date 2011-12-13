@@ -151,7 +151,7 @@ public class EmaLaeDesktopView extends FrameView {
         JFrame mainFrame = this.getFrame();
         JPanel componentPanel = this.mainPanel;
 
-        adminMenu.setVisible(false);
+        adminMenu.setVisible(true); // FIXME: the default value should be set back to false in production
 
         mainFrame.pack();
         mainFrame.setMinimumSize(componentPanel.getMinimumSize());

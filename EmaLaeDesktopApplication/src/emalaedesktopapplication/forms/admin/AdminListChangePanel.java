@@ -56,7 +56,6 @@ public class AdminListChangePanel extends javax.swing.JPanel {
                 if (me.getClickCount() == 2)
                 {
                     int index = objectList.locationToIndex(me.getPoint());
-                    System.out.println("Double clicked on Item " + index);
                     // simulates edit button click
                     editObjectButton.doClick();
                 }

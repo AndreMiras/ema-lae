@@ -62,7 +62,7 @@ public class LoginScreenController
                 try
                 {
                     user = ControllerServiceClient.getController().getUser();
-                    mainWindow.setAdminVisible(user.isIsStaff()||user.isIsSuperUser());
+                    mainWindow.setAdminVisible(user.isStaff()||user.isSuperUser());
                 }
                 catch (RemoteException ex)
                 {

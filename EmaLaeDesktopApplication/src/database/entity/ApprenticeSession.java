@@ -14,7 +14,7 @@ import javax.persistence.*;
  */
 
 @Entity
-public class ApprenticeSession implements Serializable{
+public class ApprenticeSession implements Serializable, WithPrimaryKey {
 
     @Column(name ="apprentice_session_id")
     @Id
@@ -66,6 +66,11 @@ public class ApprenticeSession implements Serializable{
 
     public void setMark(float mark) {
         this.mark = mark;
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return ID;
     }
 
 }

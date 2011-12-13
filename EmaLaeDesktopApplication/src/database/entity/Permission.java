@@ -22,7 +22,7 @@ import java.util.Iterator;
  * @author pc
  */
 @Entity
-public class Permission implements Serializable{
+public class Permission implements Serializable, WithPrimaryKey {
 
     @Column(name ="permissions_id")
     @Id
@@ -126,5 +126,10 @@ public class Permission implements Serializable{
             foundGroup = group.getGroupId().equals(it.next().getGroupId());
         }
         return foundGroup;
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return permissionId;
     }
 }

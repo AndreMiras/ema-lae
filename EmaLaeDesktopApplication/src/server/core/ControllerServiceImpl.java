@@ -22,8 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author laurent
+ * This RMI class provides some interfaces to the model
  */
 public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
         implements IControllerService
