@@ -45,11 +45,10 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
     /**
      * @return the list of selected objects
      */
-    public List<T> getSelectedObjects()
+    public List getSelectedObjects()
     {
-        // return (List<T>) Arrays.asList(selectedObjectsListModel.toArray());
-        // return Arrays.asList(selectedObjectsListModel.toArray());
-        T[] toArray = (T[]) selectedObjectsListModel.toArray();
+        // FIXME
+        Object[] toArray = selectedObjectsListModel.toArray();
         return Arrays.asList(toArray);
     }
 
@@ -126,28 +125,17 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        allObjectsListWidget = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
         selectedObjectsListWidget = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        allObjectsListWidget = new javax.swing.JList();
 
         setName("Form"); // NOI18N
-
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
-
-        allObjectsListWidget.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        allObjectsListWidget.setMaximumSize(new java.awt.Dimension(45, 45));
-        allObjectsListWidget.setMinimumSize(new java.awt.Dimension(45, 45));
-        allObjectsListWidget.setName("allObjectsListWidget"); // NOI18N
-        allObjectsListWidget.setPreferredSize(new java.awt.Dimension(45, 45));
-        jScrollPane1.setViewportView(allObjectsListWidget);
+        setLayout(new java.awt.GridBagLayout());
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
@@ -156,11 +144,18 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        selectedObjectsListWidget.setMaximumSize(new java.awt.Dimension(45, 45));
-        selectedObjectsListWidget.setMinimumSize(new java.awt.Dimension(45, 45));
         selectedObjectsListWidget.setName("selectedObjectsListWidget"); // NOI18N
-        selectedObjectsListWidget.setPreferredSize(new java.awt.Dimension(45, 45));
         jScrollPane2.setViewportView(selectedObjectsListWidget);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        add(jScrollPane2, gridBagConstraints);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(ManyToManySelectorPanel.class);
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
@@ -170,6 +165,11 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
                 jButton1ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
+        add(jButton1, gridBagConstraints);
 
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
@@ -178,35 +178,31 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
                 jButton2ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        add(jButton2, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
-                .addContainerGap())
-        );
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        allObjectsListWidget.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        allObjectsListWidget.setName("allObjectsListWidget"); // NOI18N
+        jScrollPane1.setViewportView(allObjectsListWidget);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
