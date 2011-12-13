@@ -58,6 +58,20 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         selectedObjectsListModel.addListDataListener(ldl);
     }
 
+    private Boolean containsObject(List<WithPrimaryKey> objects, WithPrimaryKey obj)
+    {
+        Boolean contains = false;
+        int count = objects.size() -1;
+        while(!contains && count >= 0)
+        {
+            contains = objects.get(count).getPrimaryKey().equals(
+                    obj.getPrimaryKey());
+            count++;
+        }
+
+        return contains;
+    }
+
     /**
      * Changes the JList model
      */
@@ -69,7 +83,7 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         for (int i = 0; i < allObjects.size(); i++)
         {
             obj = allObjects.get(i);
-            if (selectedObjects.contains(obj)) // TODO
+            if (containsObject((List<WithPrimaryKey>) selectedObjects, obj))
             {
                 selectedObjectsListModel.addElement(obj);
             }
