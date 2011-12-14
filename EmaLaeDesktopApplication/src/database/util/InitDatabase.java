@@ -9,9 +9,12 @@ import dao.*;
 import database.entity.*;
 import exceptions.ContractException;
 import exceptions.DaoException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.net.URLClassLoader;
+import java.net.URL;
 
 /**
  *
@@ -118,6 +121,18 @@ public class InitDatabase {
             group.addPermission(permission);
         }
         groupDao.create(group);
+    }
+
+    public void createPermissions()
+    {
+        try {
+            URL entitiesUrl = new URL("./src/database/entity/");
+            URL[] myClassesPath = {entitiesUrl};
+            URLClassLoader myClasses = new URLClassLoader(myClassesPath);
+            System.out.println(myClasses.getClass().getName());
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void dropPermissions()
