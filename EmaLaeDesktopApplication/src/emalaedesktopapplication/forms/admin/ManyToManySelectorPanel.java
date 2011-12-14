@@ -137,6 +137,7 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         setName("Form"); // NOI18N
         setLayout(new java.awt.GridBagLayout());
 
+        jScrollPane2.setMaximumSize(new java.awt.Dimension(48, 139));
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
         selectedObjectsListWidget.setModel(new javax.swing.AbstractListModel() {
@@ -144,6 +145,7 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        selectedObjectsListWidget.setMinimumSize(new java.awt.Dimension(20, 20));
         selectedObjectsListWidget.setName("selectedObjectsListWidget"); // NOI18N
         jScrollPane2.setViewportView(selectedObjectsListWidget);
 
@@ -168,6 +170,7 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
         add(jButton1, gridBagConstraints);
 
@@ -181,9 +184,11 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(jButton2, gridBagConstraints);
 
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(48, 139));
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         allObjectsListWidget.setModel(new javax.swing.AbstractListModel() {
@@ -191,6 +196,7 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        allObjectsListWidget.setMinimumSize(new java.awt.Dimension(20, 20));
         allObjectsListWidget.setName("allObjectsListWidget"); // NOI18N
         jScrollPane1.setViewportView(allObjectsListWidget);
 
