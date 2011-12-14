@@ -137,19 +137,22 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         setMaximumSize(new java.awt.Dimension(600, 300));
         setMinimumSize(new java.awt.Dimension(100, 50));
         setName("Form"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(250, 100));
+        setPreferredSize(new java.awt.Dimension(350, 100));
         setLayout(new java.awt.GridBagLayout());
 
-        jScrollPane2.setMaximumSize(new java.awt.Dimension(100, 100));
+        jScrollPane2.setMaximumSize(new java.awt.Dimension(180, 100));
         jScrollPane2.setName("jScrollPane2"); // NOI18N
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(150, 100));
 
         selectedObjectsListWidget.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        selectedObjectsListWidget.setMaximumSize(new java.awt.Dimension(100, 100));
         selectedObjectsListWidget.setMinimumSize(new java.awt.Dimension(20, 20));
         selectedObjectsListWidget.setName("selectedObjectsListWidget"); // NOI18N
+        selectedObjectsListWidget.setPreferredSize(new java.awt.Dimension(120, 80));
         jScrollPane2.setViewportView(selectedObjectsListWidget);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -191,16 +194,19 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(removeButton, gridBagConstraints);
 
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(100, 100));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(180, 100));
         jScrollPane1.setName("jScrollPane1"); // NOI18N
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(150, 100));
 
         allObjectsListWidget.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        allObjectsListWidget.setMaximumSize(new java.awt.Dimension(100, 100));
         allObjectsListWidget.setMinimumSize(new java.awt.Dimension(20, 20));
         allObjectsListWidget.setName("allObjectsListWidget"); // NOI18N
+        allObjectsListWidget.setPreferredSize(new java.awt.Dimension(120, 80));
         jScrollPane1.setViewportView(allObjectsListWidget);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
