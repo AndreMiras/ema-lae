@@ -202,17 +202,12 @@ public class PermissionsDaoTest {
         assertTrue(p1.containsGroup(newGroup2));
     }
 
-        /**
+    /**
      * Verifies the setGroups method works correctly
      */
     @Test
     public void testSetGroups()
     {
-    /*
-     * public void setGroups(Set<UserGroup> groups) {
-        this.groups = groups;
-    }
-     */
         System.out.println("setGroups");
         PermissionsDao permissionDao = new PermissionsDao();
         GroupDao groupDao = new GroupDao();
@@ -244,6 +239,24 @@ public class PermissionsDaoTest {
         permissionDao.update(permission);
         permission = permissionDao.read(permissionPk);
         assertTrue(permission.containsGroup(userGroup));
+
+
+        /*
+         * Now lets try to set another group list
+         * Normally the previous group list should be taken out
+         * and be replaced by the new one
+         */
+        userGroup = new UserGroup("AnotherGroup2");
+        groupPk = groupDao.create(userGroup);
+        userGroup = groupDao.read(groupPk);
+        groupHashSet.clear();
+        groupHashSet.add(userGroup);
+        permission.setGroups(groupHashSet);
+        // hitting the database with the new groupSet
+        permissionDao.update(permission);
+        permission = permissionDao.read(permissionPk);
+        assertTrue(permission.containsGroup(userGroup));
+        assertTrue(permission.getGroups().size() == 1);
     }
 
 }
