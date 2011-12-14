@@ -203,17 +203,12 @@ public class PermissionsDaoTest {
 
     }
 
-        /**
+    /**
      * Verifies the setGroups method works correctly
      */
     @Test
     public void testSetGroups()
     {
-    /*
-     * public void setGroups(Set<UserGroup> groups) {
-        this.groups = groups;
-    }
-     */
         System.out.println("setGroups");
         PermissionsDao permissionDao = new PermissionsDao();
         GroupDao groupDao = new GroupDao();
@@ -245,6 +240,7 @@ public class PermissionsDaoTest {
         permissionDao.update(permission);
         permission = permissionDao.read(permissionPk);
         assertTrue(permission.containsGroup(userGroup));
+
 
         /*
          * Now lets try to set another group list
