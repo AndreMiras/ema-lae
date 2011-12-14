@@ -134,10 +134,13 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         jScrollPane1 = new javax.swing.JScrollPane();
         allObjectsListWidget = new javax.swing.JList();
 
+        setMaximumSize(new java.awt.Dimension(600, 300));
+        setMinimumSize(new java.awt.Dimension(100, 50));
         setName("Form"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(250, 100));
         setLayout(new java.awt.GridBagLayout());
 
-        jScrollPane2.setMaximumSize(new java.awt.Dimension(48, 139));
+        jScrollPane2.setMaximumSize(new java.awt.Dimension(100, 100));
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
         selectedObjectsListWidget.setModel(new javax.swing.AbstractListModel() {
@@ -188,7 +191,7 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         add(removeButton, gridBagConstraints);
 
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(48, 139));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(100, 100));
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         allObjectsListWidget.setModel(new javax.swing.AbstractListModel() {
