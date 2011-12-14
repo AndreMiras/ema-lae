@@ -8,6 +8,7 @@ package server.core;
 import dao.GenericDao;
 import dao.UserDao;
 import dao.UserProfileDao;
+import database.entity.Permission;
 import database.entity.Users;
 import database.entity.UserProfile;
 import database.util.HibernateUtil;
@@ -127,6 +128,12 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
 
     public <T> void delete(Class<T> type, T obj) throws RemoteException
     {
+        /*
+         * FIXME : Implement permissions on DAO methods
+        String permString = type.getName() + ".delete";
+        Permission permission = new Permission(permString);
+        assert(loggedUser.checkPermission(permission));
+         */
         GenericDao<T> genericDao = new GenericDao<T>(type);
         genericDao.delete(obj);
     }

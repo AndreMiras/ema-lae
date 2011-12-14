@@ -57,7 +57,11 @@ public class Permission implements Serializable, WithPrimaryKey {
      */
 
     public void setGroups(Set<UserGroup> groups) {
-        this.groups = groups;
+         // perfs: could retro set user/group manually for better performances
+        for (UserGroup group: groups)
+        {
+            addToGroup(group);
+        }
     }
 
      // meta-widget better deals with Lists at the moment
