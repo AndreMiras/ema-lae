@@ -75,11 +75,6 @@ public class UserDaoTest {
     @Test
     public void testSetGroups()
     {
-    /*
-     * public void setGroups(Set<UserGroup> groups) {
-        this.groups = groups;
-    }
-     */
         System.out.println("setGroups");
         UserDao userDao = new UserDao();
         GroupDao groupDao = new GroupDao();
@@ -111,6 +106,23 @@ public class UserDaoTest {
         userDao.update(user);
         user = userDao.read(userPk);
         assertTrue(user.containsGroup(userGroup));
+
+        /*
+         * Now lets try to set another group list
+         * Normally the previous group list should be taken out
+         * and be replaced by the new one
+         */
+        userGroup = new UserGroup("AnotherGroup2");
+        groupPk = groupDao.create(userGroup);
+        userGroup = groupDao.read(groupPk);
+        groupHashSet.clear();
+        groupHashSet.add(userGroup);
+        user.setGroups(groupHashSet);
+        // hitting the database with the new groupSet
+        userDao.update(user);
+        user = userDao.read(userPk);
+        assertTrue(user.containsGroup(userGroup));
+        assertTrue(user.getGroups().size() == 1);
     }
 
     /**
