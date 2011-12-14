@@ -129,8 +129,8 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
 
         jScrollPane2 = new javax.swing.JScrollPane();
         selectedObjectsListWidget = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         allObjectsListWidget = new javax.swing.JList();
 
@@ -160,11 +160,11 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         add(jScrollPane2, gridBagConstraints);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(ManyToManySelectorPanel.class);
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
+        addButton.setName("addButton"); // NOI18N
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -172,13 +172,13 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHWEST;
-        add(jButton1, gridBagConstraints);
+        add(addButton, gridBagConstraints);
 
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setName("jButton2"); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        removeButton.setText(resourceMap.getString("removeButton.text")); // NOI18N
+        removeButton.setName("removeButton"); // NOI18N
+        removeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                removeButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -186,7 +186,7 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        add(jButton2, gridBagConstraints);
+        add(removeButton, gridBagConstraints);
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(48, 139));
         jScrollPane1.setName("jScrollPane1"); // NOI18N
@@ -211,23 +211,23 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addButtonActionPerformed
+    {//GEN-HEADEREND:event_addButtonActionPerformed
         moveToSelected(allObjectsListWidget.getSelectedIndex());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_removeButtonActionPerformed
+    {//GEN-HEADEREND:event_removeButtonActionPerformed
         removeFromSelected(selectedObjectsListWidget.getSelectedIndex());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_removeButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JList allObjectsListWidget;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton removeButton;
     private javax.swing.JList selectedObjectsListWidget;
     // End of variables declaration//GEN-END:variables
 
