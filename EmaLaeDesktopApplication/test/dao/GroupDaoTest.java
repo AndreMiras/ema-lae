@@ -5,6 +5,7 @@
 
 package dao;
 
+import java.util.HashSet;
 import database.util.HibernateUtil;
 import database.entity.UserGroup;
 import database.entity.Users;
@@ -218,4 +219,83 @@ public class GroupDaoTest {
         assertTrue(g1.containsPermission(p1));
 
     }
+
+     /**
+     * Verifies the setGroups method works correctly
+     */
+    @Test
+    public void testSetUsers()
+    {
+        System.out.println("setUsers");
+        UserDao userDao = new UserDao();
+        GroupDao groupDao = new GroupDao();
+        HashSet<Users> userHashSet = new HashSet<Users>();
+
+        UserGroup userGroup = new UserGroup("usernameSetUsers");
+        Users user = new Users("GroupSetUsers");
+
+        Integer groupPk = groupDao.create(userGroup);
+        userGroup = groupDao.read(groupPk);
+        Integer userPk = userDao.create(user);
+        user = userDao.read(userPk);
+        userHashSet.add(user);
+
+        /*
+         * The user shouldn't be in the group set before it
+         * was actually set manually
+         */
+        assertFalse(userGroup.containsUser(user));
+        userGroup.setUsers(userHashSet);
+
+        // now the user should be part of the group object
+        assertTrue(userGroup.containsUser(user));
+
+        /*
+         * the user should still be part of the group object after
+         * reading from the database
+         */
+        groupDao.update(userGroup);
+        userGroup = groupDao.read(groupPk);
+        assertTrue(userGroup.containsUser(user));
+    }
+
+            /**
+     * Verifies the setGroups method works correctly
+     */
+    @Test
+    public void testSetPermissions()
+    {
+        System.out.println("setPermissions");
+        PermissionsDao permissionDao = new PermissionsDao();
+        GroupDao groupDao = new GroupDao();
+        HashSet<Permission> permissionHashSet = new HashSet<Permission>();
+
+        UserGroup userGroup = new UserGroup("groupSetPermissions");
+        Permission permission = new Permission("permissionSetPermissions");
+
+        Integer groupPk = groupDao.create(userGroup);
+        userGroup = groupDao.read(groupPk);
+        Integer permissionPk = permissionDao.create(permission);
+        permission = permissionDao.read(permissionPk);
+        permissionHashSet.add(permission);
+
+        /*
+         * The user shouldn't be in the group set before it
+         * was actually set manually
+         */
+        assertFalse(userGroup.containsPermission(permission));
+        userGroup.setPermissions(permissionHashSet);
+
+        // now the user should be part of the group object
+        assertTrue(userGroup.containsPermission(permission));
+
+        /*
+         * the user should still be part of the group object after
+         * reading from the database
+         */
+        groupDao.update(userGroup);
+        userGroup = groupDao.read(groupPk);
+        assertTrue(userGroup.containsPermission(permission));
+    }
+
 }
