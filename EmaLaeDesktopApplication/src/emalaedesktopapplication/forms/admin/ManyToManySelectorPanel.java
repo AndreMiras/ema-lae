@@ -65,7 +65,7 @@ public class ManyToManySelectorPanel<T extends WithPrimaryKey>
         {
             contains = objects.get(count).getPrimaryKey().equals(
                     obj.getPrimaryKey());
-            count++;
+            count--;
         }
 
         return contains;
