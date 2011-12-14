@@ -74,6 +74,7 @@ public class Users implements Serializable, WithPrimaryKey {
 
     public void setGroups(Set<UserGroup> groups) {
         // perfs: could retro set user/group manually for better performances
+        removeGroups();
         for (UserGroup group: groups)
         {
             addToGroup(group);
@@ -182,6 +183,11 @@ public class Users implements Serializable, WithPrimaryKey {
     public Serializable getPrimaryKey()
     {
         return userId;
+    }
+
+    private void removeGroups()
+    {
+        this.groups.clear();
     }
     
 }
