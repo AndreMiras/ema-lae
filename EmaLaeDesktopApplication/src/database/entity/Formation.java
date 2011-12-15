@@ -24,7 +24,7 @@ public class Formation implements Serializable, WithPrimaryKey {
     @Column
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(/* cascade = CascadeType.ALL, */ fetch = FetchType.EAGER)
     @JoinColumn
     private Formation parentFormation;
 
