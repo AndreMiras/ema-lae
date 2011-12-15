@@ -142,13 +142,13 @@ public class FormationDaoTest {
         Integer result = instance.create(f1);
 
         // Check that the child formation does not yet appears in the parent's children
-        assertFalse(f1.getChildrenFormations().contains(f2));
+        assertFalse(f1.containsChild(f2));
 
         f1.addFormation(f2);
         instance.update(f1);
         Formation updatedf1 = instance.read(result);
 
-        // Check that the child formation does now appears in the parent's children
+        // Check that the child formation does now appear in the parent's children
         assertTrue(updatedf1.containsChild(f2));
 
     }
