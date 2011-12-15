@@ -13,10 +13,6 @@ import java.util.Iterator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-/**
- *
- * @author pc
- */
 
 @Entity
 public class Formation implements Serializable, WithPrimaryKey {
@@ -28,32 +24,29 @@ public class Formation implements Serializable, WithPrimaryKey {
     @Column
     private String name;
 
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
-    @JoinColumn // (name = "formation_id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn
     private Formation parentFormation;
 
-    // @LazyCollection(LazyCollectionOption.FALSE)
-    // @OneToMany(cascade = CascadeType.ALL)
-    @OneToMany(mappedBy = "parentFormation")
-    // @JoinColumn
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentFormation")
+    @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
 
     public Formation() {
 
     }
 
-    public Formation(Formation parentFormation) {
-        this.parentFormation = parentFormation;
-    }
-
     public Formation(String name) {
         this.name = name;
     }
 
+    /*
     public Formation(Formation parentFormation, String name) {
         this.name = name;
-        this.parentFormation = parentFormation;
+        this.setParentFormation(parentFormation);
     }
+    */
 
     
     public String getName() {
@@ -107,8 +100,7 @@ public class Formation implements Serializable, WithPrimaryKey {
         while(!foundFormation && it.hasNext())
         {
             tmpFormation = it.next();
-            if (child.getFormationId() != null &&
-                    tmpFormation.getFormationId() != null)
+            if (child.getFormationId() != null)
             {
                 foundFormation = child.getFormationId().equals(
                         tmpFormation.getFormationId());
@@ -132,5 +124,4 @@ public class Formation implements Serializable, WithPrimaryKey {
     {
         return formationId;
     }
-
 }
