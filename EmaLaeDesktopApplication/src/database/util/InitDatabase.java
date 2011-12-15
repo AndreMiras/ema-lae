@@ -189,7 +189,7 @@ public class InitDatabase {
 
     }
 
-        public void dropContracts()
+    public void dropContracts()
     {
         Contract contract;
         ContractDao contractDao = new ContractDao();
@@ -200,6 +200,41 @@ public class InitDatabase {
         {
             contract = (Contract) contracts.get(i);
             contractDao.delete(contract);
+        }
+    }
+
+    public void createFormations()
+    {
+        FormationDao formationDao = new FormationDao();
+        Formation semester1Formation = new Formation("Semester1");
+        Formation semester2Formation = new Formation("Semester2");
+
+        Formation mathematicsFormation = new Formation("Mathematics");
+        mathematicsFormation.setParentFormation(semester1Formation);
+
+        Formation philosophyFormation = new Formation("Philosophy");
+        philosophyFormation.setParentFormation(semester1Formation);
+
+        Formation spanishFormation = new Formation("Spanish");
+        spanishFormation.setParentFormation(semester1Formation);
+
+        formationDao.create(semester1Formation);
+        formationDao.create(semester2Formation);
+        formationDao.create(mathematicsFormation);
+        formationDao.create(philosophyFormation);
+        formationDao.create(spanishFormation);
+    }
+
+    public void dropFormations()
+    {
+        Formation formation;
+        FormationDao formationDao = new FormationDao();
+        List formations = formationDao.all();
+
+        for(int i=0; i<formations.size(); i++)
+        {
+            formation = (Formation) formations.get(i);
+            formationDao.delete(formation);
         }
     }
 }
