@@ -10,6 +10,8 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  *
@@ -19,17 +21,21 @@ import java.util.Iterator;
 @Entity
 public class Formation implements Serializable, WithPrimaryKey {
 
-    @Column(name ="formations_id")
+    @Column(name = "formation_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer formationId;
     @Column
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn
+
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+    @JoinColumn // (name = "formation_id")
     private Formation parentFormation;
-    @OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
-    @JoinColumn
+
+    // @LazyCollection(LazyCollectionOption.FALSE)
+    // @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parentFormation")
+    // @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
 
     public Formation() {
@@ -80,17 +86,33 @@ public class Formation implements Serializable, WithPrimaryKey {
 
     public void setParentFormation(Formation parentFormation) {
         this.parentFormation = parentFormation;
+        if (!parentFormation.containsChild(this))
+        {
+            parentFormation.addFormation(this);
+        }
     }
     
     public boolean addFormation(Formation child){
+        if (!child.getParentFormation().equals(this))
+        {
+            child.setParentFormation(this);
+        }
         return this.childrenFormations.add(child);
     }
 
     public boolean containsChild(Formation child){
+        Formation tmpFormation;
         Iterator<Formation> it = this.getChildrenFormations().iterator();
         boolean foundFormation = false;
-        while(!foundFormation && it.hasNext()){
-            foundFormation = child.getFormationId().equals(it.next().getFormationId());
+        while(!foundFormation && it.hasNext())
+        {
+            tmpFormation = it.next();
+            if (child.getFormationId() != null &&
+                    tmpFormation.getFormationId() != null)
+            {
+                foundFormation = child.getFormationId().equals(
+                        tmpFormation.getFormationId());
+            }
         }
         return foundFormation;
     }
