@@ -95,6 +95,17 @@ public class Formation implements Serializable, WithPrimaryKey {
         return foundFormation;
     }
 
+    @Override
+    public String toString()
+    {
+        String toStr = name;
+        if (parentFormation != null)
+        {
+            toStr += "::" + parentFormation.toString();
+        }
+        return toStr;
+    }
+
     public Serializable getPrimaryKey()
     {
         return formationId;
