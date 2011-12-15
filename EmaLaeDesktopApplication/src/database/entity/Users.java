@@ -6,11 +6,9 @@
 package database.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import javax.persistence.*;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -66,10 +64,8 @@ public class Users implements Serializable, WithPrimaryKey {
         this.password = password;
     }
 
-    // meta-widget better deals with List Collections at the moment
-    public List<UserGroup> getGroups() {
-        List<UserGroup> groupList = new ArrayList<UserGroup>(groups);
-        return groupList;
+    public Set<UserGroup> getGroups() {
+        return groups;
     }
 
     public void setGroups(Set<UserGroup> newGroups) {
@@ -118,9 +114,8 @@ public class Users implements Serializable, WithPrimaryKey {
         this.username = username;
     }
 
-    public List<Permission> getSpecialPermissions() {
-        List<Permission> listPermissions = new ArrayList<Permission>(specialPermissions);
-        return listPermissions;
+    public Set<Permission> getSpecialPermissions() {
+        return specialPermissions;
     }
 
     public void setSpecialPermissions(Set<Permission> specialPermissions) {
