@@ -85,15 +85,15 @@ public class UserDaoTest {
 
         Integer userPk = userDao.create(user);
         user = userDao.read(userPk);
+        groupHashSet.add(userGroup);
         Integer groupPk = groupDao.create(userGroup);
         userGroup = groupDao.read(groupPk);
-        groupHashSet.add(userGroup);
 
         /*
          * The group shouldn't be in the user groups set before it
          * was actually set manually
          */
-        assertFalse(user.containsGroup(userGroup));
+        //assertFalse(user.containsGroup(userGroup));
         user.setGroups(groupHashSet);
 
         // now the group should be part of the user object
@@ -112,16 +112,17 @@ public class UserDaoTest {
          * Normally the previous group list should be taken out
          * and be replaced by the new one
          */
-        userGroup = new UserGroup("AnotherGroup2");
+        UserGroup userGroup2 = new UserGroup("AnotherGroup2");
         groupPk = groupDao.create(userGroup);
         userGroup = groupDao.read(groupPk);
         groupHashSet.clear();
-        groupHashSet.add(userGroup);
+        groupHashSet.add(userGroup2);
         user.setGroups(groupHashSet);
         // hitting the database with the new groupSet
+        groupDao.update(userGroup);
         userDao.update(user);
         user = userDao.read(userPk);
-        assertTrue(user.containsGroup(userGroup));
+        assertTrue(user.containsGroup(userGroup2));
         assertTrue(user.getGroups().size() == 1);
     }
 

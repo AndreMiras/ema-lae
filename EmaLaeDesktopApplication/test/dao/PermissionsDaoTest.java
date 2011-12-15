@@ -200,6 +200,7 @@ public class PermissionsDaoTest {
 
         assertTrue(p1.containsGroup(newGroup1));
         assertTrue(p1.containsGroup(newGroup2));
+
     }
 
     /**

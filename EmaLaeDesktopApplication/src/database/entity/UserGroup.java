@@ -32,7 +32,10 @@ public class UserGroup implements Serializable, WithPrimaryKey {
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable
+    @JoinTable(
+        joinColumns = @JoinColumn (referencedColumnName="group_id"),
+        inverseJoinColumns = @JoinColumn (referencedColumnName="user_id")
+        )
     private Set<Users> users;
 
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -75,6 +78,7 @@ public class UserGroup implements Serializable, WithPrimaryKey {
      */
 
     public void setPermissions(Set<Permission> permissions) {
+        removePermissions();
          // perfs: could retro set user/group manually for better performances
         for (Permission permission: permissions)
         {
@@ -120,7 +124,8 @@ public class UserGroup implements Serializable, WithPrimaryKey {
     }
 
     public void setUsers(Set<Users> users) {
-         // perfs: could retro set user/group manually for better performances
+        removeUsers();
+        // perfs: could retro set user/group manually for better performances
         for (Users user: users)
         {
             addUser(user);
@@ -154,6 +159,46 @@ public class UserGroup implements Serializable, WithPrimaryKey {
     public Serializable getPrimaryKey()
     {
         return groupId;
+    }
+
+    private void removeUsers()
+    {
+        this.users.clear();
+    }
+
+    public void removeUser(Users u1)
+    {
+        HashSet<Users> newUsers = new HashSet<Users>();
+        for (Users user: users)
+        {
+            if(!u1.equals(user)) newUsers.add(user);
+        }
+        this.users.clear();
+        this.users = newUsers;
+    }
+
+    public void updateUsers(Set<Users> newUsers)
+    {
+        for (Users user: newUsers)
+        {
+            removeUser(user);
+        }
+    }
+
+    private void removePermissions()
+    {
+        this.permissions.clear();
+    }
+
+    public void removePermission(Permission p1)
+    {
+        HashSet<Permission> newPermissions = new HashSet<Permission>();
+        for (Permission permission: permissions)
+        {
+            if(!p1.equals(permission)) newPermissions.add(permission);
+        }
+
+        this.permissions = newPermissions;
     }
 
 }
