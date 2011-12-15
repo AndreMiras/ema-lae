@@ -7,6 +7,7 @@ package dao;
 
 import database.entity.Formation;
 import database.util.HibernateUtil;
+import database.util.InitDatabase;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,7 +15,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.List;
-import org.hibernate.HibernateException;
 
 /**
  *
@@ -28,6 +28,10 @@ public class FormationDaoTest {
     @BeforeClass
     public static void setUpClass() throws Exception {
         HibernateUtil.getSessionFactoryForTests();
+
+        InitDatabase initDatabase = new InitDatabase();
+        initDatabase.dropFormations();
+        initDatabase.createFormations();
     }
 
     @AfterClass
@@ -122,7 +126,8 @@ public class FormationDaoTest {
         FormationDao instance = new FormationDao();
         Integer result = instance.create(f1);
 
-        Formation f2 = new Formation(f1,"child formation");
+        Formation f2 = new Formation("child formation");
+        f2.setParentFormation(f1);
         assertFalse(f1.getChildrenFormations().contains(f2));
 
         f1.addFormation(f2);
@@ -135,22 +140,15 @@ public class FormationDaoTest {
         System.out.println("create");
         // Instantiate the objects
         Formation f1 = new Formation("parent formation");
-        Formation f2 = new Formation(f1,"child formation");
+        Formation f2 = new Formation("child formation");
+        f2.setParentFormation(f1);
 
         // Insertion of the parent formation into the database
         FormationDao instance = new FormationDao();
         Integer result = instance.create(f1);
 
-        // Check that the child formation does not yet appears in the parent's children
-        assertFalse(f1.containsChild(f2));
-
-        f1.addFormation(f2);
-        instance.update(f1);
-        Formation updatedf1 = instance.read(result);
-
-        // Check that the child formation does now appear in the parent's children
-        assertTrue(updatedf1.containsChild(f2));
-
+        // Check that the child formation does appear in the parent's children
+        assertTrue(f1.containsChild(f2));
     }
 
     /**
