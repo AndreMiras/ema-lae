@@ -218,8 +218,9 @@ public class InitDatabase {
         Formation spanishFormation = new Formation("Spanish");
         spanishFormation.setParentFormation(semester1Formation);
 
-        formationDao.create(semester1Formation);
+        // formationDao.create(semester1Formation); // CASCADE
         formationDao.create(semester2Formation);
+
         formationDao.create(mathematicsFormation);
         formationDao.create(philosophyFormation);
         formationDao.create(spanishFormation);
