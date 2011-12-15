@@ -90,7 +90,7 @@ public class CollectionWidgetBuilderEditable implements
         // Fetch the data. This part could be improved to use BeansBinding or
         // similar
 
-        List<?> list = new ArrayList();
+        Collection<?> list = new ArrayList();
         Method readMethod = null;
         Method writeMethod = null;
         Type t = null;
@@ -103,7 +103,7 @@ public class CollectionWidgetBuilderEditable implements
         String mPath =  metawidget.getPath(); // e.g. database.entity.UserProfile/user
         if (!mPath.contains("/"))
         {
-            list = (List<?>) ClassUtils.getProperty(
+            list = (Collection<?>) ClassUtils.getProperty(
                     metawidget.getToInspect(), attributes.get(NAME));
             readMethod = ClassUtils.getReadMethod(
                     metawidget.getToInspect().getClass(),
@@ -139,7 +139,8 @@ public class CollectionWidgetBuilderEditable implements
             Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
         }
         ManyToManySelectorPanel<?> manyToManySelectorPanel =
-                new ManyToManySelectorPanel(elementType, allObjects, list);
+                new ManyToManySelectorPanel(elementType, allObjects,
+                new ArrayList(list));
         manyToManySelectorPanel.addWidgetUpdatedListener(
                 new ManyToManyWidgetDataListener(
                     elementType, manyToManySelectorPanel,
