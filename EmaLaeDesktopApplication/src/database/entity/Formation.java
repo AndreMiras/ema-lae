@@ -24,13 +24,13 @@ public class Formation implements Serializable, WithPrimaryKey {
     @Column
     private String name;
 
-    @ManyToOne(/* cascade = CascadeType.ALL, */ fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn
     private Formation parentFormation;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentFormation")
-    @JoinColumn
+    // @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
 
     public Formation() {
