@@ -103,9 +103,14 @@ public class FormationDaoTest {
     @Test
     public void testDelete() {
         System.out.println("delete");
+        Integer nbToBeDeleted;
         FormationDao instance = new FormationDao();
         List<Formation> allFormationsBefore = instance.all();
         Formation formationToDelete = allFormationsBefore.get(0);
+
+        // cascade deletion
+        nbToBeDeleted =
+                formationToDelete.getChildrenFormations().size() + 1;
 
         // asserts that the object still exists
         assertNotNull(instance.read(formationToDelete.getFormationId()));
@@ -115,7 +120,8 @@ public class FormationDaoTest {
         // not record should now be found
         assertNull(instance.read(formationToDelete.getFormationId()));
         // only one record was deleted
-        assertTrue(allFormationsBefore.size() -1 == allFormationsAfter.size());
+        assertTrue(allFormationsBefore.size() - nbToBeDeleted ==
+                allFormationsAfter.size());
     }
 
 
