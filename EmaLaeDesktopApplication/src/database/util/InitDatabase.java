@@ -218,23 +218,29 @@ public class InitDatabase {
         Formation spanishFormation = new Formation("Spanish");
         spanishFormation.setParentFormation(semester1Formation);
 
-        // formationDao.create(semester1Formation); // CASCADE
+        formationDao.create(semester1Formation); // CASCADE
         formationDao.create(semester2Formation);
 
+        /* CASCADE
         formationDao.create(mathematicsFormation);
         formationDao.create(philosophyFormation);
         formationDao.create(spanishFormation);
+         */
     }
 
     public void dropFormations()
     {
         Formation formation;
         FormationDao formationDao = new FormationDao();
-        List formations = formationDao.all();
+        // List formations = formationDao.all();
 
-        for(int i=0; i<formations.size(); i++)
+        /*
+         * Always refreshes the list lest formations as they get deleted.
+         * Children formations are getting deleted CASCADE
+         */
+        for(int i=0; i<formationDao.all().size(); i++)
         {
-            formation = (Formation) formations.get(i);
+            formation = (Formation) formationDao.all().get(i);
             formationDao.delete(formation);
         }
     }
