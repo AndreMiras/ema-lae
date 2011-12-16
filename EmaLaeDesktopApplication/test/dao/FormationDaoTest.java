@@ -138,16 +138,33 @@ public class FormationDaoTest {
     @Test
     public void testAddFormation() {
         System.out.println("create");
+        FormationDao formationDao = new FormationDao();
         // Instantiate the objects
         Formation f1 = new Formation("parent formation");
         Formation f2 = new Formation("child formation");
+
+        // No parent and not children by default
+        assertTrue(f1.getChildrenFormations().isEmpty());
+        assertTrue(f2.getChildrenFormations().isEmpty());
+        assertTrue(f1.getParentFormation() == null);
+        assertTrue(f2.getParentFormation() == null);
+
+        // Creating parent/children relation
         f2.setParentFormation(f1);
+        assertTrue(f1.getChildrenFormations().size() == 1);
+        assertTrue(f2.getChildrenFormations().isEmpty());
+        assertTrue(f1.getParentFormation() == null);
+        assertTrue(f2.getParentFormation() == f1);
 
         // Insertion of the parent formation into the database
-        FormationDao instance = new FormationDao();
-        Integer result = instance.create(f1);
+        Integer parentPk = formationDao.create(f1);
 
         // Check that the child formation does appear in the parent's children
+        assertTrue(f1.containsChild(f2));
+
+        // Check it's still true after a read from database
+        f1 = formationDao.read(parentPk);
+        assertTrue(f1.getChildrenFormations().size() == 1);
         assertTrue(f1.containsChild(f2));
     }
 
