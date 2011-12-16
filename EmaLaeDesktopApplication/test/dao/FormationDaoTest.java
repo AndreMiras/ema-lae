@@ -8,6 +8,7 @@ package dao;
 import database.entity.Formation;
 import database.util.HibernateUtil;
 import database.util.InitDatabase;
+import java.util.HashSet;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -172,6 +173,51 @@ public class FormationDaoTest {
         f1 = formationDao.read(parentPk);
         assertTrue(f1.getChildrenFormations().size() == 1);
         assertTrue(f1.containsChild(f2));
+    }
+
+    @Test // TODO: finish this up
+    public void testSetChildrenFormations() {
+        System.out.println("create");
+        FormationDao formationDao = new FormationDao();
+        // Instantiate the objects
+        Formation pf1 = new Formation("ParentFormation1");
+        Formation cf1 = new Formation("ChildFormation1");
+        Formation cf2 = new Formation("ChildFormation2");
+        Formation cf3 = new Formation("ChildFormation3");
+
+        // No parent and not children by default
+        assertTrue(pf1.getChildrenFormations().isEmpty());
+        assertTrue(cf1.getChildrenFormations().isEmpty());
+        assertTrue(pf1.getParentFormation() == null);
+        assertTrue(cf1.getParentFormation() == null);
+
+        // Creating parent/children relation
+        HashSet<Formation> formationSet = new HashSet<Formation>();
+        formationSet.add(cf1);
+        formationSet.add(cf2);
+        formationSet.add(cf3);
+        pf1.setChildrenFormations(formationSet);
+        assertTrue(pf1.getChildrenFormations().size() == 3);
+        assertTrue(cf2.getChildrenFormations().isEmpty());
+        assertTrue(cf1.getParentFormation() == pf1);
+        assertTrue(cf2.getParentFormation() == pf1);
+        assertTrue(cf3.getParentFormation() == pf1);
+
+        // Check that the child formation does appear in the parent's children
+        assertTrue(pf1.containsChild(cf1));
+        assertTrue(pf1.containsChild(cf2));
+        assertTrue(pf1.containsChild(cf3));
+
+        // Insertion of the parent formation into the database
+        Integer parentPk = formationDao.create(pf1);
+
+
+        // Check it's still true after a read from database
+        pf1 = formationDao.read(parentPk);
+        assertTrue(pf1.getChildrenFormations().size() == 3);
+        assertTrue(pf1.containsChild(cf1));
+        assertTrue(pf1.containsChild(cf2));
+        assertTrue(pf1.containsChild(cf3));
     }
 
     /**
