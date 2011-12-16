@@ -6,10 +6,8 @@
 package database.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
@@ -86,12 +84,9 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         }
     }
 
-    // meta-widget better deals with Lists at the moment
-    public List<Permission> getPermissions()
+    public Set<Permission> getPermissions()
     {
-        List<Permission> permissionList =
-                new ArrayList<Permission>(permissions);
-        return permissionList;
+        return permissions;
     }
 
     /*
@@ -115,16 +110,13 @@ public class UserGroup implements Serializable, WithPrimaryKey {
     }
      */
 
-    // at the moment, metawidget can only deal with List not with Set
-    public List<Users> getUsers()
+    public Set<Users> getUsers()
     {
-    List<Users> userList =
-                new ArrayList<Users>(users);
-        return userList;
+        return users;
     }
 
     public void setUsers(Set<Users> users) {
-        removeUsers();
+        // removeUsers();
         // perfs: could retro set user/group manually for better performances
         for (Users user: users)
         {
@@ -161,7 +153,7 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         return groupId;
     }
 
-    private void removeUsers()
+    private void removeUsersDisabled()
     {
         this.users.clear();
     }
@@ -171,9 +163,12 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         HashSet<Users> newUsers = new HashSet<Users>();
         for (Users user: users)
         {
-            if(!u1.equals(user)) newUsers.add(user);
+            if(!u1.equals(user))
+            {
+                newUsers.add(user);
+            }
         }
-        this.users.clear();
+        // this.users.clear();
         this.users = newUsers;
     }
 

@@ -10,44 +10,43 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-/**
- *
- * @author pc
- */
 
 @Entity
 public class Formation implements Serializable, WithPrimaryKey {
 
-    @Column(name ="formations_id")
+    @Column(name = "formation_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
     private Integer formationId;
     @Column
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn
     private Formation parentFormation;
-    @OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
-    @JoinColumn
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentFormation")
+    // @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
 
     public Formation() {
 
     }
 
-    public Formation(Formation parentFormation) {
-        this.parentFormation = parentFormation;
-    }
-
     public Formation(String name) {
         this.name = name;
     }
 
+    /*
     public Formation(Formation parentFormation, String name) {
         this.name = name;
-        this.parentFormation = parentFormation;
+        this.setParentFormation(parentFormation);
     }
+    */
 
     
     public String getName() {
@@ -80,24 +79,49 @@ public class Formation implements Serializable, WithPrimaryKey {
 
     public void setParentFormation(Formation parentFormation) {
         this.parentFormation = parentFormation;
+        if (!parentFormation.containsChild(this))
+        {
+            parentFormation.addFormation(this);
+        }
     }
     
     public boolean addFormation(Formation child){
+        if (!child.getParentFormation().equals(this))
+        {
+            child.setParentFormation(this);
+        }
         return this.childrenFormations.add(child);
     }
 
     public boolean containsChild(Formation child){
+        Formation tmpFormation;
         Iterator<Formation> it = this.getChildrenFormations().iterator();
         boolean foundFormation = false;
-        while(!foundFormation && it.hasNext()){
-            foundFormation = child.getFormationId().equals(it.next().getFormationId());
+        while(!foundFormation && it.hasNext())
+        {
+            tmpFormation = it.next();
+            if (child.getFormationId() != null)
+            {
+                foundFormation = child.getFormationId().equals(
+                        tmpFormation.getFormationId());
+            }
         }
         return foundFormation;
+    }
+
+    @Override
+    public String toString()
+    {
+        String toStr = name;
+        if (parentFormation != null)
+        {
+            toStr += "::" + parentFormation.toString();
+        }
+        return toStr;
     }
 
     public Serializable getPrimaryKey()
     {
         return formationId;
     }
-
 }

@@ -8,10 +8,8 @@
 package database.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -58,17 +56,15 @@ public class Permission implements Serializable, WithPrimaryKey {
 
     public void setGroups(Set<UserGroup> groups) {
         // perfs: could retro set user/group manually for better performances
-        removeGroups();
+        // removeGroups();
         for (UserGroup group: groups)
         {
             addToGroup(group);
         }
     }
 
-     // meta-widget better deals with Lists at the moment
-    public List<UserGroup> getGroups() {
-        List<UserGroup> groupList = new ArrayList<UserGroup>(groups);
-        return groupList;
+    public Set<UserGroup> getGroups() {
+        return groups;
     }
 
     
@@ -100,9 +96,8 @@ public class Permission implements Serializable, WithPrimaryKey {
         this.permissionId = permissionID;
     }
 
-    public List<Users> getUsers() {
-        List<Users> usersList = new ArrayList<Users>(users);
-        return usersList;
+    public Set<Users> getUsers() {
+        return users;
     }
 
     public void setUsers(Set<Users> users) {
@@ -114,6 +109,11 @@ public class Permission implements Serializable, WithPrimaryKey {
     }
 
     public boolean addToGroup(UserGroup group){
+        group.addPermission(this); // workaround, seems required by mappedBy
+        return this.groups.add(group);
+    }
+
+    public boolean removeFromGroup(UserGroup group){
         group.addPermission(this); // workaround, seems required by mappedBy
         return this.groups.add(group);
     }
@@ -138,7 +138,7 @@ public class Permission implements Serializable, WithPrimaryKey {
         return permissionId;
     }
 
-    private void removeGroups()
+    private void removeGroupsDisabled()
     {
         this.groups.clear();
     }

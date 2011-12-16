@@ -66,4 +66,11 @@ http://metawidget.org/xsd/inspection-result-1.0.xsd">
         <property name="beginDate" hidden="true"/>
         <property name="endDate" hidden="true"/>
     </entity>
+    <entity type="database.entity.Formation">
+        <property name="primaryKey" hidden="true"/>
+        <property name="formationId" read-only="true" wide="true"/>
+        <property name="name" wide="true"/>
+        <property name="childrenFormations" type="database.entity.Formation"/>
+        <property name="parentFormation" type="database.entity.Formation" hidden="true"/>
+    </entity>
 </inspection-result>

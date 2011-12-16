@@ -7,6 +7,7 @@ package dao;
 
 import database.entity.Formation;
 import database.util.HibernateUtil;
+import database.util.InitDatabase;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,7 +15,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.List;
-import org.hibernate.HibernateException;
 
 /**
  *
@@ -28,6 +28,10 @@ public class FormationDaoTest {
     @BeforeClass
     public static void setUpClass() throws Exception {
         HibernateUtil.getSessionFactoryForTests();
+
+        InitDatabase initDatabase = new InitDatabase();
+        initDatabase.dropFormations();
+        initDatabase.createFormations();
     }
 
     @AfterClass
@@ -99,9 +103,14 @@ public class FormationDaoTest {
     @Test
     public void testDelete() {
         System.out.println("delete");
+        Integer nbToBeDeleted;
         FormationDao instance = new FormationDao();
         List<Formation> allFormationsBefore = instance.all();
         Formation formationToDelete = allFormationsBefore.get(0);
+
+        // cascade deletion
+        nbToBeDeleted =
+                formationToDelete.getChildrenFormations().size() + 1;
 
         // asserts that the object still exists
         assertNotNull(instance.read(formationToDelete.getFormationId()));
@@ -111,7 +120,8 @@ public class FormationDaoTest {
         // not record should now be found
         assertNull(instance.read(formationToDelete.getFormationId()));
         // only one record was deleted
-        assertTrue(allFormationsBefore.size() -1 == allFormationsAfter.size());
+        assertTrue(allFormationsBefore.size() - nbToBeDeleted ==
+                allFormationsAfter.size());
     }
 
 
@@ -122,7 +132,8 @@ public class FormationDaoTest {
         FormationDao instance = new FormationDao();
         Integer result = instance.create(f1);
 
-        Formation f2 = new Formation(f1,"child formation");
+        Formation f2 = new Formation("child formation");
+        f2.setParentFormation(f1);
         assertFalse(f1.getChildrenFormations().contains(f2));
 
         f1.addFormation(f2);
@@ -133,24 +144,34 @@ public class FormationDaoTest {
     @Test
     public void testAddFormation() {
         System.out.println("create");
+        FormationDao formationDao = new FormationDao();
         // Instantiate the objects
         Formation f1 = new Formation("parent formation");
-        Formation f2 = new Formation(f1,"child formation");
+        Formation f2 = new Formation("child formation");
+
+        // No parent and not children by default
+        assertTrue(f1.getChildrenFormations().isEmpty());
+        assertTrue(f2.getChildrenFormations().isEmpty());
+        assertTrue(f1.getParentFormation() == null);
+        assertTrue(f2.getParentFormation() == null);
+
+        // Creating parent/children relation
+        f2.setParentFormation(f1);
+        assertTrue(f1.getChildrenFormations().size() == 1);
+        assertTrue(f2.getChildrenFormations().isEmpty());
+        assertTrue(f1.getParentFormation() == null);
+        assertTrue(f2.getParentFormation() == f1);
 
         // Insertion of the parent formation into the database
-        FormationDao instance = new FormationDao();
-        Integer result = instance.create(f1);
+        Integer parentPk = formationDao.create(f1);
 
-        // Check that the child formation does not yet appears in the parent's children
-        assertFalse(f1.getChildrenFormations().contains(f2));
+        // Check that the child formation does appear in the parent's children
+        assertTrue(f1.containsChild(f2));
 
-        f1.addFormation(f2);
-        instance.update(f1);
-        Formation updatedf1 = instance.read(result);
-
-        // Check that the child formation does now appears in the parent's children
-        assertTrue(updatedf1.containsChild(f2));
-
+        // Check it's still true after a read from database
+        f1 = formationDao.read(parentPk);
+        assertTrue(f1.getChildrenFormations().size() == 1);
+        assertTrue(f1.containsChild(f2));
     }
 
     /**
