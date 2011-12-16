@@ -116,7 +116,7 @@ public class UserGroup implements Serializable, WithPrimaryKey {
     }
 
     public void setUsers(Set<Users> users) {
-        removeUsers();
+        // removeUsers();
         // perfs: could retro set user/group manually for better performances
         for (Users user: users)
         {
@@ -153,7 +153,7 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         return groupId;
     }
 
-    private void removeUsers()
+    private void removeUsersDisabled()
     {
         this.users.clear();
     }
@@ -163,9 +163,12 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         HashSet<Users> newUsers = new HashSet<Users>();
         for (Users user: users)
         {
-            if(!u1.equals(user)) newUsers.add(user);
+            if(!u1.equals(user))
+            {
+                newUsers.add(user);
+            }
         }
-        this.users.clear();
+        // this.users.clear();
         this.users = newUsers;
     }
 

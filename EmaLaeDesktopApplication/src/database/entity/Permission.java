@@ -56,7 +56,7 @@ public class Permission implements Serializable, WithPrimaryKey {
 
     public void setGroups(Set<UserGroup> groups) {
         // perfs: could retro set user/group manually for better performances
-        removeGroups();
+        // removeGroups();
         for (UserGroup group: groups)
         {
             addToGroup(group);
@@ -113,6 +113,11 @@ public class Permission implements Serializable, WithPrimaryKey {
         return this.groups.add(group);
     }
 
+    public boolean removeFromGroup(UserGroup group){
+        group.addPermission(this); // workaround, seems required by mappedBy
+        return this.groups.add(group);
+    }
+
     @Override
     public String toString()
     {
@@ -133,7 +138,7 @@ public class Permission implements Serializable, WithPrimaryKey {
         return permissionId;
     }
 
-    private void removeGroups()
+    private void removeGroupsDisabled()
     {
         this.groups.clear();
     }
