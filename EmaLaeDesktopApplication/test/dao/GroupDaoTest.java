@@ -257,6 +257,25 @@ public class GroupDaoTest {
         groupDao.update(userGroup);
         userGroup = groupDao.read(groupPk);
         assertTrue(userGroup.containsUser(user));
+
+
+        /*
+         * Now lets try to set another group list
+         * Normally the previous group list should be taken out
+         * and be replaced by the new one
+         */
+        Users user2 = new Users("AnotherUser2");
+        userPk = userDao.create(user2);
+        user = userDao.read(userPk);
+        userHashSet.clear();
+        userHashSet.add(user2);
+        userGroup.setUsers(userHashSet);
+        // hitting the database with the new groupSet
+        groupDao.update(userGroup);
+        //userDao.update(user);
+        userGroup = groupDao.read(groupPk);
+        assertTrue(userGroup.containsUser(user2));
+        assertTrue(userGroup.getUsers().size() == 1);
     }
 
             /**
