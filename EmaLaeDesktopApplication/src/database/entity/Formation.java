@@ -83,7 +83,7 @@ public class Formation implements Serializable, WithPrimaryKey {
 
     public void setParentFormation(Formation parentFormation) {
         this.parentFormation = parentFormation;
-        if (!parentFormation.containsChild(this))
+        if (parentFormation != null && !parentFormation.containsChild(this))
         {
             parentFormation.addFormation(this);
         }
