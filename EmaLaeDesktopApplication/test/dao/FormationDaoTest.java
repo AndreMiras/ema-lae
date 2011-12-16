@@ -204,9 +204,9 @@ public class FormationDaoTest {
         assertTrue(cf3.getParentFormation() == pf1);
 
         // Check that the child formation does appear in the parent's children
-        assertTrue(pf1.containsChild(cf1));
-        assertTrue(pf1.containsChild(cf2));
-        assertTrue(pf1.containsChild(cf3));
+        assertTrue(pf1.getChildrenFormations().contains(cf1));
+        assertTrue(pf1.getChildrenFormations().contains(cf2));
+        assertTrue(pf1.getChildrenFormations().contains(cf3));
 
         // Insertion of the parent formation into the database
         Integer parentPk = formationDao.create(pf1);
