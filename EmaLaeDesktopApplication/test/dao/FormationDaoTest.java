@@ -224,7 +224,7 @@ public class FormationDaoTest {
          * to see if the previous one gets overridden.
          * So we set cf1 and cf3 but not cf2
          */
-        formationSet = new HashSet<Formation>();
+        formationSet.clear();
         formationSet.add(cf1);
         formationSet.add(cf3);
 
