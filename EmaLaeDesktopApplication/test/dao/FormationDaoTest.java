@@ -218,6 +218,29 @@ public class FormationDaoTest {
         assertTrue(pf1.containsChild(cf1));
         assertTrue(pf1.containsChild(cf2));
         assertTrue(pf1.containsChild(cf3));
+
+        /*
+         * Now lets try to set a formation HashSet a second time
+         * to see if the previous one gets overridden.
+         * So we set cf1 and cf3 but not cf2
+         */
+        formationSet = new HashSet<Formation>();
+        formationSet.add(cf1);
+        formationSet.add(cf3);
+
+        pf1.setChildrenFormations(formationSet);
+        assertTrue(pf1.getChildrenFormations().size() == 2);
+        assertTrue(cf1.getParentFormation() == pf1);
+        // assertTrue(cf2.getParentFormation() == null);
+        assertTrue(cf3.getParentFormation() == pf1);
+
+        formationDao.update(pf1); // updating the database
+        // Check it's still true after a read from database
+        pf1 = formationDao.read(parentPk);
+        assertTrue(pf1.getChildrenFormations().size() == 2);
+        assertTrue(pf1.containsChild(cf1));
+        assertFalse(pf1.containsChild(cf2));
+        assertTrue(pf1.containsChild(cf3));
     }
 
     /**
