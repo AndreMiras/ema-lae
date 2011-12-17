@@ -160,16 +160,8 @@ public class UserGroup implements Serializable, WithPrimaryKey {
 
     public void removeUser(Users u1)
     {
-        HashSet<Users> newUsers = new HashSet<Users>();
-        for (Users user: users)
-        {
-            if(!u1.equals(user))
-            {
-                newUsers.add(user);
-            }
-        }
         // this.users.clear();
-        this.users = newUsers;
+        this.users.remove(u1);
     }
 
     public void updateUsers(Set<Users> newUsers)
