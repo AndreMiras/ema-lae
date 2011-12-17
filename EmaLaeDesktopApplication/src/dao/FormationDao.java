@@ -45,7 +45,7 @@ public class FormationDao extends DaoHibernate<Formation, Integer> {
     /**
      * Explicitely updates the many-to-one "parentFormation" field.
      * This is mainly used when performing a formation.setChildrenFormations
-     * followed by a formationDao.save(formation);
+     * followed by a formationDao.save(formation)
      * @param f
      */
     @Override
