@@ -40,6 +40,8 @@ public class MainWindowController
                 database.entity.Formation.class),
         Utils.getClassNameWithoutPackage(
                 database.entity.Contract.class),
+        Utils.getClassNameWithoutPackage(
+                database.entity.Promotion.class),
     };
 
     public MainWindowController(EmaLaeDesktopView view,
@@ -133,6 +135,14 @@ public class MainWindowController
                AdminController<database.entity.Contract> adminController =
                         new AdminController<database.entity.Contract>(
                             view, database.entity.Contract.class);
+                adminController.adminListChange();
+            }
+            else if (actionCommand.equals(Utils.getClassNameWithoutPackage(
+                    database.entity.Promotion.class)))
+            {
+               AdminController<database.entity.Promotion> adminController =
+                        new AdminController<database.entity.Promotion>(
+                            view, database.entity.Promotion.class);
                 adminController.adminListChange();
             }
             else
