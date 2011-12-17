@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import javax.persistence.*;
 import java.util.Set;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 @Entity
@@ -24,7 +26,8 @@ public class Promotion implements Serializable, WithPrimaryKey {
     private Integer promotionYear;
     @OneToOne
     private UserProfile responsible;
-    @OneToMany(mappedBy = "promotion")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotion")
     private Set<UserProfile> apprentices;
 
     public Promotion()
@@ -77,6 +80,12 @@ public class Promotion implements Serializable, WithPrimaryKey {
 
     public void setPromotionYear(int year) {
         this.promotionYear = year;
+    }
+
+    @Override
+    public String toString()
+    {
+        return name + " (" + promotionYear + ")";
     }
 
     public Serializable getPrimaryKey()
