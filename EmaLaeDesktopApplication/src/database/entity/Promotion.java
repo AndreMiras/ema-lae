@@ -6,6 +6,7 @@
 package database.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import javax.persistence.*;
 import java.util.Set;
 
@@ -28,10 +29,12 @@ public class Promotion implements Serializable, WithPrimaryKey {
 
     public Promotion()
     {
+        this.apprentices = new HashSet<UserProfile>();
     }
 
     public Promotion(String name)
     {
+        this();
         this.name = name;
     }
 
@@ -68,11 +71,11 @@ public class Promotion implements Serializable, WithPrimaryKey {
         this.name = name;
     }
 
-    public int getYear() {
+    public Integer getPromotionYear() {
         return promotionYear;
     }
 
-    public void setYear(int year) {
+    public void setPromotionYear(int year) {
         this.promotionYear = year;
     }
 
