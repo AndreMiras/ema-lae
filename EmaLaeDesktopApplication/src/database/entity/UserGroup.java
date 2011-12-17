@@ -13,10 +13,6 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-/**
- *
- * @author pc
- */
 
 @Entity
 public class UserGroup implements Serializable, WithPrimaryKey {
@@ -69,12 +65,6 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         this.name = name;
     }
 
-    /*
-    public Set<Permission> getPermissions() {
-        return permissionsID;
-    }
-     */
-
     public void setPermissions(Set<Permission> permissions) {
         removePermissions();
          // perfs: could retro set user/group manually for better performances
@@ -89,12 +79,6 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         return permissions;
     }
 
-    /*
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = new HashSet<Permission>(permissions);
-    }
-     */
-
     public boolean addPermission(Permission perm){
         return this.permissions.add(perm);
     }
@@ -103,12 +87,6 @@ public class UserGroup implements Serializable, WithPrimaryKey {
     {
         return users.add(u);
     }
-
-    /* metawidget cannot deal with Set Collection
-    public Set<Users> getUsers() {
-        return users;
-    }
-     */
 
     public Set<Users> getUsers()
     {
