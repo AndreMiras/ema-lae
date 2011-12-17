@@ -74,7 +74,7 @@ public class ControllerImplTest {
         controllerImpl.initDatabaseForTests();
         assertTrue(userProfileDao.all().size() > 0);
 
-        // running it a second time sometimes fails
+        // running it a second time shouldn't fail
         controllerImpl.initDatabaseForTests();
         assertTrue(userProfileDao.all().size() > 0);
     }

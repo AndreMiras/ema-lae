@@ -262,17 +262,21 @@ public class InitDatabase {
     {
         GenericDao<Promotion> promotionDao =
                 new GenericDao<Promotion>(Promotion.class);
-        Promotion infres1Promotion = new Promotion("Infres1");
-        Promotion infres2Promotion = new Promotion("Infres2");
-        Promotion infres3Promotion = new Promotion("Infres3");
-        try
+        String promoName = "InfRes";
+        Integer promoYear = 2010;
+        Promotion promotion;
+        for (int i=0; i<3; i++)
         {
-            promotionDao.create(infres1Promotion);
-            promotionDao.create(infres2Promotion);
-            promotionDao.create(infres3Promotion);
-        } catch (DaoException ex)
-        {
-            Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            promotion = new Promotion(promoName + (i + 1));
+            promotion.setPromotionYear(promoYear + i);
+            try
+            {
+                promotionDao.create(promotion);
+            }
+            catch (DaoException ex)
+            {
+                Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -281,13 +285,11 @@ public class InitDatabase {
         Promotion promo;
         GenericDao<Promotion> promotionDao =
                 new GenericDao<Promotion>(Promotion.class);
+        List<Promotion> promotions = promotionDao.all();
 
-        /*
-         * Always refreshes the list lest promotion as they get deleted.
-         */
-        for(int i=0; i<promotionDao.all().size(); i++)
+        for(int i=0; i<promotions.size(); i++)
         {
-            promo = (Promotion) promotionDao.all().get(i);
+            promo = promotions.get(i);
             promotionDao.delete(promo);
         }
     }
