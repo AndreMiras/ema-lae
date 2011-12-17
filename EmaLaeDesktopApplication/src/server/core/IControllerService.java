@@ -5,6 +5,7 @@
 
 package server.core;
 
+import database.entity.Formation;
 import database.entity.Users;
 import database.entity.UserProfile;
 import java.io.Serializable;
@@ -50,6 +51,9 @@ public interface IControllerService extends java.rmi.Remote {
     public UserProfile getUserProfile()
             throws java.rmi.RemoteException;
 
+    public Formation getFormation()
+            throws java.rmi.RemoteException;
+
     public Serializable getEntityId(Object entity)
             throws java.rmi.RemoteException;
 
@@ -63,4 +67,6 @@ public interface IControllerService extends java.rmi.Remote {
     public <T> void createOrUpdate(Class<T> type, T obj) throws java.rmi.RemoteException;
 
     public <T> void delete(Class<T> type, T obj) throws java.rmi.RemoteException;
+
+    public <T> void get(Class<T> type, T obj) throws java.rmi.RemoteException;
 }

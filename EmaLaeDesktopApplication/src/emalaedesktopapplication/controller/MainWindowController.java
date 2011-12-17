@@ -46,7 +46,8 @@ public class MainWindowController
             boolean contracts = false;
             if(user!=null)
             {
-                for(int i=0;i<user.getSpecialPermissions().size();i++)
+                int totalPermissionsSize = user.getTotalNumberOfPermissions();
+                for(int i=0;i<totalPermissionsSize;i++)
                 {
                     if(user.checkPermission("Users_read") && !users)
                     {
@@ -108,8 +109,8 @@ public class MainWindowController
                             database.entity.Formation.class),
                     Utils.getClassNameWithoutPackage(
                             database.entity.Contract.class),
-        Utils.getClassNameWithoutPackage(
-                database.entity.Promotion.class),
+                    Utils.getClassNameWithoutPackage(
+                            database.entity.Promotion.class),
                 };
             }
         }

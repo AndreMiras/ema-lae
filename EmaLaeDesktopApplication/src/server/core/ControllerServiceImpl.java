@@ -8,7 +8,9 @@ package server.core;
 import dao.GenericDao;
 import dao.UserDao;
 import dao.UserProfileDao;
+import dao.FormationDao;
 import database.entity.Permission;
+import database.entity.Formation;
 import database.entity.Users;
 import database.entity.UserProfile;
 import database.util.HibernateUtil;
@@ -169,4 +171,12 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
         GenericDao<T> genericDao = new GenericDao<T>(type);
         genericDao.delete(obj);
     }
+
+    public <T> T get(Class<T> type, T obj) throws RemoteException {
+        Serializable pk = getEntityId(obj);
+        GenericDao<T> genericDao = new GenericDao<T>(type);
+        genericDao.read(pk);
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

@@ -50,8 +50,6 @@ public class InitDatabase {
             userProfile.setLastName(lastname + i);
             Permission p1 = new Permission("Users_create");
             Permission p2 = new Permission("Users_update");
-            user.addSpecialPermission(p1);
-            user.addSpecialPermission(p2);
             // Attribute a different type each user
             switch (i%3){
                 case 1:
@@ -129,6 +127,15 @@ public class InitDatabase {
 
     public void createPermissions()
     {
+        Users user = new Users("administrator");
+        UserDao userDao = new UserDao();
+        String groupName = "bGroup";
+        UserGroup group = new UserGroup(groupName);
+        group.addUser(user);
+        GroupDao groupDao = new GroupDao();
+        
+        userDao.create(user);
+        groupDao.create(group);
         Permission permission = new Permission();
         PermissionsDao permissionsDao = new PermissionsDao();
         HashSet<String> classes = getClassesName();
@@ -138,12 +145,20 @@ public class InitDatabase {
             {
                 permission.setName(currentClass+"_read");
                 permissionsDao.create(permission);
+                group.addPermission(permission);
+                groupDao.update(group);
                 permission.setName(currentClass+"_update");
                 permissionsDao.create(permission);
+                group.addPermission(permission);
+                groupDao.update(group);
                 permission.setName(currentClass+"_create");
                 permissionsDao.create(permission);
+                group.addPermission(permission);
+                groupDao.update(group);
                 permission.setName(currentClass+"_delete");
                 permissionsDao.create(permission);
+                group.addPermission(permission);
+                groupDao.update(group);
             }
         }
     }

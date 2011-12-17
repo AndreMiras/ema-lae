@@ -263,5 +263,30 @@ public class Users implements Serializable, WithPrimaryKey {
         }
         this.groups.clear();
     }
+
+    public int getTotalNumberOfPermissions()
+    {
+        int nbPermissions = specialPermissions.size();
+        boolean checkedPermission;
+        for(UserGroup group : groups)
+        {
+            for(Permission groupPermission : group.getPermissions())
+            {
+                checkedPermission = false;
+                for(Permission userPermission : specialPermissions)
+                {
+                    if(groupPermission.equals(userPermission))
+                    {
+                        checkedPermission = true;
+                    }
+                }
+                if (!checkedPermission)
+                {
+                    nbPermissions ++;
+                }
+            }
+        }
+        return nbPermissions;
+    }
     
 }

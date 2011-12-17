@@ -5,6 +5,8 @@
 package emalaedesktopapplication.controller;
 
 import client.ControllerServiceClient;
+import database.entity.Permission;
+import database.entity.UserGroup;
 import database.entity.Users;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
@@ -65,7 +67,7 @@ public class LoginScreenController
                     user = ControllerServiceClient.getController().getUser();
 
                     // refresh admin menu
-                    String[] entitiesAdmin = new String[user.getSpecialPermissions().size()];
+                    String[] entitiesAdmin = new String[user.getTotalNumberOfPermissions()];
                     boolean users = false;
                     boolean userGroups = false;
                     boolean formations = false;
@@ -74,53 +76,48 @@ public class LoginScreenController
                     boolean contracts = false;
                     if(user!=null)
                     {
-                        for(int i=0;i<user.getSpecialPermissions().size();i++)
+                        int totalPermissionsSize = user.getTotalNumberOfPermissions();
+                        for(int i=0;i<totalPermissionsSize;i++)
                         {
                             if(user.checkPermission("Users_read") && !users)
                             {
                                 entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
                                         database.entity.Users.class);
                                 users = true;
-                                break;
                             }
-                            if(user.checkPermission("UserGroup_read") && !userGroups)
+                            else if(user.checkPermission("UserGroup_read") && !userGroups)
                             {
                                 entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
                                         database.entity.UserGroup.class);
                                 userGroups = true;
-                                break;
                             }
-                            if(user.checkPermission("Permission_read") && !userGroups)
+                            else if(user.checkPermission("Permission_read") && !permissions)
                             {
                                 entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
                                         database.entity.Permission.class);
                                 permissions = true;
-                                break;
                             }
-                            if(user.checkPermission("UserProfile_read") && !userGroups)
+                            else if(user.checkPermission("UserProfile_read") && !userGroups)
                             {
                                 entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
                                         database.entity.UserProfile.class);
                                 userProfiles = true;
-                                break;
                             }
-                            if(user.checkPermission("Formation_read") && !userGroups)
+                            else if(user.checkPermission("Formation_read") && !userGroups)
                             {
                                 entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
                                         database.entity.Formation.class);
                                 formations = true;
-                                break;
                             }
-                            if(user.checkPermission("Contract_read") && !userGroups)
+                            else if(user.checkPermission("Contract_read") && !userGroups)
                             {
                                 entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
                                         database.entity.Contract.class);
                                 contracts = true;
-                                break;
                             }
                         }
                     }
-                    mainWindow.populateAdminMenu(entitiesAdmin);
+                    mainWindow.refreshAdminMenu(entitiesAdmin);
                     mainWindow.setAdminVisible(user.isStaff()||user.isSuperUser());
                 }
                 catch (RemoteException ex)
