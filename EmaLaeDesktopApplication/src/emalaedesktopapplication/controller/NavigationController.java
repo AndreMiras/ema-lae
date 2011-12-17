@@ -4,12 +4,19 @@
  */
 package emalaedesktopapplication.controller;
 
+import client.ControllerServiceClient;
+import database.entity.Promotion;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
 import emalaedesktopapplication.forms.NavigationPanel;
-import emalaedesktopapplication.forms.ViewProfile;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -42,31 +49,55 @@ public class NavigationController
         {
             // TreePath tp = tree.getPathForLocation(me.getX(), me.getY());
             DefaultMutableTreeNode node = navigationPanel.getCurrentPath();
-            System.out.println("Node selected:");
+            System.out.println("Node selected:" + node.toString());
             if (node != null)
             {
-                System.out.println(node.toString());
-
-                if (node.toString().toLowerCase().equals("home") ||
-                    node.toString().toLowerCase().equals("login"))
+                if (node.isLeaf())
                 {
-                    LoginScreenPanel loginScreenPanel = new LoginScreenPanel();
-                    LoginScreenController loginScreenController =
-                            new LoginScreenController(
-                                mainWindow, loginScreenPanel);
-                    mainWindow.setMiddleContentPanel(loginScreenPanel);
-                }
-                else if (node.toString().toLowerCase().equals("my profile"))
-                {
-                    UserProfileController userProfileController =
-                            new UserProfileController(mainWindow);
-                    mainWindow.setMiddleContentPanel(
-                    userProfileController.getView());
+                    if (node.toString().toLowerCase().equals("home") ||
+                        node.toString().toLowerCase().equals("login"))
+                    {
+                        LoginScreenPanel loginScreenPanel = new LoginScreenPanel();
+                        LoginScreenController loginScreenController =
+                                new LoginScreenController(
+                                    mainWindow, loginScreenPanel);
+                        mainWindow.setMiddleContentPanel(loginScreenPanel);
+                    }
+                    else if (node.toString().toLowerCase().equals("my profile"))
+                    {
+                        UserProfileController userProfileController =
+                                new UserProfileController(mainWindow);
+                        mainWindow.setMiddleContentPanel(
+                        userProfileController.getView());
+                    }
+                    else
+                    {
+                        // TODO: log this one
+                        System.out.println("Unknown navigation item.");
+                    }
                 }
                 else
                 {
-                    // TODO: log this one
-                    System.out.println("Unknown navigation item.");
+                    /*
+                     * refresh the promotion tree
+                     * TODO[perfs]: this shouldn't be done everytime we click on it
+                     * but only when required
+                     */
+                    if (node.toString().toLowerCase().equals("promotion"))
+                    {
+                        Promotion[] promotions = null;
+                        try
+                        {
+                            promotions = ControllerServiceClient.getController(
+                                    ).getAllObjects(Promotion.class);
+                        } catch (RemoteException ex)
+                        {
+                            Logger.getLogger(
+                                    NavigationController.class.getName()).log(
+                                    Level.SEVERE, null, ex);
+                        }
+                        navigationPanel.setPromotions(Arrays.asList(promotions));
+                    }
                 }
             }
         }
