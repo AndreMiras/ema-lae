@@ -158,10 +158,31 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         this.users.clear();
     }
 
-    public void removeUser(Users u1)
+    public boolean removeUser(Users u1)
     {
-        // this.users.clear();
-        this.users.remove(u1);
+        boolean removed = false;
+        // if doesn't come from database record
+        if (u1.getUserId() == null)
+        {
+            removed = this.users.remove(u1);
+        }
+        else
+        {
+            boolean foundUser = false;
+            Users tmpUser = null;
+            Iterator<Users> it = this.users.iterator();
+            while(!foundUser && it.hasNext())
+            {
+                tmpUser = it.next();
+                foundUser = u1.getUserId().equals(tmpUser.getUserId());
+            }
+            if (foundUser)
+            {
+                removed = this.users.remove(tmpUser);
+            }
+        }
+
+        return removed;
     }
 
     public void updateUsers(Set<Users> newUsers)
