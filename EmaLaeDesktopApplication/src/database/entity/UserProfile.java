@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import org.hibernate.annotations.Parameter;
@@ -52,6 +53,8 @@ public class UserProfile implements Serializable {
     private String phoneNumber;
     @Column
     private String email;
+    @ManyToOne
+    private Promotion promotion;
     public enum Gender { Male, Female }
     @Column
     private Gender gender;
