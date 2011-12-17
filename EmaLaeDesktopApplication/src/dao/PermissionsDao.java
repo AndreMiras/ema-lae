@@ -6,7 +6,9 @@
 package dao;
 
 import database.entity.Permission;
+import database.entity.UserGroup;
 import exceptions.DaoException;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -41,4 +43,33 @@ public class PermissionsDao extends DaoHibernate<Permission, Integer> {
         }
     }
 
+    /**
+     * Explicitely updates the many-to-many "groups" field.
+     * This is required because Users doesn't own the m2m relation.
+     * This is mainly used when performing a user.setGroups(newGroupSet)
+     * followed by a userDao.save(user)
+     * @param permission
+     */
+    @Override
+    public void update(Permission permission)
+    {
+        GroupDao groupDao = new GroupDao();
+        Permission beforeUpdatePermission = read(permission.getPermissionId());
+        Set<UserGroup> beforeUpdateGroups =
+                beforeUpdatePermission.getGroups();
+
+        for (UserGroup beforeUpdateGroup: beforeUpdateGroups)
+        {
+            /*
+             * if the old group isn't part of the new group set,
+             * updates it by removing the previous associated user.
+             */
+            if(!permission.containsGroup(beforeUpdateGroup))
+            {
+                beforeUpdateGroup.removePermission(permission);
+                groupDao.update(beforeUpdateGroup);
+            }
+        }
+        super.update(permission);
+    }
 }

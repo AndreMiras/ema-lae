@@ -13,10 +13,6 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-/**
- *
- * @author pc
- */
 
 @Entity
 public class UserGroup implements Serializable, WithPrimaryKey {
@@ -69,12 +65,6 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         this.name = name;
     }
 
-    /*
-    public Set<Permission> getPermissions() {
-        return permissionsID;
-    }
-     */
-
     public void setPermissions(Set<Permission> permissions) {
         removePermissions();
          // perfs: could retro set user/group manually for better performances
@@ -89,12 +79,6 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         return permissions;
     }
 
-    /*
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = new HashSet<Permission>(permissions);
-    }
-     */
-
     public boolean addPermission(Permission perm){
         return this.permissions.add(perm);
     }
@@ -107,19 +91,15 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         return bool;
     }
 
-    /* metawidget cannot deal with Set Collection
-    public Set<Users> getUsers() {
-        return users;
-    }
-     */
-
     public Set<Users> getUsers()
     {
         return users;
     }
 
     public void setUsers(Set<Users> users) {
-        // removeUsers();
+        // it should be enough since the owner of the m2m relation is UserGroup
+        this.users.clear();
+
         // perfs: could retro set user/group manually for better performances
         for (Users user: users)
         {
@@ -156,22 +136,28 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         return groupId;
     }
 
-    private void removeUsersDisabled()
+    public boolean removeUser(Users u1)
     {
-        this.users.clear();
-    }
-
-    public void removeUser(Users u1)
-    {
-        for(Users user : this.users)
+        boolean removed = false;
+        // if doesn't come from database record
+        if (u1.getUserId() == null)
         {
-            if(user.getUserId().equals(u1.getUserId()))
-            {
-               this.users.remove(user);
-            }
+            removed = this.users.remove(u1);
         }
-        
-        if(!u1.containsGroup(this))
+        else
+        {
+            boolean foundUser = false;
+            Users tmpUser = null;
+            Iterator<Users> it = this.users.iterator();
+            while(!foundUser && it.hasNext())
+            {
+                tmpUser = it.next();
+                foundUser = u1.getUserId().equals(tmpUser.getUserId());
+            }
+            if (foundUser)
+            {
+                removed = this.users.remove(tmpUser);
+            }
         {
             u1.removeGroup(this);
         }
@@ -187,14 +173,9 @@ public class UserGroup implements Serializable, WithPrimaryKey {
 //        }
 //        // this.users.clear();
 //        this.users = newUsers;
-    }
-
-    public void updateUsers(Set<Users> newUsers)
-    {
-        for (Users user: newUsers)
-        {
-            removeUser(user);
         }
+
+        return removed;
     }
 
     private void removePermissions()
@@ -202,15 +183,32 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         this.permissions.clear();
     }
 
-    public void removePermission(Permission p1)
+    public boolean removePermission(Permission p1)
     {
-        HashSet<Permission> newPermissions = new HashSet<Permission>();
-        for (Permission permission: permissions)
+        boolean removed = false;
+        // if doesn't come from database record
+        if (p1.getPermissionId() == null)
         {
-            if(!p1.equals(permission)) newPermissions.add(permission);
+            removed = this.permissions.remove(p1);
+        }
+        else
+        {
+            boolean foundUser = false;
+            Permission tmpPermission = null;
+            Iterator<Permission> it = this.permissions.iterator();
+            while(!foundUser && it.hasNext())
+            {
+                tmpPermission = it.next();
+                foundUser = p1.getPermissionId().equals(
+                        tmpPermission.getPermissionId());
+            }
+            if (foundUser)
+            {
+                removed = this.permissions.remove(tmpPermission);
+            }
         }
 
-        this.permissions = newPermissions;
+        return removed;
     }
 
 }

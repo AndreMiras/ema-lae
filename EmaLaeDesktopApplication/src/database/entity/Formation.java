@@ -71,6 +71,10 @@ public class Formation implements Serializable, WithPrimaryKey {
 
     public void setChildrenFormations(Set<Formation> childrenFormations) {
         this.childrenFormations = childrenFormations;
+        for (Formation formation: childrenFormations)
+        {
+            formation.setParentFormation(this);
+        }
     }
 
     public Formation getParentFormation() {
@@ -79,7 +83,7 @@ public class Formation implements Serializable, WithPrimaryKey {
 
     public void setParentFormation(Formation parentFormation) {
         this.parentFormation = parentFormation;
-        if (!parentFormation.containsChild(this))
+        if (parentFormation != null && !parentFormation.containsChild(this))
         {
             parentFormation.addFormation(this);
         }
@@ -112,11 +116,13 @@ public class Formation implements Serializable, WithPrimaryKey {
     @Override
     public String toString()
     {
-        String toStr = name;
+        String toStr = "";
         if (parentFormation != null)
         {
-            toStr += "::" + parentFormation.toString();
+            toStr = parentFormation.toString() + "::";
         }
+        toStr += name;
+
         return toStr;
     }
 
