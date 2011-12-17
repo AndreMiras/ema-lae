@@ -85,6 +85,7 @@ public class UserDao extends DaoHibernate<Users, Integer>
 
     /**
      * Explicitely updates the many-to-many "groups" field.
+     * This is required because Users doesn't own the m2m relation.
      * This is mainly used when performing a user.setGroups(newGroupSet)
      * followed by a userDao.save(user)
      * @param user
