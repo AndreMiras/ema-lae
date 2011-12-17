@@ -116,7 +116,9 @@ public class UserGroup implements Serializable, WithPrimaryKey {
     }
 
     public void setUsers(Set<Users> users) {
-        // removeUsers();
+        // it should be enough since the owner of the m2m relation is UserGroup
+        this.users.clear();
+
         // perfs: could retro set user/group manually for better performances
         for (Users user: users)
         {
@@ -151,11 +153,6 @@ public class UserGroup implements Serializable, WithPrimaryKey {
     public Serializable getPrimaryKey()
     {
         return groupId;
-    }
-
-    private void removeUsersDisabled()
-    {
-        this.users.clear();
     }
 
     public boolean removeUser(Users u1)
