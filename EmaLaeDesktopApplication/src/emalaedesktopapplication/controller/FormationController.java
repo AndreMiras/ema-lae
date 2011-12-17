@@ -43,11 +43,12 @@ public class FormationController {
 
     private void populateView()
     {
-        Formation formation;
+        Formation formation = new Formation();
         try
         {
-            formation = ControllerServiceClient.getController().getFormation();
-        } catch (RemoteException ex)
+            formation = ControllerServiceClient.getController().get(Formation.class, formation);
+        }
+        catch (RemoteException ex)
         {
             Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
             formation = null;
