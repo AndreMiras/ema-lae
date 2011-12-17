@@ -11,7 +11,10 @@
 
 package emalaedesktopapplication.forms;
 
+import database.entity.Promotion;
 import java.awt.event.MouseListener;
+import java.util.Enumeration;
+import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
@@ -20,6 +23,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
  * @author andre
  */
 public class NavigationPanel extends javax.swing.JPanel {
+
+    private List<Promotion> promotions;
 
     /** Creates new form NavigationPanel */
     public NavigationPanel() {
@@ -42,18 +47,44 @@ public class NavigationPanel extends javax.swing.JPanel {
         jTree1.addMouseListener(l);
     }
 
+    private DefaultMutableTreeNode searchNode(String nodeStr)
+    {
+        DefaultMutableTreeNode node = null;
+        DefaultMutableTreeNode rootNode =
+                (DefaultMutableTreeNode) jTree1.getModel().getRoot();
+        Enumeration e = rootNode.breadthFirstEnumeration();
+        while (e.hasMoreElements())
+        {
+            node = (DefaultMutableTreeNode) e.nextElement();
+            if (nodeStr.equals(node.getUserObject().toString()))
+            {
+                return node;
+            }
+        }
+    return null;
+  }
+
     /**
-     * @return the selected leaf node
+     * updates the navigation panel with the new promotion list
+     * @param promotions
+     */
+    public void setPromotions(List<Promotion> promotions)
+    {
+        DefaultMutableTreeNode promoNode = searchNode("Promotion");
+        this.promotions = promotions;
+
+        System.out.println("TODO");
+    }
+
+    /**
+     * @return the selected node
      */
     public DefaultMutableTreeNode getCurrentPath()
     {
         DefaultMutableTreeNode node;
 
         node = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
-        if (!node.isLeaf())
-        {
-           node = null;
-        }
+
         return node;
     }
 
@@ -85,6 +116,14 @@ public class NavigationPanel extends javax.swing.JPanel {
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("My profile");
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Contracts");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Promotion");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Infres1");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Infres2");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TODO");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Agenda");
