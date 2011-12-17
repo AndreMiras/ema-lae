@@ -254,6 +254,40 @@ public class InitDatabase {
         }
     }
 
+    public void createPromotions()
+    {
+        GenericDao<Promotion> promotionDao =
+                new GenericDao<Promotion>(Promotion.class);
+        Promotion infres1Promotion = new Promotion("Infres1");
+        Promotion infres2Promotion = new Promotion("Infres2");
+        Promotion infres3Promotion = new Promotion("Infres3");
+        try
+        {
+            promotionDao.create(infres1Promotion);
+            promotionDao.create(infres2Promotion);
+            promotionDao.create(infres3Promotion);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void dropPromotions()
+    {
+        Promotion promo;
+        GenericDao<Promotion> promotionDao =
+                new GenericDao<Promotion>(Promotion.class);
+
+        /*
+         * Always refreshes the list lest promotion as they get deleted.
+         */
+        for(int i=0; i<promotionDao.all().size(); i++)
+        {
+            promo = (Promotion) promotionDao.all().get(i);
+            promotionDao.delete(promo);
+        }
+    }
+
     private HashSet getClassesName(){
 
     File folder = new File("./src/database/entity");
