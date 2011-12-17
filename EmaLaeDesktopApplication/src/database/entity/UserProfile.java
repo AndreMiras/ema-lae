@@ -27,7 +27,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @author pc
  */
 @Entity
-public class UserProfile implements Serializable {
+public class UserProfile implements Serializable, WithPrimaryKey {
 
     //TODO: check this code
     @GenericGenerator(name = "generator", strategy = "foreign",
@@ -272,5 +272,10 @@ public class UserProfile implements Serializable {
         {
             return "M.";
         }
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return userId;
     }
 }
