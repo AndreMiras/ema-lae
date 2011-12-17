@@ -51,8 +51,7 @@ public class PromotionDaoTest
     public void testCreate()
     {
         System.out.println("create");
-        // Objects instanciation
-        Promotion promotion = new Promotion();
+        Promotion promotion = new Promotion("promo1");
         GenericDao<Promotion> promotionDao =
                 new GenericDao<Promotion>(Promotion.class);
         Integer promotionPk = null;
@@ -68,11 +67,26 @@ public class PromotionDaoTest
         assertNotNull(promotionPk);
     }
 
-    // @Test
+    @Test
     public void testRead()
     {
         System.out.println("read");
-        fail("TODO");
+        Promotion promotionFromDb;
+        Promotion promotion = new Promotion("promo2");
+        GenericDao<Promotion> promotionDao =
+                new GenericDao<Promotion>(Promotion.class);
+        Integer promotionPk = null;
+        try
+        {
+            promotionPk = promotionDao.create(promotion);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(PromotionDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // verifies we can retrieve the promotion from the database
+        promotionFromDb = promotionDao.read(promotionPk);
+        assertTrue(promotionFromDb.getName().equals(promotion.getName()));
     }
 
     @Test

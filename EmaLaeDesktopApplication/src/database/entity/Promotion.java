@@ -26,6 +26,16 @@ public class Promotion implements Serializable, WithPrimaryKey {
     @OneToMany(mappedBy = "promotion")
     private Set<UserProfile> apprentices;
 
+    public Promotion()
+    {
+    }
+
+    public Promotion(String name)
+    {
+        this.name = name;
+    }
+
+
     public Integer getPromotionId() {
         return promotionId;
     }
