@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import org.hibernate.annotations.Parameter;
@@ -26,7 +27,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @author pc
  */
 @Entity
-public class UserProfile implements Serializable {
+public class UserProfile implements Serializable, WithPrimaryKey {
 
     //TODO: check this code
     @GenericGenerator(name = "generator", strategy = "foreign",
@@ -52,6 +53,8 @@ public class UserProfile implements Serializable {
     private String phoneNumber;
     @Column
     private String email;
+    @ManyToOne
+    private Promotion promotion;
     public enum Gender { Male, Female }
     @Column
     private Gender gender;
@@ -269,5 +272,10 @@ public class UserProfile implements Serializable {
         {
             return "M.";
         }
+    }
+
+    public Serializable getPrimaryKey()
+    {
+        return userId;
     }
 }

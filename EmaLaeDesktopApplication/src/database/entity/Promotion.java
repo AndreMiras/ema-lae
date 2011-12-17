@@ -6,63 +6,61 @@
 package database.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import javax.persistence.*;
 import java.util.Set;
 
 
-/**
- *
- * @author pc
- */
-
 @Entity
 public class Promotion implements Serializable, WithPrimaryKey {
 
-    @Column(name ="promotions_id")
+    @Column(name ="promotion_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private int promotionId;
+    private Integer promotionId;
     @Column
     private String name;
     @Column
-    private int promotionYear;
-    @Column
-    private int responsibleId;
-    @Column
-    private int adminId;
-    
-    private Set<Integer> IDApprentice;
+    private Integer promotionYear;
+    @OneToOne
+    private UserProfile responsible;
+    @OneToMany(mappedBy = "promotion")
+    private Set<UserProfile> apprentices;
 
-    public int getID() {
+    public Promotion()
+    {
+        this.apprentices = new HashSet<UserProfile>();
+    }
+
+    public Promotion(String name)
+    {
+        this();
+        this.name = name;
+    }
+
+
+    public Integer getPromotionId() {
         return promotionId;
     }
 
-    public void setID(int ID) {
-        this.promotionId = ID;
+    public void setPromotionId(Integer promotionId) {
+        this.promotionId = promotionId;
     }
 
-    public int getIDAdmin() {
-        return adminId;
+    public Set<UserProfile> getApprentices() {
+        return apprentices;
     }
 
-    public void setIDAdmin(int IDAdmin) {
-        this.adminId = IDAdmin;
+    public void setApprentices(Set<UserProfile> apprentices) {
+        this.apprentices = apprentices;
     }
 
-    public Set<Integer> getIDApprentice() {
-        return IDApprentice;
+    public UserProfile getResponsible() {
+        return responsible;
     }
 
-    public void setIDApprentice(Set<Integer> IDApprentice) {
-        this.IDApprentice = IDApprentice;
-    }
-
-    public int getIDresponsible() {
-        return responsibleId;
-    }
-
-    public void setIDresponsible(int IDresponsible) {
-        this.responsibleId = IDresponsible;
+    public void setResponsible(UserProfile responsible) {
+        this.responsible = responsible;
     }
 
     public String getName() {
@@ -73,11 +71,11 @@ public class Promotion implements Serializable, WithPrimaryKey {
         this.name = name;
     }
 
-    public int getYear() {
+    public Integer getPromotionYear() {
         return promotionYear;
     }
 
-    public void setYear(int year) {
+    public void setPromotionYear(int year) {
         this.promotionYear = year;
     }
 
@@ -85,6 +83,4 @@ public class Promotion implements Serializable, WithPrimaryKey {
     {
         return promotionId;
     }
-
-    
 }
