@@ -6,6 +6,7 @@ package emalaedesktopapplication;
 
 import client.ControllerServiceClient;
 import emalaedesktopapplication.controller.MainWindowController;
+import java.awt.Component;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -127,7 +128,28 @@ public class EmaLaeDesktopView extends FrameView {
         {
             menuItemChange = new javax.swing.JMenuItem(entity);
             menuItemChange.setActionCommand(entity);
+            menuItemChange.setName(entity);
             adminListChangeMenu.add(menuItemChange);
+        }
+        Component[] components = adminListChangeMenu.getMenuComponents();
+        for (Component component: components)
+        {
+            component.setVisible(false);
+        }
+    }
+
+    public void refreshAdminMenu(String[] entitiesAdmin)
+    {
+        for (String entity : entitiesAdmin)
+        {
+            Component[] components = adminListChangeMenu.getMenuComponents();
+            for (Component component: components)
+            {
+                if (component.getName().equals(entity))
+                {
+                    component.setVisible(true);
+                }
+            }
         }
     }
 
