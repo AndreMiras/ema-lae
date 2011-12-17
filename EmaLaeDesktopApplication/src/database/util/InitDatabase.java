@@ -167,7 +167,7 @@ public class InitDatabase {
         GroupDao groupDao = new GroupDao();
         List groups = groupDao.all();
 
-        dropPermissions();
+        // dropPermissions();
         for(int i=0; i<groups.size(); i++)
         {
             group = (UserGroup) groups.get(i);
@@ -208,7 +208,7 @@ public class InitDatabase {
         ContractDao contractDao = new ContractDao();
         List contracts = contractDao.all();
 
-        dropPermissions();
+        // dropPermissions();
         for(int i=0; i<contracts.size(); i++)
         {
             contract = (Contract) contracts.get(i);
