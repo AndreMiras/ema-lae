@@ -18,7 +18,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.List;
-import org.hibernate.HibernateException;
 
 /**
  *
@@ -72,6 +71,10 @@ public class ControllerImplTest {
         assertTrue(userDao.all().isEmpty());
         
         // This should create a set of users
+        controllerImpl.initDatabaseForTests();
+        assertTrue(userProfileDao.all().size() > 0);
+
+        // running it a second time shouldn't fail
         controllerImpl.initDatabaseForTests();
         assertTrue(userProfileDao.all().size() > 0);
     }

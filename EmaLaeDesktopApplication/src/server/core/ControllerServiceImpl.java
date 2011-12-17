@@ -45,12 +45,15 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
         InitDatabase initDatabase = new InitDatabase();
         initDatabase.dropContracts();
         initDatabase.dropFormations();
+        initDatabase.dropPermissions();
+        initDatabase.dropPromotions();
         initDatabase.dropUsers();
         initDatabase.dropGroups();
         initDatabase.createContracts();
         initDatabase.createGroups();
         initDatabase.createFormations();
         initDatabase.createPermissions();
+        initDatabase.createPromotions();
     }
 
     public boolean login(String username, String password)

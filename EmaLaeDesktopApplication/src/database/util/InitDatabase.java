@@ -182,7 +182,7 @@ public class InitDatabase {
         GroupDao groupDao = new GroupDao();
         List groups = groupDao.all();
 
-        dropPermissions();
+        // dropPermissions();
         for(int i=0; i<groups.size(); i++)
         {
             group = (UserGroup) groups.get(i);
@@ -223,7 +223,7 @@ public class InitDatabase {
         ContractDao contractDao = new ContractDao();
         List contracts = contractDao.all();
 
-        dropPermissions();
+        // dropPermissions();
         for(int i=0; i<contracts.size(); i++)
         {
             contract = (Contract) contracts.get(i);
@@ -270,6 +270,42 @@ public class InitDatabase {
         {
             formation = (Formation) formationDao.all().get(i);
             formationDao.delete(formation);
+        }
+    }
+
+    public void createPromotions()
+    {
+        GenericDao<Promotion> promotionDao =
+                new GenericDao<Promotion>(Promotion.class);
+        String promoName = "InfRes";
+        Integer promoYear = 2010;
+        Promotion promotion;
+        for (int i=0; i<3; i++)
+        {
+            promotion = new Promotion(promoName + (i + 1));
+            promotion.setPromotionYear(promoYear + i);
+            try
+            {
+                promotionDao.create(promotion);
+            }
+            catch (DaoException ex)
+            {
+                Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void dropPromotions()
+    {
+        Promotion promo;
+        GenericDao<Promotion> promotionDao =
+                new GenericDao<Promotion>(Promotion.class);
+        List<Promotion> promotions = promotionDao.all();
+
+        for(int i=0; i<promotions.size(); i++)
+        {
+            promo = promotions.get(i);
+            promotionDao.delete(promo);
         }
     }
 
