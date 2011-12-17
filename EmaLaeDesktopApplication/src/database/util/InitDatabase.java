@@ -48,6 +48,10 @@ public class InitDatabase {
             userProfile = new UserProfile(user);
             userProfile.setFirstName(firstname + i);
             userProfile.setLastName(lastname + i);
+            Permission p1 = new Permission("Users_create");
+            Permission p2 = new Permission("Users_update");
+            user.addSpecialPermission(p1);
+            user.addSpecialPermission(p2);
             // Attribute a different type each user
             switch (i%3){
                 case 1:
