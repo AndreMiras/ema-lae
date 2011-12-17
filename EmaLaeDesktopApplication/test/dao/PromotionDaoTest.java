@@ -89,11 +89,27 @@ public class PromotionDaoTest
         assertTrue(promotionFromDb.getName().equals(promotion.getName()));
     }
 
+    /**
+     * Tries to change a promotion name
+     */
     @Test
     public void testUpdate()
     {
         System.out.println("update");
-        fail("TODO");
+        String newPromotionName = "NewPromotionName";
+        GenericDao<Promotion> promotionDao =
+                new GenericDao<Promotion>(Promotion.class);
+        Promotion promotion = promotionDao.all().get(0);
+
+        assertFalse(promotion.getName().equals(newPromotionName));
+        promotion.setName(newPromotionName);
+        assertTrue(promotion.getName().equals(newPromotionName));
+
+        // Lets now hit the database with the change
+        promotionDao.update(promotion);
+        // and re-read from it
+        promotion = promotionDao.read(promotion.getPromotionId());
+        assertTrue(promotion.getName().equals(newPromotionName));
     }
 
     @Test
