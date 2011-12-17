@@ -4,6 +4,7 @@ import database.entity.UserGroup;
 import database.entity.Users;
 import database.entity.UserProfile;
 import exceptions.DaoException;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Session;
@@ -80,5 +81,34 @@ public class UserDao extends DaoHibernate<Users, Integer>
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return pk;
+    }
+
+    /**
+     * Explicitely updates the many-to-many "groups" field.
+     * This is mainly used when performing a user.setGroups(newGroupSet)
+     * followed by a userDao.save(user)
+     * @param user
+     */
+    @Override
+    public void update(Users user)
+    {
+        GroupDao groupDao = new GroupDao();
+        Users beforeUpdateUser = read(user.getUserId());
+        Set<UserGroup> beforeUpdateGroups =
+                beforeUpdateUser.getGroups();
+
+        for (UserGroup beforeUpdateGroup: beforeUpdateGroups)
+        {
+            /*
+             * if the old group isn't part of the new group set,
+             * updates it by removing the previous associated user.
+             */
+            if(!user.containsGroup(beforeUpdateGroup))
+            {
+                beforeUpdateGroup.removeUser(user);
+                groupDao.update(beforeUpdateGroup);
+            }
+        }
+        super.update(user);
     }
 }
