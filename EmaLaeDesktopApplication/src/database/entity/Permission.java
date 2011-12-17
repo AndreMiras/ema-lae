@@ -15,10 +15,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import java.util.Iterator;
 
-/**
- *
- * @author pc
- */
+
 @Entity
 public class Permission implements Serializable, WithPrimaryKey {
 
@@ -48,11 +45,6 @@ public class Permission implements Serializable, WithPrimaryKey {
         this.name = permissionName;
     }
 
-    /*
-    public Set<UserGroup> getGroups() {
-        return this.groups;
-    }
-     */
 
     public void setGroups(Set<UserGroup> groups) {
         // perfs: could retro set user/group manually for better performances
@@ -136,11 +128,6 @@ public class Permission implements Serializable, WithPrimaryKey {
     public Serializable getPrimaryKey()
     {
         return permissionId;
-    }
-
-    private void removeGroupsDisabled()
-    {
-        this.groups.clear();
     }
 
 }

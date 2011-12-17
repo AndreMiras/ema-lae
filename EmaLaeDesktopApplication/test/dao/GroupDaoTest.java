@@ -220,7 +220,7 @@ public class GroupDaoTest {
 
     }
 
-     /**
+    /**
      * Verifies the setGroups method works correctly
      */
     @Test
