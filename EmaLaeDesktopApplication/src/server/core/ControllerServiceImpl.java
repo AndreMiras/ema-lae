@@ -172,11 +172,10 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
         genericDao.delete(obj);
     }
 
-    public <T> T get(Class<T> type, T obj) throws RemoteException {
-        Serializable pk = getEntityId(obj);
+    public <T> T get(Class<T> type, Integer pk) throws RemoteException {
         GenericDao<T> genericDao = new GenericDao<T>(type);
-        genericDao.read(pk);
-        throw new UnsupportedOperationException("Not supported yet.");
+        T obj = genericDao.read(pk);
+        return obj;
     }
 
 }

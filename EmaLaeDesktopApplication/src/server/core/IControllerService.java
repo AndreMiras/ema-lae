@@ -51,9 +51,6 @@ public interface IControllerService extends java.rmi.Remote {
     public UserProfile getUserProfile()
             throws java.rmi.RemoteException;
 
-    public Formation getFormation()
-            throws java.rmi.RemoteException;
-
     public Serializable getEntityId(Object entity)
             throws java.rmi.RemoteException;
 
@@ -68,5 +65,5 @@ public interface IControllerService extends java.rmi.Remote {
 
     public <T> void delete(Class<T> type, T obj) throws java.rmi.RemoteException;
 
-    public <T> void get(Class<T> type, T obj) throws java.rmi.RemoteException;
+    public <T> T get(Class<T> type, Integer pk) throws java.rmi.RemoteException;
 }
