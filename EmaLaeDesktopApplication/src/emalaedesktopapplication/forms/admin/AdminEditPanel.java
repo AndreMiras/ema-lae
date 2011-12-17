@@ -10,6 +10,7 @@
  */
 package emalaedesktopapplication.forms.admin;
 
+import emalaedesktopapplication.utils.Utils;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -86,12 +87,17 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
 
     /**
      * - sets some labels
+     * - sets border titles
      * - makes the return (Enter) key validate form, refs #30
      */
     private void initCustomWidgets()
     {
+        String objectTypeStr = Utils.getClassNameWithoutPackage(type);
+        setBorder(
+                javax.swing.BorderFactory.createTitledBorder(
+                objectTypeStr + " Edit"));
         middleContentPanel.setBorder(
-                javax.swing.BorderFactory.createTitledBorder(type.toString()));
+                javax.swing.BorderFactory.createTitledBorder(objectTypeStr));
         KeyListener keyListener = new KeyListener()
         {
 
