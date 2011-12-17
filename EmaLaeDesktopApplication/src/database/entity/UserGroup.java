@@ -160,28 +160,37 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         return removed;
     }
 
-    public void updateUsers(Set<Users> newUsers)
-    {
-        for (Users user: newUsers)
-        {
-            removeUser(user);
-        }
-    }
-
     private void removePermissions()
     {
         this.permissions.clear();
     }
 
-    public void removePermission(Permission p1)
+    public boolean removePermission(Permission p1)
     {
-        HashSet<Permission> newPermissions = new HashSet<Permission>();
-        for (Permission permission: permissions)
+        boolean removed = false;
+        // if doesn't come from database record
+        if (p1.getPermissionId() == null)
         {
-            if(!p1.equals(permission)) newPermissions.add(permission);
+            removed = this.permissions.remove(p1);
+        }
+        else
+        {
+            boolean foundUser = false;
+            Permission tmpPermission = null;
+            Iterator<Permission> it = this.permissions.iterator();
+            while(!foundUser && it.hasNext())
+            {
+                tmpPermission = it.next();
+                foundUser = p1.getPermissionId().equals(
+                        tmpPermission.getPermissionId());
+            }
+            if (foundUser)
+            {
+                removed = this.permissions.remove(tmpPermission);
+            }
         }
 
-        this.permissions = newPermissions;
+        return removed;
     }
 
 }

@@ -47,8 +47,8 @@ public class Permission implements Serializable, WithPrimaryKey {
 
 
     public void setGroups(Set<UserGroup> groups) {
+        this.groups.clear();
         // perfs: could retro set user/group manually for better performances
-        // removeGroups();
         for (UserGroup group: groups)
         {
             addToGroup(group);
