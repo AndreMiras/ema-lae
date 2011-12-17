@@ -5,6 +5,7 @@
 
 package dao;
 
+import java.util.List;
 import database.util.HibernateUtil;
 import database.entity.Promotion;
 import exceptions.DaoException;
@@ -116,6 +117,16 @@ public class PromotionDaoTest
     public void testDelete()
     {
         System.out.println("delete");
-        fail("TODO");
+        GenericDao<Promotion> promotionDao =
+                new GenericDao<Promotion>(Promotion.class);
+        List<Promotion> promotions = promotionDao.all();
+        Promotion promotionToDelete = promotions.get(0);
+        Integer countBeforeDelete = promotions.size();
+
+        // deleting the selected promotion from the database
+        promotionDao.delete(promotionToDelete);
+
+        // the number of total promotions should have decreased
+        assertTrue(promotionDao.all().size() == countBeforeDelete -1);
     }
 }
