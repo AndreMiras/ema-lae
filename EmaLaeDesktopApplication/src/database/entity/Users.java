@@ -6,7 +6,10 @@
 package database.entity;
 
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.*;
 import java.util.Iterator;
 import java.util.Set;
@@ -61,7 +64,7 @@ public class Users implements Serializable, WithPrimaryKey {
     public Users(String username, String password)
     {
         this(username);
-        this.password = password;
+        setPassword(password);
     }
 
     public Set<UserGroup> getGroups() {
@@ -94,9 +97,57 @@ public class Users implements Serializable, WithPrimaryKey {
         return password;
     }
 
+    /**
+     * Sets the password encrypted in the database
+     * @param password
+     */
     public void setPassword(String password)
     {
-        this.password = password;
+        this.password = computeHashToString(password);
+    }
+
+    /**
+     * Compute the hash from given plain string.
+     * If the algorithm method isn't supported, returns a plain string byteArray
+     * @param plain
+     * @return
+     */
+    public static byte[] computeHash(String plain)// throws Exception
+    {
+        byte[] pwd;
+        try // throws Exception
+        {
+            java.security.MessageDigest d = null;
+            d = java.security.MessageDigest.getInstance("SHA-1");
+            d.reset();
+            d.update(plain.getBytes());
+            pwd = d.digest();
+        }
+        catch (NoSuchAlgorithmException ex)
+        {
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            pwd = plain.getBytes();
+        }
+
+        return pwd;
+    }
+
+    /**
+     * Converts the byteArray hash back to hexaString
+     * @param x
+     * @return
+     * @throws Exception
+     */
+    public static String computeHashToString(String x)
+    {
+        byte[] computedHash = computeHash(x);
+        //convert the byte to hex format
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < computedHash.length; i++) {
+         sb.append(Integer.toString((computedHash[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
+        return sb.toString();
     }
 
     public Integer getUserId()

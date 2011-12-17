@@ -55,9 +55,10 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
             throws java.rmi.RemoteException {
         Boolean loginSuccess = false;
         UserDao userDao = new UserDao();
+        String passwordHash = Users.computeHashToString(password);
         HashMap<String, String> querySet = new HashMap<String, String>();
         querySet.put("username", username);
-        querySet.put("password", password);
+        querySet.put("password", passwordHash);
 
         List<Users> userList;
         userList = userDao.all();
