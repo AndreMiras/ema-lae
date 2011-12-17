@@ -105,6 +105,8 @@ public class AdminListChangePanel extends javax.swing.JPanel {
         newObjectButton = new javax.swing.JButton();
         deleteObjectButton = new javax.swing.JButton();
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(AdminListChangePanel.class);
+        setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Form.border.title"))); // NOI18N
         setName("Form"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
@@ -117,7 +119,6 @@ public class AdminListChangePanel extends javax.swing.JPanel {
         objectList.setName("objectList"); // NOI18N
         jScrollPane1.setViewportView(objectList);
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(AdminListChangePanel.class);
         editObjectButton.setText(resourceMap.getString("editObjectButton.text")); // NOI18N
         editObjectButton.setName("editObjectButton"); // NOI18N
 
@@ -134,7 +135,7 @@ public class AdminListChangePanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(editObjectButton)
                         .addGap(18, 18, 18)
@@ -147,7 +148,7 @@ public class AdminListChangePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editObjectButton)

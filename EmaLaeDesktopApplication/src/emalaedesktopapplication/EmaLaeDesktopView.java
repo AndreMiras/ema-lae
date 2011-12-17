@@ -285,10 +285,8 @@ public class EmaLaeDesktopView extends FrameView {
         mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("mainPanel.border.title"))); // NOI18N
         mainPanel.setMinimumSize(new java.awt.Dimension(750, 550));
         mainPanel.setName("mainPanel"); // NOI18N
-        mainPanel.setPreferredSize(null);
         mainPanel.setLayout(new java.awt.GridBagLayout());
 
-        middleContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Middle Content"));
         middleContentPanel.setName("middleContentPanel"); // NOI18N
         middleContentPanel.setPreferredSize(new java.awt.Dimension(400, 200));
         middleContentPanel.setLayout(new java.awt.CardLayout());

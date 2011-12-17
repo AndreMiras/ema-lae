@@ -158,6 +158,7 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
         deleteButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Edit"));
         setName("Form"); // NOI18N
 
         middleContentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Object"));
@@ -189,14 +190,14 @@ public class AdminEditPanel<T> extends javax.swing.JPanel
                         .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(middleContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)))
+                        .addComponent(middleContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(middleContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addComponent(middleContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton)
