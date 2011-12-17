@@ -9,12 +9,12 @@ import dao.*;
 import database.entity.*;
 import exceptions.ContractException;
 import exceptions.DaoException;
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.net.URLClassLoader;
-import java.net.URL;
+import java.io.File;
+import java.util.HashSet;
+
 
 /**
  *
@@ -125,13 +125,22 @@ public class InitDatabase {
 
     public void createPermissions()
     {
-        try {
-            URL entitiesUrl = new URL("./src/database/entity/");
-            URL[] myClassesPath = {entitiesUrl};
-            URLClassLoader myClasses = new URLClassLoader(myClassesPath);
-            System.out.println(myClasses.getClass().getName());
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        Permission permission = new Permission();
+        PermissionsDao permissionsDao = new PermissionsDao();
+        HashSet<String> classes = getClassesName();
+        for(String currentClass : classes)
+        {
+            if (!currentClass.equals("WithPrimaryKey"))
+            {
+                permission.setName(currentClass+"_read");
+                permissionsDao.create(permission);
+                permission.setName(currentClass+"_update");
+                permissionsDao.create(permission);
+                permission.setName(currentClass+"_create");
+                permissionsDao.create(permission);
+                permission.setName(currentClass+"_delete");
+                permissionsDao.create(permission);
+            }
         }
     }
 
@@ -244,4 +253,19 @@ public class InitDatabase {
             formationDao.delete(formation);
         }
     }
+
+    private HashSet getClassesName(){
+
+    File folder = new File("./src/database/entity");
+    File[] listOfFiles = folder.listFiles();
+    HashSet<String> classes = new HashSet<String>();
+    for (int i = 0; i < listOfFiles.length; i++) {
+        String name = listOfFiles[i].getName();
+        name = name.replace(".java", "");
+        if (listOfFiles[i].isFile()) {
+            classes.add(name);
+        }
+    }
+    return classes;
+  }
 }
