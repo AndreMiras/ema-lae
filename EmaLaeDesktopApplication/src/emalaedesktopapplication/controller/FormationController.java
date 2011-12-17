@@ -29,8 +29,9 @@ public class FormationController {
 
     private EmaLaeDesktopView mainWindow;
     private ViewFormation viewFormation;
+    private Formation formation;
 
-    public FormationController(EmaLaeDesktopView mainWindow) {
+    public FormationController(EmaLaeDesktopView mainWindow, Formation formation) {
         this.mainWindow = mainWindow;
         this.viewFormation = new ViewFormation();
         populateView();
@@ -43,17 +44,6 @@ public class FormationController {
 
     private void populateView()
     {
-        Formation formation = new Formation();
-        try
-        {
-            formation = ControllerServiceClient.getController().get(Formation.class, formation);
-        }
-        catch (RemoteException ex)
-        {
-            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            formation = null;
-        }
-
         viewFormation.setFormation(formation);
     }
 }
