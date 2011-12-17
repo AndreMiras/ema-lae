@@ -8,6 +8,7 @@ import client.ControllerServiceClient;
 import database.entity.Users;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
+import emalaedesktopapplication.utils.Utils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -62,13 +63,73 @@ public class LoginScreenController
                 try
                 {
                     user = ControllerServiceClient.getController().getUser();
+
+                    // refresh admin menu
+                    String[] entitiesAdmin = new String[user.getSpecialPermissions().size()];
+                    boolean users = false;
+                    boolean userGroups = false;
+                    boolean formations = false;
+                    boolean permissions = false;
+                    boolean userProfiles = false;
+                    boolean contracts = false;
+                    if(user!=null)
+                    {
+                        for(int i=0;i<user.getSpecialPermissions().size();i++)
+                        {
+                            if(user.checkPermission("Users_read") && !users)
+                            {
+                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                        database.entity.Users.class);
+                                users = true;
+                                break;
+                            }
+                            if(user.checkPermission("UserGroup_read") && !userGroups)
+                            {
+                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                        database.entity.UserGroup.class);
+                                userGroups = true;
+                                break;
+                            }
+                            if(user.checkPermission("Permission_read") && !userGroups)
+                            {
+                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                        database.entity.Permission.class);
+                                permissions = true;
+                                break;
+                            }
+                            if(user.checkPermission("UserProfile_read") && !userGroups)
+                            {
+                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                        database.entity.UserProfile.class);
+                                userProfiles = true;
+                                break;
+                            }
+                            if(user.checkPermission("Formation_read") && !userGroups)
+                            {
+                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                        database.entity.Formation.class);
+                                formations = true;
+                                break;
+                            }
+                            if(user.checkPermission("Contract_read") && !userGroups)
+                            {
+                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                        database.entity.Contract.class);
+                                contracts = true;
+                                break;
+                            }
+                        }
+                    }
+                    mainWindow.populateAdminMenu(entitiesAdmin);
                     mainWindow.setAdminVisible(user.isStaff()||user.isSuperUser());
                 }
                 catch (RemoteException ex)
                 {
                     Logger.getLogger(LoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
                 
+
                 UserProfileController userProfileController =
                         new UserProfileController(mainWindow);
                 mainWindow.setMiddleContentPanel(

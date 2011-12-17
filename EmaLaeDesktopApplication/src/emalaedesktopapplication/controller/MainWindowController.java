@@ -4,6 +4,7 @@
  */
 package emalaedesktopapplication.controller;
 
+import client.ControllerServiceClient;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
 import emalaedesktopapplication.forms.NavigationPanel;
@@ -14,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import database.entity.Users;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -26,27 +29,94 @@ public class MainWindowController
     private LoginScreenPanel loginScreenPanel;
     private LoginScreenController loginScreenController;
     private NavigationController navigationController;
-    private String[] entitiesAdmin = new String[]
-    {
-        Utils.getClassNameWithoutPackage(
-                database.entity.Users.class),
-        Utils.getClassNameWithoutPackage(
-                database.entity.UserGroup.class),
-        Utils.getClassNameWithoutPackage(
-                database.entity.Permission.class),
-        Utils.getClassNameWithoutPackage(
-                database.entity.UserProfile.class),
-        Utils.getClassNameWithoutPackage(
-                database.entity.Formation.class),
-        Utils.getClassNameWithoutPackage(
-                database.entity.Contract.class),
-        Utils.getClassNameWithoutPackage(
-                database.entity.Promotion.class),
-    };
+    private String[] entitiesAdmin;
+
 
     public MainWindowController(EmaLaeDesktopView view,
             NavigationPanel navigationPanel)
     {
+        try
+        {
+            Users user = ControllerServiceClient.getController().getUser();
+            boolean users = false;
+            boolean userGroups = false;
+            boolean formations = false;
+            boolean permissions = false;
+            boolean userProfiles = false;
+            boolean contracts = false;
+            if(user!=null)
+            {
+                for(int i=0;i<user.getSpecialPermissions().size();i++)
+                {
+                    if(user.checkPermission("Users_read") && !users)
+                    {
+                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                database.entity.Users.class);
+                        users = true;
+                        break;
+                    }
+                    if(user.checkPermission("UserGroup_read") && !userGroups)
+                    {
+                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                database.entity.UserGroup.class);
+                        userGroups = true;
+                        break;
+                    }
+                    if(user.checkPermission("Permission_read") && !userGroups)
+                    {
+                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                database.entity.Permission.class);
+                        permissions = true;
+                        break;
+                    }
+                    if(user.checkPermission("UserProfile_read") && !userGroups)
+                    {
+                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                database.entity.UserProfile.class);
+                        userProfiles = true;
+                        break;
+                    }
+                    if(user.checkPermission("Formation_read") && !userGroups)
+                    {
+                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                database.entity.Formation.class);
+                        formations = true;
+                        break;
+                    }
+                    if(user.checkPermission("Contract_read") && !userGroups)
+                    {
+                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                database.entity.Contract.class);
+                        contracts = true;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                entitiesAdmin = new String[]
+                {
+                    Utils.getClassNameWithoutPackage(
+                            database.entity.Users.class),
+                    Utils.getClassNameWithoutPackage(
+                            database.entity.UserGroup.class),
+                    Utils.getClassNameWithoutPackage(
+                            database.entity.Permission.class),
+                    Utils.getClassNameWithoutPackage(
+                            database.entity.UserProfile.class),
+                    Utils.getClassNameWithoutPackage(
+                            database.entity.Formation.class),
+                    Utils.getClassNameWithoutPackage(
+                            database.entity.Contract.class),
+        Utils.getClassNameWithoutPackage(
+                database.entity.Promotion.class),
+                };
+            }
+        }
+        catch (RemoteException ex)
+        {
+            Logger.getLogger(LoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.view = view;
         loginScreenPanel = new LoginScreenPanel();
         loginScreenController = new LoginScreenController(view, loginScreenPanel);

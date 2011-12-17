@@ -13,7 +13,9 @@ import database.entity.Users;
 import database.entity.UserProfile;
 import database.util.HibernateUtil;
 import database.util.InitDatabase;
+import emalaedesktopapplication.utils.Utils;
 import exceptions.DaoException;
+import exceptions.PermissionException;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -112,9 +114,32 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
     {
         // UserDao userDao = new UserDao();
         // userDao.createOrUpdate(user);
+        Users user = null;
+        if (loggedUser != null)
+        {
+            try
+            {
 
-        GenericDao<T> genericDao = new GenericDao<T>(type);
-        genericDao.createOrUpdate(obj);
+                user = getUser();
+                GenericDao<T> genericDao = new GenericDao<T>(type);
+                String className = Utils.getClassNameWithoutPackage(type);
+                if(user.checkPermission(className+"_create")&&user.checkPermission(className+"_update"))
+                {
+                    genericDao.createOrUpdate(obj);
+                }
+                else throw new PermissionException("Permission denied");
+            }
+            catch (RemoteException ex)
+            {
+                Logger.getLogger(ControllerServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        else //FIXME : Debug and test purpose only : needs to be removed in production
+        {
+            GenericDao<T> genericDao = new GenericDao<T>(type);
+            genericDao.createOrUpdate(obj);
+        }
     }
 
 

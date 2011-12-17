@@ -223,6 +223,24 @@ public class Users implements Serializable, WithPrimaryKey {
         return hasPermission;
     }
 
+    public boolean checkPermission (String permission){
+        boolean hasPermission = false;
+        Iterator<UserGroup> i=this.groups.iterator();
+        while(i.hasNext() && !hasPermission)
+        {
+            UserGroup userGroup = i.next();
+            Iterator<Permission> j = userGroup.getPermissions().iterator();
+            while(j.hasNext() && !hasPermission){
+                hasPermission = j.next().getName().equals(permission);
+            }
+        }
+        Iterator<Permission> k = this.specialPermissions.iterator();
+        while(k.hasNext() && !hasPermission){
+            hasPermission = k.next().getName().equals(permission);
+        }
+        return hasPermission;
+    }
+
     public boolean containsGroup(UserGroup group){
         Iterator<UserGroup> it = this.groups.iterator();
         boolean foundGroup = false;
