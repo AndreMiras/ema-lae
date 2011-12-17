@@ -68,37 +68,24 @@ public class Users implements Serializable, WithPrimaryKey {
         return groups;
     }
 
-    public void removeGroup(UserGroup g1)
+    public boolean removeGroup(UserGroup g1)
     {
-        for(UserGroup group : this.groups)
-        {
-            if(group.getGroupId().equals(g1.getGroupId()))
-            {
-               this.groups.remove(group);
-            }
-        }
-
-        if(!g1.containsUser(this))
-        {
-            g1.removeUser(this);
-        }           
+        g1.addUser(this); // workaround, seems required by mappedBy
+        return this.groups.add(g1);
     }
 
-    public void setGroups(Set<UserGroup> newGroups) {
+   public void setGroups(Set<UserGroup> groups) {
+        this.groups.clear();
         // perfs: could retro set user/group manually for better performances
-        clearGroups();
-        for(UserGroup group : newGroups)
+        for (UserGroup group: groups)
         {
-            group.addUser(this);
+            addToGroup(group);
         }
-        this.groups.addAll(newGroups);
     }
 
-    public boolean addToGroup(UserGroup newGroup){
-        Boolean bool = this.groups.add(newGroup);
-        if(!newGroup.getUsers().contains(this))
-            newGroup.addUser(this); // workaround, seems required by mappedBy
-        return bool;
+    public boolean addToGroup(UserGroup group){
+        group.addUser(this); // workaround, seems required by mappedBy
+        return this.groups.add(group);
     }
 
 

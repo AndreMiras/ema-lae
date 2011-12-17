@@ -83,12 +83,8 @@ public class UserGroup implements Serializable, WithPrimaryKey {
         return this.permissions.add(perm);
     }
 
-    public boolean addUser(Users u)
-    {
-        Boolean bool = users.add(u);
-        if(!u.getGroups().contains(this))
-            u.addToGroup(this);
-        return bool;
+    public boolean addUser(Users user){
+        return this.users.add(user);
     }
 
     public Set<Users> getUsers()
@@ -138,7 +134,7 @@ public class UserGroup implements Serializable, WithPrimaryKey {
 
     public boolean removeUser(Users u1)
     {
-        boolean removed = false;
+       boolean removed = false;
         // if doesn't come from database record
         if (u1.getUserId() == null)
         {
@@ -152,27 +148,13 @@ public class UserGroup implements Serializable, WithPrimaryKey {
             while(!foundUser && it.hasNext())
             {
                 tmpUser = it.next();
-                foundUser = u1.getUserId().equals(tmpUser.getUserId());
+                foundUser = u1.getUserId().equals(
+                        tmpUser.getUserId());
             }
             if (foundUser)
             {
                 removed = this.users.remove(tmpUser);
             }
-        {
-            u1.removeGroup(this);
-        }
-
-//        HashSet<Users> newUsers = new HashSet<Users>();
-//        for (Users user: users)
-//        {
-//            if(!(u1.getUserId().equals(user.getUserId())))
-//            {
-//                newUsers.add (user);
-//                user.addToGroup(this);
-//            }
-//        }
-//        // this.users.clear();
-//        this.users = newUsers;
         }
 
         return removed;
