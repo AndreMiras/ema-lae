@@ -73,6 +73,10 @@ public class ControllerImplTest {
         // This should create a set of users
         controllerImpl.initDatabaseForTests();
         assertTrue(userProfileDao.all().size() > 0);
+
+        // running it a second time sometimes fails
+        controllerImpl.initDatabaseForTests();
+        assertTrue(userProfileDao.all().size() > 0);
     }
 
     /**
