@@ -120,14 +120,14 @@ public class UserDaoTest {
         groupHashSet.add(userGroup2);
         user.setGroups(groupHashSet);
         // hitting the database with the new groupSet
-        userGroup.removeUser(user);
+        //userGroup.removeUser(user);
         groupDao.update(userGroup);
         groupDao.update(userGroup2);
         userDao.update(user);
         Users user3 = userDao.read(userPk);
         userGroup2 = groupDao.read(group2Pk);
         userGroup = groupDao.read(groupPk);
-        assertTrue(user.containsGroup(userGroup2));
+        assertTrue(user3.containsGroup(userGroup2));
         assertFalse(userGroup.containsUser(user3));
         assertTrue(userGroup2.containsUser(user3));
         assertTrue(user3.containsGroup(userGroup2));

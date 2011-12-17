@@ -101,7 +101,10 @@ public class UserGroup implements Serializable, WithPrimaryKey {
 
     public boolean addUser(Users u)
     {
-        return users.add(u);
+        Boolean bool = users.add(u);
+        if(!u.getGroups().contains(this))
+            u.addToGroup(this);
+        return bool;
     }
 
     /* metawidget cannot deal with Set Collection
@@ -160,16 +163,30 @@ public class UserGroup implements Serializable, WithPrimaryKey {
 
     public void removeUser(Users u1)
     {
-        HashSet<Users> newUsers = new HashSet<Users>();
-        for (Users user: users)
+        for(Users user : this.users)
         {
-            if(!u1.equals(user))
+            if(user.getUserId().equals(u1.getUserId()))
             {
-                newUsers.add(user);
+               this.users.remove(user);
             }
         }
-        // this.users.clear();
-        this.users = newUsers;
+        
+        if(!u1.containsGroup(this))
+        {
+            u1.removeGroup(this);
+        }
+
+//        HashSet<Users> newUsers = new HashSet<Users>();
+//        for (Users user: users)
+//        {
+//            if(!(u1.getUserId().equals(user.getUserId())))
+//            {
+//                newUsers.add (user);
+//                user.addToGroup(this);
+//            }
+//        }
+//        // this.users.clear();
+//        this.users = newUsers;
     }
 
     public void updateUsers(Set<Users> newUsers)

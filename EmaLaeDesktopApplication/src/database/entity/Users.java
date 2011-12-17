@@ -68,23 +68,37 @@ public class Users implements Serializable, WithPrimaryKey {
         return groups;
     }
 
+    public void removeGroup(UserGroup g1)
+    {
+        for(UserGroup group : this.groups)
+        {
+            if(group.getGroupId().equals(g1.getGroupId()))
+            {
+               this.groups.remove(group);
+            }
+        }
+
+        if(!g1.containsUser(this))
+        {
+            g1.removeUser(this);
+        }           
+    }
+
     public void setGroups(Set<UserGroup> newGroups) {
         // perfs: could retro set user/group manually for better performances
-        for (UserGroup group: groups)
+        clearGroups();
+        for(UserGroup group : newGroups)
         {
-            group.removeUser(this);
+            group.addUser(this);
         }
-        removeGroups();
-
-        for (UserGroup group: newGroups)
-        {
-            this.addToGroup(group);
-        }
+        this.groups.addAll(newGroups);
     }
 
     public boolean addToGroup(UserGroup newGroup){
-        newGroup.addUser(this); // workaround, seems required by mappedBy
-        return this.groups.add(newGroup);
+        Boolean bool = this.groups.add(newGroup);
+        if(!newGroup.getUsers().contains(this))
+            newGroup.addUser(this); // workaround, seems required by mappedBy
+        return bool;
     }
 
 
@@ -185,8 +199,12 @@ public class Users implements Serializable, WithPrimaryKey {
         return userId;
     }
 
-    private void removeGroups()
+    private void clearGroups()
     {
+        for (UserGroup group: groups)
+        {
+            group.removeUser(this);
+        }
         this.groups.clear();
     }
     
