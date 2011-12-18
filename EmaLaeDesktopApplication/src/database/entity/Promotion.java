@@ -83,8 +83,9 @@ public class Promotion implements Serializable, WithPrimaryKey {
         return promotionYear;
     }
 
-    public void setPromotionYear(int year) {
-        this.promotionYear = year;
+    public void setPromotionYear(Integer promotionYear)
+    {
+        this.promotionYear = promotionYear;
     }
 
     public Set<Formation> getFormations() {

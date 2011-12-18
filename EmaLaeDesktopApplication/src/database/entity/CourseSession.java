@@ -35,6 +35,10 @@ public class CourseSession implements Serializable, WithPrimaryKey {
     @JoinColumn
     private Formation formation;
 
+    @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn
+    private UserProfile teacher;
+
     public CourseSession()
     {
     }
@@ -112,6 +116,20 @@ public class CourseSession implements Serializable, WithPrimaryKey {
     public void setSessionId(Integer sessionId)
     {
         this.sessionId = sessionId;
+    }
+
+    public UserProfile getTeacher()
+    {
+        return teacher;
+    }
+
+    public void setTeacher(UserProfile teacher)
+    {
+        this.teacher = teacher;
+        if (teacher != null && !teacher.ownsSession(this))
+        {
+            teacher.addCourseSession(this);
+        }
     }
 
     public Serializable getPrimaryKey()
