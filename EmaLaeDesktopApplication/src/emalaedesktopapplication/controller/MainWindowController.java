@@ -44,7 +44,9 @@ public class MainWindowController
                             Utils.getClassNameWithoutPackage(
                             database.entity.Contract.class),
                             Utils.getClassNameWithoutPackage(
-                            database.entity.Promotion.class)
+                            database.entity.Promotion.class),
+                            Utils.getClassNameWithoutPackage(
+                            database.entity.CourseSession.class)
                         };
 
 
@@ -152,6 +154,14 @@ public class MainWindowController
                AdminController<database.entity.Promotion> adminController =
                         new AdminController<database.entity.Promotion>(
                             view, database.entity.Promotion.class);
+                adminController.adminListChange();
+            }
+            else if (actionCommand.equals(Utils.getClassNameWithoutPackage(
+                    database.entity.CourseSession.class)))
+            {
+               AdminController<database.entity.CourseSession> adminController =
+                        new AdminController<database.entity.CourseSession>(
+                            view, database.entity.CourseSession.class);
                 adminController.adminListChange();
             }
             else
