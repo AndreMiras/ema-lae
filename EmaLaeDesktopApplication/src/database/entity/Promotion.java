@@ -29,6 +29,8 @@ public class Promotion implements Serializable, WithPrimaryKey {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotion")
     private Set<UserProfile> apprentices;
+    @OneToMany(mappedBy = "promotion")
+    private Set<Formation> formations;
 
     public Promotion()
     {
@@ -80,6 +82,14 @@ public class Promotion implements Serializable, WithPrimaryKey {
 
     public void setPromotionYear(int year) {
         this.promotionYear = year;
+    }
+
+    public Set<Formation> getFormations() {
+        return formations;
+    }
+
+    public void setFormations(Set<Formation> formations) {
+        this.formations = formations;
     }
 
     @Override

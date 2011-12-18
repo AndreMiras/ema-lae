@@ -35,17 +35,12 @@
                           <Component id="responsibleNameLabel" alignment="0" max="32767" attributes="1"/>
                           <Component id="yearLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="yearTextField" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="nameTextField" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="responsibleTextField" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Component id="yearTextField" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Component id="nameTextField" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="responsibleTextField" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

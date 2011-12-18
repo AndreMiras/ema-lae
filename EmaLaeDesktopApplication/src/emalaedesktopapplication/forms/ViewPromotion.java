@@ -160,12 +160,16 @@ public class ViewPromotion extends javax.swing.JPanel {
         responsibleTextField.setText(promotion.getResponsible().getFullName());
         yearTextField.setText(promotion.getPromotionYear().toString());
 
+        /*
+         * FIXME : one to many between formations and promotions needs to be implemented
         selectedFormationListModel = new DefaultListModel();
         for (Formation formation : promotion.getFormation())
         {
             selectedFormationListModel.addElement(formation.getName());
         }
         formationList.setModel(selectedFormationListModel);
+         * 
+         */
     }
 
 
