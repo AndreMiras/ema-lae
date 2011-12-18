@@ -16,10 +16,6 @@ import java.util.Set;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-/**
- *
- * @author andre
- */
 @Entity
 public class Users implements Serializable, WithPrimaryKey {
 
@@ -31,11 +27,11 @@ public class Users implements Serializable, WithPrimaryKey {
     private String username;
     @Column
     private String password;
-    //Has access to admin GUI but actions have to be defined in the group permissions
+    // Has access to admin GUI but actions have to be defined in the group permissions
     @Column
     private boolean staff;
     @Column
-    //Has access to everything regardless his permissionsh
+    // Has access to everything regardless his permissions
     private boolean superUser;
 
     @LazyCollection(LazyCollectionOption.FALSE)

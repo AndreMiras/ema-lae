@@ -127,7 +127,8 @@ public class InitDatabase {
 
     public void createPermissions()
     {
-        Users user = new Users("administrator");
+        Users user = new Users("admin", "pwd");
+        user.setSuperUser(true);
         UserDao userDao = new UserDao();
         String groupName = "bGroup";
         UserGroup group = new UserGroup(groupName);
