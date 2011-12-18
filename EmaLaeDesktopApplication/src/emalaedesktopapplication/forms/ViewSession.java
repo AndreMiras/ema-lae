@@ -38,11 +38,13 @@ public class ViewSession extends javax.swing.JPanel {
         endDateLabel = new javax.swing.JLabel();
         formationLabel = new javax.swing.JLabel();
         assignmentsLabel = new javax.swing.JLabel();
-        typeTextField = new javax.swing.JTextField();
-        formationTextField = new javax.swing.JTextField();
-        assignmentsTextField = new javax.swing.JTextField();
-        startDateTextField = new javax.swing.JTextField();
-        endDateTextField = new javax.swing.JTextField();
+        typeValue = new javax.swing.JLabel();
+        endDateValue = new javax.swing.JLabel();
+        startDateValue = new javax.swing.JLabel();
+        assignmentsValue = new javax.swing.JLabel();
+        formationValue = new javax.swing.JLabel();
+        teacherLabel = new javax.swing.JLabel();
+        teacherValue = new javax.swing.JLabel();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(ViewSession.class);
         setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Form.border.title"))); // NOI18N
@@ -63,20 +65,26 @@ public class ViewSession extends javax.swing.JPanel {
         assignmentsLabel.setText(resourceMap.getString("assignmentsLabel.text")); // NOI18N
         assignmentsLabel.setName("assignmentsLabel"); // NOI18N
 
-        typeTextField.setText(resourceMap.getString("typeTextField.text")); // NOI18N
-        typeTextField.setName("typeTextField"); // NOI18N
+        typeValue.setText(resourceMap.getString("typeValue.text")); // NOI18N
+        typeValue.setName("typeValue"); // NOI18N
 
-        formationTextField.setText(resourceMap.getString("formationTextField.text")); // NOI18N
-        formationTextField.setName("formationTextField"); // NOI18N
+        endDateValue.setText(resourceMap.getString("endDateValue.text")); // NOI18N
+        endDateValue.setName("endDateValue"); // NOI18N
 
-        assignmentsTextField.setText(resourceMap.getString("assignmentsTextField.text")); // NOI18N
-        assignmentsTextField.setName("assignmentsTextField"); // NOI18N
+        startDateValue.setText(resourceMap.getString("startDateValue.text")); // NOI18N
+        startDateValue.setName("startDateValue"); // NOI18N
 
-        startDateTextField.setText(resourceMap.getString("startDateTextField.text")); // NOI18N
-        startDateTextField.setName("startDateTextField"); // NOI18N
+        assignmentsValue.setText(resourceMap.getString("assignmentsValue.text")); // NOI18N
+        assignmentsValue.setName("assignmentsValue"); // NOI18N
 
-        endDateTextField.setText(resourceMap.getString("endDateTextField.text")); // NOI18N
-        endDateTextField.setName("endDateTextField"); // NOI18N
+        formationValue.setText(resourceMap.getString("formationValue.text")); // NOI18N
+        formationValue.setName("formationValue"); // NOI18N
+
+        teacherLabel.setText(resourceMap.getString("teacherLabel.text")); // NOI18N
+        teacherLabel.setName("teacherLabel"); // NOI18N
+
+        teacherValue.setText(resourceMap.getString("teacherValue.text")); // NOI18N
+        teacherValue.setName("teacherValue"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,74 +94,94 @@ public class ViewSession extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(endDateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(endDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(teacherLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(teacherValue))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(typeLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(typeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(startDateLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(startDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(50, 50, 50)
+                            .addComponent(endDateLabel)
+                            .addComponent(typeLabel)
+                            .addComponent(startDateLabel))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(endDateValue)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(assignmentsLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(assignmentsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(formationLabel)
+                                .addGap(2, 2, 2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(typeValue)
+                                    .addComponent(startDateValue))
+                                .addGap(64, 64, 64)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(assignmentsLabel)
+                                    .addComponent(formationLabel))
                                 .addGap(18, 18, 18)
-                                .addComponent(formationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(assignmentsValue)
+                                    .addComponent(formationValue))))))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(typeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(formationLabel)
-                    .addComponent(typeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(formationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(startDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(assignmentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(assignmentsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(startDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(teacherLabel)
+                    .addComponent(teacherValue))
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(endDateLabel)
-                    .addComponent(endDateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(189, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(formationValue)
+                        .addGap(18, 18, 18)
+                        .addComponent(assignmentsValue))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(typeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(formationLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(startDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(assignmentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(endDateLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(typeValue)
+                        .addGap(18, 18, 18)
+                        .addComponent(startDateValue)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(endDateValue)))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel assignmentsLabel;
-    private javax.swing.JTextField assignmentsTextField;
+    private javax.swing.JLabel assignmentsValue;
     private javax.swing.JLabel endDateLabel;
-    private javax.swing.JTextField endDateTextField;
+    private javax.swing.JLabel endDateValue;
     private javax.swing.JLabel formationLabel;
-    private javax.swing.JTextField formationTextField;
+    private javax.swing.JLabel formationValue;
     private javax.swing.JLabel startDateLabel;
-    private javax.swing.JTextField startDateTextField;
+    private javax.swing.JLabel startDateValue;
+    private javax.swing.JLabel teacherLabel;
+    private javax.swing.JLabel teacherValue;
     private javax.swing.JLabel typeLabel;
-    private javax.swing.JTextField typeTextField;
+    private javax.swing.JLabel typeValue;
     // End of variables declaration//GEN-END:variables
 
     public void setSession(CourseSession session)
     {
-        typeTextField.setText(session.getType().toString());
-        formationTextField.setText(session.getFormation().getName());
-        startDateTextField.setText(session.getStartDate().toString());
-        endDateTextField.setText(session.getEndDate().toString());
-        assignmentsTextField.setText(session.getAssignmentsLink());
+        if(session.getType() != null)
+            typeValue.setText(session.getType().toString());
+        if(session.getFormation() != null)
+            formationValue.setText(session.getFormation().getName());
+        if(session.getStartDate() != null)
+            startDateValue.setText(session.getStartDate().toString());
+        if (session.getEndDate() != null)
+            endDateValue.setText(session.getEndDate().toString());
+        if (session.getAssignmentsLink() != null)
+            assignmentsValue.setText(session.getAssignmentsLink());
+        if (session.getTeacher() != null)
+            teacherValue.setText(session.getTeacher().getFullName());
     }
-
 }
