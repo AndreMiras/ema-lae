@@ -120,9 +120,17 @@ public class NavigationPanel extends javax.swing.JPanel {
     {
         Promotion promotion = (Promotion) promotionNode.getUserObject();
         DefaultMutableTreeNode formationNode;
+        DefaultMutableTreeNode childrenFormationNode;
         for (Formation formation : promotion.getFormations())
         {
             formationNode = new DefaultMutableTreeNode(formation);
+            // recursively set child formations
+            for (Formation childrenFormation:formation.getChildrenFormations())
+            {
+                childrenFormationNode = new DefaultMutableTreeNode(promotion);
+                setFormations(childrenFormationNode);
+                formationNode.add(childrenFormationNode);
+            }
             promotionNode.add(formationNode);
         }
     }
