@@ -42,7 +42,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="formationNameLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="formationNameTextField" min="-2" max="-2" attributes="0"/>
+                      <Component id="formationNameValue" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -54,7 +54,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="formationNameLabel" alignment="3" min="-2" max="-2" attributes="1"/>
-                  <Component id="formationNameTextField" alignment="3" min="0" pref="0" max="32767" attributes="1"/>
+                  <Component id="formationNameValue" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="parentFormationPanel" min="-2" max="-2" attributes="0"/>
@@ -91,12 +91,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="parentFormationNameLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="parentFormationNameTextField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="132" max="32767" attributes="0"/>
+                  <Component id="parentFormationNameValue" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="160" max="32767" attributes="0"/>
                   <Component id="parentFormationParentLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="parentFormationParentTextField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="parentFormationParentValue" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -107,8 +107,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="parentFormationParentLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="parentFormationNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="parentFormationParentTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="parentFormationNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="parentFormationNameValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="parentFormationParentValue" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -128,21 +128,16 @@
             <Property name="name" type="java.lang.String" value="parentFormationNameLabel" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="parentFormationNameTextField">
+        <Component class="javax.swing.JLabel" name="parentFormationNameValue">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="parentFormationNameTextField.text"/>
-            <Property name="enabled" type="boolean" value="false"/>
-            <Property name="name" type="java.lang.String" value="parentFormationNameTextField" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="parentFormationNameValue.text"/>
+            <Property name="name" type="java.lang.String" value="parentFormationNameValue" noResource="true"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="parentFormationNameTextFieldActionPerformed"/>
-          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="parentFormationParentTextField">
+        <Component class="javax.swing.JLabel" name="parentFormationParentValue">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="parentFormationParentTextField.text"/>
-            <Property name="enabled" type="boolean" value="false"/>
-            <Property name="name" type="java.lang.String" value="parentFormationParentTextField" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="parentFormationParentValue.text"/>
+            <Property name="name" type="java.lang.String" value="parentFormationParentValue" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -172,7 +167,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -233,7 +228,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="130" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" pref="136" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -273,11 +268,10 @@
         <Property name="name" type="java.lang.String" value="formationNameLabel" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="formationNameTextField">
+    <Component class="javax.swing.JLabel" name="formationNameValue">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="formationNameTextField.text"/>
-        <Property name="enabled" type="boolean" value="false"/>
-        <Property name="name" type="java.lang.String" value="formationNameTextField" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="formationNameValue.text"/>
+        <Property name="name" type="java.lang.String" value="formationNameValue" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

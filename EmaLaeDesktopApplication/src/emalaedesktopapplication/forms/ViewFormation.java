@@ -40,8 +40,8 @@ public class ViewFormation extends javax.swing.JPanel {
         parentFormationPanel = new javax.swing.JPanel();
         parentFormationParentLabel = new javax.swing.JLabel();
         parentFormationNameLabel = new javax.swing.JLabel();
-        parentFormationNameTextField = new javax.swing.JTextField();
-        parentFormationParentTextField = new javax.swing.JTextField();
+        parentFormationNameValue = new javax.swing.JLabel();
+        parentFormationParentValue = new javax.swing.JLabel();
         childrenFormationsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         childrenFormationsList = new javax.swing.JList();
@@ -49,7 +49,7 @@ public class ViewFormation extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         sessionsList = new javax.swing.JList();
         formationNameLabel = new javax.swing.JLabel();
-        formationNameTextField = new javax.swing.JTextField();
+        formationNameValue = new javax.swing.JLabel();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(ViewFormation.class);
         setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Form.border.title"))); // NOI18N
@@ -65,18 +65,11 @@ public class ViewFormation extends javax.swing.JPanel {
         parentFormationNameLabel.setText(resourceMap.getString("parentFormationNameLabel.text")); // NOI18N
         parentFormationNameLabel.setName("parentFormationNameLabel"); // NOI18N
 
-        parentFormationNameTextField.setText(resourceMap.getString("parentFormationNameTextField.text")); // NOI18N
-        parentFormationNameTextField.setEnabled(false);
-        parentFormationNameTextField.setName("parentFormationNameTextField"); // NOI18N
-        parentFormationNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                parentFormationNameTextFieldActionPerformed(evt);
-            }
-        });
+        parentFormationNameValue.setText(resourceMap.getString("parentFormationNameValue.text")); // NOI18N
+        parentFormationNameValue.setName("parentFormationNameValue"); // NOI18N
 
-        parentFormationParentTextField.setText(resourceMap.getString("parentFormationParentTextField.text")); // NOI18N
-        parentFormationParentTextField.setEnabled(false);
-        parentFormationParentTextField.setName("parentFormationParentTextField"); // NOI18N
+        parentFormationParentValue.setText(resourceMap.getString("parentFormationParentValue.text")); // NOI18N
+        parentFormationParentValue.setName("parentFormationParentValue"); // NOI18N
 
         javax.swing.GroupLayout parentFormationPanelLayout = new javax.swing.GroupLayout(parentFormationPanel);
         parentFormationPanel.setLayout(parentFormationPanelLayout);
@@ -86,12 +79,12 @@ public class ViewFormation extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(parentFormationNameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(parentFormationNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addComponent(parentFormationNameValue)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                 .addComponent(parentFormationParentLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(parentFormationParentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addComponent(parentFormationParentValue)
+                .addGap(55, 55, 55))
         );
         parentFormationPanelLayout.setVerticalGroup(
             parentFormationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,8 +93,8 @@ public class ViewFormation extends javax.swing.JPanel {
                 .addGroup(parentFormationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(parentFormationParentLabel)
                     .addComponent(parentFormationNameLabel)
-                    .addComponent(parentFormationParentTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(parentFormationNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(parentFormationNameValue)
+                    .addComponent(parentFormationParentValue))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -130,7 +123,7 @@ public class ViewFormation extends javax.swing.JPanel {
         childrenFormationsPanelLayout.setVerticalGroup(
             childrenFormationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(childrenFormationsPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -160,15 +153,14 @@ public class ViewFormation extends javax.swing.JPanel {
             sessionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sessionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
         );
 
         formationNameLabel.setText(resourceMap.getString("formationNameLabel.text")); // NOI18N
         formationNameLabel.setName("formationNameLabel"); // NOI18N
 
-        formationNameTextField.setText(resourceMap.getString("formationNameTextField.text")); // NOI18N
-        formationNameTextField.setEnabled(false);
-        formationNameTextField.setName("formationNameTextField"); // NOI18N
+        formationNameValue.setText(resourceMap.getString("formationNameValue.text")); // NOI18N
+        formationNameValue.setName("formationNameValue"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -185,7 +177,7 @@ public class ViewFormation extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(formationNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(formationNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(formationNameValue)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -193,7 +185,7 @@ public class ViewFormation extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(formationNameLabel)
-                    .addComponent(formationNameTextField, 0, 0, Short.MAX_VALUE))
+                    .addComponent(formationNameValue))
                 .addGap(18, 18, 18)
                 .addComponent(parentFormationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
@@ -208,31 +200,31 @@ public class ViewFormation extends javax.swing.JPanel {
         getAccessibleContext().setAccessibleName(resourceMap.getString("Form.AccessibleContext.accessibleName")); // NOI18N
     }// </editor-fold>//GEN-END:initComponents
 
-    private void parentFormationNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parentFormationNameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_parentFormationNameTextFieldActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList childrenFormationsList;
     private javax.swing.JPanel childrenFormationsPanel;
     private javax.swing.JLabel formationNameLabel;
-    private javax.swing.JTextField formationNameTextField;
+    private javax.swing.JLabel formationNameValue;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel parentFormationNameLabel;
-    private javax.swing.JTextField parentFormationNameTextField;
+    private javax.swing.JLabel parentFormationNameValue;
     private javax.swing.JPanel parentFormationPanel;
     private javax.swing.JLabel parentFormationParentLabel;
-    private javax.swing.JTextField parentFormationParentTextField;
+    private javax.swing.JLabel parentFormationParentValue;
     private javax.swing.JList sessionsList;
     private javax.swing.JPanel sessionsPanel;
     // End of variables declaration//GEN-END:variables
 
     public void setFormation(Formation formation) {
-        formationNameTextField.setText(formation.getName());
-        parentFormationNameTextField.setText(formation.getParentFormation().getName());
-        parentFormationParentTextField.setText(formation.getParentFormation().getParentFormation().getName());
+        if(formation.getName() != null)
+            formationNameValue.setText(formation.getName());
+        if (formation.getParentFormation() != null && formation.getParentFormation().getName() != null)
+        {
+            parentFormationNameValue.setText(formation.getParentFormation().getName());
+            parentFormationParentValue.setText(formation.getParentFormation().getParentFormation().getName());
+        }
         selectedFormationListModel = new DefaultListModel();
         for (Formation childFormation : formation.getChildrenFormations())
         {
