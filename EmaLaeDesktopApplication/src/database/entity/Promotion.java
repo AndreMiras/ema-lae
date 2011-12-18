@@ -7,6 +7,7 @@ package database.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import javax.persistence.*;
 import java.util.Set;
 import org.hibernate.annotations.LazyCollection;
@@ -29,6 +30,7 @@ public class Promotion implements Serializable, WithPrimaryKey {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotion")
     private Set<UserProfile> apprentices;
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotion")
     private Set<Formation> formations;
 
@@ -91,12 +93,18 @@ public class Promotion implements Serializable, WithPrimaryKey {
 
     public void setFormations(Set<Formation> formations) {
         this.formations = formations;
+        for (Formation formation: formations)
+        {
+            formation.setPromotion(this);
+        }
     }
 
-    public void addFormation(Formation formation){
-        this.formations.add(formation);
-        if(!formation.getPromotion().equals(this))
+    public boolean addFormation(Formation formation){
+        if (!formation.getPromotion().equals(this))
+        {
             formation.setPromotion(this);
+        }
+        return this.formations.add(formation);
     }
 
     @Override
@@ -111,11 +119,19 @@ public class Promotion implements Serializable, WithPrimaryKey {
     }
 
     public boolean containsFormation(Formation formation) {
+        Formation tmpFormation;
+        Iterator<Formation> it = this.getFormations().iterator();
         boolean foundFormation = false;
-        for (Formation currentformation : formations)
+        while(!foundFormation && it.hasNext())
         {
-            if(!foundFormation)
-                foundFormation = currentformation.equals(formation);
+            tmpFormation = it.next();
+            if (formation.getFormationId() != null)
+            {
+                foundFormation = formation.getFormationId().equals(
+                        tmpFormation.getFormationId());
+            }
+            else
+                foundFormation = formation.getName().equals(tmpFormation.getName());
         }
         return foundFormation;
     }

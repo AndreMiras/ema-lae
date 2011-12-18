@@ -28,6 +28,7 @@ public class FormationDao extends DaoHibernate<Formation, Integer> {
     }
 
     @Override
+    //Fails silently
     public Integer create(Formation f){
         Integer pk = null;
         try {

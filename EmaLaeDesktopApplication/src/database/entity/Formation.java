@@ -33,7 +33,7 @@ public class Formation implements Serializable, WithPrimaryKey {
     // @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
     @ManyToOne(cascade = CascadeType.ALL)
-    private Promotion promotion = new Promotion();
+    private Promotion promotion;
 
     public Formation() {
     }
@@ -92,13 +92,18 @@ public class Formation implements Serializable, WithPrimaryKey {
     }
 
     public Promotion getPromotion() {
-        return promotion;
+        if (promotion == null)
+            return new Promotion();
+        else
+            return promotion;
     }
 
     public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
-        if(!promotion.containsFormation(this))
+        if (promotion != null && !promotion.containsFormation(this))
+        {
             promotion.addFormation(this);
+        }
     }
     
     public boolean addFormation(Formation child){
@@ -141,5 +146,18 @@ public class Formation implements Serializable, WithPrimaryKey {
     public Serializable getPrimaryKey()
     {
         return formationId;
+    }
+
+    void removePromotion(Promotion promotion) {
+        if(this.promotion.getPromotionId() != null && promotion.getPromotionId() != null)
+        {
+            if(this.promotion.getPromotionId().equals(promotion.getPromotionId()))
+            {
+                this.promotion = null;
+            }
+        }
+        else if (this.promotion.getName().equals(promotion.getName()))
+            this.promotion = null;
+
     }
 }

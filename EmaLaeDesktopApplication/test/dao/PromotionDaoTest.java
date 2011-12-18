@@ -5,6 +5,7 @@
 
 package dao;
 
+import java.util.HashSet;
 import database.entity.Formation;
 import java.util.List;
 import database.util.HibernateUtil;
@@ -143,6 +144,7 @@ public class PromotionDaoTest
         try
         {
             promotionPk = promotionDao.create(promotion);
+            promotion = promotionDao.read(promotionPk);
             promotion.addFormation(formation);
             promotionDao.update(promotion);
             promotion = promotionDao.read(promotionPk);
@@ -156,6 +158,37 @@ public class PromotionDaoTest
     @Test
     public void testSetFormations()
     {
-        fail("not implemented yet");
+        System.out.println("setFormations");
+        PromotionDao promotionDao = new PromotionDao();
+        HashSet<Formation> formationHashSet = new HashSet<Formation>();
+        Promotion promotion = new Promotion("promotion4setFormations");
+        Formation formation = new Formation("formation4setFormation");
+        Integer promotionPk = promotionDao.create(promotion);
+        promotion = promotionDao.read(promotionPk);
+        formationHashSet.add(formation);
+
+
+        assertFalse(promotion.containsFormation(formation));
+        promotion.setFormations(formationHashSet);
+
+        assertTrue(promotion.containsFormation(formation));
+
+
+        promotionDao.update(promotion);
+        promotion = promotionDao.read(promotionPk);
+        assertTrue(promotion.containsFormation(formation));
+
+
+
+        Formation formation2 = new Formation("AnotherFormation");
+        formationHashSet.clear();
+        formationHashSet.add(formation2);
+        promotion.setFormations(formationHashSet);
+
+        promotionDao.update(promotion);
+
+        promotion = promotionDao.read(promotionPk);
+        assertTrue(promotion.containsFormation(formation2));
+        assertTrue(promotion.getFormations().size() == 1);
     }
 }
