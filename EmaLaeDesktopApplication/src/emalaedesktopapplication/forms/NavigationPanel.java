@@ -76,11 +76,10 @@ public class NavigationPanel extends javax.swing.JPanel {
         DefaultMutableTreeNode promoRootNode = searchNode("Promotion");
 
         DefaultMutableTreeNode promotionNode;
-        promoRootNode.removeAllChildren();
+        // promoRootNode.removeAllChildren();
         for (Promotion promotion: promotions)
         {
-            promotionNode = new DefaultMutableTreeNode((Promotion) promotion);
-            promotionNode.setUserObject((Promotion) promotion);
+            promotionNode = new DefaultMutableTreeNode(promotion);
             promoRootNode.add(promotionNode);
         }
 

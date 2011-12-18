@@ -82,12 +82,11 @@ public class NavigationController
                     {
                         Promotion promotion = (Promotion)(node.getUserObject());
 
-                        ViewPromotion promotionPanel = new ViewPromotion();
                         PromotionController promotionController =
                                 new PromotionController(
                                     mainWindow, promotion);
-                        mainWindow.setMiddleContentPanel(promotionPanel);
-                        System.out.println("Displaying promotionPanel");
+                        mainWindow.setMiddleContentPanel(
+                                promotionController.getView());
                     }
                     else
                     {
