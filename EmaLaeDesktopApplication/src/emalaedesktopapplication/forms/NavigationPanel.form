@@ -59,6 +59,9 @@
             <Property name="name" type="java.lang.String" value="jTree1" noResource="true"/>
             <Property name="rootVisible" type="boolean" value="false"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="NavigationPanel_jTree1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
