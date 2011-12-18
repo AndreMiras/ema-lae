@@ -232,11 +232,20 @@ public class InitDatabase {
         }
     }
 
+    /**
+     * creates some formation sets and attaches them to the first
+     * promotion found
+     */
     public void createFormations()
     {
         FormationDao formationDao = new FormationDao();
+        PromotionDao promotionDao = new PromotionDao();
+
+        Promotion promotion = promotionDao.read(0);
         Formation semester1Formation = new Formation("Semester1");
         Formation semester2Formation = new Formation("Semester2");
+        semester1Formation.setPromotion(promotion);
+        semester1Formation.setPromotion(promotion);
 
         Formation mathematicsFormation = new Formation("Mathematics");
         mathematicsFormation.setParentFormation(semester1Formation);
@@ -311,79 +320,20 @@ public class InitDatabase {
         }
     }
 
-
-    public void createFormation()
+    private HashSet getClassesName()
     {
-        GenericDao<Formation> formationDao =
-                new GenericDao<Formation>(Formation.class);
-        GenericDao<Promotion> promotionDao =
-                new GenericDao<Promotion>(Promotion.class);
-
-        List<Promotion> promotions = promotionDao.all();
-        String formationName = "Formation";
-        Formation formation;
-
-        for (int i=0; i<promotions.size(); i++)
+        File folder = new File("./src/database/entity");
+        File[] listOfFiles = folder.listFiles();
+        HashSet<String> classes = new HashSet<String>();
+        for (int i = 0; i < listOfFiles.length; i++)
         {
-            for (int j=0; j<3; j++)
+            String name = listOfFiles[i].getName();
+            name = name.replace(".java", "");
+            if (listOfFiles[i].isFile())
             {
-                formation = new Formation(formationName + (j + 1));
-                formation.setPromotion(promotions.get(i));
-                try
-                {
-                    formationDao.create(formation);
-                }
-                catch (DaoException ex)
-                {
-                    Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                classes.add(name);
             }
         }
-
-        // Let's also create some child formation for the first formation
-        formationName = "ChildFormation";
-        Formation parentFormation = formationDao.read(0);
-        for (int j=0; j<3; j++)
-            {
-                formation = new Formation(formationName + (j + 1));
-                formation.setParentFormation(parentFormation);
-                try
-                {
-                    formationDao.create(formation);
-                }
-                catch (DaoException ex)
-                {
-                    Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+        return classes;
     }
-
-    public void dropFormation()
-    {
-        Formation formation;
-        GenericDao<Formation> formationDao =
-                new GenericDao<Formation>(Formation.class);
-        List<Formation> formations = formationDao.all();
-
-        for(int i=0; i<formations.size(); i++)
-        {
-            formation = formations.get(i);
-            formationDao.delete(formation);
-        }
-    }
-
-    private HashSet getClassesName(){
-
-    File folder = new File("./src/database/entity");
-    File[] listOfFiles = folder.listFiles();
-    HashSet<String> classes = new HashSet<String>();
-    for (int i = 0; i < listOfFiles.length; i++) {
-        String name = listOfFiles[i].getName();
-        name = name.replace(".java", "");
-        if (listOfFiles[i].isFile()) {
-            classes.add(name);
-        }
-    }
-    return classes;
-  }
 }
