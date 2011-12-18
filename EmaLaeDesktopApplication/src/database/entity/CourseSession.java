@@ -89,12 +89,19 @@ public class CourseSession implements Serializable, WithPrimaryKey {
 
     public Formation getFormation()
     {
-        return formation;
+        if (formation == null)
+            return null;
+        else
+            return formation;
     }
 
     public void setFormation(Formation formation)
     {
         this.formation = formation;
+        if (formation != null && !formation.containsSession(this))
+        {
+            formation.addCourseSession(this);
+        }
     }
 
     public Integer getSessionId()

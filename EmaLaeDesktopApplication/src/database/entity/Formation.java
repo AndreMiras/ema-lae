@@ -136,12 +136,19 @@ public class Formation implements Serializable, WithPrimaryKey {
 
     public Set<CourseSession> getSessions()
     {
-        return sessions;
+        if (sessions == null)
+            return null;
+        else
+            return sessions;
     }
 
     public void setSessions(Set<CourseSession> sessions)
     {
         this.sessions = sessions;
+        for (CourseSession session: sessions)
+        {
+            session.setFormation(this);
+        }
     }
 
     @Override
@@ -173,5 +180,31 @@ public class Formation implements Serializable, WithPrimaryKey {
         else if (this.promotion.getName().equals(promotion.getName()))
             this.promotion = null;
 
+    }
+
+    public boolean containsSession(CourseSession session)
+    {
+        CourseSession tmpSession;
+        Iterator<CourseSession> it = this.getSessions().iterator();
+        boolean foundSession = false;
+        while(!foundSession && it.hasNext())
+        {
+            tmpSession = it.next();
+            if (session.getSessionId() != null)
+            {
+                foundSession = session.getSessionId().equals(
+                        tmpSession.getSessionId());
+            }
+        }
+        return foundSession;
+    }
+
+    public boolean addCourseSession(CourseSession session)
+    {
+        if (!session.getFormation().equals(this))
+        {
+            session.setFormation(this);
+        }
+        return this.sessions.add(session);
     }
 }
