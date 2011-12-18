@@ -28,6 +28,25 @@ public class ViewPromotion extends javax.swing.JPanel {
         initComponents();
     }
 
+    public void setPromotion(Promotion promotion)
+    {
+        nameTextField.setText(promotion.getName());
+        responsibleTextField.setText(promotion.getResponsible().getFullName());
+        yearTextField.setText(promotion.getPromotionYear().toString());
+
+        /*
+         * FIXME : one to many between formations and promotions needs to be implemented
+        selectedFormationListModel = new DefaultListModel();
+        for (Formation formation : promotion.getFormation())
+        {
+        selectedFormationListModel.addElement(formation.getName());
+        }
+        formationList.setModel(selectedFormationListModel);
+         *
+         */
+    }
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -154,25 +173,6 @@ public class ViewPromotion extends javax.swing.JPanel {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    public void setPromotion(Promotion promotion) {
-        nameTextField.setText(promotion.getName());
-        responsibleTextField.setText(promotion.getResponsible().getFullName());
-        yearTextField.setText(promotion.getPromotionYear().toString());
-
-        /*
-         * FIXME : one to many between formations and promotions needs to be implemented
-        selectedFormationListModel = new DefaultListModel();
-        for (Formation formation : promotion.getFormation())
-        {
-            selectedFormationListModel.addElement(formation.getName());
-        }
-        formationList.setModel(selectedFormationListModel);
-         * 
-         */
-    }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel apprenticesLabel;
     private javax.swing.JList apprenticesList;
