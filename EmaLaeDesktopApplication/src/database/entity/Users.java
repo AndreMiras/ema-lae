@@ -259,7 +259,7 @@ public class Users implements Serializable, WithPrimaryKey {
                     permFound = groupPermission.getPermissionId().equals(
                             it.next().getPermissionId());
                 }
-                if (permFound)
+                if (!permFound)
                 {
                     allPermissions.add(groupPermission);
                 }
