@@ -35,6 +35,10 @@ public class Formation implements Serializable, WithPrimaryKey {
     @ManyToOne(cascade = CascadeType.ALL)
     private Promotion promotion;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "formation")
+    private Set<CourseSession> sessions = new HashSet<CourseSession>();
+
     public Formation() {
     }
 
@@ -128,6 +132,16 @@ public class Formation implements Serializable, WithPrimaryKey {
             }
         }
         return foundFormation;
+    }
+
+    public Set<CourseSession> getSessions()
+    {
+        return sessions;
+    }
+
+    public void setSessions(Set<CourseSession> sessions)
+    {
+        this.sessions = sessions;
     }
 
     @Override
