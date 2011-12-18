@@ -339,6 +339,23 @@ public class InitDatabase {
                 }
             }
         }
+
+        // Let's also create some child formation for the first formation
+        formationName = "ChildFormation";
+        Formation parentFormation = formationDao.read(0);
+        for (int j=0; j<3; j++)
+            {
+                formation = new Formation(formationName + (j + 1));
+                formation.setParentFormation(parentFormation);
+                try
+                {
+                    formationDao.create(formation);
+                }
+                catch (DaoException ex)
+                {
+                    Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
     }
 
     public void dropFormation()
