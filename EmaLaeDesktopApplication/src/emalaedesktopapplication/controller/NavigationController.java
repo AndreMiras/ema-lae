@@ -73,9 +73,7 @@ public class NavigationController
                      * I wish we could use proper generics with
                      * DefaultMutableTreeNode/DefaultTreeModel
                      */
-                    // else if (node.getUserObject() instanceof Promotion)
-                    else if (node.getParent().toString().toLowerCase().equals(
-                            "promotion"))
+                    else if (node.getUserObject() instanceof Promotion)
                     {
                         Promotion promotion = (Promotion)(node.getUserObject());
 
