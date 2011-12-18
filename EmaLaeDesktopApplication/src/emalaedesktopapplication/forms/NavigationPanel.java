@@ -65,15 +65,25 @@ public class NavigationPanel extends javax.swing.JPanel {
   }
 
     /**
-     * updates the navigation panel with the new promotion list
+     * Updates the navigation panel with the new promotion list
+     * If there's only one item in the list, the root promotion node
+     * will be replaced by this item. Otherwise the list will appended
+     * to the root promotion node
      * @param promotions
      */
     public void setPromotions(List<Promotion> promotions)
     {
-        DefaultMutableTreeNode promoNode = searchNode("Promotion");
-        this.promotions = promotions;
+        DefaultMutableTreeNode promoRootNode = searchNode("Promotion");
 
-        System.out.println("TODO");
+        DefaultMutableTreeNode promotionNode;
+
+        for (Promotion promotion: promotions)
+        {
+            promotionNode = new DefaultMutableTreeNode(promotion);
+            promoRootNode.add(promotionNode);
+        }
+
+        this.promotions = promotions;
     }
 
     /**

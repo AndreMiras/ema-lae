@@ -5,7 +5,9 @@
 package emalaedesktopapplication;
 
 import client.ControllerServiceClient;
+import database.entity.Users;
 import emalaedesktopapplication.controller.MainWindowController;
+import emalaedesktopapplication.utils.Utils;
 import java.awt.Component;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
@@ -17,6 +19,9 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JComponent;
@@ -29,6 +34,8 @@ import javax.swing.JScrollPane;
  * The application's main frame.
  */
 public class EmaLaeDesktopView extends FrameView {
+
+    private String[] entitiesAdmin;
 
     public EmaLaeDesktopView(SingleFrameApplication app) {
         super(app);
@@ -121,8 +128,13 @@ public class EmaLaeDesktopView extends FrameView {
         middleContentPanel.revalidate();
     }
 
+    /**
+     * Fills the admin menu with all possible entities
+     * @param entitiesAdmin
+     */
     public void populateAdminMenu(String[] entitiesAdmin)
     {
+        this.entitiesAdmin = entitiesAdmin;
         javax.swing.JMenuItem menuItemChange;
         for (String entity : entitiesAdmin)
         {
@@ -138,9 +150,13 @@ public class EmaLaeDesktopView extends FrameView {
         }
     }
 
-    public void refreshAdminMenu(String[] entitiesAdmin)
+    /**
+     * Refreshes the admin menu, showing or hiding relevant items
+     * @param visibleEntities
+     */
+    public void visibleAdminMenues(String[] visibleEntities)
     {
-        for (String entity : entitiesAdmin)
+        for (String entity : visibleEntities)
         {
             Component[] components = adminListChangeMenu.getMenuComponents();
             for (Component component: components)
@@ -150,6 +166,65 @@ public class EmaLaeDesktopView extends FrameView {
                     component.setVisible(true);
                 }
             }
+        }
+    }
+
+    /**
+     * Also refreshes the admin menu based on given user permissions
+     * @param user
+     */
+    public void visibleAdminMenues(Users user)
+    {
+        List<String> visibleAdminEntities = new ArrayList<String>();
+        if (user != null)
+        {
+            // if super user, just display them all
+            if (user.isSuperUser())
+            {
+                visibleAdminEntities = Arrays.asList(entitiesAdmin);
+            } else
+            {
+                // FIXME: DRY
+                if (user.checkPermission("Users_read"))
+                {
+                    visibleAdminEntities.add(Utils.getClassNameWithoutPackage(
+                            database.entity.Users.class));
+                }
+                if (user.checkPermission("UserGroup_read"))
+                {
+                    visibleAdminEntities.add(Utils.getClassNameWithoutPackage(
+                            database.entity.UserGroup.class));
+                }
+                if (user.checkPermission("Permission_read"))
+                {
+                    visibleAdminEntities.add(Utils.getClassNameWithoutPackage(
+                            database.entity.Permission.class));
+                }
+                if (user.checkPermission("UserProfile_read"))
+                {
+                    visibleAdminEntities.add(Utils.getClassNameWithoutPackage(
+                            database.entity.UserProfile.class));
+                }
+                if (user.checkPermission("Formation_read"))
+                {
+                    visibleAdminEntities.add(Utils.getClassNameWithoutPackage(
+                            database.entity.Formation.class));
+                }
+                if (user.checkPermission("Contract_read"))
+                {
+                    visibleAdminEntities.add(Utils.getClassNameWithoutPackage(
+                            database.entity.Contract.class));
+                }
+                if (user.checkPermission("Promotion_read"))
+                {
+                    visibleAdminEntities.add(Utils.getClassNameWithoutPackage(
+                            database.entity.Promotion.class));
+                }
+            }
+
+        visibleAdminMenues(
+                visibleAdminEntities.toArray(new String[0]));
+        setAdminVisible(user.isStaff() || user.isSuperUser());
         }
     }
 
