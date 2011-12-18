@@ -28,31 +28,6 @@ public class ViewFormation extends javax.swing.JPanel {
         initComponents();
     }
 
-
-    public void setFormation(Formation formation) {
-        formationNameTextField.setText(formation.getName());
-        parentFormationNameTextField.setText(formation.getParentFormation().getName());
-        parentFormationParentTextField.setText(formation.getParentFormation().getParentFormation().getName());
-        selectedFormationListModel = new DefaultListModel();
-        for (Formation childFormation : formation.getChildrenFormations())
-        {
-            selectedFormationListModel.addElement(childFormation.getName());
-        }
-        childrenFormationsList.setModel(selectedFormationListModel);
-
-        /*
-         * FIXME : Sessions need to be implemented in business class
-        selectedFormationListModel = new DefaultListModel();
-        for (Session session : formation.getSessions())
-        {
-            selectedFormationListModel.addElement(session.getName());
-        }
-        sessionsList.setModel(selectedFormationListModel);
-         *
-         */
-    }
-
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -149,7 +124,6 @@ public class ViewFormation extends javax.swing.JPanel {
             childrenFormationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(childrenFormationsPanelLayout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -172,14 +146,14 @@ public class ViewFormation extends javax.swing.JPanel {
             sessionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sessionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                 .addContainerGap())
         );
         sessionsPanelLayout.setVerticalGroup(
             sessionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sessionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
         );
 
         formationNameLabel.setText(resourceMap.getString("formationNameLabel.text")); // NOI18N
@@ -203,7 +177,7 @@ public class ViewFormation extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(formationNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(formationNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(formationNameValue)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -211,7 +185,7 @@ public class ViewFormation extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(formationNameLabel)
-                    .addComponent(formationNameTextField, 0, 0, Short.MAX_VALUE))
+                    .addComponent(formationNameValue))
                 .addGap(18, 18, 18)
                 .addComponent(parentFormationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
@@ -242,6 +216,8 @@ public class ViewFormation extends javax.swing.JPanel {
     private javax.swing.JList sessionsList;
     private javax.swing.JPanel sessionsPanel;
     // End of variables declaration//GEN-END:variables
+
+    public void setFormation(Formation formation) {
         if(formation.getName() != null)
             formationNameValue.setText(formation.getName());
         if (formation.getParentFormation() != null && formation.getParentFormation().getName() != null)
@@ -249,4 +225,23 @@ public class ViewFormation extends javax.swing.JPanel {
             parentFormationNameValue.setText(formation.getParentFormation().getName());
             parentFormationParentValue.setText(formation.getParentFormation().getParentFormation().getName());
         }
+        selectedFormationListModel = new DefaultListModel();
+        for (Formation childFormation : formation.getChildrenFormations())
+        {
+            selectedFormationListModel.addElement(childFormation.getName());
+        }
+        childrenFormationsList.setModel(selectedFormationListModel);
+
+        /*
+         * FIXME : Sessions need to be implemented in business class
+        selectedFormationListModel = new DefaultListModel();
+        for (Session session : formation.getSessions())
+        {
+            selectedFormationListModel.addElement(session.getName());
+        }
+        sessionsList.setModel(selectedFormationListModel);
+         * 
+         */
+    }
+
 }
