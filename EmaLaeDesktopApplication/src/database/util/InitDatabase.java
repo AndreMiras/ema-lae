@@ -245,7 +245,7 @@ public class InitDatabase {
         Formation semester1Formation = new Formation("Semester1");
         Formation semester2Formation = new Formation("Semester2");
         semester1Formation.setPromotion(promotion);
-        semester1Formation.setPromotion(promotion);
+        semester2Formation.setPromotion(promotion);
 
         Formation mathematicsFormation = new Formation("Mathematics");
         mathematicsFormation.setParentFormation(semester1Formation);
