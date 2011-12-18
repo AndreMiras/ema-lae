@@ -5,10 +5,10 @@
 
 package server.core;
 
-import database.entity.Formation;
 import database.entity.Users;
 import database.entity.UserProfile;
 import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -54,7 +54,7 @@ public interface IControllerService extends java.rmi.Remote {
     public Serializable getEntityId(Object entity)
             throws java.rmi.RemoteException;
 
-    public <T> T[] getAllObjects(Class<T> type) throws java.rmi.RemoteException;
+    public <T> List<T> getAllObjects(Class<T> type) throws java.rmi.RemoteException;
 
     /**
      * TODO: security checks, is the request.user allowed to do that
