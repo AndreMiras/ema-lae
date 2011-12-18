@@ -26,68 +26,84 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="endDateLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="endDateTextField" min="-2" max="-2" attributes="0"/>
+                      <Component id="teacherLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="teacherValue" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="typeLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="typeTextField" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="startDateLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="startDateTextField" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="endDateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="typeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="startDateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="assignmentsLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="assignmentsTextField" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="endDateValue" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="formationLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                              <Component id="formationTextField" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="2" pref="2" max="2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="typeValue" min="-2" max="-2" attributes="0"/>
+                                  <Component id="startDateValue" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="assignmentsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="formationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="assignmentsValue" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="formationValue" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="97" max="32767" attributes="0"/>
+              <EmptySpace pref="105" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="typeLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="formationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="typeTextField" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="formationTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="startDateLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="assignmentsLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="assignmentsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="startDateTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="endDateLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="endDateTextField" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="teacherLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="teacherValue" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="189" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="formationValue" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="assignmentsValue" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="typeLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="formationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="startDateLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="assignmentsLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="endDateLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="typeValue" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="startDateValue" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="endDateValue" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="138" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -123,34 +139,46 @@
         <Property name="name" type="java.lang.String" value="assignmentsLabel" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="typeTextField">
+    <Component class="javax.swing.JLabel" name="typeValue">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="typeTextField.text"/>
-        <Property name="name" type="java.lang.String" value="typeTextField" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="typeValue.text"/>
+        <Property name="name" type="java.lang.String" value="typeValue" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="formationTextField">
+    <Component class="javax.swing.JLabel" name="endDateValue">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="formationTextField.text"/>
-        <Property name="name" type="java.lang.String" value="formationTextField" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="endDateValue.text"/>
+        <Property name="name" type="java.lang.String" value="endDateValue" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="assignmentsTextField">
+    <Component class="javax.swing.JLabel" name="startDateValue">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="assignmentsTextField.text"/>
-        <Property name="name" type="java.lang.String" value="assignmentsTextField" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="startDateValue.text"/>
+        <Property name="name" type="java.lang.String" value="startDateValue" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="startDateTextField">
+    <Component class="javax.swing.JLabel" name="assignmentsValue">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="startDateTextField.text"/>
-        <Property name="name" type="java.lang.String" value="startDateTextField" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="assignmentsValue.text"/>
+        <Property name="name" type="java.lang.String" value="assignmentsValue" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="endDateTextField">
+    <Component class="javax.swing.JLabel" name="formationValue">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="endDateTextField.text"/>
-        <Property name="name" type="java.lang.String" value="endDateTextField" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="formationValue.text"/>
+        <Property name="name" type="java.lang.String" value="formationValue" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="teacherLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="teacherLabel.text"/>
+        <Property name="name" type="java.lang.String" value="teacherLabel" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="teacherValue">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="teacherValue.text"/>
+        <Property name="name" type="java.lang.String" value="teacherValue" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>
