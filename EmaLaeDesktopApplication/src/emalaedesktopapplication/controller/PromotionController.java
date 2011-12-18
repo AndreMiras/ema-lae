@@ -17,29 +17,30 @@ along with Jpcsp.  If not, see <http://www.gnu.org/licenses/>.
 
 package emalaedesktopapplication.controller;
 
-import database.entity.Formation;
+import database.entity.Promotion;
 import emalaedesktopapplication.EmaLaeDesktopView;
-import emalaedesktopapplication.forms.ViewFormation;
+import emalaedesktopapplication.forms.ViewPromotion;
 
-public class FormationController {
+public class PromotionController {
 
     private EmaLaeDesktopView mainWindow;
-    private ViewFormation viewFormation;
-    private Formation formation;
+    private ViewPromotion viewPromotion;
+    private Promotion promotion;
 
-    public FormationController(EmaLaeDesktopView mainWindow, Formation formation) {
+    public PromotionController(EmaLaeDesktopView mainWindow, Promotion promotion) {
         this.mainWindow = mainWindow;
-        this.viewFormation = new ViewFormation();
+        this.viewPromotion = new ViewPromotion();
         populateView();
     }
 
-    public ViewFormation getView()
+    public ViewPromotion getView()
     {
-        return viewFormation;
+        return viewPromotion;
     }
 
     private void populateView()
     {
-        viewFormation.setFormation(formation);
+        viewPromotion.setPromotion(promotion);
     }
+
 }

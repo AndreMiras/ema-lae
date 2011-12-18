@@ -12,6 +12,9 @@
 package emalaedesktopapplication.forms;
 
 import database.entity.Formation;
+//import database.entity.Session;
+import javax.swing.DefaultListModel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -19,6 +22,7 @@ import database.entity.Formation;
  */
 public class ViewFormation extends javax.swing.JPanel {
 
+    private DefaultListModel selectedFormationListModel;
     /** Creates new form ViewFormation */
     public ViewFormation() {
         initComponents();
@@ -226,7 +230,26 @@ public class ViewFormation extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void setFormation(Formation formation) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        formationNameTextField.setText(formation.getName());
+        parentFormationNameTextField.setText(formation.getParentFormation().getName());
+        parentFormationParentTextField.setText(formation.getParentFormation().getParentFormation().getName());
+        selectedFormationListModel = new DefaultListModel();
+        for (Formation childFormation : formation.getChildrenFormations())
+        {
+            selectedFormationListModel.addElement(childFormation.getName());
+        }
+        childrenFormationsList.setModel(selectedFormationListModel);
+
+        /*
+         * FIXME : Sessions need to be implemented in business class
+        selectedFormationListModel = new DefaultListModel();
+        for (Session session : formation.getSessions())
+        {
+            selectedFormationListModel.addElement(session.getName());
+        }
+        sessionsList.setModel(selectedFormationListModel);
+         * 
+         */
     }
 
 }

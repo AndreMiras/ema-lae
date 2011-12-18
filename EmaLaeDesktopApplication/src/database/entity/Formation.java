@@ -32,6 +32,8 @@ public class Formation implements Serializable, WithPrimaryKey {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentFormation")
     // @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
+    @ManyToOne
+    private Promotion promotion;
 
     public Formation() {
 
@@ -87,6 +89,14 @@ public class Formation implements Serializable, WithPrimaryKey {
         {
             parentFormation.addFormation(this);
         }
+    }
+
+    public Promotion getPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
     }
     
     public boolean addFormation(Formation child){

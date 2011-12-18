@@ -77,43 +77,71 @@ public class LoginScreenController
                     if(user!=null)
                     {
                         int totalPermissionsSize = user.getTotalNumberOfPermissions();
-                        for(int i=0;i<totalPermissionsSize;i++)
+                        if(user.isSuperUser())
                         {
-                            if(user.checkPermission("Users_read") && !users)
+                            entitiesAdmin = new String[]{
+                                Utils.getClassNameWithoutPackage(
+                                    database.entity.Users.class),
+                                Utils.getClassNameWithoutPackage(
+                                    database.entity.UserGroup.class),
+                                Utils.getClassNameWithoutPackage(
+                                    database.entity.Permission.class),
+                                Utils.getClassNameWithoutPackage(
+                                    database.entity.UserProfile.class),
+                                Utils.getClassNameWithoutPackage(
+                                    database.entity.Formation.class),
+                                Utils.getClassNameWithoutPackage(
+                                    database.entity.Contract.class),
+                                Utils.getClassNameWithoutPackage(
+                                    database.entity.Promotion.class)
+                            };
+                        }
+                        else
+                        {
+                            for(int i=0;i<totalPermissionsSize;i++)
                             {
-                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                        database.entity.Users.class);
-                                users = true;
-                            }
-                            else if(user.checkPermission("UserGroup_read") && !userGroups)
-                            {
-                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                        database.entity.UserGroup.class);
-                                userGroups = true;
-                            }
-                            else if(user.checkPermission("Permission_read") && !permissions)
-                            {
-                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                        database.entity.Permission.class);
-                                permissions = true;
-                            }
-                            else if(user.checkPermission("UserProfile_read") && !userGroups)
-                            {
-                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                        database.entity.UserProfile.class);
-                                userProfiles = true;
-                            }
-                            else if(user.checkPermission("Formation_read") && !userGroups)
-                            {
-                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                        database.entity.Formation.class);
-                                formations = true;
-                            }
-                            else if(user.checkPermission("Contract_read") && !userGroups)
-                            {
-                                entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                        database.entity.Contract.class);
-                                contracts = true;
+                                if(user.checkPermission("Users_read") && !users)
+                                {
+                                    entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                            database.entity.Users.class);
+                                    users = true;
+                                }
+                                else if(user.checkPermission("UserGroup_read") && !userGroups)
+                                {
+                                    entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                            database.entity.UserGroup.class);
+                                    userGroups = true;
+                                }
+                                else if(user.checkPermission("Permission_read") && !permissions)
+                                {
+                                    entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                            database.entity.Permission.class);
+                                    permissions = true;
+                                }
+                                else if(user.checkPermission("UserProfile_read") && !userGroups)
+                                {
+                                    entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                            database.entity.UserProfile.class);
+                                    userProfiles = true;
+                                }
+                                else if(user.checkPermission("Formation_read") && !userGroups)
+                                {
+                                    entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                            database.entity.Formation.class);
+                                    formations = true;
+                                }
+                                else if(user.checkPermission("Contract_read") && !userGroups)
+                                {
+                                    entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                            database.entity.Contract.class);
+                                    contracts = true;
+                                }
+                                else if(user.checkPermission("Promotion_read") && !userGroups)
+                                {
+                                    entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
+                                            database.entity.Promotion.class);
+                                    contracts = true;
+                                }
                             }
                         }
                     }
