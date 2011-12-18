@@ -8,6 +8,10 @@ package database.entity;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,11 +19,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import org.hibernate.annotations.Parameter;
 import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 /**
@@ -65,14 +72,19 @@ public class UserProfile implements Serializable, WithPrimaryKey {
     private Contract contract;
     @Column
     private String photoPath;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "teacher")
+    private Set<CourseSession> courseSessions;
 
 
     public UserProfile()
     {
+        this.courseSessions = new HashSet<CourseSession>();
     }
 
     public UserProfile(Users user)
     {
+        this();
         this.user = user;
     }
 
@@ -272,6 +284,43 @@ public class UserProfile implements Serializable, WithPrimaryKey {
         {
             return "M.";
         }
+    }
+
+    public Set<CourseSession> getCourseSessions()
+    {
+        return courseSessions;
+    }
+
+    public void setCourseSessions(Set<CourseSession> sessions)
+    {
+        this.courseSessions = sessions;
+        for (CourseSession session: sessions)
+        {
+            session.setTeacher(this);
+        }
+    }
+
+    public boolean addCourseSession(CourseSession courseSession){
+        return this.courseSessions.add(courseSession);
+    }
+
+    public boolean ownsSession(CourseSession session)
+    {
+        CourseSession tmpSession;
+        Iterator<CourseSession> it = this.getCourseSessions().iterator();
+        boolean foundSession = false;
+        while(!foundSession && it.hasNext())
+        {
+            tmpSession = it.next();
+            if (session.getSessionId() != null)
+            {
+                foundSession = session.getSessionId().equals(
+                        tmpSession.getSessionId());
+            }
+            else
+                foundSession = (session.getTeacher().equals(tmpSession.getTeacher())&&(session.getTeacher().equals(session.getTeacher())));
+        }
+        return foundSession;
     }
 
     public Serializable getPrimaryKey()

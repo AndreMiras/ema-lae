@@ -5,6 +5,9 @@
 
 package dao;
 
+import java.util.HashSet;
+import database.entity.CourseSession.SessionType;
+import database.entity.CourseSession;
 import database.util.HibernateUtil;
 import database.entity.Users;
 import database.entity.UserProfile;
@@ -186,6 +189,101 @@ public class UserProfileDaoTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+
+    @Test
+    public void testAddSession() {
+        try
+        {
+            System.out.println("add session");
+            UserProfileDao userProfileDao = new UserProfileDao();
+            // Instantiate the objects
+            Users u = new Users("User4addSession");
+            UserProfile user = new UserProfile(u);
+            CourseSession cs1 = new CourseSession(SessionType.Course);
+            // No parent and not children by default
+            assertTrue(user.getCourseSessions().isEmpty());
+            assertTrue(cs1.getFormation() == null);
+            // Creating parent/children relation
+            cs1.setTeacher(user);
+            assertTrue(user.getCourseSessions().size() == 1);
+            assertTrue(cs1.getTeacher() == user);
+            // Insertion of the parent formation into the database
+            Integer formationPk = userProfileDao.create(user);
+            // Check that the child formation does appear in the parent's children
+            assertTrue(user.ownsSession(cs1));
+            // Check it's still true after a read from database
+            user = userProfileDao.read(formationPk);
+            assertTrue(user.getCourseSessions().size() == 1);
+            assertTrue(user.ownsSession(cs1));
+        }
+        catch (DaoException ex)
+        {
+            Logger.getLogger(UserProfileDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Test // TODO: finish this up
+    public void testSetSessions() {
+        try
+        {
+            System.out.println("create");
+            UserProfileDao userProfileDao = new UserProfileDao();
+            // Instantiate the objects
+            Users u = new Users("User4SetSessions");
+            UserProfile user = new UserProfile(u);
+            CourseSession cs1 = new CourseSession(SessionType.Course);
+            CourseSession cs2 = new CourseSession(SessionType.Pratictal);
+            CourseSession cs3 = new CourseSession(SessionType.Test);
+            // Nothing should be set by default
+            assertTrue(user.getCourseSessions().isEmpty());
+            assertTrue(cs1.getFormation() == null);
+            // Creating relation
+            HashSet<CourseSession> sessionsSet = new HashSet<CourseSession>();
+            sessionsSet.add(cs1);
+            sessionsSet.add(cs2);
+            sessionsSet.add(cs3);
+            user.setCourseSessions(sessionsSet);
+            assertTrue(user.getCourseSessions().size() == 3);
+            assertTrue(cs1.getTeacher() == user);
+            assertTrue(cs2.getTeacher() == user);
+            assertTrue(cs3.getTeacher() == user);
+            // Check that the child formation does appear in the parent's children
+            assertTrue(user.getCourseSessions().contains(cs1));
+            assertTrue(user.getCourseSessions().contains(cs2));
+            assertTrue(user.getCourseSessions().contains(cs3));
+            // Insertion of the parent formation into the database
+            Integer userPk = userProfileDao.create(user);
+            // Check it's still true after a read from database
+            user = userProfileDao.read(userPk);
+            assertTrue(user.getCourseSessions().size() == 3);
+            assertTrue(user.ownsSession(cs1));
+            assertTrue(user.ownsSession(cs2));
+            assertTrue(user.ownsSession(cs3));
+            /*
+             * Now lets try to set a formation HashSet a second time
+             * to see if the previous one gets overridden.
+             * So we set cf1 and cf3 but not cf2
+             */
+            sessionsSet.clear();
+            sessionsSet.add(cs1);
+            sessionsSet.add(cs3);
+            user.setCourseSessions(sessionsSet);
+            assertTrue(user.getCourseSessions().size() == 2);
+            assertTrue(cs1.getTeacher() == user);
+            // assertTrue(cf2.getParentFormation() == null);
+            assertTrue(cs3.getTeacher() == user);
+            userProfileDao.update(user); // updating the database
+            // Check it's still true after a read from database
+            user = userProfileDao.read(userPk);
+            assertTrue(user.getCourseSessions().size() == 2);
+            assertTrue(user.ownsSession(cs1));
+            assertFalse(user.ownsSession(cs2));
+            assertTrue(user.ownsSession(cs3));
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(UserProfileDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

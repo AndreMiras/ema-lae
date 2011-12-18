@@ -5,14 +5,12 @@
 
 package dao;
 
+import database.entity.CourseSession;
 import database.entity.Users;
 import database.entity.UserProfile;
 import exceptions.DaoException;
-import java.lang.String;
 import java.util.HashMap;
-import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import java.util.Set;
 
 /**
  *
@@ -51,4 +49,27 @@ public class UserProfileDao extends DaoHibernate<UserProfile, Integer> {
             return super.create(profile);
     }
 
+        @Override
+    public void update(UserProfile p)
+    {
+        GenericDao<CourseSession> courseSessionGenericDao =
+                new GenericDao<CourseSession>(CourseSession.class);
+        UserProfile beforeUpdateProfile = read(p.getUserId());
+        Set<CourseSession> beforeUpdateSessions =
+                beforeUpdateProfile.getCourseSessions();
+
+        for (CourseSession beforeUpdatedSession: beforeUpdateSessions)
+        {
+            /*
+             * if the old session isn't part of the new sessions set,
+             * updates it by making it orphan
+             */
+            if(!p.ownsSession(beforeUpdatedSession))
+            {
+                beforeUpdatedSession.setTeacher(null);
+                courseSessionGenericDao.update(beforeUpdatedSession);
+            }
+        }
+        super.update(p);
+    }
 }

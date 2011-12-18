@@ -21,6 +21,8 @@ package dao;
 import database.entity.CourseSession;
 import database.entity.CourseSession.SessionType;
 import database.entity.Formation;
+import database.entity.UserProfile;
+import database.entity.Users;
 import database.util.HibernateUtil;
 import database.util.InitDatabase;
 import java.util.HashSet;
@@ -31,6 +33,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.List;
+import org.hsqldb.User;
 
 public class CourseSessionDaoTest {
     public CourseSessionDaoTest() {
@@ -147,5 +150,25 @@ public class CourseSessionDaoTest {
         session = csInstance.read(sessionId);
 
         assertTrue(session.getFormation().getFormationId().equals(formation.getFormationId()));
+    }
+
+    @Test
+    public void testSetTeacher()
+    {
+        System.out.println("set Promotion");
+        CourseSession session = new CourseSession(SessionType.Course);
+        CourseSessionDao csInstance = new CourseSessionDao();
+        Users u = new Users("user4setTeacher");
+        UserProfile user = new UserProfile(u);
+
+        Integer sessionId = csInstance.create(session);
+        session = csInstance.read(sessionId);
+
+        session.setTeacher(user);
+
+        csInstance.update(session);
+        session = csInstance.read(sessionId);
+
+        assertTrue(session.getTeacher().getUserId().equals(user.getUserId()));
     }
 }

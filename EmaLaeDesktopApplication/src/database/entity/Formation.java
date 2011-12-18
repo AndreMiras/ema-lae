@@ -43,7 +43,7 @@ public class Formation implements Serializable, WithPrimaryKey {
     }
 
     public Formation(String name) {
-        super();
+        this();
         this.name = name;
     }
 
