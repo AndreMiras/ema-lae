@@ -6,6 +6,7 @@
 package dao;
 
 import database.entity.Formation;
+import database.entity.Promotion;
 import database.util.HibernateUtil;
 import database.util.InitDatabase;
 import java.util.HashSet;
@@ -241,6 +242,25 @@ public class FormationDaoTest {
         assertTrue(pf1.containsChild(cf1));
         assertFalse(pf1.containsChild(cf2));
         assertTrue(pf1.containsChild(cf3));
+    }
+
+    @Test
+    public void testSetPromotion()
+    {
+        System.out.println("set Promotion");
+        Formation formation = new Formation("formation4setPromotion");
+        FormationDao fInstance = new FormationDao();
+        Promotion promotion = new Promotion("promotion4setPromotion");
+
+        Integer formationID = fInstance.create(formation);
+        formation = fInstance.read(formationID);
+
+        formation.setPromotion(promotion);
+
+        fInstance.update(formation);
+        formation = fInstance.read(formationID);
+
+        assertTrue(formation.getPromotion().getName().equals(promotion.getName()));
     }
 
     /**

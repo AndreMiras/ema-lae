@@ -29,7 +29,7 @@ public class Promotion implements Serializable, WithPrimaryKey {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotion")
     private Set<UserProfile> apprentices;
-    @OneToMany(mappedBy = "promotion")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "promotion")
     private Set<Formation> formations;
 
     public Promotion()

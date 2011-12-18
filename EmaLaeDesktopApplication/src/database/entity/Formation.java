@@ -32,7 +32,7 @@ public class Formation implements Serializable, WithPrimaryKey {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentFormation")
     // @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Promotion promotion;
 
     public Formation() {
