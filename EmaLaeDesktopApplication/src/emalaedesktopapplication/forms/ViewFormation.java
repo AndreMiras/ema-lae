@@ -93,11 +93,6 @@ public class ViewFormation extends javax.swing.JPanel {
         parentFormationNameTextField.setText(resourceMap.getString("parentFormationNameTextField.text")); // NOI18N
         parentFormationNameTextField.setEnabled(false);
         parentFormationNameTextField.setName("parentFormationNameTextField"); // NOI18N
-        parentFormationNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                parentFormationNameTextFieldActionPerformed(evt);
-            }
-        });
 
         parentFormationParentTextField.setText(resourceMap.getString("parentFormationParentTextField.text")); // NOI18N
         parentFormationParentTextField.setEnabled(false);
@@ -178,14 +173,14 @@ public class ViewFormation extends javax.swing.JPanel {
             sessionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sessionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                 .addContainerGap())
         );
         sessionsPanelLayout.setVerticalGroup(
             sessionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sessionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                .addComponent(jScrollPane2))
         );
 
         formationNameLabel.setText(resourceMap.getString("formationNameLabel.text")); // NOI18N
@@ -232,10 +227,6 @@ public class ViewFormation extends javax.swing.JPanel {
 
         getAccessibleContext().setAccessibleName(resourceMap.getString("Form.AccessibleContext.accessibleName")); // NOI18N
     }// </editor-fold>//GEN-END:initComponents
-
-    private void parentFormationNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parentFormationNameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_parentFormationNameTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
