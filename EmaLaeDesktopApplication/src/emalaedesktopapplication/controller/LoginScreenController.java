@@ -5,8 +5,6 @@
 package emalaedesktopapplication.controller;
 
 import client.ControllerServiceClient;
-import database.entity.Permission;
-import database.entity.UserGroup;
 import database.entity.Users;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
@@ -68,6 +66,7 @@ public class LoginScreenController
 
                     // refresh admin menu
                     String[] entitiesAdmin = new String[user.getTotalNumberOfPermissions()];
+                    // FIXME: DRY
                     boolean users = false;
                     boolean userGroups = false;
                     boolean formations = false;
@@ -98,6 +97,7 @@ public class LoginScreenController
                         }
                         else
                         {
+                            // FIXME: DRY
                             for(int i=0;i<totalPermissionsSize;i++)
                             {
                                 if(user.checkPermission("Users_read") && !users)

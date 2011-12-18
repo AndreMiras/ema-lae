@@ -4,6 +4,7 @@
  */
 
 //TODO: Generate tests for users and permission : test a viewprofile on an authorized user, and on an unauthorized  user.
+// TODO: content type reference or at least ref to Class type
 
 package database.entity;
 
