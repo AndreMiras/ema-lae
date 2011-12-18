@@ -203,36 +203,21 @@ public class Users implements Serializable, WithPrimaryKey {
     
     public boolean checkPermission (Permission permission){
         boolean hasPermission = false;
-        Iterator<UserGroup> i=this.groups.iterator();
-        while(i.hasNext() && !hasPermission)
+        Iterator<Permission> k = this.getAllPermissions().iterator();
+        while(k.hasNext() && !hasPermission)
         {
-            UserGroup userGroup = i.next();
-            Iterator<Permission> j = userGroup.getPermissions().iterator();
-            while(j.hasNext() && !hasPermission){
-                hasPermission = j.next().containsGroup(userGroup);
-            }
-        }
-        Iterator<Permission> k = this.specialPermissions.iterator();
-        while(k.hasNext() && !hasPermission){
-            hasPermission = k.next().getPermissionId().equals(permission.getPermissionId());
+            hasPermission = k.next().getPermissionId().equals(
+                    permission.getPermissionId());
         }
         return hasPermission;
     }
 
-    public boolean checkPermission (String permission){
+    public boolean checkPermission (String permissionStr){
         boolean hasPermission = false;
-        Iterator<UserGroup> i=this.groups.iterator();
-        while(i.hasNext() && !hasPermission)
+        Iterator<Permission> k = this.getAllPermissions().iterator();
+        while(k.hasNext() && !hasPermission)
         {
-            UserGroup userGroup = i.next();
-            Iterator<Permission> j = userGroup.getPermissions().iterator();
-            while(j.hasNext() && !hasPermission){
-                hasPermission = j.next().getName().equals(permission);
-            }
-        }
-        Iterator<Permission> k = this.specialPermissions.iterator();
-        while(k.hasNext() && !hasPermission){
-            hasPermission = k.next().getName().equals(permission);
+            hasPermission = k.next().getName().equals(permissionStr);
         }
         return hasPermission;
     }
@@ -251,38 +236,35 @@ public class Users implements Serializable, WithPrimaryKey {
         return userId;
     }
 
-    private void clearGroups()
+    /**
+     *
+     * @return specialPermssions + groupPermissions
+     */
+    public Set<Permission> getAllPermissions()
     {
-        for (UserGroup group: groups)
-        {
-            group.removeUser(this);
-        }
-        this.groups.clear();
-    }
-
-    public int getTotalNumberOfPermissions()
-    {
-        int nbPermissions = specialPermissions.size();
-        boolean checkedPermission;
+        boolean permFound;
+        Set<Permission> allPermissions = specialPermissions;
         for(UserGroup group : groups)
         {
             for(Permission groupPermission : group.getPermissions())
             {
-                checkedPermission = false;
-                for(Permission userPermission : specialPermissions)
+                /* Checks the permission wasn't already added.
+                 * We have to manually compare permission ids since
+                 * we did not override the isEqual method of Permission
+                 */
+                permFound = false;
+                Iterator<Permission> it = allPermissions.iterator();
+                while(!permFound && it.hasNext())
                 {
-                    if(groupPermission.equals(userPermission))
-                    {
-                        checkedPermission = true;
-                    }
+                    permFound = groupPermission.getPermissionId().equals(
+                            it.next().getPermissionId());
                 }
-                if (!checkedPermission)
+                if (permFound)
                 {
-                    nbPermissions ++;
+                    allPermissions.add(groupPermission);
                 }
             }
         }
-        return nbPermissions;
+        return allPermissions;
     }
-    
 }
