@@ -13,6 +13,7 @@ package emalaedesktopapplication.forms;
 
 import database.entity.Formation;
 import database.entity.Promotion;
+import database.entity.UserProfile;
 import javax.swing.DefaultListModel;
 
 /**
@@ -30,9 +31,18 @@ public class ViewPromotion extends javax.swing.JPanel {
 
     public void setPromotion(Promotion promotion)
     {
-        nameTextField.setText(promotion.getName());
-        responsibleTextField.setText(promotion.getResponsible().getFullName());
-        yearTextField.setText(promotion.getPromotionYear().toString());
+        String promoName = promotion.getName();
+        UserProfile responsible = promotion.getResponsible();
+        Integer promoYear = promotion.getPromotionYear();
+        nameTextField.setText(promoName);
+        if (responsible != null)
+        {
+            responsibleTextField.setText(responsible.getFullName());
+        }
+        if (promoYear != null)
+        {
+            yearTextField.setText(promoYear.toString());
+        }
 
         /*
          * FIXME : one to many between formations and promotions needs to be implemented
