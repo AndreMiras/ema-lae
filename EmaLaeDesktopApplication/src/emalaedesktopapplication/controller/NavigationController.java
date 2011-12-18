@@ -5,6 +5,7 @@
 package emalaedesktopapplication.controller;
 
 import client.ControllerServiceClient;
+import database.entity.Formation;
 import database.entity.Promotion;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
@@ -82,6 +83,16 @@ public class NavigationController
                                     mainWindow, promotion);
                         mainWindow.setMiddleContentPanel(
                                 promotionController.getView());
+                    }
+                    else if (node.getUserObject() instanceof Formation)
+                    {
+                        Formation formation = (Formation)(node.getUserObject());
+
+                        FormationController formationController =
+                                new FormationController(
+                                    mainWindow, formation);
+                        mainWindow.setMiddleContentPanel(
+                                formationController.getView());
                     }
                     else
                     {
