@@ -11,6 +11,7 @@
 
 package emalaedesktopapplication.forms;
 
+import database.entity.Formation;
 import database.entity.Promotion;
 import java.awt.event.MouseListener;
 import java.util.Enumeration;
@@ -40,11 +41,21 @@ public class NavigationPanel extends javax.swing.JPanel {
         DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
         renderer.setBackgroundNonSelectionColor(null);
         jTree1.setCellRenderer(renderer);
+        // setPromotionObject();
     }
 
     public void addTreeMouseListener(MouseListener l)
     {
         jTree1.addMouseListener(l);
+    }
+
+    /**
+     * replaces the "Promotion" string by a Promotion object
+     */
+    private void setPromotionObject()
+    {
+        DefaultMutableTreeNode promoRootNode = searchNode("Promotion");
+        promoRootNode.setUserObject(new Promotion("Promotion"));
     }
 
     private DefaultMutableTreeNode searchNode(String nodeStr)
@@ -61,8 +72,25 @@ public class NavigationPanel extends javax.swing.JPanel {
                 return node;
             }
         }
-    return null;
-  }
+        return null;
+    }
+
+    private <T> DefaultMutableTreeNode searchNode(Class<T> type)
+    {
+        DefaultMutableTreeNode node = null;
+        DefaultMutableTreeNode rootNode =
+                (DefaultMutableTreeNode) jTree1.getModel().getRoot();
+        Enumeration e = rootNode.breadthFirstEnumeration();
+        while (e.hasMoreElements())
+        {
+            node = (DefaultMutableTreeNode) e.nextElement();
+            if (node.getUserObject().getClass().isAssignableFrom(type))
+            {
+                return node;
+            }
+        }
+        return null;
+    }
 
     /**
      * Updates the navigation panel with the new promotion list
@@ -74,16 +102,29 @@ public class NavigationPanel extends javax.swing.JPanel {
     public void setPromotions(List<Promotion> promotions)
     {
         DefaultMutableTreeNode promoRootNode = searchNode("Promotion");
+        // DefaultMutableTreeNode promoRootNode = searchNode(Promotion.class);
 
         DefaultMutableTreeNode promotionNode;
         // promoRootNode.removeAllChildren();
         for (Promotion promotion: promotions)
         {
             promotionNode = new DefaultMutableTreeNode(promotion);
+            setFormations(promotionNode);
             promoRootNode.add(promotionNode);
         }
 
         this.promotions = promotions;
+    }
+
+    public void setFormations(DefaultMutableTreeNode promotionNode)
+    {
+        Promotion promotion = (Promotion) promotionNode.getUserObject();
+        DefaultMutableTreeNode formationNode;
+        for (Formation formation : promotion.getFormations())
+        {
+            formationNode = new DefaultMutableTreeNode(formation);
+            promotionNode.add(formationNode);
+        }
     }
 
     /**
