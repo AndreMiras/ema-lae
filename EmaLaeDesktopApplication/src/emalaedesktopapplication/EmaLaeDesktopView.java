@@ -220,6 +220,11 @@ public class EmaLaeDesktopView extends FrameView {
                     visibleAdminEntities.add(Utils.getClassNameWithoutPackage(
                             database.entity.Promotion.class));
                 }
+                if (user.checkPermission("CourseSession_read"))
+                {
+                    visibleAdminEntities.add(Utils.getClassNameWithoutPackage(
+                            database.entity.CourseSession.class));
+                }
             }
 
         visibleAdminMenues(

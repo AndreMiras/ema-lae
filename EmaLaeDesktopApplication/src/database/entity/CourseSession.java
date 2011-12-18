@@ -16,11 +16,10 @@ import java.util.Date;
 
 @Entity
 public class CourseSession implements Serializable, WithPrimaryKey {
-
     @Column(name ="sessions_id")
     @Id
     @GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
-    private int sessionId;
+    private Integer sessionId;
     @Temporal(TemporalType.DATE)
     @Column
     private Date startDate;
@@ -29,15 +28,31 @@ public class CourseSession implements Serializable, WithPrimaryKey {
     private Date endDate;
     @Column
     private String assignmentsLink;
+    public enum SessionType { Course, Test, Pratictal }
     @Column
-    private int sessionType;
+    private SessionType type;
+    @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @JoinColumn
+    private Formation formation;
 
-    public int getID() {
-        return sessionId;
+    public CourseSession()
+    {
     }
 
-    public void setID(int ID) {
-        this.sessionId = ID;
+    public CourseSession(Formation formation)
+    {
+        this.formation = formation;
+    }
+
+    public CourseSession(SessionType type)
+    {
+        this.type = type;
+    }
+
+    public CourseSession(SessionType type, Formation formation)
+    {
+        this.type = type;
+        this.formation = formation;
     }
 
     public String getAssignmentsLink() {
@@ -56,12 +71,12 @@ public class CourseSession implements Serializable, WithPrimaryKey {
         this.endDate = endDate;
     }
 
-    public int getSessionType() {
-        return sessionType;
+    public SessionType getType() {
+        return type;
     }
 
-    public void setSessionType(int sessionType) {
-        this.sessionType = sessionType;
+    public void setSessionType(SessionType sessionType) {
+        this.type = sessionType;
     }
 
     public Date getStartDate() {
@@ -70,6 +85,33 @@ public class CourseSession implements Serializable, WithPrimaryKey {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public Formation getFormation()
+    {
+        if (formation == null)
+            return null;
+        else
+            return formation;
+    }
+
+    public void setFormation(Formation formation)
+    {
+        this.formation = formation;
+        if (formation != null && !formation.containsSession(this))
+        {
+            formation.addCourseSession(this);
+        }
+    }
+
+    public Integer getSessionId()
+    {
+        return sessionId;
+    }
+
+    public void setSessionId(Integer sessionId)
+    {
+        this.sessionId = sessionId;
     }
 
     public Serializable getPrimaryKey()

@@ -5,6 +5,8 @@
 
 package dao;
 
+import java.util.HashSet;
+import database.entity.Formation;
 import java.util.List;
 import database.util.HibernateUtil;
 import database.entity.Promotion;
@@ -128,5 +130,65 @@ public class PromotionDaoTest
 
         // the number of total promotions should have decreased
         assertTrue(promotionDao.all().size() == countBeforeDelete -1);
+    }
+
+    @Test
+    public void testAddFormation()
+    {
+        System.out.println("testAddFormation");
+        Promotion promotion = new Promotion("promotion4addFormation");
+        GenericDao<Promotion> promotionDao =
+                new GenericDao<Promotion>(Promotion.class);
+        Formation formation = new Formation("formation4addFormation");
+        Integer promotionPk = null;
+        try
+        {
+            promotionPk = promotionDao.create(promotion);
+            promotion = promotionDao.read(promotionPk);
+            promotion.addFormation(formation);
+            promotionDao.update(promotion);
+            promotion = promotionDao.read(promotionPk);
+            assertTrue(promotion.containsFormation(formation));
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(PromotionDaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Test
+    public void testSetFormations()
+    {
+        System.out.println("setFormations");
+        PromotionDao promotionDao = new PromotionDao();
+        HashSet<Formation> formationHashSet = new HashSet<Formation>();
+        Promotion promotion = new Promotion("promotion4setFormations");
+        Formation formation = new Formation("formation4setFormation");
+        Integer promotionPk = promotionDao.create(promotion);
+        promotion = promotionDao.read(promotionPk);
+        formationHashSet.add(formation);
+
+
+        assertFalse(promotion.containsFormation(formation));
+        promotion.setFormations(formationHashSet);
+
+        assertTrue(promotion.containsFormation(formation));
+
+
+        promotionDao.update(promotion);
+        promotion = promotionDao.read(promotionPk);
+        assertTrue(promotion.containsFormation(formation));
+
+
+
+        Formation formation2 = new Formation("AnotherFormation");
+        formationHashSet.clear();
+        formationHashSet.add(formation2);
+        promotion.setFormations(formationHashSet);
+
+        promotionDao.update(promotion);
+
+        promotion = promotionDao.read(promotionPk);
+        assertTrue(promotion.containsFormation(formation2));
+        assertTrue(promotion.getFormations().size() == 1);
     }
 }

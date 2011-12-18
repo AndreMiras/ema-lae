@@ -5,7 +5,10 @@
 
 package dao;
 
+import database.entity.CourseSession;
+import database.entity.CourseSession.SessionType;
 import database.entity.Formation;
+import database.entity.Promotion;
 import database.util.HibernateUtil;
 import database.util.InitDatabase;
 import java.util.HashSet;
@@ -241,6 +244,119 @@ public class FormationDaoTest {
         assertTrue(pf1.containsChild(cf1));
         assertFalse(pf1.containsChild(cf2));
         assertTrue(pf1.containsChild(cf3));
+    }
+
+    @Test
+    public void testSetPromotion()
+    {
+        System.out.println("set Promotion");
+        Formation formation = new Formation("formation4setPromotion");
+        FormationDao fInstance = new FormationDao();
+        Promotion promotion = new Promotion("promotion4setPromotion");
+
+        Integer formationID = fInstance.create(formation);
+        formation = fInstance.read(formationID);
+
+        formation.setPromotion(promotion);
+
+        fInstance.update(formation);
+        formation = fInstance.read(formationID);
+
+        assertTrue(formation.getPromotion().getName().equals(promotion.getName()));
+    }
+
+    @Test
+    public void testAddSession() {
+        System.out.println("add session");
+        FormationDao formationDao = new FormationDao();
+        // Instantiate the objects
+        Formation f1 = new Formation("parent formation");
+        CourseSession cs1 = new CourseSession(SessionType.Course);
+
+        // No parent and not children by default
+        assertTrue(f1.getSessions().isEmpty());
+        assertTrue(cs1.getFormation() == null);
+
+        // Creating parent/children relation
+        cs1.setFormation(f1);
+        assertTrue(f1.getSessions().size() == 1);
+        assertTrue(cs1.getFormation() == f1);
+
+        // Insertion of the parent formation into the database
+        Integer formationPk = formationDao.create(f1);
+
+        // Check that the child formation does appear in the parent's children
+        assertTrue(f1.containsSession(cs1));
+
+        // Check it's still true after a read from database
+        f1 = formationDao.read(formationPk);
+        assertTrue(f1.getSessions().size() == 1);
+        assertTrue(f1.containsSession(cs1));
+    }
+
+    @Test // TODO: finish this up
+    public void testSetSessions() {
+        System.out.println("create");
+        FormationDao formationDao = new FormationDao();
+        // Instantiate the objects
+        Formation f1 = new Formation("ParentFormation1");
+        CourseSession cs1 = new CourseSession(SessionType.Course);
+        CourseSession cs2 = new CourseSession(SessionType.Pratictal);
+        CourseSession cs3 = new CourseSession(SessionType.Test);
+
+        // Nothing should be set by default
+        assertTrue(f1.getSessions().isEmpty());
+        assertTrue(cs1.getFormation() == null);
+
+        // Creating relation
+        HashSet<CourseSession> sessionsSet = new HashSet<CourseSession>();
+        sessionsSet.add(cs1);
+        sessionsSet.add(cs2);
+        sessionsSet.add(cs3);
+        f1.setSessions(sessionsSet);
+        assertTrue(f1.getSessions().size() == 3);
+        assertTrue(cs1.getFormation() == f1);
+        assertTrue(cs2.getFormation() == f1);
+        assertTrue(cs3.getFormation() == f1);
+
+        // Check that the child formation does appear in the parent's children
+        assertTrue(f1.getSessions().contains(cs1));
+        assertTrue(f1.getSessions().contains(cs2));
+        assertTrue(f1.getSessions().contains(cs3));
+
+        // Insertion of the parent formation into the database
+        Integer formationPk = formationDao.create(f1);
+
+
+        // Check it's still true after a read from database
+        f1 = formationDao.read(formationPk);
+        assertTrue(f1.getSessions().size() == 3);
+        assertTrue(f1.containsSession(cs1));
+        assertTrue(f1.containsSession(cs2));
+        assertTrue(f1.containsSession(cs3));
+
+        /*
+         * Now lets try to set a formation HashSet a second time
+         * to see if the previous one gets overridden.
+         * So we set cf1 and cf3 but not cf2
+         */
+        sessionsSet.clear();
+        sessionsSet.add(cs1);
+        sessionsSet.add(cs3);
+
+        f1.setSessions(sessionsSet);
+        assertTrue(f1.getSessions().size() == 2);
+        assertTrue(cs1.getFormation() == f1);
+        // assertTrue(cf2.getParentFormation() == null);
+        assertTrue(cs3.getFormation() == f1);
+
+        formationDao.update(f1); // updating the database
+        // Check it's still true after a read from database
+        f1 = formationDao.read(formationPk);
+        assertTrue(f1.getSessions().size() == 2);
+        assertTrue(f1.containsSession(cs1));
+        assertFalse(f1.containsSession(cs2));
+        assertTrue(f1.containsSession(cs3));
     }
 
     /**

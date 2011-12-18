@@ -32,14 +32,18 @@ public class Formation implements Serializable, WithPrimaryKey {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentFormation")
     // @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Promotion promotion;
 
-    public Formation() {
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "formation")
+    private Set<CourseSession> sessions = new HashSet<CourseSession>();
 
+    public Formation() {
     }
 
     public Formation(String name) {
+        super();
         this.name = name;
     }
 
@@ -92,11 +96,18 @@ public class Formation implements Serializable, WithPrimaryKey {
     }
 
     public Promotion getPromotion() {
-        return promotion;
+        if (promotion == null)
+            return new Promotion();
+        else
+            return promotion;
     }
 
     public void setPromotion(Promotion promotion) {
         this.promotion = promotion;
+        if (promotion != null && !promotion.containsFormation(this))
+        {
+            promotion.addFormation(this);
+        }
     }
     
     public boolean addFormation(Formation child){
@@ -123,6 +134,23 @@ public class Formation implements Serializable, WithPrimaryKey {
         return foundFormation;
     }
 
+    public Set<CourseSession> getSessions()
+    {
+        if (sessions == null)
+            return null;
+        else
+            return sessions;
+    }
+
+    public void setSessions(Set<CourseSession> sessions)
+    {
+        this.sessions = sessions;
+        for (CourseSession session: sessions)
+        {
+            session.setFormation(this);
+        }
+    }
+
     @Override
     public String toString()
     {
@@ -139,5 +167,44 @@ public class Formation implements Serializable, WithPrimaryKey {
     public Serializable getPrimaryKey()
     {
         return formationId;
+    }
+
+    void removePromotion(Promotion promotion) {
+        if(this.promotion.getPromotionId() != null && promotion.getPromotionId() != null)
+        {
+            if(this.promotion.getPromotionId().equals(promotion.getPromotionId()))
+            {
+                this.promotion = null;
+            }
+        }
+        else if (this.promotion.getName().equals(promotion.getName()))
+            this.promotion = null;
+
+    }
+
+    public boolean containsSession(CourseSession session)
+    {
+        CourseSession tmpSession;
+        Iterator<CourseSession> it = this.getSessions().iterator();
+        boolean foundSession = false;
+        while(!foundSession && it.hasNext())
+        {
+            tmpSession = it.next();
+            if (session.getSessionId() != null)
+            {
+                foundSession = session.getSessionId().equals(
+                        tmpSession.getSessionId());
+            }
+        }
+        return foundSession;
+    }
+
+    public boolean addCourseSession(CourseSession session)
+    {
+        if (!session.getFormation().equals(this))
+        {
+            session.setFormation(this);
+        }
+        return this.sessions.add(session);
     }
 }
