@@ -296,6 +296,7 @@ public class InitDatabase {
         }
     }
 
+
     public void dropPromotions()
     {
         Promotion promo;
@@ -307,6 +308,50 @@ public class InitDatabase {
         {
             promo = promotions.get(i);
             promotionDao.delete(promo);
+        }
+    }
+
+
+    public void createFormation()
+    {
+        GenericDao<Formation> formationDao =
+                new GenericDao<Formation>(Formation.class);
+        GenericDao<Promotion> promotionDao =
+                new GenericDao<Promotion>(Promotion.class);
+
+        List<Promotion> promotions = promotionDao.all();
+        String formationName = "Formation";
+        Formation formation;
+
+        for (int i=0; i<promotions.size(); i++)
+        {
+            for (int j=0; j<3; j++)
+            {
+                formation = new Formation(formationName + (i + 1));
+                formation.setPromotion(promotions.get(i));
+                try
+                {
+                    formationDao.create(formation);
+                }
+                catch (DaoException ex)
+                {
+                    Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    public void dropFormation()
+    {
+        Formation formation;
+        GenericDao<Formation> formationDao =
+                new GenericDao<Formation>(Formation.class);
+        List<Formation> formations = formationDao.all();
+
+        for(int i=0; i<formations.size(); i++)
+        {
+            formation = formations.get(i);
+            formationDao.delete(formation);
         }
     }
 
