@@ -35,6 +35,7 @@ public class Promotion implements Serializable, WithPrimaryKey {
     public Promotion()
     {
         this.apprentices = new HashSet<UserProfile>();
+        this.formations = new HashSet<Formation>();
     }
 
     public Promotion(String name)
@@ -92,6 +93,12 @@ public class Promotion implements Serializable, WithPrimaryKey {
         this.formations = formations;
     }
 
+    public void addFormation(Formation formation){
+        this.formations.add(formation);
+        if(!formation.getPromotion().equals(this))
+            formation.setPromotion(this);
+    }
+
     @Override
     public String toString()
     {
@@ -101,5 +108,15 @@ public class Promotion implements Serializable, WithPrimaryKey {
     public Serializable getPrimaryKey()
     {
         return promotionId;
+    }
+
+    public boolean containsFormation(Formation formation) {
+        boolean foundFormation = false;
+        for (Formation currentformation : formations)
+        {
+            if(!foundFormation)
+                foundFormation = currentformation.equals(formation);
+        }
+        return foundFormation;
     }
 }
