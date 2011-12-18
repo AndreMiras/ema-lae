@@ -11,7 +11,11 @@ import database.entity.Formation;
 import database.entity.Promotion;
 import database.util.HibernateUtil;
 import database.util.InitDatabase;
+import exceptions.DaoException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -263,6 +267,28 @@ public class FormationDaoTest {
         formation = fInstance.read(formationID);
 
         assertTrue(formation.getPromotion().getName().equals(promotion.getName()));
+        /*
+         * now let's try to set a promotion again after it was already
+         * persisted in the database
+         */
+        promotion = null;
+        formation = new Formation("anotherFormation2");
+        PromotionDao promotionDao = new PromotionDao();
+        HashMap<String, String> querySet = new HashMap<String, String>();
+        querySet.put("name", "promotion4setPromotion");
+        try
+        {
+            promotion = promotionDao.get(querySet);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(FormationDaoTest.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        }
+        formation.setPromotion(promotion);
+        formationID = fInstance.create(formation);
+        formation = fInstance.read(formationID);
+        assertTrue(formation.getPromotion().getName().equals(
+                promotion.getName()));
     }
 
     @Test
