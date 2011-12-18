@@ -9,12 +9,9 @@ import database.entity.Promotion;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
 import emalaedesktopapplication.forms.NavigationPanel;
-import emalaedesktopapplication.forms.ViewPromotion;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,18 +73,15 @@ public class NavigationController
                      * I wish we could use proper generics with
                      * DefaultMutableTreeNode/DefaultTreeModel
                      */
-                    // else if (node.getUserObject() instanceof Promotion)
-                    else if (node.getParent().toString().toLowerCase().equals(
-                            "promotion"))
+                    else if (node.getUserObject() instanceof Promotion)
                     {
                         Promotion promotion = (Promotion)(node.getUserObject());
 
-                        ViewPromotion promotionPanel = new ViewPromotion();
                         PromotionController promotionController =
                                 new PromotionController(
                                     mainWindow, promotion);
-                        mainWindow.setMiddleContentPanel(promotionPanel);
-                        System.out.println("Displaying promotionPanel");
+                        mainWindow.setMiddleContentPanel(
+                                promotionController.getView());
                     }
                     else
                     {

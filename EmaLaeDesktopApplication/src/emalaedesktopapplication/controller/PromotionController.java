@@ -30,6 +30,7 @@ public class PromotionController {
     public PromotionController(EmaLaeDesktopView mainWindow, Promotion promotion) {
         this.mainWindow = mainWindow;
         this.viewPromotion = new ViewPromotion();
+        this.promotion = promotion;
         populateView();
     }
 
