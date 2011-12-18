@@ -9,6 +9,7 @@ import client.ControllerServiceClient;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.admin.AdminListChangePanel;
 import java.rmi.RemoteException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,20 +32,20 @@ public class AdminController<T> {
 
     public void adminListChange()
     {
-        T[] objs = null;
+        List<T> objs = null;
         AdminListChangePanel adminListChangePanel;
         AdminListChangeController adminListChangeController;
 
         try
         {
-            objs = (T[]) ControllerServiceClient.getController().getAllObjects(type);
+            objs = ControllerServiceClient.getController().getAllObjects(type);
         } catch (RemoteException ex)
         {
             Logger.getLogger(AdminController.class.getName()).log(
                     Level.SEVERE, null, ex);
         }
 
-        adminListChangePanel = new AdminListChangePanel(objs);
+        adminListChangePanel = new AdminListChangePanel(objs.toArray());
         adminListChangeController =
                 new AdminListChangeController(
                 mainWindow, adminListChangePanel, type);

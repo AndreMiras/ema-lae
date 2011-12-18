@@ -8,9 +8,6 @@ package server.core;
 import dao.GenericDao;
 import dao.UserDao;
 import dao.UserProfileDao;
-import dao.FormationDao;
-import database.entity.Permission;
-import database.entity.Formation;
 import database.entity.Users;
 import database.entity.UserProfile;
 import database.util.HibernateUtil;
@@ -151,13 +148,13 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
      * @return
      * @throws RemoteException
      */
-    public <T> T[] getAllObjects(Class<T> type) throws RemoteException
+    public <T> List<T> getAllObjects(Class<T> type) throws RemoteException
     {
         GenericDao<T> genericDao = new GenericDao<T>(type);
         List<T> objectList;
         objectList = genericDao.all();
 
-        return (T[]) objectList.toArray();
+        return objectList;
     }
 
     public <T> void delete(Class<T> type, T obj) throws RemoteException

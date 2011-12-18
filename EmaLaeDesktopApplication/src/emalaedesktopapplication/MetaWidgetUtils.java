@@ -8,6 +8,7 @@ import client.ControllerServiceClient;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -28,9 +29,10 @@ public class MetaWidgetUtils
         return metawidget;
     }
 
-    public static JList createObjectListWidget(Object[] objs)
+    public static <T> JList createObjectListWidget(
+            Class<T> type, List<T> objs)
     {
-        final JList objectList = new JList(objs);
+        final JList objectList = new JList(objs.toArray());
 
         /**
          * Listens to the double click event
@@ -94,7 +96,7 @@ public class MetaWidgetUtils
      */
     public static <T> void addObjectDialog(Class<T> type)
     {
-        T[] objs = null;
+        List<T> objs = null;
         try
         {
             // TODO[uglyness]: This should really be done in the controller
@@ -107,7 +109,7 @@ public class MetaWidgetUtils
 
         JDialog f = new JDialog();
         f.setModal(true);
-        f.getContentPane().add(createObjectListWidget(objs));
+        f.getContentPane().add(createObjectListWidget(type, objs));
         f.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         f.setSize(400, 250);
         f.setVisible(true);

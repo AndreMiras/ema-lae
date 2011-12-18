@@ -43,6 +43,7 @@ public class FormationController {
 
     private void populateView()
     {
+        /*
         Formation formation = new Formation();
         try
         {
@@ -55,5 +56,6 @@ public class FormationController {
         }
 
         viewFormation.setFormation(formation);
+         */
     }
 }

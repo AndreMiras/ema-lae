@@ -12,6 +12,7 @@ import emalaedesktopapplication.forms.admin.AdminListChangePanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,7 +61,7 @@ public class AdminListChangeController<T> {
             {
                 try
                 {
-                    AdminEditPanel<T> adminEditPanel = new AdminEditPanel<T>(type); // TODO: check this cast up
+                    AdminEditPanel<T> adminEditPanel = new AdminEditPanel<T>(type);
                     mainWindow.setMiddleContentPanel(adminEditPanel);
                     AdminEditController adminEditUserController = new AdminEditController(mainWindow, adminEditPanel, type);
                 } catch (InstantiationException ex)
@@ -73,7 +74,7 @@ public class AdminListChangeController<T> {
             }
             else if (actionCommand.equals("Delete"))
             {
-                T[] objs = null;
+                List<T> objs = null;
                 T obj = (T) view.getSelectedItem();
                 try
                 {
@@ -84,12 +85,12 @@ public class AdminListChangeController<T> {
                 }
                 try
                 {
-                    objs = (T[]) ControllerServiceClient.getController().getAllObjects(type);
+                    objs = ControllerServiceClient.getController().getAllObjects(type);
                 } catch (RemoteException ex)
                 {
                     Logger.getLogger(AdminListChangeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                view.updateObjectList(objs);
+                view.updateObjectList(objs.toArray());
             }
         }
     }

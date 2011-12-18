@@ -1,12 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * AdminListChangePanel.java
- *
- * Created on Nov 20, 2011, 10:42:26 PM
+ * TODO: this should probably use generics (rather than casting) for type safty
  */
 
 package emalaedesktopapplication.forms.admin;
@@ -15,10 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-/**
- *
- * @author andre
- */
+
 public class AdminListChangePanel extends javax.swing.JPanel {
 
     /** Creates new form AdminListChangePanel */

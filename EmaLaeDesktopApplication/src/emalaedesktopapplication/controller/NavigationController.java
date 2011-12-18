@@ -85,18 +85,18 @@ public class NavigationController
                      */
                     if (node.toString().toLowerCase().equals("promotion"))
                     {
-                        Promotion[] promotions = null;
+                        List<Promotion> promotions = null;
                         try
                         {
                             promotions = ControllerServiceClient.getController(
-                                    ).getAllObjects(Promotion.class);
+                                    ).<Promotion>getAllObjects(Promotion.class);
                         } catch (RemoteException ex)
                         {
                             Logger.getLogger(
                                     NavigationController.class.getName()).log(
                                     Level.SEVERE, null, ex);
                         }
-                        navigationPanel.setPromotions(Arrays.asList(promotions));
+                        navigationPanel.setPromotions(promotions);
                     }
                 }
             }

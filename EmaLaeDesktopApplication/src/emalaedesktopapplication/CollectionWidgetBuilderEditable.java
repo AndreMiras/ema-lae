@@ -133,7 +133,7 @@ public class CollectionWidgetBuilderEditable implements
         List<?> allObjects = new ArrayList();
         try
         {
-            allObjects = new ArrayList(Arrays.asList(ControllerServiceClient.getController().getAllObjects(elementType)));
+            allObjects = ControllerServiceClient.getController().getAllObjects(elementType);
         } catch (RemoteException ex)
         {
             Logger.getLogger(CollectionWidgetBuilderEditable.class.getName()).log(Level.SEVERE, null, ex);
