@@ -56,7 +56,10 @@ public class Formation implements Serializable, WithPrimaryKey {
 
     
     public String getName() {
-        return name;
+        if(name == null)
+            return null;
+        else
+            return name;
     }
 
     public void setName(String name) {
@@ -64,7 +67,10 @@ public class Formation implements Serializable, WithPrimaryKey {
     }
 
     public Integer getFormationId() {
-        return this.formationId;
+        if(formationId == null)
+            return null;
+        else
+            return this.formationId;
     }
 
     public void setFormationId(Integer ID) {
@@ -72,7 +78,10 @@ public class Formation implements Serializable, WithPrimaryKey {
     }
 
     public Set<Formation> getChildrenFormations() {
-        return childrenFormations;
+        if(childrenFormations == null)
+            return null;
+        else
+            return childrenFormations;
     }
 
     public void setChildrenFormations(Set<Formation> childrenFormations) {
@@ -84,7 +93,10 @@ public class Formation implements Serializable, WithPrimaryKey {
     }
 
     public Formation getParentFormation() {
-        return parentFormation;
+        if (parentFormation == null)
+            return null;
+        else
+            return parentFormation;
     }
 
     public void setParentFormation(Formation parentFormation) {
