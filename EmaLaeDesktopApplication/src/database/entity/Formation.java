@@ -56,10 +56,7 @@ public class Formation implements Serializable, WithPrimaryKey {
 
     
     public String getName() {
-        if(name == null)
-            return null;
-        else
-            return name;
+        return name;
     }
 
     public void setName(String name) {
@@ -67,10 +64,7 @@ public class Formation implements Serializable, WithPrimaryKey {
     }
 
     public Integer getFormationId() {
-        if(formationId == null)
-            return null;
-        else
-            return this.formationId;
+        return this.formationId;
     }
 
     public void setFormationId(Integer ID) {
