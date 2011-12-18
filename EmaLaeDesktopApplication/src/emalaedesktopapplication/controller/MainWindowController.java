@@ -29,95 +29,28 @@ public class MainWindowController
     private LoginScreenPanel loginScreenPanel;
     private LoginScreenController loginScreenController;
     private NavigationController navigationController;
-    private String[] entitiesAdmin;
+    private String[] entitiesAdmin = new String[]
+                        {
+                            Utils.getClassNameWithoutPackage(
+                            database.entity.Users.class),
+                            Utils.getClassNameWithoutPackage(
+                            database.entity.UserGroup.class),
+                            Utils.getClassNameWithoutPackage(
+                            database.entity.Permission.class),
+                            Utils.getClassNameWithoutPackage(
+                            database.entity.UserProfile.class),
+                            Utils.getClassNameWithoutPackage(
+                            database.entity.Formation.class),
+                            Utils.getClassNameWithoutPackage(
+                            database.entity.Contract.class),
+                            Utils.getClassNameWithoutPackage(
+                            database.entity.Promotion.class)
+                        };
 
 
     public MainWindowController(EmaLaeDesktopView view,
             NavigationPanel navigationPanel)
     {
-        try
-        {
-            Users user = ControllerServiceClient.getController().getUser();
-            boolean users = false;
-            boolean userGroups = false;
-            boolean formations = false;
-            boolean permissions = false;
-            boolean userProfiles = false;
-            boolean contracts = false;
-            if(user!=null)
-            {
-                int totalPermissionsSize = user.getTotalNumberOfPermissions();
-                for(int i=0;i<totalPermissionsSize;i++)
-                {
-                    if(user.checkPermission("Users_read") && !users)
-                    {
-                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                database.entity.Users.class);
-                        users = true;
-                        break;
-                    }
-                    if(user.checkPermission("UserGroup_read") && !userGroups)
-                    {
-                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                database.entity.UserGroup.class);
-                        userGroups = true;
-                        break;
-                    }
-                    if(user.checkPermission("Permission_read") && !userGroups)
-                    {
-                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                database.entity.Permission.class);
-                        permissions = true;
-                        break;
-                    }
-                    if(user.checkPermission("UserProfile_read") && !userGroups)
-                    {
-                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                database.entity.UserProfile.class);
-                        userProfiles = true;
-                        break;
-                    }
-                    if(user.checkPermission("Formation_read") && !userGroups)
-                    {
-                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                database.entity.Formation.class);
-                        formations = true;
-                        break;
-                    }
-                    if(user.checkPermission("Contract_read") && !userGroups)
-                    {
-                        entitiesAdmin[i] = Utils.getClassNameWithoutPackage(
-                                database.entity.Contract.class);
-                        contracts = true;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                entitiesAdmin = new String[]
-                {
-                    Utils.getClassNameWithoutPackage(
-                            database.entity.Users.class),
-                    Utils.getClassNameWithoutPackage(
-                            database.entity.UserGroup.class),
-                    Utils.getClassNameWithoutPackage(
-                            database.entity.Permission.class),
-                    Utils.getClassNameWithoutPackage(
-                            database.entity.UserProfile.class),
-                    Utils.getClassNameWithoutPackage(
-                            database.entity.Formation.class),
-                    Utils.getClassNameWithoutPackage(
-                            database.entity.Contract.class),
-                    Utils.getClassNameWithoutPackage(
-                            database.entity.Promotion.class),
-                };
-            }
-        }
-        catch (RemoteException ex)
-        {
-            Logger.getLogger(LoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
-        }
         this.view = view;
         loginScreenPanel = new LoginScreenPanel();
         loginScreenController = new LoginScreenController(view, loginScreenPanel);
@@ -137,6 +70,11 @@ public class MainWindowController
     private void initAdminMenu()
     {
         view.populateAdminMenu(entitiesAdmin);
+    }
+
+    public String[] getAvailableAdminEntities()
+    {
+        return entitiesAdmin;
     }
 
     /**

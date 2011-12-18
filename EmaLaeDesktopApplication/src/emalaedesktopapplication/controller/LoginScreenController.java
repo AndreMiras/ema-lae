@@ -8,13 +8,9 @@ import client.ControllerServiceClient;
 import database.entity.Users;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.LoginScreenPanel;
-import emalaedesktopapplication.utils.Utils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,81 +62,12 @@ public class LoginScreenController
                 try
                 {
                     user = ControllerServiceClient.getController().getUser();
-
-                    // refresh admin menu
-                    List<String> entitiesAdmin = new ArrayList<String>();
-                    if(user!=null)
-                    {
-                        if(user.isSuperUser())
-                        {
-                            entitiesAdmin = Arrays.asList(new String[]{
-                                Utils.getClassNameWithoutPackage(
-                                    database.entity.Users.class),
-                                Utils.getClassNameWithoutPackage(
-                                    database.entity.UserGroup.class),
-                                Utils.getClassNameWithoutPackage(
-                                    database.entity.Permission.class),
-                                Utils.getClassNameWithoutPackage(
-                                    database.entity.UserProfile.class),
-                                Utils.getClassNameWithoutPackage(
-                                    database.entity.Formation.class),
-                                Utils.getClassNameWithoutPackage(
-                                    database.entity.Contract.class),
-                                Utils.getClassNameWithoutPackage(
-                                    database.entity.Promotion.class)
-                            });
-                        }
-                        else
-                        {
-                            // FIXME: DRY
-                                if(user.checkPermission("Users_read"))
-                                {
-                                    entitiesAdmin.add(Utils.getClassNameWithoutPackage(
-                                            database.entity.Users.class));
-                                }
-                                if(user.checkPermission("UserGroup_read"))
-                                {
-                                    entitiesAdmin.add(Utils.getClassNameWithoutPackage(
-                                            database.entity.UserGroup.class));
-                                }
-                                if(user.checkPermission("Permission_read"))
-                                {
-                                    entitiesAdmin.add(Utils.getClassNameWithoutPackage(
-                                            database.entity.Permission.class));
-                                }
-                                if(user.checkPermission("UserProfile_read"))
-                                {
-                                    entitiesAdmin.add(Utils.getClassNameWithoutPackage(
-                                            database.entity.UserProfile.class));
-                                }
-                                if(user.checkPermission("Formation_read"))
-                                {
-                                    entitiesAdmin.add(Utils.getClassNameWithoutPackage(
-                                            database.entity.Formation.class));
-                                }
-                                if(user.checkPermission("Contract_read"))
-                                {
-                                    entitiesAdmin.add(Utils.getClassNameWithoutPackage(
-                                            database.entity.Contract.class));
-                                }
-                                if(user.checkPermission("Promotion_read"))
-                                {
-                                    entitiesAdmin.add(Utils.getClassNameWithoutPackage(
-                                            database.entity.Promotion.class));
-                                }
-                        }
-                    }
-                    mainWindow.refreshAdminMenu(
-                            entitiesAdmin.toArray(new String[0]));
-                    mainWindow.setAdminVisible(user.isStaff()||user.isSuperUser());
+                    mainWindow.visibleAdminMenues(user);
                 }
                 catch (RemoteException ex)
                 {
                     Logger.getLogger(LoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-                
-
                 UserProfileController userProfileController =
                         new UserProfileController(mainWindow);
                 mainWindow.setMiddleContentPanel(
