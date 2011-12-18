@@ -36,20 +36,18 @@
                           <Component id="yearLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="yearTextField" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="nameTextField" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="responsibleTextField" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="yearValue" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="responsibleNameValue" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="promotionNameValue" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="1"/>
-                          <Component id="apprenticesLabel" alignment="0" max="32767" attributes="1"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="apprenticesLabel" min="-2" max="-2" attributes="1"/>
+                          <Component id="jScrollPane1" min="-2" pref="71" max="-2" attributes="1"/>
                       </Group>
-                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane2" min="-2" pref="86" max="-2" attributes="0"/>
                           <Component id="formationsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -65,17 +63,17 @@
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="promotionNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="promotionNameValue" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="responsibleNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="responsibleTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="responsibleNameValue" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="yearLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="yearTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="yearValue" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -84,10 +82,10 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace pref="43" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -143,24 +141,6 @@
         <Property name="name" type="java.lang.String" value="apprenticesLabel" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="nameTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="nameTextField.text"/>
-        <Property name="name" type="java.lang.String" value="nameTextField" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="responsibleTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="responsibleTextField.text"/>
-        <Property name="name" type="java.lang.String" value="responsibleTextField" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="yearTextField">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="yearTextField.text"/>
-        <Property name="name" type="java.lang.String" value="yearTextField" noResource="true"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="formationsLabel">
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="formationsLabel.text"/>
@@ -193,5 +173,23 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="promotionNameValue">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="promotionNameValue.text"/>
+        <Property name="name" type="java.lang.String" value="promotionNameValue" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="responsibleNameValue">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="responsibleNameValue.text"/>
+        <Property name="name" type="java.lang.String" value="responsibleNameValue" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="yearValue">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="yearValue.text"/>
+        <Property name="name" type="java.lang.String" value="yearValue" noResource="true"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

@@ -34,26 +34,29 @@ public class ViewPromotion extends javax.swing.JPanel {
         String promoName = promotion.getName();
         UserProfile responsible = promotion.getResponsible();
         Integer promoYear = promotion.getPromotionYear();
-        nameTextField.setText(promoName);
+        promotionNameValue.setText(promoName);
         if (responsible != null)
         {
-            responsibleTextField.setText(responsible.getFullName());
+            responsibleNameValue.setText(responsible.getFullName());
         }
         if (promoYear != null)
         {
-            yearTextField.setText(promoYear.toString());
+            yearValue.setText(promoYear.toString());
         }
 
-        /*
-         * FIXME : one to many between formations and promotions needs to be implemented
         selectedFormationListModel = new DefaultListModel();
-        for (Formation formation : promotion.getFormation())
+        for (Formation formation : promotion.getFormations())
         {
         selectedFormationListModel.addElement(formation.getName());
         }
         formationList.setModel(selectedFormationListModel);
-         *
-         */
+
+        selectedFormationListModel = new DefaultListModel();
+        for (UserProfile user : promotion.getApprentices())
+        {
+        selectedFormationListModel.addElement(user.getFullName());
+        }
+        apprenticesList.setModel(selectedFormationListModel);
     }
 
 
@@ -72,12 +75,12 @@ public class ViewPromotion extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         apprenticesList = new javax.swing.JList();
         apprenticesLabel = new javax.swing.JLabel();
-        nameTextField = new javax.swing.JTextField();
-        responsibleTextField = new javax.swing.JTextField();
-        yearTextField = new javax.swing.JTextField();
         formationsLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         formationList = new javax.swing.JList();
+        promotionNameValue = new javax.swing.JLabel();
+        responsibleNameValue = new javax.swing.JLabel();
+        yearValue = new javax.swing.JLabel();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(ViewPromotion.class);
         setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Form.border.title"))); // NOI18N
@@ -105,15 +108,6 @@ public class ViewPromotion extends javax.swing.JPanel {
         apprenticesLabel.setText(resourceMap.getString("apprenticesLabel.text")); // NOI18N
         apprenticesLabel.setName("apprenticesLabel"); // NOI18N
 
-        nameTextField.setText(resourceMap.getString("nameTextField.text")); // NOI18N
-        nameTextField.setName("nameTextField"); // NOI18N
-
-        responsibleTextField.setText(resourceMap.getString("responsibleTextField.text")); // NOI18N
-        responsibleTextField.setName("responsibleTextField"); // NOI18N
-
-        yearTextField.setText(resourceMap.getString("yearTextField.text")); // NOI18N
-        yearTextField.setName("yearTextField"); // NOI18N
-
         formationsLabel.setText(resourceMap.getString("formationsLabel.text")); // NOI18N
         formationsLabel.setName("formationsLabel"); // NOI18N
 
@@ -127,6 +121,15 @@ public class ViewPromotion extends javax.swing.JPanel {
         formationList.setName("formationList"); // NOI18N
         jScrollPane2.setViewportView(formationList);
 
+        promotionNameValue.setText(resourceMap.getString("promotionNameValue.text")); // NOI18N
+        promotionNameValue.setName("promotionNameValue"); // NOI18N
+
+        responsibleNameValue.setText(resourceMap.getString("responsibleNameValue.text")); // NOI18N
+        responsibleNameValue.setName("responsibleNameValue"); // NOI18N
+
+        yearValue.setText(resourceMap.getString("yearValue.text")); // NOI18N
+        yearValue.setName("yearValue"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,20 +142,16 @@ public class ViewPromotion extends javax.swing.JPanel {
                             .addComponent(promotionNameLabel)
                             .addComponent(responsibleNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(yearLabel))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(yearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(responsibleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(yearValue)
+                            .addComponent(responsibleNameValue)
+                            .addComponent(promotionNameValue)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(apprenticesLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(112, 112, 112)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(apprenticesLabel)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(102, 102, 102)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(formationsLabel))))
@@ -163,24 +162,24 @@ public class ViewPromotion extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(promotionNameLabel)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(promotionNameValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(responsibleNameLabel)
-                    .addComponent(responsibleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(responsibleNameValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yearLabel)
-                    .addComponent(yearTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(yearValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(apprenticesLabel)
                     .addComponent(formationsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -190,12 +189,12 @@ public class ViewPromotion extends javax.swing.JPanel {
     private javax.swing.JLabel formationsLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel promotionNameLabel;
+    private javax.swing.JLabel promotionNameValue;
     private javax.swing.JLabel responsibleNameLabel;
-    private javax.swing.JTextField responsibleTextField;
+    private javax.swing.JLabel responsibleNameValue;
     private javax.swing.JLabel yearLabel;
-    private javax.swing.JTextField yearTextField;
+    private javax.swing.JLabel yearValue;
     // End of variables declaration//GEN-END:variables
 
 }
