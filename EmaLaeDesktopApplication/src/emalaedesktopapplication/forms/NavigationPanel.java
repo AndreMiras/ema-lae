@@ -29,13 +29,13 @@ public class NavigationPanel extends javax.swing.JPanel {
     /** Creates new form NavigationPanel */
     public NavigationPanel() {
         initComponents();
-        init();
+        customInitComponents();
     }
 
     /**
      * Removes the nodes background color
      */
-    private void init()
+    private void customInitComponents()
     {
         DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
         renderer.setBackgroundNonSelectionColor(null);
@@ -76,10 +76,11 @@ public class NavigationPanel extends javax.swing.JPanel {
         DefaultMutableTreeNode promoRootNode = searchNode("Promotion");
 
         DefaultMutableTreeNode promotionNode;
-
+        promoRootNode.removeAllChildren();
         for (Promotion promotion: promotions)
         {
-            promotionNode = new DefaultMutableTreeNode(promotion);
+            promotionNode = new DefaultMutableTreeNode((Promotion) promotion);
+            promotionNode.setUserObject((Promotion) promotion);
             promoRootNode.add(promotionNode);
         }
 
