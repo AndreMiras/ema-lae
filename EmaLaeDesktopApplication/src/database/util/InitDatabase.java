@@ -327,7 +327,7 @@ public class InitDatabase {
         {
             for (int j=0; j<3; j++)
             {
-                formation = new Formation(formationName + (i + 1));
+                formation = new Formation(formationName + (j + 1));
                 formation.setPromotion(promotions.get(i));
                 try
                 {
