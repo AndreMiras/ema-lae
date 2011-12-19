@@ -5,6 +5,7 @@
 package emalaedesktopapplication.controller;
 
 import client.ControllerServiceClient;
+import emalaedesktopapplication.Dialogs;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.admin.AdminEditPanel;
 import exceptions.PermissionException;
@@ -63,14 +64,10 @@ public class AdminEditController<T>
                         JOptionPane.YES_NO_OPTION);
                     if (n == JOptionPane.YES_OPTION)
                     {
-                        String strackTrace = "TODO";// ex.getStackTrace();
-                        JOptionPane.showMessageDialog(view,
-                                new javax.swing.JScrollPane(
-                                new javax.swing.JLabel(strackTrace)));
+                        Dialogs.stackTraceDialog(view, ex);
                     }
                 } catch (RemoteException ex)
                 {
-                   JOptionPane.showMessageDialog(view, ex);
                     Logger.getLogger(AdminEditController.class.getName()).log(
                             Level.SEVERE, null, ex);
                 }
