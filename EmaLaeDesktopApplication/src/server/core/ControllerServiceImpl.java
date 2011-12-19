@@ -96,7 +96,8 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
                 userProfile = (UserProfile) userProfileDao.get(loggedUser);
             } catch (DaoException ex)
             {
-                Logger.getLogger(ControllerServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerServiceImpl.class.getName()).log(
+                        Level.SEVERE, null, ex);
             }
         }
 
@@ -106,7 +107,8 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
     public Serializable getEntityId(Object entity) throws RemoteException
     {
         Serializable id =
-                HibernateUtil.getSessionFactory().openSession().getIdentifier(entity);
+                HibernateUtil.getSessionFactory().openSession().getIdentifier(
+                entity);
         return id;
     }
 
@@ -139,12 +141,13 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
                         Level.SEVERE, null, ex);
             }
         }
-
-        else //FIXME : Debug and test purpose only : needs to be removed in production
+        //FIXME : Debug and test purpose only : needs to be removed in production
+        else
         {
             GenericDao<T> genericDao = new GenericDao<T>(type);
             genericDao.createOrUpdate(obj);
-            // throw new PermissionException("Permission denied"); // TODO: for production
+            // throw new PermissionException("Permission denied");
+            // TODO: for production
         }
     }
 
