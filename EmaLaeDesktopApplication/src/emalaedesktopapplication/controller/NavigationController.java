@@ -16,7 +16,12 @@ import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTree;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeWillExpandListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.ExpandVetoException;
+import javax.swing.tree.TreePath;
 
 /**
  *
@@ -36,6 +41,7 @@ public class NavigationController
 
         // Add listeners to the view.
         navigationPanel.addTreeMouseListener(new TreeMouseListener());
+        navigationPanel.addTreeWillExpandListener(new NavigationTreeWillExpandListener());
     }
 
     /**
@@ -100,29 +106,6 @@ public class NavigationController
                         System.out.println("Unknown navigation item.");
                     }
                 }
-                else
-                {
-                    /*
-                     * refresh the promotion tree
-                     * TODO[perfs]: this shouldn't be done everytime we click on it
-                     * but only when required
-                     */
-                    if (node.toString().toLowerCase().equals("promotion"))
-                    {
-                        List<Promotion> promotions = null;
-                        try
-                        {
-                            promotions = ControllerServiceClient.getController(
-                                    ).<Promotion>getAllObjects(Promotion.class);
-                        } catch (RemoteException ex)
-                        {
-                            Logger.getLogger(
-                                    NavigationController.class.getName()).log(
-                                    Level.SEVERE, null, ex);
-                        }
-                        navigationPanel.setPromotions(promotions);
-                    }
-                }
             }
         }
 
@@ -143,6 +126,46 @@ public class NavigationController
 
         public void mouseExited(MouseEvent me)
         {
+            // throw new UnsupportedOperationException("Not supported yet.");
+        }
+    }
+
+    /**
+     * Refreshes the Promotion (and children) object just before expanding
+     * the tree
+     */
+    class NavigationTreeWillExpandListener implements TreeWillExpandListener {
+
+        public void treeWillExpand(TreeExpansionEvent evt) throws ExpandVetoException {
+            /*
+            JTree tree = (JTree) evt.getSource();
+            TreePath path = evt.getPath();
+             */
+            DefaultMutableTreeNode node = navigationPanel.getCurrentPath();
+
+            /*
+             * refresh the promotion tree
+             * TODO[perfs]: this shouldn't be done everytime we click on it
+             * but only when required
+             */
+            if (node.toString().toLowerCase().equals("promotion"))
+            {
+                List<Promotion> promotions = null;
+                try
+                {
+                    promotions = ControllerServiceClient.getController(
+                            ).<Promotion>getAllObjects(Promotion.class);
+                } catch (RemoteException ex)
+                {
+                    Logger.getLogger(
+                            NavigationController.class.getName()).log(
+                            Level.SEVERE, null, ex);
+                }
+                navigationPanel.setPromotions(promotions);
+            }
+        }
+
+        public void treeWillCollapse(TreeExpansionEvent event) throws ExpandVetoException {
             // throw new UnsupportedOperationException("Not supported yet.");
         }
     }

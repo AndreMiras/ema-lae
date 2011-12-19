@@ -16,6 +16,7 @@ import database.entity.Promotion;
 import java.awt.event.MouseListener;
 import java.util.Enumeration;
 import java.util.List;
+import javax.swing.event.TreeWillExpandListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
@@ -47,6 +48,11 @@ public class NavigationPanel extends javax.swing.JPanel {
     public void addTreeMouseListener(MouseListener l)
     {
         jTree1.addMouseListener(l);
+    }
+
+    public void addTreeWillExpandListener(TreeWillExpandListener tel)
+    {
+        jTree1.addTreeWillExpandListener(tel);
     }
 
     /**
@@ -189,10 +195,6 @@ public class NavigationPanel extends javax.swing.JPanel {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Promotion");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Infres1");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Infres2");
-        treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TODO");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
