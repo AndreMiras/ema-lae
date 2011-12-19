@@ -31,12 +31,12 @@ public class ViewFormation extends javax.swing.JPanel {
 
     public void setFormation(Formation formation)
     {
-        if(formation.getName() != null)
-            formationNameValue.setText(formation.getName());
-        if (formation.getParentFormation() != null && formation.getParentFormation().getName() != null)
+        formationNameValue.setText(formation.getName());
+        if (formation.getParentFormation() != null)
         {
             parentFormationNameValue.setText(formation.getParentFormation().getName());
-            parentFormationParentValue.setText(formation.getParentFormation().getParentFormation().getName());
+            // TODO: what is this (below) for Simon?
+            // parentFormationParentValue.setText(formation.getParentFormation().getParentFormation().getName());
         }
         selectedFormationListModel = new DefaultListModel();
         for (Formation childFormation : formation.getChildrenFormations())
