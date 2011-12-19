@@ -129,15 +129,24 @@ public class InitDatabase {
 
     public void createPermissions()
     {
-        Users user = new Users("admin", "pwd");
+        Users user = new Users("admin", "admin");
+        UserProfile profile = new UserProfile(user, UserProfile.Type.Other);
         user.setSuperUser(true);
         UserDao userDao = new UserDao();
+        UserProfileDao userProfileDao = new UserProfileDao();
         String groupName = "bGroup";
         UserGroup group = new UserGroup(groupName);
         group.addUser(user);
         GroupDao groupDao = new GroupDao();
         
         userDao.create(user);
+        try
+        {
+            userProfileDao.create(profile);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
         groupDao.create(group);
         Permission permission = new Permission();
         PermissionsDao permissionsDao = new PermissionsDao();
@@ -245,7 +254,7 @@ public class InitDatabase {
 
         Promotion promotion;
         List<Promotion> promotions = promotionDao.all();
-        if (promotions.size() == 0)
+        if (promotions.isEmpty())
         {
             createPromotions();
             promotions = promotionDao.all();
@@ -304,9 +313,10 @@ public class InitDatabase {
         Promotion promotion;
         List<Promotion> promotions = promotionDao.all();
         // creates few promotions if none exist
-        if (promotions.size() == 0)
+        if (promotions.isEmpty())
         {
             createPromotions();
+            promotions = promotionDao.all();
         }
         promotion = promotions.get(0);
 

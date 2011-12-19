@@ -64,7 +64,8 @@ public class UserProfile implements Serializable, WithPrimaryKey {
     public enum Gender { Male, Female }
     @Column
     private Gender gender;
-    public enum Type { Apprentice, InternshipSupervisor, SupervisingTeacher }
+    public enum Type
+        { Apprentice, InternshipSupervisor, SupervisingTeacher, Other }
     @Column
     private Type userProfileType;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
