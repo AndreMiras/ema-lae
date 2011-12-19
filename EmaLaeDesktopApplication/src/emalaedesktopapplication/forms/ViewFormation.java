@@ -14,7 +14,6 @@ package emalaedesktopapplication.forms;
 import database.entity.Formation;
 //import database.entity.Session;
 import javax.swing.DefaultListModel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -24,9 +23,40 @@ public class ViewFormation extends javax.swing.JPanel {
 
     private DefaultListModel selectedFormationListModel;
     /** Creates new form ViewFormation */
-    public ViewFormation() {
+    public ViewFormation()
+    {
         initComponents();
     }
+
+
+    public void setFormation(Formation formation)
+    {
+        if(formation.getName() != null)
+            formationNameValue.setText(formation.getName());
+        if (formation.getParentFormation() != null && formation.getParentFormation().getName() != null)
+        {
+            parentFormationNameValue.setText(formation.getParentFormation().getName());
+            parentFormationParentValue.setText(formation.getParentFormation().getParentFormation().getName());
+        }
+        selectedFormationListModel = new DefaultListModel();
+        for (Formation childFormation : formation.getChildrenFormations())
+        {
+            selectedFormationListModel.addElement(childFormation.getName());
+        }
+        childrenFormationsList.setModel(selectedFormationListModel);
+
+        /*
+         * FIXME : Sessions need to be implemented in business class
+        selectedFormationListModel = new DefaultListModel();
+        for (Session session : formation.getSessions())
+        {
+            selectedFormationListModel.addElement(session.getName());
+        }
+        sessionsList.setModel(selectedFormationListModel);
+         *
+         */
+    }
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -216,32 +246,4 @@ public class ViewFormation extends javax.swing.JPanel {
     private javax.swing.JList sessionsList;
     private javax.swing.JPanel sessionsPanel;
     // End of variables declaration//GEN-END:variables
-
-    public void setFormation(Formation formation) {
-        if(formation.getName() != null)
-            formationNameValue.setText(formation.getName());
-        if (formation.getParentFormation() != null && formation.getParentFormation().getName() != null)
-        {
-            parentFormationNameValue.setText(formation.getParentFormation().getName());
-            parentFormationParentValue.setText(formation.getParentFormation().getParentFormation().getName());
-        }
-        selectedFormationListModel = new DefaultListModel();
-        for (Formation childFormation : formation.getChildrenFormations())
-        {
-            selectedFormationListModel.addElement(childFormation.getName());
-        }
-        childrenFormationsList.setModel(selectedFormationListModel);
-
-        /*
-         * FIXME : Sessions need to be implemented in business class
-        selectedFormationListModel = new DefaultListModel();
-        for (Session session : formation.getSessions())
-        {
-            selectedFormationListModel.addElement(session.getName());
-        }
-        sessionsList.setModel(selectedFormationListModel);
-         * 
-         */
-    }
-
 }

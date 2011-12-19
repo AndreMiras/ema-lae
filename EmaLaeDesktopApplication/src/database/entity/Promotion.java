@@ -100,7 +100,8 @@ public class Promotion implements Serializable, WithPrimaryKey {
         }
     }
 
-    public boolean addFormation(Formation formation){
+    public boolean addFormation(Formation formation)
+    {
         if (!formation.getPromotion().equals(this))
         {
             formation.setPromotion(this);
