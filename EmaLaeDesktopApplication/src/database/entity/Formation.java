@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -24,7 +25,10 @@ public class Formation implements Serializable, WithPrimaryKey {
     @Column
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {
+        CascadeType.MERGE,
+        CascadeType.PERSIST,
+        CascadeType.REFRESH }, fetch = FetchType.EAGER)
     @JoinColumn
     private Formation parentFormation;
 
@@ -32,7 +36,12 @@ public class Formation implements Serializable, WithPrimaryKey {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentFormation")
     // @JoinColumn
     private Set<Formation> childrenFormations = new HashSet<Formation>();
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    // it should be possible to do them all, except CascadeType.DELETE
+    @ManyToOne(cascade = {
+        CascadeType.MERGE,
+        CascadeType.PERSIST }, fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Promotion promotion;
 
     @LazyCollection(LazyCollectionOption.FALSE)
