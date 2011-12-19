@@ -4,7 +4,10 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <property name="hibernate.connection.url">jdbc:hsqldb:file:database.db;shutdown=true</property>
-      &cfg;
+        <property name="hibernate.connection.url">
+            jdbc:hsqldb:file:database.db;shutdown=true
+        </property>
+        <property name="hibernate.show_sql">false</property>
+        &cfg;
     </session-factory>
 </hibernate-configuration>
