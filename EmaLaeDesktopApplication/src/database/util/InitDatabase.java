@@ -241,7 +241,14 @@ public class InitDatabase {
         FormationDao formationDao = new FormationDao();
         PromotionDao promotionDao = new PromotionDao();
 
-        Promotion promotion = promotionDao.all().get(0);
+        Promotion promotion;
+        List<Promotion> promotions = promotionDao.all();
+        if (promotions.size() == 0)
+        {
+            createPromotions();
+            promotions = promotionDao.all();
+        }
+        promotion = promotions.get(0);
         Formation semester1Formation = new Formation("Semester1");
         Formation semester2Formation = new Formation("Semester2");
         semester1Formation.setPromotion(promotion);
