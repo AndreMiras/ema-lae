@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.File;
 import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -290,6 +291,28 @@ public class InitDatabase {
         }
     }
 
+    /**
+     * This method adds few apprentices to the first promotion found
+     * createPromotions should be called priot to call this method
+     */
+    public void addApprenticesToPromotions()
+    {
+        List<UserProfile> userProfiles;
+        Set<UserProfile> userProfilesSet;
+        UserProfileDao userProfileDao = new UserProfileDao();
+        PromotionDao promotionDao = new PromotionDao();
+        Promotion promotion;
+        List<Promotion> promotions = promotionDao.all();
+        promotion = promotions.get(0);
+
+        // TODO: filter to take apprentices only rather than all profiles types
+        userProfiles = userProfileDao.all();
+        userProfilesSet = new HashSet(userProfiles);
+        promotion.setApprentices(userProfilesSet);
+        promotionDao.update(promotion);
+        System.out.println("promotion:" + promotion);
+    }
+
     public void createPromotions()
     {
         GenericDao<Promotion> promotionDao =
@@ -310,6 +333,7 @@ public class InitDatabase {
                 Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        addApprenticesToPromotions(); // adds few apprentices to a promotion
     }
 
 
