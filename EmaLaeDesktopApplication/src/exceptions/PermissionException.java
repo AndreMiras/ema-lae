@@ -17,9 +17,7 @@ along with Jpcsp.  If not, see <http://www.gnu.org/licenses/>.
 
 package exceptions;
 
-import java.rmi.RemoteException;
-
-public class PermissionException extends RemoteException{
+public class PermissionException extends Exception {
 
     public PermissionException(String msg)
     {

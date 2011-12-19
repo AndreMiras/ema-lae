@@ -110,7 +110,8 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
         return id;
     }
 
-    public <T> void createOrUpdate(Class<T> type, T obj) throws RemoteException
+    public <T> void createOrUpdate(Class<T> type, T obj)
+            throws RemoteException, PermissionException
     {
         // UserDao userDao = new UserDao();
         // userDao.createOrUpdate(user);
@@ -123,15 +124,19 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
                 user = getUser();
                 GenericDao<T> genericDao = new GenericDao<T>(type);
                 String className = Utils.getClassNameWithoutPackage(type);
-                if(user.checkPermission(className+"_create")&&user.checkPermission(className+"_update"))
+                if(user.checkPermission(className + "_create")
+                        && user.checkPermission(className + "_update"))
                 {
                     genericDao.createOrUpdate(obj);
                 }
-                else throw new PermissionException("Permission denied");
+                else throw new PermissionException(
+                        "You're not allowed to create or update "
+                        + className + " objects.");
             }
             catch (RemoteException ex)
             {
-                Logger.getLogger(ControllerServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerServiceImpl.class.getName()).log(
+                        Level.SEVERE, null, ex);
             }
         }
 
@@ -139,6 +144,7 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
         {
             GenericDao<T> genericDao = new GenericDao<T>(type);
             genericDao.createOrUpdate(obj);
+            // throw new PermissionException("Permission denied"); // TODO: for production
         }
     }
 

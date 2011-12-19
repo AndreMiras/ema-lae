@@ -7,11 +7,13 @@ package emalaedesktopapplication.controller;
 import client.ControllerServiceClient;
 import emalaedesktopapplication.EmaLaeDesktopView;
 import emalaedesktopapplication.forms.admin.AdminEditPanel;
+import exceptions.PermissionException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,9 +51,28 @@ public class AdminEditController<T>
                     // hit the database back with the edited user
                     ControllerServiceClient.getController().createOrUpdate(
                             type, editedObj);
+                } catch (PermissionException ex)
+                {
+                    Logger.getLogger(AdminEditController.class.getName()).log(
+                            Level.SEVERE, null, ex);
+                    int n = JOptionPane.showConfirmDialog(
+                        view,
+                        "You're not allowed to modify this.\n" +
+                        "Do you want more details?",
+                        "Permission Error",
+                        JOptionPane.YES_NO_OPTION);
+                    if (n == JOptionPane.YES_OPTION)
+                    {
+                        String strackTrace = "TODO";// ex.getStackTrace();
+                        JOptionPane.showMessageDialog(view,
+                                new javax.swing.JScrollPane(
+                                new javax.swing.JLabel(strackTrace)));
+                    }
                 } catch (RemoteException ex)
                 {
-                    Logger.getLogger(AdminEditController.class.getName()).log(Level.SEVERE, null, ex);
+                   JOptionPane.showMessageDialog(view, ex);
+                    Logger.getLogger(AdminEditController.class.getName()).log(
+                            Level.SEVERE, null, ex);
                 }
             } else if (actionCommand.equals("Delete"))
             {

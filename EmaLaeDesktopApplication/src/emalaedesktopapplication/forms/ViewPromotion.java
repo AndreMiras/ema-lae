@@ -47,14 +47,14 @@ public class ViewPromotion extends javax.swing.JPanel {
         selectedFormationListModel = new DefaultListModel();
         for (Formation formation : promotion.getFormations())
         {
-        selectedFormationListModel.addElement(formation.getName());
+            selectedFormationListModel.addElement(formation.getName());
         }
         formationList.setModel(selectedFormationListModel);
 
         selectedFormationListModel = new DefaultListModel();
         for (UserProfile user : promotion.getApprentices())
         {
-        selectedFormationListModel.addElement(user.getFullName());
+            selectedFormationListModel.addElement(user.getFullName());
         }
         apprenticesList.setModel(selectedFormationListModel);
     }

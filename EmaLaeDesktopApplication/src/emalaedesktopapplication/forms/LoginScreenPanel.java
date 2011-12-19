@@ -72,7 +72,7 @@ public class LoginScreenPanel extends javax.swing.JPanel {
 
     public void loginErrorMesage()
     {
-        JOptionPane.showMessageDialog(this, "Not Logged in");
+        JOptionPane.showMessageDialog(this, "Wrong credentials.");
     }
 
     public void addConnectionButtonListener(ActionListener al) {

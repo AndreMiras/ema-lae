@@ -69,6 +69,7 @@ public class InitDatabase {
                 Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        addApprenticesToPromotions(); // adds few apprentices to a promotion
     }
 
     /**
@@ -293,7 +294,6 @@ public class InitDatabase {
 
     /**
      * This method adds few apprentices to the first promotion found
-     * createPromotions should be called priot to call this method
      */
     public void addApprenticesToPromotions()
     {
@@ -303,6 +303,11 @@ public class InitDatabase {
         PromotionDao promotionDao = new PromotionDao();
         Promotion promotion;
         List<Promotion> promotions = promotionDao.all();
+        // creates few promotions if none exist
+        if (promotions.size() == 0)
+        {
+            createPromotions();
+        }
         promotion = promotions.get(0);
 
         // TODO: filter to take apprentices only rather than all profiles types
@@ -310,6 +315,7 @@ public class InitDatabase {
         userProfilesSet = new HashSet(userProfiles);
         promotion.setApprentices(userProfilesSet);
         promotionDao.update(promotion);
+        promotion = promotions.get(0);
         System.out.println("promotion:" + promotion);
     }
 
@@ -333,7 +339,6 @@ public class InitDatabase {
                 Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        addApprenticesToPromotions(); // adds few apprentices to a promotion
     }
 
 

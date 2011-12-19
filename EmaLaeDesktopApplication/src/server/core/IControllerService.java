@@ -7,6 +7,7 @@ package server.core;
 
 import database.entity.Users;
 import database.entity.UserProfile;
+import exceptions.PermissionException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -61,7 +62,8 @@ public interface IControllerService extends java.rmi.Remote {
      * @param user
      * @throws java.rmi.RemoteException
      */
-    public <T> void createOrUpdate(Class<T> type, T obj) throws java.rmi.RemoteException;
+    public <T> void createOrUpdate(Class<T> type, T obj)
+            throws java.rmi.RemoteException, PermissionException;
 
     public <T> void delete(Class<T> type, T obj) throws java.rmi.RemoteException;
 
