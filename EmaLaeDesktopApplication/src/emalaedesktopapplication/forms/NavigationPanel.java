@@ -105,7 +105,7 @@ public class NavigationPanel extends javax.swing.JPanel {
         // DefaultMutableTreeNode promoRootNode = searchNode(Promotion.class);
 
         DefaultMutableTreeNode promotionNode;
-        // promoRootNode.removeAllChildren();
+        // promoRootNode.removeAllChildren(); // Getting a bug with that one
         for (Promotion promotion: promotions)
         {
             promotionNode = new DefaultMutableTreeNode(promotion);
@@ -124,19 +124,16 @@ public class NavigationPanel extends javax.swing.JPanel {
         for (Formation formation : promotion.getFormations())
         {
             formationNode = new DefaultMutableTreeNode(formation);
-            // recursively set child formations
-            for (Formation childrenFormation:formation.getChildrenFormations())
-            {
-                // TODO: verify this bit
-                childrenFormationNode = new DefaultMutableTreeNode(childrenFormation);
-                setChildrenFormations(childrenFormationNode);
-                formationNode.add(childrenFormationNode);
-            }
+            // recursively sets child formations
+            setChildrenFormations(formationNode);
             promotionNode.add(formationNode);
         }
     }
 
-    // TODO: recursively set child formations
+    /**
+     * Recursively sets child formations
+     * @param formationNode
+     */
     public void setChildrenFormations(DefaultMutableTreeNode formationNode)
     {
         DefaultMutableTreeNode childrenFormationNode;
@@ -144,7 +141,7 @@ public class NavigationPanel extends javax.swing.JPanel {
         for (Formation child: formation.getChildrenFormations())
         {
             childrenFormationNode = new DefaultMutableTreeNode(child);
-            // TODO: also append to the node
+            formationNode.add(childrenFormationNode);
             setChildrenFormations(childrenFormationNode);
         }
     }
