@@ -75,36 +75,39 @@ public class NavigationController
                         mainWindow.setMiddleContentPanel(
                         userProfileController.getView());
                     }
-                    /**
-                     * TODO: this is not so reliable
-                     * I wish we could use proper generics with
-                     * DefaultMutableTreeNode/DefaultTreeModel
-                     */
-                    else if (node.getUserObject() instanceof Promotion)
-                    {
-                        Promotion promotion = (Promotion)(node.getUserObject());
-
-                        PromotionController promotionController =
-                                new PromotionController(
-                                    mainWindow, promotion);
-                        mainWindow.setMiddleContentPanel(
-                                promotionController.getView());
-                    }
-                    else if (node.getUserObject() instanceof Formation)
-                    {
-                        Formation formation = (Formation)(node.getUserObject());
-
-                        FormationController formationController =
-                                new FormationController(
-                                    mainWindow, formation);
-                        mainWindow.setMiddleContentPanel(
-                                formationController.getView());
-                    }
                     else
                     {
                         // TODO: log this one
                         System.out.println("Unknown navigation item.");
                     }
+                }
+
+                // User clicked on Promotion
+                /**
+                 * TODO: this is not so reliable
+                 * I wish we could use proper generics with
+                 * DefaultMutableTreeNode/DefaultTreeModel
+                 */
+                if (node.getUserObject() instanceof Promotion)
+                {
+                    Promotion promotion = (Promotion)(node.getUserObject());
+
+                    PromotionController promotionController =
+                            new PromotionController(
+                                mainWindow, promotion);
+                    mainWindow.setMiddleContentPanel(
+                            promotionController.getView());
+                }
+                // User clicked on Formation
+                else if (node.getUserObject() instanceof Formation)
+                {
+                    Formation formation = (Formation)(node.getUserObject());
+
+                    FormationController formationController =
+                            new FormationController(
+                                mainWindow, formation);
+                    mainWindow.setMiddleContentPanel(
+                            formationController.getView());
                 }
             }
         }
