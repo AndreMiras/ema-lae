@@ -30,6 +30,7 @@ public class FormationController {
     public FormationController(EmaLaeDesktopView mainWindow, Formation formation) {
         this.mainWindow = mainWindow;
         this.viewFormation = new ViewFormation();
+        this.formation = formation;
         populateView();
     }
 
