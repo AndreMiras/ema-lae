@@ -168,7 +168,9 @@ public class NavigationController
             }
         }
 
-        public void treeWillCollapse(TreeExpansionEvent event) throws ExpandVetoException {
+        public void treeWillCollapse(TreeExpansionEvent event)
+                throws ExpandVetoException
+        {
             // throw new UnsupportedOperationException("Not supported yet.");
         }
     }

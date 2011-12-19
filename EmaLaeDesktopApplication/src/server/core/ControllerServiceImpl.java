@@ -115,39 +115,20 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
     public <T> void createOrUpdate(Class<T> type, T obj)
             throws RemoteException, PermissionException
     {
-        // UserDao userDao = new UserDao();
-        // userDao.createOrUpdate(user);
-        Users user = null;
-        if (loggedUser != null)
-        {
-            try
-            {
-
-                user = getUser();
-                GenericDao<T> genericDao = new GenericDao<T>(type);
-                String className = Utils.getClassNameWithoutPackage(type);
-                if(user.checkPermission(className + "_create")
-                        && user.checkPermission(className + "_update"))
-                {
-                    genericDao.createOrUpdate(obj);
-                }
-                else throw new PermissionException(
-                        "You're not allowed to create or update "
-                        + className + " objects.");
-            }
-            catch (RemoteException ex)
-            {
-                Logger.getLogger(ControllerServiceImpl.class.getName()).log(
-                        Level.SEVERE, null, ex);
-            }
-        }
-        //FIXME : Debug and test purpose only : needs to be removed in production
-        else
+        String className = Utils.getClassNameWithoutPackage(type);
+        String permissionDeniedMessage =
+                "You're not allowed to create or update "
+                        + className + " objects.";
+        if ((loggedUser != null)
+                && (loggedUser.checkPermission(className + "_create")
+                && loggedUser.checkPermission(className + "_update")))
         {
             GenericDao<T> genericDao = new GenericDao<T>(type);
             genericDao.createOrUpdate(obj);
-            // throw new PermissionException("Permission denied");
-            // TODO: for production
+        }
+        else
+        {
+            throw new PermissionException(permissionDeniedMessage);
         }
     }
 
