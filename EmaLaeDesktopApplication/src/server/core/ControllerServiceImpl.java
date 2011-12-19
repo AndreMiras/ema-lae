@@ -121,7 +121,8 @@ public class ControllerServiceImpl extends java.rmi.server.UnicastRemoteObject
                         + className + " objects.";
         if ((loggedUser != null)
                 && (loggedUser.checkPermission(className + "_create")
-                && loggedUser.checkPermission(className + "_update")))
+                && loggedUser.checkPermission(className + "_update"))
+                || loggedUser.isSuperUser())
         {
             GenericDao<T> genericDao = new GenericDao<T>(type);
             genericDao.createOrUpdate(obj);
