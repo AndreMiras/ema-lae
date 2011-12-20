@@ -29,6 +29,9 @@ public class ViewSession extends javax.swing.JPanel {
     {
         // Default values
         String assignments = "none";
+        String startDate = "none";
+        String endDate = "none";
+        String teacher = "none";
 
         if(session.getType() != null)
             typeValue.setText(session.getType().toString());
@@ -37,15 +40,18 @@ public class ViewSession extends javax.swing.JPanel {
             formationValue.setText(session.getFormation().getName());
          */
         if(session.getStartDate() != null)
-            startDateValue.setText(session.getStartDate().toString());
+            startDate = session.getStartDate().toString();
         if (session.getEndDate() != null)
-            endDateValue.setText(session.getEndDate().toString());
+            endDate = session.getEndDate().toString();
         if (session.getAssignmentsLink() != null)
             assignments = session.getAssignmentsLink();
         if (session.getTeacher() != null)
-            teacherValue.setText(session.getTeacher().getFullName());
+            teacher = session.getTeacher().getFullName();
 
-        assignmentsValue.setText(assignments);
+       startDateValue.setText(startDate);
+       endDateValue.setText(endDate);
+       assignmentsValue.setText(assignments);
+       teacherValue.setText(teacher);
     }
 
 
@@ -118,17 +124,17 @@ public class ViewSession extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(endDateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addComponent(endDateValue))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(startDateLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(startDateValue)))
-                .addContainerGap())
+                        .addComponent(startDateValue))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(endDateLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(endDateValue)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,11 +143,13 @@ public class ViewSession extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(startDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(startDateValue))
-                .addGap(18, 18, 18)
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(endDateLabel)
-                    .addComponent(endDateValue))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(endDateValue)
+                    .addComponent(endDateLabel))
+                .addContainerGap())
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel3.border.title"))); // NOI18N
@@ -172,7 +180,7 @@ public class ViewSession extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(typeValue)
                     .addComponent(teacherValue))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
