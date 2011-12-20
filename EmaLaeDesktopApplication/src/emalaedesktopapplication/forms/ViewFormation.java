@@ -33,6 +33,12 @@ public class ViewFormation extends javax.swing.JPanel {
     public void setFormation(Formation formation)
     {
         formationNameValue.setText(formation.getName());
+
+        /*
+         * TODO: I think this should be part of the panel title
+         * and presented like a hierachy path, e.g.:
+         * --- ThisFormation::Parent::Root ---
+         */
         if (formation.getParentFormation() != null)
         {
             parentFormationNameValue.setText(formation.getParentFormation().getName());
