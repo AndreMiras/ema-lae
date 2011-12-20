@@ -433,6 +433,9 @@ public class InitDatabase {
 
     private HashSet getClassesNamesFromJar()
     {
+        String entryName;
+        String classPrefix = "database/entity/";
+        String classSuffix = ".class";
         HashSet<String> classes = new HashSet<String>();
         try
         {
@@ -442,32 +445,18 @@ public class InitDatabase {
             while (entries.hasMoreElements())
             {
                 JarEntry entry = (JarEntry) entries.nextElement();
-                String name = entry.getName();
-                System.out.println(entry.getName());
+                entryName = entry.getName();
 
-                if (name.startsWith("database/entity/")
-                        && name.endsWith(".class")
-                        && !name.contains("$"))
+                if (entryName.startsWith(classPrefix)
+                        && entryName.endsWith(classSuffix)
+                        && !entryName.contains("$"))
                 {
-                    name = name.replace(".class", "");
-                    classes.add(name);
+                    entryName = entryName.replace(classPrefix, "");
+                    entryName = entryName.replace(classSuffix, "");
+                    classes.add(entryName);
                 }
             }
             jarfile.close();
-            /*
-            File folder = new File("./src/database/entity");
-            File[] listOfFiles = folder.listFiles();
-            HashSet<String> classes = new HashSet<String>();
-            for (int i = 0; i < listOfFiles.length; i++)
-            {
-                String name = listOfFiles[i].getName();
-                name = name.replace(".java", "");
-                if (listOfFiles[i].isFile())
-                {
-                    classes.add(name);
-                }
-            }
-             */
         } catch (IOException ex)
         {
             Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
