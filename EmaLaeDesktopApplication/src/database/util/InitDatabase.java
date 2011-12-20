@@ -7,6 +7,7 @@ package database.util;
 
 import dao.*;
 import database.entity.*;
+import database.entity.CourseSession.SessionType;
 import exceptions.ContractException;
 import exceptions.DaoException;
 import java.util.List;
@@ -309,6 +310,55 @@ public class InitDatabase {
         {
             formation = (Formation) formationDao.all().get(i);
             formationDao.delete(formation);
+        }
+    }
+
+
+    /*
+     * Loop over all formation dao
+     * Add course, practical and test sessions to all leaf formations
+     */
+    public void createCourseSessions()
+    {
+        CourseSession courseSession;
+        CourseSession practicalSession;
+        CourseSession testSession;
+        CourseSessionDao courseSessionDao = new CourseSessionDao();
+        FormationDao formationDao = new FormationDao();
+        List<Formation> formations = formationDao.all();
+
+        /*
+         * Loop over all formation dao
+         * Add course, practical and test sessions to all leaf formations
+         */
+        for (Formation formation: formations)
+        {
+            if (formation.getChildrenFormations().isEmpty())
+            {
+                courseSession = new CourseSession(
+                        SessionType.Course, formation);
+                practicalSession = new CourseSession(
+                        SessionType.Pratictal, formation);
+                testSession = new CourseSession(
+                        SessionType.Test, formation);
+
+                // hit the database
+                courseSessionDao.create(courseSession);
+                courseSessionDao.create(practicalSession);
+                courseSessionDao.create(testSession);
+            }
+        }
+    }
+
+    public void dropCourseSessions()
+    {
+        CourseSessionDao courseSessionDao = new CourseSessionDao();
+        List<CourseSession> courseSessions =
+                courseSessionDao.all();
+
+        for (CourseSession courseSession: courseSessions)
+        {
+            courseSessionDao.delete(courseSession);
         }
     }
 

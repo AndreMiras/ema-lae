@@ -25,7 +25,6 @@ import database.entity.UserProfile;
 import database.entity.Users;
 import database.util.HibernateUtil;
 import database.util.InitDatabase;
-import java.util.HashSet;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -33,7 +32,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.List;
-import org.hsqldb.User;
 
 public class CourseSessionDaoTest {
     public CourseSessionDaoTest() {
