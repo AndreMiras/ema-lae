@@ -132,6 +132,12 @@ public class CourseSession implements Serializable, WithPrimaryKey {
         }
     }
 
+    @Override
+    public String toString()
+    {
+        return formation.getName() + " " + type.name();
+    }
+
     public Serializable getPrimaryKey()
     {
         return sessionId;
