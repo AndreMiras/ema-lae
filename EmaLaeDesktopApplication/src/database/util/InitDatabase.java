@@ -36,6 +36,7 @@ public class InitDatabase {
         UserProfile userProfile;
         UserProfileDao userProfileDao;
 
+        // createAdminAndStaff();
         userProfileDao = new UserProfileDao();
         username = "username";
         password = "pwd";
@@ -49,18 +50,19 @@ public class InitDatabase {
             userProfile = new UserProfile(user);
             userProfile.setFirstName(firstname + i);
             userProfile.setLastName(lastname + i);
-            Permission p1 = new Permission("Users_create");
-            Permission p2 = new Permission("Users_update");
-            // Attribute a different type each user
+            // Attribute a different type to each user
             switch (i%3){
                 case 1:
-                    userProfile.setUserProfileType(UserProfile.Type.Apprentice);
+                    userProfile.setUserProfileType(
+                            UserProfile.Type.Apprentice);
                     break;
                 case 2:
-                    userProfile.setUserProfileType(UserProfile.Type.InternshipSupervisor);
+                    userProfile.setUserProfileType(
+                            UserProfile.Type.InternshipSupervisor);
                     break;
                 case 3:
-                    userProfile.setUserProfileType(UserProfile.Type.SupervisingTeacher);
+                    userProfile.setUserProfileType(
+                            UserProfile.Type.SupervisingTeacher);
                     break;
             }
             try {
@@ -101,11 +103,34 @@ public class InitDatabase {
         }
     }
 
+    /**
+     * Creates admin and staff users/profiles
+     */
+    private void createAdminAndStaff()
+    {
+        Users admin = new Users("admin", "admin");
+        Users staff = new Users("staff", "staff");
+        UserProfile adminProfile = new UserProfile(admin, UserProfile.Type.Other);
+        UserProfile staffProfile = new UserProfile(staff, UserProfile.Type.Other);
+        admin.setSuperUser(true);
+        staff.setStaff(true);
+        UserProfileDao userProfileDao = new UserProfileDao();
+
+        try
+        {
+            userProfileDao.create(adminProfile);
+            userProfileDao.create(staffProfile);
+        } catch (DaoException ex)
+        {
+            Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void createGroups()
     {
         Permission permission;
         PermissionsDao permissionsDao;
-        Users user = new Users();
+        Users user;
         UserDao userDao = new UserDao();
         String permissionName = "permission";
         String groupName = "aGroup";
@@ -129,24 +154,10 @@ public class InitDatabase {
 
     public void createPermissions()
     {
-        Users user = new Users("admin", "admin");
-        UserProfile profile = new UserProfile(user, UserProfile.Type.Other);
-        user.setSuperUser(true);
-        UserDao userDao = new UserDao();
-        UserProfileDao userProfileDao = new UserProfileDao();
         String groupName = "bGroup";
         UserGroup group = new UserGroup(groupName);
-        group.addUser(user);
         GroupDao groupDao = new GroupDao();
-        
-        userDao.create(user);
-        try
-        {
-            userProfileDao.create(profile);
-        } catch (DaoException ex)
-        {
-            Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         groupDao.create(group);
         Permission permission = new Permission();
         PermissionsDao permissionsDao = new PermissionsDao();
@@ -205,11 +216,11 @@ public class InitDatabase {
     public void createContracts()
     {
        ContractDao instance = new ContractDao();
-        Users u1 = new Users("username1","pwd1");
+        Users u1 = new Users("simon.boeuf","pwd1");
         u1.setStaff(true);
-        Users u2 = new Users("username2", "pwd2");
+        Users u2 = new Users("philippe.cathala", "pwd2");
         u2.setSuperUser(true);
-        Users u3 = new Users("username3", "pwd3");
+        Users u3 = new Users("frederic.ameglio", "pwd3");
         UserProfile p1 = new UserProfile(u1, UserProfile.Type.Apprentice);
         p1.setFirstName("BOEUF");
         p1.setLastName("Simon");
