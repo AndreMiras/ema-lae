@@ -33,18 +33,9 @@ public class ViewFormation extends javax.swing.JPanel {
     public void setFormation(Formation formation)
     {
         formationNameValue.setText(formation.getName());
-
-        /*
-         * TODO: I think this should be part of the panel title
-         * and presented like a hierachy path, e.g.:
-         * --- ThisFormation::Parent::Root ---
-         */
-        if (formation.getParentFormation() != null)
-        {
-            parentFormationNameValue.setText(formation.getParentFormation().getName());
-            // TODO: what is this (below) for Simon?
-            // parentFormationParentValue.setText(formation.getParentFormation().getParentFormation().getName());
-        }
+        setBorder(
+                javax.swing.BorderFactory.createTitledBorder(
+                "Formation " + formation.toString()));
         
         ViewSession viewSession;
         for (CourseSession session: formation.getSessions())
@@ -94,11 +85,6 @@ public class ViewFormation extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        parentFormationPanel = new javax.swing.JPanel();
-        parentFormationParentLabel = new javax.swing.JLabel();
-        parentFormationNameLabel = new javax.swing.JLabel();
-        parentFormationNameValue = new javax.swing.JLabel();
-        parentFormationParentValue = new javax.swing.JLabel();
         formationNameLabel = new javax.swing.JLabel();
         formationNameValue = new javax.swing.JLabel();
         formationDetailsTabbedPane = new javax.swing.JTabbedPane();
@@ -110,48 +96,6 @@ public class ViewFormation extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Form.border.title"))); // NOI18N
         setAutoscrolls(true);
         setName("Form"); // NOI18N
-
-        parentFormationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("parentFormationPanel.border.title"))); // NOI18N
-        parentFormationPanel.setName("parentFormationPanel"); // NOI18N
-
-        parentFormationParentLabel.setText(resourceMap.getString("parentFormationParentLabel.text")); // NOI18N
-        parentFormationParentLabel.setName("parentFormationParentLabel"); // NOI18N
-
-        parentFormationNameLabel.setText(resourceMap.getString("parentFormationNameLabel.text")); // NOI18N
-        parentFormationNameLabel.setName("parentFormationNameLabel"); // NOI18N
-
-        parentFormationNameValue.setText(resourceMap.getString("parentFormationNameValue.text")); // NOI18N
-        parentFormationNameValue.setName("parentFormationNameValue"); // NOI18N
-
-        parentFormationParentValue.setText(resourceMap.getString("parentFormationParentValue.text")); // NOI18N
-        parentFormationParentValue.setName("parentFormationParentValue"); // NOI18N
-
-        javax.swing.GroupLayout parentFormationPanelLayout = new javax.swing.GroupLayout(parentFormationPanel);
-        parentFormationPanel.setLayout(parentFormationPanelLayout);
-        parentFormationPanelLayout.setHorizontalGroup(
-            parentFormationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, parentFormationPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(parentFormationNameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(parentFormationNameValue)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addComponent(parentFormationParentLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(parentFormationParentValue)
-                .addGap(55, 55, 55))
-        );
-        parentFormationPanelLayout.setVerticalGroup(
-            parentFormationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(parentFormationPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(parentFormationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(parentFormationParentLabel)
-                    .addComponent(parentFormationNameLabel)
-                    .addComponent(parentFormationNameValue)
-                    .addComponent(parentFormationParentValue))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         formationNameLabel.setText(resourceMap.getString("formationNameLabel.text")); // NOI18N
         formationNameLabel.setName("formationNameLabel"); // NOI18N
@@ -201,12 +145,11 @@ public class ViewFormation extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(formationDetailsTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
-                    .addComponent(parentFormationPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(formationNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(formationNameValue)))
+                        .addComponent(formationNameValue))
+                    .addComponent(formationDetailsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -216,13 +159,10 @@ public class ViewFormation extends javax.swing.JPanel {
                     .addComponent(formationNameLabel)
                     .addComponent(formationNameValue))
                 .addGap(18, 18, 18)
-                .addComponent(parentFormationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(formationDetailsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        parentFormationPanel.getAccessibleContext().setAccessibleName(resourceMap.getString("parentFormationPanel.AccessibleContext.accessibleName")); // NOI18N
         formationDetailsTabbedPane.getAccessibleContext().setAccessibleName(resourceMap.getString("jTabbedPane1.AccessibleContext.accessibleName")); // NOI18N
 
         getAccessibleContext().setAccessibleName(resourceMap.getString("Form.AccessibleContext.accessibleName")); // NOI18N
@@ -235,11 +175,6 @@ public class ViewFormation extends javax.swing.JPanel {
     private javax.swing.JLabel formationNameLabel;
     private javax.swing.JLabel formationNameValue;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel parentFormationNameLabel;
-    private javax.swing.JLabel parentFormationNameValue;
-    private javax.swing.JPanel parentFormationPanel;
-    private javax.swing.JLabel parentFormationParentLabel;
-    private javax.swing.JLabel parentFormationParentValue;
     private javax.swing.JPanel subFormationPanel;
     // End of variables declaration//GEN-END:variables
 }
