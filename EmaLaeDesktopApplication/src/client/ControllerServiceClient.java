@@ -4,8 +4,6 @@
  */
 package client;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -14,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.core.IControllerService;
 import server.core.IControllerServiceFactory;
-import java.util.Properties;
 
 /**
  *
@@ -30,26 +27,32 @@ public class ControllerServiceClient {
     public static synchronized IControllerService getController() {
         if (controller == null) {
             try {
-                Properties rmiProp = null;
-                String rmiPropFilePath =
-                        "emalaedesktopapplication.utils/RMI.properties";
-                InputStream in = rmiPropFilePath.getClass().getResourceAsStream(
-                        rmiPropFilePath);
-                rmiProp.load(in);
+                /*
+                 * this is bugged when running the application on differents
+                 * environements
+                 */
+                /*
+                Properties rmiProp = Utils.readProperties(
+                        "emalaedesktopapplication/utils/RMI.properties");
                 IControllerServiceFactory controllerServiceFactory =
                         (IControllerServiceFactory) Naming.lookup(rmiProp.getProperty("protocol")+
                         "://"+rmiProp.getProperty("ipaddress")+
                         ":"+rmiProp.getProperty("port")+
                         "/"+rmiProp.getProperty("directory"));
+                 */
+                Integer port = 1099;
+                String serverAddress = "localhost";
+                IControllerServiceFactory controllerServiceFactory =
+                        (IControllerServiceFactory) Naming.lookup(
+                        "rmi://"
+                        + serverAddress + ":" + port
+                        + "/controllerServiceFactory");
                 controller = controllerServiceFactory.createControllerService();
             } catch (NotBoundException ex) {
                 Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
             } catch (MalformedURLException ex) {
                 Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RemoteException ex) {
-                Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex)
-            {
                 Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
