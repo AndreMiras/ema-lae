@@ -338,7 +338,7 @@ public class InitDatabase {
                 courseSession = new CourseSession(
                         SessionType.Course, formation);
                 practicalSession = new CourseSession(
-                        SessionType.Pratictal, formation);
+                        SessionType.Practical, formation);
                 testSession = new CourseSession(
                         SessionType.Test, formation);
 

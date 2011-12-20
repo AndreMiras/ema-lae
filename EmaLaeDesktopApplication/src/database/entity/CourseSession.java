@@ -28,7 +28,7 @@ public class CourseSession implements Serializable, WithPrimaryKey {
     private Date endDate;
     @Column
     private String assignmentsLink;
-    public enum SessionType { Course, Test, Pratictal }
+    public enum SessionType { Course, Test, Practical }
     @Column
     private SessionType type;
     @ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)

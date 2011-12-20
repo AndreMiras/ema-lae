@@ -233,7 +233,7 @@ public class UserProfileDaoTest {
             Users u = new Users("User4SetSessions");
             UserProfile user = new UserProfile(u);
             CourseSession cs1 = new CourseSession(SessionType.Course);
-            CourseSession cs2 = new CourseSession(SessionType.Pratictal);
+            CourseSession cs2 = new CourseSession(SessionType.Practical);
             CourseSession cs3 = new CourseSession(SessionType.Test);
             // Nothing should be set by default
             assertTrue(user.getCourseSessions().isEmpty());

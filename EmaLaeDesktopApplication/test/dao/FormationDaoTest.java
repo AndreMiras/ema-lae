@@ -327,7 +327,7 @@ public class FormationDaoTest {
         // Instantiate the objects
         Formation f1 = new Formation("ParentFormation1");
         CourseSession cs1 = new CourseSession(SessionType.Course);
-        CourseSession cs2 = new CourseSession(SessionType.Pratictal);
+        CourseSession cs2 = new CourseSession(SessionType.Practical);
         CourseSession cs3 = new CourseSession(SessionType.Test);
 
         // Nothing should be set by default
