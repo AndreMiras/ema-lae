@@ -34,6 +34,10 @@ public class ViewPromotion extends javax.swing.JPanel {
         String promoName = promotion.getName();
         UserProfile responsible = promotion.getResponsible();
         Integer promoYear = promotion.getPromotionYear();
+
+        setBorder(
+                javax.swing.BorderFactory.createTitledBorder(
+                "Promotion " + promotion.toString()));
         promotionNameValue.setText(promoName);
         if (responsible != null)
         {

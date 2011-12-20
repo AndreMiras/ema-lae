@@ -60,6 +60,12 @@ public class ViewFormation extends javax.swing.JPanel {
         else // otherwise hide/remove it
         {
             formationDetailsTabbedPane.removeTabAt(0);
+
+            // Do not show the tabPane at all if it has no tabs
+            if (formationDetailsTabbedPane.getTabCount() == 0)
+            {
+                formationDetailsTabbedPane.setVisible(false);
+            }
             subFormationPanel.setVisible(false);
         }
 
