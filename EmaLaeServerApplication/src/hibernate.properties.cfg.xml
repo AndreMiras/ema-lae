@@ -1,0 +1,40 @@
+<!--<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping
+    PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-configuration>
+    <session-factory> -->
+        <property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <!-- <property name="hibernate.connection.url">jdbc:hsqldb:file:database.db;shutdown=true</property> -->
+        <property name="connection.username">sa</property>
+        <property name="connection.password"/>
+        <!-- Echo all executed SQL to stdout -->
+        <!-- property name="hibernate.show_sql">true</property -->
+        <!--
+            - Create a schema if one doesn't exist
+            - Attempt to modify an existing one to match the defined mapping
+            WARN: never EVER use hibernate.hbm2ddl.auto in any live/production database
+        -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+        <!-- property name="hbm2ddl.auto">create</property -->
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.query.factory_class">
+            org.hibernate.hql.classic.ClassicQueryTranslatorFactory
+        </property>
+        <!-- property name="hibernate.jdbc.batch_size">0</property -->
+        <mapping class="database.entity.Users"/>
+        <mapping class="database.entity.UserProfile"/>
+        <mapping class="database.entity.UserGroup"/>
+        <mapping class="database.entity.Permission"/>
+        <mapping class="database.entity.Contract"/>
+        <mapping class="database.entity.Formation"/>
+        <mapping class="database.entity.Promotion"/>
+        <mapping class="database.entity.CourseSession"/>
+    <!--<mapping class="database.entity.Apprentice"/>
+        <mapping class="database.entity.ApprenticeSession"/>
+        <mapping class="database.entity.Company"/>
+        <mapping class="database.entity.InternshipSupervisor"/>
+        <mapping class="database.entity.SupervisingTeacher"/>-->
+<!-- session-factory>
+</hibernate-configuration> -->
