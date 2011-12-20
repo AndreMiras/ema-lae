@@ -4,6 +4,8 @@
  */
 package client;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -12,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.core.IControllerService;
 import server.core.IControllerServiceFactory;
-import emalaedesktopapplication.utils.*;
 import java.util.Properties;
 
 /**
@@ -29,8 +30,12 @@ public class ControllerServiceClient {
     public static synchronized IControllerService getController() {
         if (controller == null) {
             try {
-                Properties rmiProp = Utils.readProperties(
-                        "./src/emalaedesktopapplication/utils/RMI.properties");
+                Properties rmiProp = null;
+                String rmiPropFilePath =
+                        "emalaedesktopapplication.utils/RMI.properties";
+                InputStream in = rmiPropFilePath.getClass().getResourceAsStream(
+                        rmiPropFilePath);
+                rmiProp.load(in);
                 IControllerServiceFactory controllerServiceFactory =
                         (IControllerServiceFactory) Naming.lookup(rmiProp.getProperty("protocol")+
                         "://"+rmiProp.getProperty("ipaddress")+
@@ -42,6 +47,9 @@ public class ControllerServiceClient {
             } catch (MalformedURLException ex) {
                 Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RemoteException ex) {
+                Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex)
+            {
                 Logger.getLogger(ControllerServiceClient.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

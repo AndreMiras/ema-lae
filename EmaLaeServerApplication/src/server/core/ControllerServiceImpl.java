@@ -12,7 +12,7 @@ import database.entity.Users;
 import database.entity.UserProfile;
 import database.util.HibernateUtil;
 import database.util.InitDatabase;
-import emalaedesktopapplication.utils.Utils;
+import emalaecommon.Utils;
 import exceptions.DaoException;
 import exceptions.PermissionException;
 import java.io.Serializable;

@@ -7,7 +7,7 @@ package emalaedesktopapplication;
 import client.ControllerServiceClient;
 import database.entity.Users;
 import emalaedesktopapplication.controller.MainWindowController;
-import emalaedesktopapplication.utils.Utils;
+import emalaecommon.Utils;
 import java.awt.Component;
 import java.rmi.RemoteException;
 import java.util.logging.Level;

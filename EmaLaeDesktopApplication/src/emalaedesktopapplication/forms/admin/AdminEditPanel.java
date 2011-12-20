@@ -10,7 +10,7 @@
  */
 package emalaedesktopapplication.forms.admin;
 
-import emalaedesktopapplication.utils.Utils;
+import emalaecommon.Utils;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
