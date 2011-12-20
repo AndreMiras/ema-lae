@@ -29,7 +29,8 @@ public class ControllerServiceClient {
     public static synchronized IControllerService getController() {
         if (controller == null) {
             try {
-                Properties rmiProp = Utils.readProperties("./src/emalaedesktopapplication/utils/RMI");
+                Properties rmiProp = Utils.readProperties(
+                        "./src/emalaedesktopapplication/utils/RMI.properties");
                 IControllerServiceFactory controllerServiceFactory =
                         (IControllerServiceFactory) Naming.lookup(rmiProp.getProperty("protocol")+
                         "://"+rmiProp.getProperty("ipaddress")+

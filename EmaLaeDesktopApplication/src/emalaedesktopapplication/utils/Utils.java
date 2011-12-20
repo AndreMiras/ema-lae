@@ -27,7 +27,7 @@ public class Utils
             // Read properties file.
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(fileName+".properties"));
+            properties.load(new FileInputStream(fileName));
         } catch (IOException ex) {
             Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -37,7 +37,7 @@ public class Utils
     public static void writeProperties(Properties properties, String fileName){
                 // Write properties file.
         try {
-            properties.store(new FileOutputStream(fileName+".properties"), null);
+            properties.store(new FileOutputStream(fileName), null);
         }
         catch (IOException e)
         {
