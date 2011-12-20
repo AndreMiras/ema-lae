@@ -18,7 +18,7 @@ public class ControllerServiceFactoryImpl extends UnicastRemoteObject
         implements IControllerServiceFactory
 {
 
-    protected ControllerServiceFactoryImpl()
+    public ControllerServiceFactoryImpl()
             throws java.rmi.RemoteException, java.io.IOException
     {
     }
