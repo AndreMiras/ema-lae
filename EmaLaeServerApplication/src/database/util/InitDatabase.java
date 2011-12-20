@@ -10,12 +10,15 @@ import database.entity.*;
 import database.entity.CourseSession.SessionType;
 import exceptions.ContractException;
 import exceptions.DaoException;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.io.File;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 
 /**
@@ -429,17 +432,44 @@ public class InitDatabase {
 
     private HashSet getClassesName()
     {
-        File folder = new File("./src/database/entity");
-        File[] listOfFiles = folder.listFiles();
         HashSet<String> classes = new HashSet<String>();
-        for (int i = 0; i < listOfFiles.length; i++)
+        try
         {
-            String name = listOfFiles[i].getName();
-            name = name.replace(".java", "");
-            if (listOfFiles[i].isFile())
+            String jarPath = "./dist/lib/EmaLaeCommon.jar";
+            JarFile jarfile = new JarFile(jarPath);
+            Enumeration entries = jarfile.entries();
+            while (entries.hasMoreElements())
             {
-                classes.add(name);
+                JarEntry entry = (JarEntry) entries.nextElement();
+                String name = entry.getName();
+                System.out.println(entry.getName());
+
+                if (name.startsWith("database/entity/")
+                        && name.endsWith(".class")
+                        && !name.contains("$"))
+                {
+                    name = name.replace(".class", "");
+                    classes.add(name);
+                }
             }
+            jarfile.close();
+            /*
+            File folder = new File("./src/database/entity");
+            File[] listOfFiles = folder.listFiles();
+            HashSet<String> classes = new HashSet<String>();
+            for (int i = 0; i < listOfFiles.length; i++)
+            {
+                String name = listOfFiles[i].getName();
+                name = name.replace(".java", "");
+                if (listOfFiles[i].isFile())
+                {
+                    classes.add(name);
+                }
+            }
+             */
+        } catch (IOException ex)
+        {
+            Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
         return classes;
     }
