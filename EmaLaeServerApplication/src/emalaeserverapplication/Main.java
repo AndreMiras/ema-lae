@@ -8,6 +8,8 @@ package emalaeserverapplication;
 import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import server.core.ControllerServiceFactoryImpl;
 import server.core.IControllerServiceFactory;
 
@@ -21,13 +23,20 @@ public class Main {
      */
     public static void main(String args[])
     {
+        Integer port = 1099;
         try
         {
-            LocateRegistry.createRegistry(1099);
+            LocateRegistry.createRegistry(port);
             IControllerServiceFactory controller =
                     new ControllerServiceFactoryImpl();
-            Naming.rebind("rmi://localhost:1099/controllerServiceFactory",
+            Naming.rebind("rmi://localhost:"
+                    + port
+                    + "/controllerServiceFactory",
                     controller);
+            String loggerMessage = "Server listening on port: " + port;
+            Logger.getLogger(Main.class.getName()).log(
+                    Level.INFO, loggerMessage);
+
         } catch (IOException e)
         {
             System.err.println(e);
