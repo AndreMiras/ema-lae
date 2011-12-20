@@ -27,145 +27,227 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-              <Component id="teacherLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
-              <Component id="teacherValue" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-              <Component id="typeLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="30" pref="30" max="30" attributes="0"/>
-              <Component id="typeValue" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="64" pref="64" max="64" attributes="0"/>
-              <Component id="formationLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="37" pref="37" max="37" attributes="0"/>
-              <Component id="formationValue" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-              <Component id="startDateLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="20" pref="20" max="20" attributes="0"/>
-              <Component id="startDateValue" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="64" pref="64" max="64" attributes="0"/>
-              <Component id="assignmentsLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="18" pref="18" max="18" attributes="0"/>
-              <Component id="assignmentsValue" min="-2" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-              <Component id="endDateLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="28" pref="28" max="28" attributes="0"/>
-              <Component id="endDateValue" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jPanel3" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="12" pref="12" max="12" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="teacherLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="teacherValue" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jPanel3" max="32767" attributes="1"/>
+                  <Component id="jPanel2" alignment="0" max="32767" attributes="1"/>
               </Group>
-              <EmptySpace min="18" pref="18" max="18" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="typeLabel" min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="typeValue" min="-2" max="-2" attributes="0"/>
-                  <Component id="formationLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="formationValue" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="18" pref="18" max="18" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="startDateLabel" min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="startDateValue" min="-2" max="-2" attributes="0"/>
-                  <Component id="assignmentsLabel" min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="assignmentsValue" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="5" pref="5" max="5" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="endDateLabel" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="1" pref="1" max="1" attributes="0"/>
-                      <Component id="endDateValue" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="typeLabel">
+    <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="typeLabel.text"/>
-        <Property name="name" type="java.lang.String" value="typeLabel" noResource="true"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Assignments">
+              <Property name="titleX" resourceKey="jPanel1.border.title"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="jPanel1" noResource="true"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="startDateLabel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="assignmentsValue" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="302" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="assignmentsValue" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="assignmentsValue">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="assignmentsValue.text"/>
+            <Property name="name" type="java.lang.String" value="assignmentsValue" noResource="true"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="startDateLabel.text"/>
-        <Property name="name" type="java.lang.String" value="startDateLabel" noResource="true"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Time">
+              <Property name="titleX" resourceKey="jPanel2.border.title"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="jPanel2" noResource="true"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="endDateLabel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="1">
+                          <Component id="endDateLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="28" max="32767" attributes="0"/>
+                          <Component id="endDateValue" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="startDateLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="startDateValue" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="startDateLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="startDateValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="endDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="endDateValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="startDateLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="startDateLabel.text"/>
+            <Property name="name" type="java.lang.String" value="startDateLabel" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="startDateValue">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="startDateValue.text"/>
+            <Property name="name" type="java.lang.String" value="startDateValue" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="endDateLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="endDateLabel.text"/>
+            <Property name="name" type="java.lang.String" value="endDateLabel" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="endDateValue">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="endDateValue.text"/>
+            <Property name="name" type="java.lang.String" value="endDateValue" noResource="true"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel3">
       <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="endDateLabel.text"/>
-        <Property name="name" type="java.lang.String" value="endDateLabel" noResource="true"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Details">
+              <Property name="titleX" resourceKey="jPanel3.border.title"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="jPanel3" noResource="true"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="formationLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="formationLabel.text"/>
-        <Property name="name" type="java.lang.String" value="formationLabel" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="assignmentsLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="assignmentsLabel.text"/>
-        <Property name="name" type="java.lang.String" value="assignmentsLabel" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="typeValue">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="typeValue.text"/>
-        <Property name="name" type="java.lang.String" value="typeValue" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="endDateValue">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="endDateValue.text"/>
-        <Property name="name" type="java.lang.String" value="endDateValue" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="startDateValue">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="startDateValue.text"/>
-        <Property name="name" type="java.lang.String" value="startDateValue" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="assignmentsValue">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="assignmentsValue.text"/>
-        <Property name="name" type="java.lang.String" value="assignmentsValue" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="formationValue">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="formationValue.text"/>
-        <Property name="name" type="java.lang.String" value="formationValue" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="teacherLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="teacherLabel.text"/>
-        <Property name="name" type="java.lang.String" value="teacherLabel" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="teacherValue">
-      <Properties>
-        <Property name="text" type="java.lang.String" resourceKey="teacherValue.text"/>
-        <Property name="name" type="java.lang.String" value="teacherValue" noResource="true"/>
-      </Properties>
-    </Component>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="teacherLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="typeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="typeValue" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="teacherValue" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="37" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="teacherLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="teacherValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="typeLabel" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="typeValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="typeLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="typeLabel.text"/>
+            <Property name="name" type="java.lang.String" value="typeLabel" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="teacherLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="teacherLabel.text"/>
+            <Property name="name" type="java.lang.String" value="teacherLabel" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="teacherValue">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="teacherValue.text"/>
+            <Property name="name" type="java.lang.String" value="teacherValue" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="typeValue">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="typeValue.text"/>
+            <Property name="name" type="java.lang.String" value="typeValue" noResource="true"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
