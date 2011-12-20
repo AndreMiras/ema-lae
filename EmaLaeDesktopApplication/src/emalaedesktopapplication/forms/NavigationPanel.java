@@ -191,7 +191,7 @@ public class NavigationPanel extends javax.swing.JPanel {
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Profile");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("My profile");
         treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Contracts");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Contract");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Promotion");
@@ -203,10 +203,6 @@ public class NavigationPanel extends javax.swing.JPanel {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Messaging");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TODO");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("TODO");
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TODO");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
