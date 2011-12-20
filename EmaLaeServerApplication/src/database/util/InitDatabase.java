@@ -10,6 +10,7 @@ import database.entity.*;
 import database.entity.CourseSession.SessionType;
 import exceptions.ContractException;
 import exceptions.DaoException;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -165,7 +166,7 @@ public class InitDatabase {
         groupDao.create(group);
         Permission permission = new Permission();
         PermissionsDao permissionsDao = new PermissionsDao();
-        HashSet<String> classes = getClassesName();
+        HashSet<String> classes = getClassesNamesFromJar();
         for(String currentClass : classes)
         {
             if (!currentClass.equals("WithPrimaryKey"))
@@ -430,7 +431,7 @@ public class InitDatabase {
         }
     }
 
-    private HashSet getClassesName()
+    private HashSet getClassesNamesFromJar()
     {
         HashSet<String> classes = new HashSet<String>();
         try
@@ -471,6 +472,22 @@ public class InitDatabase {
         {
             Logger.getLogger(InitDatabase.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return classes;
+    }
+    private HashSet getClassesNamesFromDir()
+    {
+            File folder = new File("./src/database/entity/");
+            File[] listOfFiles = folder.listFiles();
+            HashSet<String> classes = new HashSet<String>();
+            for (int i = 0; i < listOfFiles.length; i++)
+            {
+                String name = listOfFiles[i].getName();
+                name = name.replace(".java", "");
+                if (listOfFiles[i].isFile())
+                {
+                    classes.add(name);
+                }
+            }
         return classes;
     }
 }
