@@ -36,7 +36,7 @@ public class InitDatabase {
         UserProfile userProfile;
         UserProfileDao userProfileDao;
 
-        // createAdminAndStaff();
+        createAdminAndStaff();
         userProfileDao = new UserProfileDao();
         username = "username";
         password = "pwd";

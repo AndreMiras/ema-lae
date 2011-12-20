@@ -63,10 +63,8 @@ public class ControllerImplTest {
         UserDao userDao = new UserDao();
         InitDatabase initDatabase = new InitDatabase();
 
-        
-        List<Users> myUsers = userDao.all();
         // The tables should be totally void at this point
-        //initDatabase.dropUsers();
+        // initDatabase.dropUsers();
         assertTrue(userProfileDao.all().isEmpty());
         assertTrue(userDao.all().isEmpty());
         
