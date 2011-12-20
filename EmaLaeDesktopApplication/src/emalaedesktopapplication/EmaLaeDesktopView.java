@@ -395,8 +395,10 @@ public class EmaLaeDesktopView extends FrameView {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 3.0;
         gridBagConstraints.weighty = 1.0;
         mainPanel.add(middleContentPanel, gridBagConstraints);
 
@@ -406,6 +408,9 @@ public class EmaLaeDesktopView extends FrameView {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weighty = 1.0;
         mainPanel.add(navigationPanel1, gridBagConstraints);
 
         setComponent(mainPanel);
