@@ -11,6 +11,7 @@
 
 package emalaedesktopapplication.forms;
 
+import database.entity.CourseSession;
 import database.entity.Formation;
 //import database.entity.Session;
 import javax.swing.DefaultListModel;
@@ -38,12 +39,25 @@ public class ViewFormation extends javax.swing.JPanel {
             // TODO: what is this (below) for Simon?
             // parentFormationParentValue.setText(formation.getParentFormation().getParentFormation().getName());
         }
+        
+        ViewSession viewSession;
+        for (CourseSession session: formation.getSessions())
+        {
+            viewSession = new ViewSession();
+            viewSession.setSession(session);
+            formationDetailsTabbedPane.addTab(
+                    session.toString(), viewSession);
+
+        }
+        
+        /*
         selectedFormationListModel = new DefaultListModel();
         for (Formation childFormation : formation.getChildrenFormations())
         {
             selectedFormationListModel.addElement(childFormation.getName());
         }
         childrenFormationsList.setModel(selectedFormationListModel);
+         */
 
         /*
          * FIXME : Sessions need to be implemented in business class
@@ -72,14 +86,13 @@ public class ViewFormation extends javax.swing.JPanel {
         parentFormationNameLabel = new javax.swing.JLabel();
         parentFormationNameValue = new javax.swing.JLabel();
         parentFormationParentValue = new javax.swing.JLabel();
-        childrenFormationsPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        childrenFormationsList = new javax.swing.JList();
-        sessionsPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        sessionsList = new javax.swing.JList();
         formationNameLabel = new javax.swing.JLabel();
         formationNameValue = new javax.swing.JLabel();
+        formationDetailsTabbedPane = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        childrenFormationsList = new javax.swing.JList();
+        jPanel1 = new javax.swing.JPanel();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(emalaedesktopapplication.EmaLaeDesktopApplication.class).getContext().getResourceMap(ViewFormation.class);
         setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Form.border.title"))); // NOI18N
@@ -128,8 +141,15 @@ public class ViewFormation extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        childrenFormationsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("childrenFormationsPanel.border.title"))); // NOI18N
-        childrenFormationsPanel.setName("childrenFormationsPanel"); // NOI18N
+        formationNameLabel.setText(resourceMap.getString("formationNameLabel.text")); // NOI18N
+        formationNameLabel.setName("formationNameLabel"); // NOI18N
+
+        formationNameValue.setText(resourceMap.getString("formationNameValue.text")); // NOI18N
+        formationNameValue.setName("formationNameValue"); // NOI18N
+
+        formationDetailsTabbedPane.setName("formationDetailsTabbedPane"); // NOI18N
+
+        jPanel2.setName("jPanel2"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
@@ -141,56 +161,39 @@ public class ViewFormation extends javax.swing.JPanel {
         childrenFormationsList.setName("childrenFormationsList"); // NOI18N
         jScrollPane1.setViewportView(childrenFormationsList);
 
-        javax.swing.GroupLayout childrenFormationsPanelLayout = new javax.swing.GroupLayout(childrenFormationsPanel);
-        childrenFormationsPanel.setLayout(childrenFormationsPanelLayout);
-        childrenFormationsPanelLayout.setHorizontalGroup(
-            childrenFormationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(childrenFormationsPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                .addGap(262, 262, 262))
         );
-        childrenFormationsPanelLayout.setVerticalGroup(
-            childrenFormationsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(childrenFormationsPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        sessionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("sessionsPanel.border.title"))); // NOI18N
-        sessionsPanel.setName("sessionsPanel"); // NOI18N
-
-        jScrollPane2.setName("jScrollPane2"); // NOI18N
-
-        sessionsList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        sessionsList.setName("sessionsList"); // NOI18N
-        jScrollPane2.setViewportView(sessionsList);
-
-        javax.swing.GroupLayout sessionsPanelLayout = new javax.swing.GroupLayout(sessionsPanel);
-        sessionsPanel.setLayout(sessionsPanelLayout);
-        sessionsPanelLayout.setHorizontalGroup(
-            sessionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sessionsPanelLayout.createSequentialGroup()
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        sessionsPanelLayout.setVerticalGroup(
-            sessionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sessionsPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        formationNameLabel.setText(resourceMap.getString("formationNameLabel.text")); // NOI18N
-        formationNameLabel.setName("formationNameLabel"); // NOI18N
+        formationDetailsTabbedPane.addTab(resourceMap.getString("jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
 
-        formationNameValue.setText(resourceMap.getString("formationNameValue.text")); // NOI18N
-        formationNameValue.setName("formationNameValue"); // NOI18N
+        jPanel1.setName("jPanel1"); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 456, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 130, Short.MAX_VALUE)
+        );
+
+        formationDetailsTabbedPane.addTab(resourceMap.getString("jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -198,13 +201,10 @@ public class ViewFormation extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(parentFormationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(childrenFormationsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(sessionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(formationDetailsTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                    .addComponent(parentFormationPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(formationNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(formationNameValue)))
@@ -218,14 +218,13 @@ public class ViewFormation extends javax.swing.JPanel {
                     .addComponent(formationNameValue))
                 .addGap(18, 18, 18)
                 .addComponent(parentFormationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sessionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(childrenFormationsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(formationDetailsTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         parentFormationPanel.getAccessibleContext().setAccessibleName(resourceMap.getString("parentFormationPanel.AccessibleContext.accessibleName")); // NOI18N
+        formationDetailsTabbedPane.getAccessibleContext().setAccessibleName(resourceMap.getString("jTabbedPane1.AccessibleContext.accessibleName")); // NOI18N
 
         getAccessibleContext().setAccessibleName(resourceMap.getString("Form.AccessibleContext.accessibleName")); // NOI18N
     }// </editor-fold>//GEN-END:initComponents
@@ -233,17 +232,16 @@ public class ViewFormation extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList childrenFormationsList;
-    private javax.swing.JPanel childrenFormationsPanel;
+    private javax.swing.JTabbedPane formationDetailsTabbedPane;
     private javax.swing.JLabel formationNameLabel;
     private javax.swing.JLabel formationNameValue;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel parentFormationNameLabel;
     private javax.swing.JLabel parentFormationNameValue;
     private javax.swing.JPanel parentFormationPanel;
     private javax.swing.JLabel parentFormationParentLabel;
     private javax.swing.JLabel parentFormationParentValue;
-    private javax.swing.JList sessionsList;
-    private javax.swing.JPanel sessionsPanel;
     // End of variables declaration//GEN-END:variables
 }

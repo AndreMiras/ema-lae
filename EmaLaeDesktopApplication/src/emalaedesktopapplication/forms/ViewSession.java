@@ -24,6 +24,24 @@ public class ViewSession extends javax.swing.JPanel {
         initComponents();
     }
 
+
+    public void setSession(CourseSession session)
+    {
+        if(session.getType() != null)
+            typeValue.setText(session.getType().toString());
+        if(session.getFormation() != null)
+            formationValue.setText(session.getFormation().getName());
+        if(session.getStartDate() != null)
+            startDateValue.setText(session.getStartDate().toString());
+        if (session.getEndDate() != null)
+            endDateValue.setText(session.getEndDate().toString());
+        if (session.getAssignmentsLink() != null)
+            assignmentsValue.setText(session.getAssignmentsLink());
+        if (session.getTeacher() != null)
+            teacherValue.setText(session.getTeacher().getFullName());
+    }
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -91,65 +109,59 @@ public class ViewSession extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(teacherLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(teacherValue))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(endDateLabel)
-                            .addComponent(typeLabel)
-                            .addComponent(startDateLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(endDateValue)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(typeValue)
-                                    .addComponent(startDateValue))
-                                .addGap(64, 64, 64)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(assignmentsLabel)
-                                    .addComponent(formationLabel))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(assignmentsValue)
-                                    .addComponent(formationValue))))))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(teacherLabel)
+                .addGap(6, 6, 6)
+                .addComponent(teacherValue))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(typeLabel)
+                .addGap(30, 30, 30)
+                .addComponent(typeValue)
+                .addGap(64, 64, 64)
+                .addComponent(formationLabel)
+                .addGap(37, 37, 37)
+                .addComponent(formationValue))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(startDateLabel)
+                .addGap(20, 20, 20)
+                .addComponent(startDateValue)
+                .addGap(64, 64, 64)
+                .addComponent(assignmentsLabel)
+                .addGap(18, 18, 18)
+                .addComponent(assignmentsValue))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(endDateLabel)
+                .addGap(28, 28, 28)
+                .addComponent(endDateValue))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(teacherLabel)
                     .addComponent(teacherValue))
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(typeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(typeValue)
+                    .addComponent(formationLabel)
+                    .addComponent(formationValue))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(startDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(startDateValue)
+                    .addComponent(assignmentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(assignmentsValue))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(endDateLabel)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(formationValue)
-                        .addGap(18, 18, 18)
-                        .addComponent(assignmentsValue))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(typeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(formationLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(startDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(assignmentsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(endDateLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(typeValue)
-                        .addGap(18, 18, 18)
-                        .addComponent(startDateValue)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(endDateValue)))
-                .addContainerGap(138, Short.MAX_VALUE))
+                        .addGap(1, 1, 1)
+                        .addComponent(endDateValue))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -168,20 +180,4 @@ public class ViewSession extends javax.swing.JPanel {
     private javax.swing.JLabel typeLabel;
     private javax.swing.JLabel typeValue;
     // End of variables declaration//GEN-END:variables
-
-    public void setSession(CourseSession session)
-    {
-        if(session.getType() != null)
-            typeValue.setText(session.getType().toString());
-        if(session.getFormation() != null)
-            formationValue.setText(session.getFormation().getName());
-        if(session.getStartDate() != null)
-            startDateValue.setText(session.getStartDate().toString());
-        if (session.getEndDate() != null)
-            endDateValue.setText(session.getEndDate().toString());
-        if (session.getAssignmentsLink() != null)
-            assignmentsValue.setText(session.getAssignmentsLink());
-        if (session.getTeacher() != null)
-            teacherValue.setText(session.getTeacher().getFullName());
-    }
 }
