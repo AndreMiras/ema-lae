@@ -26,23 +26,26 @@ public class ContractViewPanel extends javax.swing.JPanel {
 
     public void setContract(Contract contract)
     {
-        if (contract.getBeginDate() != null)
+        if (contract != null)
         {
-           contractStartsLabel.setText(contract.getBeginDate().toString());
-        }
-        if (contract.getBeginDate() != null)
-        {
-           contractEndsLabel.setText(contract.getEndDate().toString());
-        }
-        if (contract.getSupervisingTeacher() != null)
-        {
-           supTeacherLabel.setText(
-                   contract.getSupervisingTeacher().getFullName());
-        }
-        if (contract.getInternshipSupervisor() != null)
-        {
-           internshipSupLabel.setText(
-                   contract.getInternshipSupervisor().getFullName());
+            if (contract.getBeginDate() != null)
+            {
+               contractStartsLabel.setText(contract.getBeginDate().toString());
+            }
+            if (contract.getBeginDate() != null)
+            {
+               contractEndsLabel.setText(contract.getEndDate().toString());
+            }
+            if (contract.getSupervisingTeacher() != null)
+            {
+               supTeacherLabel.setText(
+                       contract.getSupervisingTeacher().getFullName());
+            }
+            if (contract.getInternshipSupervisor() != null)
+            {
+               internshipSupLabel.setText(
+                       contract.getInternshipSupervisor().getFullName());
+            }
         }
     }
 
