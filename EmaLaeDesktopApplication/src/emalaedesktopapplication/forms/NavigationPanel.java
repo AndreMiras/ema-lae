@@ -195,7 +195,7 @@ public class NavigationPanel extends javax.swing.JPanel {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Promotion");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("TODO");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("/");
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Agenda");
