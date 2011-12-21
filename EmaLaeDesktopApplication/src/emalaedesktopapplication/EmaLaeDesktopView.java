@@ -27,6 +27,7 @@ import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -274,6 +275,11 @@ public class EmaLaeDesktopView extends FrameView {
         MainWindowController mainWindowController;
         mainWindowController =
                 new MainWindowController(this, navigationPanel1);
+    }
+
+    public void loginRequiredErrorMessage()
+    {
+        JOptionPane.showMessageDialog(mainPanel, "Login required.");
     }
 
     /** This method is called from within the constructor to

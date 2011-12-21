@@ -4,26 +4,27 @@ package emalaedesktopapplication.controller;
 import client.ControllerServiceClient;
 import database.entity.UserProfile;
 import emalaedesktopapplication.EmaLaeDesktopView;
+import emalaedesktopapplication.forms.ContractViewPanel;
 import emalaedesktopapplication.forms.ViewProfile;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class UserProfileController {
+public class ContractController {
 
     private EmaLaeDesktopView mainWindow;
-    private ViewProfile viewProfile;
+    private ContractViewPanel contractViewPanel;
 
-    public UserProfileController(EmaLaeDesktopView mainWindow) {
+    public ContractController(EmaLaeDesktopView mainWindow) {
         this.mainWindow = mainWindow;
-        this.viewProfile = new ViewProfile();
+        this.contractViewPanel = new ContractViewPanel();
         populateView();
     }
 
-    public ViewProfile getView()
+    public ContractViewPanel getView()
     {
-        return viewProfile;
+        return contractViewPanel;
     }
 
     private void setMiddleContentPanel()
@@ -40,17 +41,16 @@ public class UserProfileController {
             userProfile = ControllerServiceClient.getController().getUserProfile();
         } catch (RemoteException ex)
         {
-            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ContractController.class.getName()).log(Level.SEVERE, null, ex);
             userProfile = null;
         }
-
         if (userProfile == null)
         {
             mainWindow.loginRequiredErrorMessage();
         }
         else
         {
-            viewProfile.setUserProfile(userProfile);
+            contractViewPanel.setContract(userProfile.getContract());
             setMiddleContentPanel();
         }
     }

@@ -16,12 +16,10 @@ import java.rmi.RemoteException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTree;
 import javax.swing.event.TreeExpansionEvent;
 import javax.swing.event.TreeWillExpandListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.ExpandVetoException;
-import javax.swing.tree.TreePath;
 
 /**
  *
@@ -72,8 +70,11 @@ public class NavigationController
                     {
                         UserProfileController userProfileController =
                                 new UserProfileController(mainWindow);
-                        mainWindow.setMiddleContentPanel(
-                        userProfileController.getView());
+                    }
+                    else if (node.toString().toLowerCase().equals("contract"))
+                    {
+                        ContractController contractController =
+                                new ContractController(mainWindow);
                     }
                     else
                     {
